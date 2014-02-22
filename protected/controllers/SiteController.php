@@ -28,8 +28,7 @@ class SiteController extends Controller
 	}
 
 	public function actionIndex(){
-		//$this->render('index');
-        $this->render('index_new');
+		$this->render('index');
 	}
 
 	public function actionDown(){
