@@ -37,8 +37,8 @@
         <div class="col-md-4 col-sm-4">
             <!-- Social media links -->
             <div class="social">
-                <button class="btn">注册</button>
-                <button class="btn">登录</button>
+                <button class="btn" >注册</button>
+                <button class="btn" onclick="window.open('site/login')">登录</button>
                 <button class="btn">关于我们</button>
             </div>
         </div>
