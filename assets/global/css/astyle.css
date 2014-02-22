@@ -1,0 +1,52 @@
+.adcenter{width:728px;height:90px;margin:0 auto;}
+
+/*header style*/
+.header{
+    margin: 25px 0;
+}
+.header .search{
+    max-width: 250px;
+    margin: 12px auto;
+    /*border: 1px dashed #666;*/
+}
+h2{
+    margin-top: 0;
+}
+a{
+    border-bottom: 1px dotted #ffffff;
+    color: #ffffff;
+}
+.sub-header{
+    color: #ffffff;
+}
+.description{
+    color: #ffffff;
+    font-size: 25px;
+    padding: 5px 50px;
+}
+
+.tjl-btn {
+    -moz-user-select: none;
+    background-image: none;
+    background-color: #ffffff;
+    color: #017a5e;
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 23px;
+    font-weight: normal;
+    line-height: 1.42857;
+    margin-bottom: 0;
+    padding: 25px 70px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.social .btn{
+    float: right;
+    margin-left: 25px;
+    background-color: #ffffff;
+    color: #017a5e;
+}

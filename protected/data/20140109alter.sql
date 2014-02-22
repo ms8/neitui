@@ -1,0 +1,1 @@
+ALTER TABLE ms_zhaopinhui  MODIFY COLUMN description VARCHAR(20000);
