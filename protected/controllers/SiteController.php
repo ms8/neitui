@@ -2,8 +2,7 @@
 
 class SiteController extends Controller
 {
-	//public $layout='site';
-    public $layout='global';
+	public $layout='site';
 
 	public function init(){
 //		Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_PATH.'common.css');
