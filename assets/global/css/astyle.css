@@ -50,3 +50,131 @@ a{
     background-color: #ffffff;
     color: #017a5e;
 }
+
+/*登录界面样式*/
+.login_wrapper {
+    color: #777777;
+    font-size: 16px;
+    margin: 0 auto;
+    padding-top: 110px;
+    width: 640px;
+}
+*::-moz-selection {
+    background: none repeat scroll 0 0 #019875;
+    color: #FFFFFF;
+}
+.login_header {
+    margin-bottom: 20px;
+    position: relative;
+}
+.login_box {
+    background: none repeat scroll 0 0 #EAFFFD;
+    min-height: 150px;
+    overflow: hidden;
+    padding: 40px;
+}
+.login_box_btm {
+    background: url("../images/login_btm.png") repeat-x scroll 0 0 rgba(0, 0, 0, 0);
+    height: 10px;
+}
+#loginForm {
+    border-right: 1px dashed #999999;
+    float: left;
+    margin: 0;
+    width: 360px;
+}
+.login_right {
+    float: left;
+    line-height: 30px;
+    margin: 10px 0 0 30px;
+}
+#loginForm input#email {
+    border: medium none;
+    color: #777777;
+    font-size: 16px;
+    width: 296px;
+}
+#loginForm input#password {
+    border: medium none;
+    color: #777777;
+    font-size: 16px;
+    width: 296px;
+}
+#loginForm input[type="text"], #loginForm input[type="password"] {
+    margin: 0 0 20px;
+}
+.login_wrapper input[type="text"], .login_wrapper input[type="password"] {
+    border: medium none;
+    margin: 0 0 20px;
+}
+input[type="text"], input[type="password"] {
+    border: 2px solid #F1F1F1;
+    font: 20px/32px "微软雅黑","宋体",Arial;
+    height: 30px;
+    margin-top: 20px;
+    outline: medium none;
+    padding: 6px 10px;
+    transition: border 0.2s ease-in 0s;
+    width: 600px;
+}
+#loginForm label {
+    vertical-align: top;
+}
+.fl {
+    float: left !important;
+}
+#loginForm .fr {
+    color: #777777;
+    margin-right: 45px;
+}
+#loginForm a {
+    color: #019875;
+}
+.fr {
+    float: right !important;
+}
+a {
+    text-decoration: none;
+    transition: background-color 0.2s ease-out 0s, color 0.1s ease-out 0s;
+}
+#submitLogin {
+    background: none repeat scroll 0 0 #019875;
+    border: medium none;
+    clear: both;
+    color: #FFFFFF;
+    float: left;
+    font-size: 16px;
+    height: 46px;
+    line-height: 46px;
+    text-align: center;
+    width: 155px;
+}
+.registor_now:hover {
+    color: #019875;
+    text-decoration: underline;
+}
+.registor_now {
+    background: url("../images/registor_now.png") no-repeat scroll right center rgba(0, 0, 0, 0);
+    color: #019875;
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    padding-right: 24px;
+}
+.login_others {
+    clear: both;
+    margin: 70px 0 10px;
+}
+.icon_wb {
+    background: url("../images/wbqq.png") no-repeat scroll left top rgba(0, 0, 0, 0);
+    float: left;
+    height: 54px;
+    margin: 0 30px 0 10px;
+    width: 54px;
+}
+.icon_qq {
+    background: url("../images/wbqq.png") no-repeat scroll right top rgba(0, 0, 0, 0);
+    float: left;
+    height: 54px;
+    width: 54px;
+}
