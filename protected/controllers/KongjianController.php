@@ -49,13 +49,13 @@ class KongjianController extends Controller
 
 		$member = Member::model()->find('id = :id',array(':id'=>$uid));
 
-		$topics = $member->topicMany;
+//		$topics = $member->topicMany;
 		$this->pageKeyword=array(
 			'title'=>$member->nickname.'的空间-'.Helper::siteConfig()->site_name,
 			'keywords'=>$member->nickname.'的空间-'.Helper::siteConfig()->site_name,
 			'description'=>$member->nickname.'的空间-'.Helper::siteConfig()->site_name,
 		);
-		$this->render('index', compact('member','topics'));
+		$this->render('index', compact('member'));
 	}
 
     public function actionDeletejianli(){

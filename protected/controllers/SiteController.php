@@ -75,6 +75,30 @@ class SiteController extends Controller
 	}
 
     public function actionLogin(){
-        $this->render('login');
+        $model=new LoginForm;
+
+        if(!empty($_POST['LoginForm'])){
+
+            //赋值给模型
+            $model->attributes=$_POST['LoginForm'];
+            //获取验证错误
+            $ajaxRes = CActiveForm::validate($model, array('username','password'));
+            $ajaxResArr = CJSON::decode($ajaxRes);
+            //验证结果为空入库
+            if(empty($ajaxResArr)){
+                if($model->validate() && $model->login()){
+//                    scoreAction::setScore(Yii::app()->user->id,'denglu','add',false);//登陆加积分
+                    die(CJSON::encode(array('status'=>1)));
+//                    $this->render('index');
+                }else{
+                    die(CJSON::encode(array('status'=>0)));
+                }
+            }else{
+                die($ajaxRes);
+            }
+        }
+
+        $this->render('login',array('model'=>$model));
+//        $this->render('login');
     }
 }

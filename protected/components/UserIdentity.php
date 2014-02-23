@@ -41,8 +41,8 @@ class UserIdentity extends CUserIdentity
 				$this->setState('username',$user->username);
 				$this->setState('photo',$user->photo);
 				$this->setState('id',$user->id);
-				$this->setState('groupCount',$user->groupCount);
-				$this->setState('topicCount',$user->topicCount);
+//				$this->setState('groupCount',$user->groupCount);
+//				$this->setState('topicCount',$user->topicCount);
 
 				// $this->setState('mGroupCount',$user->mGroupCount(array('condition'=>'uid !='.$user->id)));
 				

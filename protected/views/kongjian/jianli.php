@@ -1,67 +1,94 @@
-
-<div class="top3">
-    我的简历
-</div>
-<!--<div class="mynav">-->
-<!--    <a --><?php //if($this->action->id == 'info'){ ?><!--class="bai"--><?php //} ?><!-- href="--><?php //echo $this->createUrl('/kongjian/info'); ?><!--">基本设置</a>-->
-<!--    <a --><?php //if($this->action->id == 'changepwd'){ ?><!--class="bai"--><?php //} ?><!-- href="--><?php //echo $this->createUrl('/kongjian/changepwd'); ?><!--">修改密码</a>-->
-<!--    <a --><?php //if($this->action->id == 'jianli' || $this->action->id == 'jianliupload'){ ?><!--class="bai"--><?php //} ?><!-- href="--><?php //echo $this->createUrl('/kongjian/jianli'); ?><!--">我的简历</a>-->
-<!--    <a --><?php //if($this->action->id == 'myscore'){ ?><!--class="bai"--><?php //} ?><!-- href="--><?php //echo $this->createUrl('/kongjian/myscore'); ?><!--">我的积分</a>-->
-<!--</div>-->
-
-
-    <div class="con clear">
-        <form action="?r=kongjian/jianli" method="post" enctype="multipart/form-data">
-            <input type="file" name="jianlifile">
-            <input id="jianliSubmit" type="submit"  class="btn" value="上传简历">
-        </form>
-        <?php if($jianlis != null && count($jianlis)>0){?>
-        <div class="left2">
-            <div class="huatilist" style="margin-top: 30px;">
-                <div class="huatilist1">
-                        <div class="huatilist2" style="width: 250px">简历</div>
-                        <div  style="width: 50px;float: left">操作</div>
-                        <div class="huatilist3" style="width: 170px">修改时间</div>
-                        <div class="huatilist4" style="width: 200px">备注</div>
+<div class="mian-content-inner">
+    <div class="row">
+        <div class="col-md-8">
+            <!--<div class="mynav">-->
+            <!--    <a --><?php //if($this->action->id == 'info'){ ?><!--class="bai"--><?php //} ?><!-- href="--><?php //echo $this->createUrl('/kongjian/info'); ?><!--">基本设置</a>-->
+            <!--    <a --><?php //if($this->action->id == 'changepwd'){ ?><!--class="bai"--><?php //} ?><!-- href="--><?php //echo $this->createUrl('/kongjian/changepwd'); ?><!--">修改密码</a>-->
+            <!--    <a --><?php //if($this->action->id == 'jianli' || $this->action->id == 'jianliupload'){ ?><!--class="bai"--><?php //} ?><!-- href="--><?php //echo $this->createUrl('/kongjian/jianli'); ?><!--">我的简历</a>-->
+            <!--    <a --><?php //if($this->action->id == 'myscore'){ ?><!--class="bai"--><?php //} ?><!-- href="--><?php //echo $this->createUrl('/kongjian/myscore'); ?><!--">我的积分</a>-->
+            <!--</div>-->
+            <div class="panel panel-default">
+                <div class="panel-heading">已投递职位</div>
+                <div class="panel-body">
+                    Panel content
                 </div>
-                <?php foreach ($jianlis as $key => $value) {?>
-                    <div class="huatilist1">
-                        <div class="huatilist2" style="width: 250px">
-                            <a href="<?php echo Yii::app()->createUrl('kongjian/jianlidownload',array('id'=>$value->id)); ?>">
-                                <?php  echo $value->name ?>
-                            </a>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">简历</div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>简历</th>
+                            <th>操作</th>
+                            <th>修改时间</th>
+                            <th>备注</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php if($jianlis != null && count($jianlis)>0){ ?>
+                        <?php foreach ($jianlis as $key => $value) {?>
+                            <tr>
+                                <td>
+                                    <a href="<?php echo Yii::app()->createUrl('kongjian/jianlidownload',array('id'=>$value->id)); ?>">
+                                        <?php  echo $value->name ?>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="javascript;;"  onclick="deleteJianli(this)"><i class="icon-remove"></i></a>
+                                </td>
+                                <td><?php  echo $value->updatetime ?></td>
+                                <td><?php  echo $value->description ?></td>
+                            </tr>
+                        <?php } ?>
+                    <?php }else{ ?>
+                        <div class="top3">
+                            你还没上传简历哦~速度上传简历吧，可以上传word格式文档
+                            <br>或者avi,mpeg1,mpeg2,mpeg4,wmv,mp4格式的视频文件简介
+                            <br>~我们免费帮您投递~
                         </div>
-                        <div style="width: 50px;float: left">
-                            <img id="<?php echo $value->id?>" onclick="deleteJianli(this)" style="margin-top: 10px;cursor:pointer;" src="<?php echo  Yii::app()->baseUrl.'/'.IMAGES_TOOLICON_PHOTO.'delete.png'; ?>">
-                        </div>
-                        <div class="huatilist3"  style="width: 170px">
-                            <?php  echo $value->updatetime ?>
-                        </div>
-                        <div class="huatilist4"  style="width: 200px">
-                            <?php  echo $value->description ?>
-                        </div>
-                    </div>
-                <?php  }  ?>
+                    <?php }?>
+                    </tbody>
+                </table>
             </div>
         </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">投递简历</div>
+                <div class="panel-body fade in">
+                    <div class="alert alert-success">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <p> 1元，能买二分之一个安全套，能坐二分之一地铁，能获得一份高质量简历。投递简历，马上享有！
+                            <a class="alert-link" href="javascript:;">活动详情</a>
+                        </p>
+                    </div>
+                    <form action="?r=kongjian/jianli" method="post" class="form-horizontal" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">职位方向:</label>
+                            <div class="col-sm-6">
+                                <select name="position" class="form-control">
+                                    <option value="softdeveloper">请选择</option>
+                                    <option value="softdeveloper">软件工程师</option>
+                                    <option value="seller">销售</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-4 control-label">简历:</label>
+                            <div class="col-sm-6">
+                                <input type="file" name="jianlifile" class=" class="form-control">
+                            </div>
+                        </div>
 
-        <?php }else{?>
-            <div class="top3">
-                你还没上传简历哦~速度上传简历吧，可以上传word格式文档
-                <br>或者avi,mpeg1,mpeg2,mpeg4,wmv,mp4格式的视频文件简介
-                <br>~我们免费帮您投递~
+
+                        <p>
+                            <button id="jianliSubmit" class="btn btn-danger btn-lg btn-block"  type="button">上传简历</button>
+                        </p>
+                    </form>
+                </div>
             </div>
-        <?php
-        } if($message != null && $message != ''){ ?>
-            <h3 style="color:red"><?php echo $message?></h3>
-        <?php
-          }?>
-
-        <!-- 发现小组右侧 -->
-        <?php //$this->renderPartial('_explore_right',array('tagSelected'=>$tagSelected)); ?>
-        
+        </div>
     </div>
-
+</div>
 <?php if(Yii::app()->user->isGuest){?>
 <script>
     $('.addGroup').click(function(){

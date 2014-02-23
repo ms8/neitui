@@ -13,6 +13,7 @@
     <meta property="wb:webmaster" content="" />
     <?php
     Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery-1.7.1.min.js');
+    Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery.form.js');
     //    Yii::app()->clientScript->registerCssFile('common.css');
     //    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_GLOBAL.'style.css');
     Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_GLOBAL.'main.css');
@@ -39,8 +40,7 @@
 
 <body style="background-color: #019875">
 
-<?php echo $content ?>
-
+        <?php echo $content ?>
 
 </body>
 </html>

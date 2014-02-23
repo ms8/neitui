@@ -29,6 +29,9 @@
     background-color: #fff;
     padding: 5px;
 }
+/*mian-content内部div jdh*/
+.mian-content-inner{
+}
 
 #top-bar .container { width: 960px; }
 #header .container { width: 920px; }
