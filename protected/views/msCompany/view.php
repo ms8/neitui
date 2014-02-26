@@ -1,6 +1,9 @@
 
 <div class="clearfix">
     <div class="content_l">
+        <?php if($model->status == '1'){ ?>
+        <div style="color: red">公司信息未验证，暂时不能发布招聘信息和阅读简历</div>
+        <?php }?>
         <div class="c_detail">
             <div class="c_logo">
                 <div id="logoShow">
