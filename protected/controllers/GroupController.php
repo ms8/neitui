@@ -2,7 +2,8 @@
 
 class GroupController extends Controller
 {
-	public $layout='common';
+	//public $layout='common';
+    public $layout='site';
 
 	public $filePath;
 
@@ -779,5 +780,10 @@ class GroupController extends Controller
 	public function actionXiaozu(){
 		$this->render('xiaozu');
 	}
+
+    //公司页面
+    public function actionCompany(){
+        $this->render('company');
+    }
 
 }

@@ -38,9 +38,52 @@
     </style>
 </head>
 
-<body style="background-color: #019875">
+<body style="background-color: #019875;width: 960px;margin:0 auto;">
+
+<div class="header">
+    <div class="row">
+        <div class="col-md-2 col-sm-2">
+            <!-- Header -->
+            <h2 style="margin-bottom:0px"><a href="">快入职</a></h2>
+            <!--            <img style="opacity: 1;" class="defaultimg" src="--><?php //echo Yii::app()->baseUrl.CSS_BOXCOL?><!--/logo.png" alt="" />-->
+            <span class="sub-header">kuairuzhi.com</span>
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <div class="description">
+                应届生的公司内推平台
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-4">
+            <!-- Social media links -->
+            <?php if(Yii::app()->user->isGuest){?>
+            <div class="social">
+                <button class="btn" onclick="window.open('<?php echo Yii::app()->baseUrl.'/site/register'?>')">注册</button>
+                <button class="btn" onclick="window.location.href='<?php echo Yii::app()->baseUrl.'/site/login'?>'">登录</button>
+                <button class="btn">关于我们</button>
+            </div>
+            <?php }else{?>
+            <!-- 登录后出现的个人中心信息-->
+            <div class="social">
+                <a href="<?php echo Yii::app()->baseUrl.'/site/logout'?>">退出</a>
+                <a href="<?php echo Yii::app()->baseUrl.'/kongjian/jianli/'.Yii::app()->user->id?>">个人中心</a>
+            </div>
+            <!-- -->
+            <?php }?>
+        </div>
+
+
+
+    </div>
+</div>
 
         <?php echo $content ?>
 
 </body>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.register_radio li input').click(function(e){
+            $(this).parent('li').addClass('current').append('<em></em>').siblings().removeClass('current').find('em').remove();
+        });
+    });
+</script>
 </html>

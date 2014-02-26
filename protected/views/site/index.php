@@ -4,46 +4,6 @@
 <!--<section id="main-content">-->
 <!-- Container -->
 <div  class="container">
-    <div class="header">
-        <div class="row">
-            <div class="col-md-2 col-sm-2">
-                <!-- Header -->
-                <h2 style="margin-bottom:0px"><a href="">面试吧</a></h2>
-                <!--            <img style="opacity: 1;" class="defaultimg" src="--><?php //echo Yii::app()->baseUrl.CSS_BOXCOL?><!--/logo.png" alt="" />-->
-                <span class="sub-header">mianshi8.com</span>
-            </div>
-            <div class="col-md-6 col-sm-6">
-                <div class="description">
-                    应届生的公司内推平台
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-4">
-                <!-- Social media links -->
-                <div class="social">
-                    <button class="btn" >注册</button>
-                    <button class="btn" onclick="window.open('<?php echo Yii::app()->baseUrl.'/site/login'?>')">登录</button>
-                    <button class="btn">关于我们</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-<!--<div id="header" style="height:30px;width: 960px;margin: 0 auto;">-->
-<!--    <div id="logo" style="float:left;width: 150px">-->
-<!--        <div style="color:black;">面试吧</div>-->
-<!--        <div style="color:black;">mianshi8.com</div>-->
-<!--    </div>-->
-<!--    <div id="descrition" style="float:left;width: 650px;color:black;padding-top:20px;">应届生的直推平台</div>-->
-<!--    <div id="oper" style="float:left;width: 160px;padding-top:20px;">-->
-<!--        <div style="float:left;width: 80px">-->
-<!--            <button  class="btn primary">登录</button>-->
-<!--        </div>-->
-<!--        <div style="float:left;width: 80px">-->
-<!--            <button  class="btn primary">注册</button>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
 
 <!--<div class="header">-->
 <!--    <div class="row">-->

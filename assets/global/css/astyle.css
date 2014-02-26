@@ -56,7 +56,7 @@ a{
     color: #777777;
     font-size: 16px;
     margin: 0 auto;
-    padding-top: 110px;
+    padding-top: 50px;
     width: 640px;
 }
 *::-moz-selection {
@@ -122,6 +122,8 @@ input[type="text"], input[type="password"] {
 }
 .fl {
     float: left !important;
+    margin-bottom: -20px;
+    padding: 10px 0 0;
 }
 #login-form .fr {
     color: #777777;
@@ -140,14 +142,17 @@ a {
 #submitLogin {
     background: none repeat scroll 0 0 #019875;
     border: medium none;
+    border-radius: 100px;
     clear: both;
     color: #FFFFFF;
     float: left;
-    font-size: 16px;
-    height: 46px;
+    font-size: 30px;
+    height: 150px;
     line-height: 46px;
+    margin: 30px 30px 0 0;
     text-align: center;
-    width: 155px;
+    width: 150px;
+    cursor: pointer;
 }
 .registor_now:hover {
     color: #019875;
@@ -182,4 +187,272 @@ a {
 /*table 内部样式 jdh*/
 .table a{
     color:#006600;
+}
+
+/*公司页面*/
+
+.clearfix:after {
+    clear: both;
+    content: "";
+    height: 0;
+    visibility: hidden;
+}
+.clearfix {
+    display: inline-block;
+}
+.content_l {
+    float: left;
+    width: 650px;
+}
+.content_r {
+    float: left;
+    margin-left: 20px;
+    width: 290px;
+}
+.c_detail {
+    margin-bottom: 30px;
+    min-height: 120px;
+    position: relative;
+}
+.c_section {
+    background-color: #FAFAFA;
+    margin-bottom: 40px;
+    position: relative;
+}
+.c_tags {
+    margin-bottom: 30px;
+    position: relative;
+}
+.c_detail .c_logo {
+    height: 110px;
+    left: 0;
+    position: absolute;
+    width: 190px;
+}
+.c_logo {
+    background: none repeat scroll 0 0 #E7E7E7;
+    color: #E8E8E8;
+    height: 110px;
+    overflow: hidden;
+    position: relative;
+    width: 190px;
+}
+.c_box {
+    margin: 0 30px 0 220px;
+}
+.clear {
+    clear: both;
+}
+.c_logo div#logoShow {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    height: 110px;
+    margin: 0;
+    padding: 0;
+    width: 190px;
+}
+.c_detail #logoShow {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 3px solid #91CEBE;
+    display: block;
+    height: 190px;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    width: 190px;
+}
+.c_detail .c_logo img {
+    left: 0;
+    position: absolute;
+}
+.c_box h2 {
+    float: left;
+    font-size: 24px;
+    font-weight: normal;
+    margin: 10px 0;
+}
+.c_box em {
+    background: url("../images/unvalid.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    float: left;
+    height: 19px;
+    margin: 3px 0 0 10px;
+    width: 15px;
+}
+em {
+    font-style: normal;
+}
+.c_box h1.fullname {
+    color: #555555;
+    font-size: 18px;
+    line-height: 30px;
+    margin: 0 0 10px;
+}
+.content_l h1 {
+    font-weight: normal;
+    line-height: 42px;
+    margin: 0 0 20px;
+}
+.c_box .oneword {
+    color: #777777;
+    overflow: hidden;
+}
+.c_box ul {
+    margin-top: 20px;
+}
+ul.reset {
+    list-style: none outside none;
+    margin: 10px 0 0 ;
+    padding: 0;
+}
+.c_box li {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CBCBCB;
+    color: #777777;
+    float: left;
+    font-size: 12px;
+    margin: 0 18px 7px 0;
+    white-space: nowrap;
+}
+.c_box li span {
+    float: left;
+    padding: 0 5px;
+}
+.c_tags table {
+    color: #555555;
+    font-size: 18px;
+    line-height: 24px;
+    width: 283px;
+}
+.c_tags table td {
+    border-bottom: 3px solid #FFFFFF;
+    border-right: 3px solid #FFFFFF;
+}
+.c_tags td {
+    background: none repeat scroll 0 0 #FAFAFA;
+    padding: 7px 10px;
+}
+.c_section h2 {
+    background: none repeat scroll 0 0 #91CEBE;
+    color: #FFFFFF;
+    float: left;
+    font-size: 24px;
+    font-weight: normal;
+    height: 43px;
+    line-height: 43px;
+    margin: -8px 0 10px 20px;
+    padding: 0 20px;
+    position: absolute;
+    z-index: 2;
+}
+.c_intro {
+    font-size: 18px;
+    line-height: 30px;
+    text-indent: 2em;
+    word-wrap: break-word;
+}
+.c_section > dd {
+    clear: both;
+    color: #555555;
+    padding: 50px 25px 20px;
+}
+dl, dd {
+    margin: 0;
+}
+.jobsTotal {
+    color: #555555;
+    float: right;
+    margin: 10px 25px 0 0;
+}
+ul.c_jobs {
+    margin: -10px 0 0;
+}
+.c_jobs li {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-left: 3px solid #91CEBE;
+    height: 60px;
+    margin-bottom: 30px;
+}
+.c_jobs a {
+    color: #555555;
+    display: block;
+    height: 60px;
+    overflow: hidden;
+    padding: 0 10px 0 15px;
+}
+.c_jobs span {
+    color: #999999;
+    float: right;
+    font-size: 14px;
+    margin-top: -30px;
+}
+.c_jobs h3 {
+    color: #0D9572;
+    font-size: 18px;
+    font-weight: normal;
+    margin: 0;
+    padding: 5px 0;
+    width: 520px;
+}
+.c_jobs h3 span {
+    color: #999999;
+    float: none;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+/*个人中心*/
+.social a {
+    display: block;
+    float: right;
+    margin-right: 30px;
+}
+
+/*注册*/
+.register_radio {
+    list-style: none outside none;
+    margin: -10px 0 20px 0px;
+    padding: 0;
+}
+.register_radio li {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 2px solid #FAFAFA;
+    color: #555555;
+    cursor: pointer;
+    float: left;
+    font-size: 18px;
+    height: 42px;
+    line-height: 42px;
+    margin: 15px 11px 0 0;
+    position: relative;
+    text-align: center;
+    width: 148px;
+}
+.register_radio li input[type="radio"] {
+    cursor: pointer;
+    height: 46px;
+    left: -2px;
+    margin: 0;
+    opacity: 0;
+    position: absolute;
+    top: -2px;
+    width: 152px;
+}
+#loginForm a {
+    color: #019875;
+}
+
+#loginForm input[type="checkbox"] {
+    margin-bottom: 20px;
+    margin-right: 3px;
+}
+.checkbox {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 2px solid #E0E0E0;
+    float: left;
+    height: 13px;
+    margin-top: 3px;
+    position: relative;
+    width: 13px;
+}
+.register_radio li.current {
+    border: 2px solid #93B7BB;
 }

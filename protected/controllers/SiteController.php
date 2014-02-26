@@ -27,7 +27,23 @@ class SiteController extends Controller
 	}
 
 	public function actionIndex(){
-		$this->render('index');
+        if(!Yii::app()->user->isGuest){
+            $id = Yii::app()->user->id;
+            $member = Member::model()->findByPk($id);
+            if($member->type == '1'){ //应聘者
+                $this->redirect(array('/kongjian/jianli/'.$id));
+            }else{ //企业
+                $company = MsCompany::model()->findByAttributes(array('account'=>$member->username));
+                if($company == null){ //还未完善公司信息，跳转到创建公司信息页面
+                    $this->redirect(array('/mscompany/create'));
+                }else{
+                    $this->redirect(array('/mscompany/view/'.$company->id));
+                }
+            }
+        }else{
+            $this->render('index');
+        }
+
 	}
 
 	public function actionDown(){
@@ -100,5 +116,70 @@ class SiteController extends Controller
 
         $this->render('login',array('model'=>$model));
 //        $this->render('login');
+    }
+
+    //注册
+    public function actionRegister(){
+
+        $this->pageKeyword['title'] = Helper::siteConfig()->site_name.'-注册';
+        $this->pageKeyword['keywords'] = Helper::siteConfig()->site_name.'-注册';
+        $this->pageKeyword['description'] = Helper::siteConfig()->site_name.'-注册';
+
+        //实例化用户模型
+        $memberModel=new Member();
+        if(!empty($_POST['Member'])){
+            //赋值给模型
+            $memberModel->attributes=$_POST['Member'];
+            $input_password = $memberModel->password;
+            $memberModel->nickname = $memberModel->username;
+            $memberModel->email = $memberModel->username;
+            //验证
+            $ajaxRes 	= 	CActiveForm::validate($memberModel, array('username','nickname','password','passwordrepeat','verifyCode'));
+            $ajaxResArr = 	CJSON::decode($ajaxRes);
+            //验证结果
+            if(empty($ajaxResArr)){
+
+                $score=Score::model()->find('id=1');
+
+                $memberModel->salt=Helper::randomCode();//加盐值
+                $memberModel->password=$memberModel->hashPassword();//密码
+                $memberModel->create_time=time();//创建时间
+                $memberModel->update_time=time();//更新时间
+                $memberModel->status=1;//状态
+                $memberModel->role_id=1;//状态
+                $memberModel->photo=rand(1,95).'.jpg';//头像
+                $memberModel->last_login_time=time();//登陆时间
+                $memberModel->last_login_ip=Yii::app()->request->UserHostAddress;//IP地址
+                $memberModel->score=$score->zhuce;//注册积分
+                $memberModel->bind_account = '';
+//                $memberModel->email = '';
+                $memberModel->remark = '';
+                $memberModel->info = '';
+                $memberModel->save(false);
+                //创建用户积分
+                $memberModel->createrScore();
+
+                //用户积分
+                $model = new LoginForm();
+                $model->username = $memberModel->username;
+                $model->password = $input_password;
+                $model->login();
+               // $this->render('login',array('model'=>$model));
+                $this->redirect(array('/mscompany/create'));
+                //die(CJSON::encode(array('status'=>1)));
+            }else{
+                die($ajaxRes);
+            }
+
+        }else{
+            $this->render('register',array('model'=>$memberModel));
+        }
+    }
+
+    //退出登陆
+    public function actionLogout()
+    {
+        Yii::app()->user->logout();
+        $this->redirect(Yii::app()->homeUrl);
     }
 }

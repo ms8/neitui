@@ -59,7 +59,7 @@
                     $('#'+items[i][0]).parent().next().html('&nbsp;'+items[i][1]);
                 }
             }else{
-                alert('登陆成功');
+                //alert('登陆成功');
                 window.location.href ="<?php echo Yii::app()->baseUrl.'/'; ?>";
             }
         }

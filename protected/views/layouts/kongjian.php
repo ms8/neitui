@@ -55,11 +55,20 @@
             </div>
             <div class="col-md-4 col-sm-4">
                 <!-- Social media links -->
-                <div class="social">
-                    <button class="btn" >注册</button>
-                    <button class="btn" onclick="window.open('<?php echo Yii::app()->baseUrl.'/site/login'?>')">登录</button>
-                    <button class="btn">关于我们</button>
-                </div>
+                <?php if(Yii::app()->user->isGuest){?>
+                    <div class="social">
+                        <button class="btn" >注册</button>
+                        <button class="btn" onclick="window.location.href='<?php echo Yii::app()->baseUrl.'/site/login'?>'">登录</button>
+                        <button class="btn">关于我们</button>
+                    </div>
+                <?php }else{?>
+                    <!-- 登录后出现的个人中心信息-->
+                    <div class="social">
+                        <a href="<?php echo Yii::app()->baseUrl.'/site/logout'?>">退出</a>
+                        <a href="<?php echo Yii::app()->baseUrl.'/kongjian/jianli/'.Yii::app()->user->id?>">个人中心</a>
+                    </div>
+                    <!-- -->
+                <?php }?>
             </div>
         </div>
     </div>
