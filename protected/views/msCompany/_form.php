@@ -11,7 +11,8 @@
 
         <div class="row">
             <label for="MsCompany_name">公司名称</label>
-            <input type="text" id="MsCompany_name" name="MsCompany[name]" maxlength="100" size="60">			</div>
+            <input type="text" id="MsCompany_name" name="MsCompany[name]" maxlength="100" size="60">
+        </div>
 
         <div class="row">
             <label for="MsCompany_logo">公司Logo</label>
@@ -40,7 +41,7 @@
 
         <div class="row">
             <label for="MsCompany_tags">公司标签</label>
-            <input type="text" id="MsCompany_tags" name="MsCompany[tags]" maxlength="500" size="60">
+            <input type="text" id="MsCompany_tags" name="MsCompany[tags]" placeholder="标签之间有空格" maxlength="500" size="60">
         </div>
 
         <div class="row">

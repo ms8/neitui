@@ -19,7 +19,12 @@ class PicCreate {
      * @return 文件保存的路径
      */
     public function createPic($fileInput,$dir,$size,$typeArr,$new=true){
-        $pic_path = $dir. $_FILES[$fileInput]["name"];
+        if(Yii::app()->user->isGuest){
+            return '';
+        }
+        $id = Yii::app()->user->id;
+        $member = Member::model()->findByPk($id);
+        $pic_path = $dir. $member->username.'_'.$_FILES[$fileInput]["name"];
         $picname = $_FILES[$fileInput]['name'];
         $picsize = $_FILES[$fileInput]['size'];
         if ($picname != "") {
@@ -43,5 +48,9 @@ class PicCreate {
             return $pic_path;
         }
         return '';
+    }
+
+    public function deletePic($path){
+        unlink($path);
     }
 }

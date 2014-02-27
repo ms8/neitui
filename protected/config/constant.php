@@ -29,6 +29,10 @@ define('JS_BOXCOL','/assets/boxcol_data/');
 define('CSS_GLOBAL','/assets/global/css/');
 //前台js路径
 define('JS_GLOBAL','/assets/global/js/');
-//前台js路径
+//网页图片路径
 define('IMGAGES_GLOBAL','/assets/global/images/');
+//公司logo路径
+define('COMPANY_LOGO','/upload/companylogo/');
+//用户简历路径
+define('JIANLI','/upload/jianli/');
 ?>

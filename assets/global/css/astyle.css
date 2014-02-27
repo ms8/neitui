@@ -456,3 +456,26 @@ ul.c_jobs {
 .register_radio li.current {
     border: 2px solid #93B7BB;
 }
+/*右侧标签云*/
+.r_box{
+    margin: 0 30px 0 5px;
+}
+.r_box li {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CBCBCB;
+    color: #777777;
+    float: left;
+    font-size: 12px;
+    margin: 0 18px 7px 0;
+    white-space: nowrap;
+}
+.c_box a{
+    color: #000000;
+}
+
+/*公司信息编辑框*/
+#info-edit input{
+    width: 85%;
+    margin-top: 0px;
+    margin-bottom: 10px;
+}

@@ -6,8 +6,8 @@
 <link rel="stylesheet" type="text/css" href="<?php echo $this->module->assetUrl; ?>/css/common.css" />
 <?php Yii::app()->clientScript->registerCoreScript('jquery'); ?>
 <script src="<?php echo $this->module->assetUrl; ?>/css/common.js"></script>
-<script src="/js/ymPrompt/ymPrompt.js"></script>
-<link href="/js/ymPrompt/skin/qq/ymPrompt.css" rel="stylesheet" type="text/css" />
+<script src="<?php echo Yii::app()->baseUrl?>/js/ymPrompt/ymPrompt.js"></script>
+<link href="<?php echo Yii::app()->baseUrl?>/js/ymPrompt/skin/qq/ymPrompt.css" rel="stylesheet" type="text/css" />
 </head>
 <?php
       $userid = Yii::app()->controller->module->getComponent('user')->id;

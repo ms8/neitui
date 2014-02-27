@@ -32,7 +32,7 @@ class MsCompanyController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','dashboard'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -85,7 +85,7 @@ class MsCompanyController extends Controller
                 $model->updatetime = date("Y-m-d H:i:s");
                 $model->logo = $picPath;
                 if($model->save())
-                    $this->redirect(array('view','id'=>$model->id,'info'=>$msg));
+                    $this->redirect(array('dashboard'));
             }
 //
 //            if($model->save())
@@ -97,29 +97,68 @@ class MsCompanyController extends Controller
 		));
 	}
 
+    public function actionDashboard(){
+        if(!Yii::app()->user->isGuest){
+            $id = Yii::app()->user->id;
+            $member = Member::model()->findByPk($id);
+            $model = MsCompany::model()->findByAttributes(array('account'=>$member->username));
+            $this->render('dashboard',array(
+                'model'=>$model
+            ));
+        }else{
+            //render 404页面
+        }
+
+
+    }
+
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
-	 * @param integer $id the ID of the model to be updated
+	 * 不能根据id来更新公司信息，防止直接敲url的方式篡改其他公司信息
 	 */
-	public function actionUpdate($id)
+	public function actionUpdate()
 	{
-		$model=$this->loadModel($id);
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
-		if(isset($_POST['MsCompany']))
-		{
-			$model->attributes=$_POST['MsCompany'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
-		}
-
-		$this->render('update',array(
-			'model'=>$model,
-		));
+        $account_id = Yii::app()->user->id;  //当前登录用户id
+        $member = Member::model()->findByPk($account_id);
+        if($member->type == '2'){ //企业用户才能修改信息
+            $company = MsCompany::model()->findByAttributes(array('account'=>$member->username));
+            if(isset($_POST['MsCompany'])){
+                $company->attributes=$_POST['MsCompany'];
+                if(isset($_FILES['logo']) && $_FILES['logo']!=null){ //更新logo
+                    $old_path = $company->logo;
+                    //上传图片
+                    $picCreate = new PicCreate();
+                    $picPath = $picCreate->createPic('logo','upload/companylogo/'
+                        ,1024*1024,array('.jpg','.jpeg','.png','gif'));
+                    if($picPath != ""){
+                        $company->logo = $picPath;
+                    }
+                    //删除之前的图片
+                    $picCreate->deletePic($old_path);
+                }
+                $company->save();
+            }
+            $this->redirect(array('dashboard'));
+        }else{
+            //303 没权限页面
+        }
 	}
+
+    public function actionTagUpdate(){
+        $account_id = Yii::app()->user->id;  //当前登录用户id
+        $member = Member::model()->findByPk($account_id);
+        if($member->type == '2'){ //企业用户才能修改信息
+            $company = MsCompany::model()->findByAttributes(array('account'=>$member->username));
+            if(isset($_POST['MsCompany'])){
+                $company->attributes=$_POST['MsCompany'];
+                $company->save();
+            }
+            $this->redirect(array('dashboard'));
+        }else{
+            //303 没权限页面
+        }
+    }
 
 	/**
 	 * Deletes a particular model.

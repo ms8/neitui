@@ -7,25 +7,19 @@
         <div class="c_detail">
             <div class="c_logo">
                 <div id="logoShow">
-                    <img width="190" height="190" alt="美团网"
-                         src="<?php echo Yii::app()->baseUrl.IMGAGES_GLOBAL?>meituan.jpg">
+                    <img width="190" height="190" alt="<?php echo $model->name?>"
+                         src="<?php echo Yii::app()->baseUrl.'/'.$model->logo?>">
                 </div>
             </div>
             <div class="c_box">
-                <h2 title="美团网">美团网</h2>
+                <h2 ><?php echo $model->name?></h2>
                 <div class="clear"></div>
-                <ul id="hasLabels" class="reset clearfix">
-                    <li><span>五险一金</span></li>
-                    <li><span>带薪年假</span></li>
-                    <li><span>绩效奖金</span></li>
-                    <li><span>免费班车</span></li>
-                    <li><span>定期体检</span></li>
-                    <li><span>岗位晋升</span></li>
-                    <li><span>技能培训</span></li>
-                    <li><span>领导好</span></li>
-                    <li><span>美女多</span></li>
-                    <li><span>帅哥多</span></li>
-                </ul>
+                <span>主页：</span>
+                    <a href="<?php echo $model->website?>" target="_blank">
+                        <?php echo $model->website?>
+                    </a>
+
+                <h5>地址：<?php echo $model->address?></h5>
             </div>
             <div class="clear"></div>
         </div>
@@ -38,7 +32,10 @@
             <h2><em></em>公司介绍</h2>
             </dt>
             <dd>
-                <div class="c_intro">美团网&mdash;&mdash;中国最早,口碑最好的团购网。每天团购多单精品打折消费,超省钱巨划算!美团网为您精选自助餐、电影票、KTV、美发、足浴等特色商家,享尽无敌折扣!</div>
+                <div class="c_intro">
+                    <?php echo $model->name?>&nbsp;&nbsp;
+                    <?php echo $model->description?>
+                </div>
             </dd>
         </dl>
 
@@ -68,27 +65,38 @@
     </div>
 
     <div class="content_r">
-        <div class="c_tags">
-            <table>
-                <tbody><tr>
-                    <td width="65">地点</td>
-                    <td>北京</td>
-                </tr>
-                <!--                    <tr>-->
-                <!--                        <td>领域</td>-->
-                <!--                        <td title="移动互联网,O2O">移动互联网,O2O</td>-->
-                <!--                    </tr>-->
-                <tr>
-                    <td>规模</td>
-                    <td>2000人以上</td>
-                </tr>
-                <tr>
-                    <td>主页</td>
-                    <td>
-                        <a rel="nofollow" title="http://www.meituan.com" target="_blank" href="http://www.meituan.com/">http://www.meit...</a>
-                    </td>
-                </tr>
-                </tbody></table>
+<!--        <div class="c_tags">-->
+<!--            <table>-->
+<!--                <tbody><tr>-->
+<!--                    <td width="65">地点</td>-->
+<!--                    <td>北京</td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td>规模</td>-->
+<!--                    <td>2000人以上</td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td>主页</td>-->
+<!--                    <td>-->
+<!--                        <a rel="nofollow" title="http://www.meituan.com" target="_blank" href="http://www.meituan.com/">http://www.meit...</a>-->
+<!--                    </td>-->
+<!--                </tr>-->
+<!--                </tbody>-->
+<!--            </table>-->
+<!--        </div>-->
+        <div class="r_box">
+            <h3 >公司印象</h3>
+            <div class="clear"></div>
+            <ul id="hasLabels" class="reset clearfix">
+                <?php
+                $tags = explode(' ',$model->tags);
+                foreach($tags as $tag){
+                    ?>
+                    <li><span><?php echo $tag?></span></li>
+                <?php
+                }
+                ?>
+            </ul>
         </div>
 
 
