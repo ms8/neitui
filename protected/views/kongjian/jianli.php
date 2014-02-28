@@ -61,17 +61,7 @@
                             <a class="alert-link" href="javascript:;">活动详情</a>
                         </p>
                     </div>
-                    <form action="?r=kongjian/jianli" method="post" class="form-horizontal" enctype="multipart/form-data">
-                        <div class="form-group">
-                            <label for="inputEmail3" class="col-sm-4 control-label">职位方向:</label>
-                            <div class="col-sm-6">
-                                <select name="position" class="form-control">
-                                    <option value="softdeveloper">请选择</option>
-                                    <option value="softdeveloper">软件工程师</option>
-                                    <option value="seller">销售</option>
-                                </select>
-                            </div>
-                        </div>
+                    <form action="<?php echo Yii::app()->baseUrl.'/kongjian/jianli'?>" method="post" class="form-horizontal" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="inputPassword3" class="col-sm-4 control-label">简历:</label>
                             <div class="col-sm-6">
@@ -81,7 +71,7 @@
 
 
                         <p>
-                            <button id="jianliSubmit" class="btn btn-danger btn-lg btn-block"  type="button">上传简历</button>
+                            <button id="jianliSubmit" class="btn btn-danger btn-lg btn-block"  type="submit">上传简历</button>
                         </p>
                     </form>
                 </div>
