@@ -165,7 +165,7 @@ class SiteController extends Controller
                 $model->password = $input_password;
                 $model->login();
 
-                if($model->type == '2'){ //公司
+                if($memberModel->type == '2'){ //公司
                     $this->redirect(array('/mscompany/create'));
                 }else{ //个人
                     $this->redirect(array('/kongjian/jianli'));
