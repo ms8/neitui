@@ -37,7 +37,7 @@ class SiteController extends Controller
                 if($company == null){ //还未完善公司信息，跳转到创建公司信息页面
                     $this->redirect(array('/mscompany/create'));
                 }else{
-                    $this->redirect(array('/mscompany/view/'.$company->id));
+                    $this->redirect(array('/mscompany/dashboard/'));
                 }
             }
         }else{
@@ -164,8 +164,13 @@ class SiteController extends Controller
                 $model->username = $memberModel->username;
                 $model->password = $input_password;
                 $model->login();
-               // $this->render('login',array('model'=>$model));
-                $this->redirect(array('/mscompany/create'));
+
+                if($model->type == '2'){ //公司
+                    $this->redirect(array('/mscompany/create'));
+                }else{ //个人
+                    $this->redirect(array('/kongjian/jianli'));
+                }
+
                 //die(CJSON::encode(array('status'=>1)));
             }else{
                 die($ajaxRes);

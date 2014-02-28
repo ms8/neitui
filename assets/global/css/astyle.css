@@ -110,7 +110,7 @@ a{
 input[type="text"], input[type="password"] {
     border: 2px solid #F1F1F1;
     font: 20px/32px "微软雅黑","宋体",Arial;
-    height: 30px;
+    height: 40px;
     margin-top: 20px;
     outline: medium none;
     padding: 6px 10px;
@@ -362,14 +362,14 @@ dl, dd {
     float: right;
     margin: 10px 25px 0 0;
 }
-ul.c_jobs {
-    margin: -10px 0 0;
-}
+/*ul.c_jobs {*/
+    /*margin: -10px 0 0;*/
+/*}*/
 .c_jobs li {
     background: none repeat scroll 0 0 #FFFFFF;
     border-left: 3px solid #91CEBE;
-    height: 60px;
-    margin-bottom: 30px;
+    height: 30px;
+    margin-bottom: 10px;
 }
 .c_jobs a {
     color: #555555;
@@ -479,3 +479,88 @@ ul.c_jobs {
     margin-top: 0px;
     margin-bottom: 10px;
 }
+
+/*职位信息*/
+.job_detail {
+    background: none repeat scroll 0 0 #FAFAFA;
+    margin-top: 6px;
+    padding-bottom: 30px;
+}
+.job_detail dt {
+    padding-right: 35px;
+}
+.job_detail dt h1 {
+    background: none repeat scroll 0 0 #91CEBE;
+    color: #FFFFFF;
+    float: left;
+    font-size: 30px;
+    line-height: 38px;
+    margin: -6px 0 10px 35px;
+    max-width: 440px;
+    padding: 6px 20px;
+}
+
+.job_detail dt h1 div {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 14px;
+}
+.job_detail dd {
+    color: #777777;
+    overflow: hidden;
+    padding: 15px 35px 10px;
+}
+.job_bt {
+    border-top: 1px solid #FFFFFF;
+}
+
+.job_detail dd h3.description {
+    border-left: 7px solid #91CEBE;
+    color: #555555;
+    font-size: 16px;
+    line-height: 16px;
+    margin-bottom: 20px;
+    padding: 2px 0 0 7px;
+}
+
+.job_company dt {
+    margin-bottom: 10px;
+    padding-bottom: 25px;
+    position: relative;
+}
+.job_company dt a {
+    color: #555555;
+}
+.job_company .b2 {
+    border: 2px solid #91CEBE;
+}
+.job_company dt div {
+    bottom: 5px;
+    left: 90px;
+    padding: 20px 0;
+    position: absolute;
+}
+.job_company dt h2 {
+    color: #ffffff;
+    margin: 0;
+}
+.fl {
+    float: left !important;
+}
+.job_company dd {
+    padding: 10px 0;
+}
+.c_feature li {
+    color: #777777;
+    line-height: 25px;
+    margin: 0 0 5px;
+    overflow: hidden;
+}
+.c_feature span {
+    background: none repeat scroll 0 0 #FAFAFA;
+    color: #333333;
+    float: left;
+    margin-right: 8px;
+    padding: 0 6px;
+}
+

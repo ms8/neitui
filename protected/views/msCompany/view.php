@@ -43,19 +43,22 @@
         <dl class="c_section">
             <dt>
             <h2><em></em>招聘职位</h2>
-            <span class="jobsTotal">该公司近两月共有 <i>1</i> 个职位正在招聘</span>
+<!--            <span class="jobsTotal">该公司近两月共有 <i>1</i> 个职位正在招聘</span>-->
             </dt>
             <dd>
                 <ul id="jobList" class="reset c_jobs">
-                    <li>
-                        <a target="_blank" href="http://www.lagou.com/jobs/36690.html">
-                            <h3><span title="Java" class="pos">Java</span> <span>[北京]</span>
-                            </h3>
-                            <span>20:15发布</span>
-                            <div>全职 / 15k以上 / 1-3年 / 本科及以上
-                            </div>
-                        </a>
-                    </li>
+                    <?php foreach($jobs as $job){?>
+                        <li>
+                            <a target="_blank"
+                               href="<?php echo Yii::app()->baseUrl.'/msjobs/view/'.$job->id?>">
+                                <h3>
+                                    <span title="Java" class="pos"><?php echo $job->title?></span>
+                                    <span><?php echo $job->cityname?></span>
+                                </h3>
+                                <span><?php echo $job->createtime?></span>
+                            </a>
+                        </li>
+                    <?php }?>
                 </ul>
 
             </dd>
@@ -65,25 +68,6 @@
     </div>
 
     <div class="content_r">
-<!--        <div class="c_tags">-->
-<!--            <table>-->
-<!--                <tbody><tr>-->
-<!--                    <td width="65">地点</td>-->
-<!--                    <td>北京</td>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                    <td>规模</td>-->
-<!--                    <td>2000人以上</td>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                    <td>主页</td>-->
-<!--                    <td>-->
-<!--                        <a rel="nofollow" title="http://www.meituan.com" target="_blank" href="http://www.meituan.com/">http://www.meit...</a>-->
-<!--                    </td>-->
-<!--                </tr>-->
-<!--                </tbody>-->
-<!--            </table>-->
-<!--        </div>-->
         <div class="r_box">
             <h3 >公司印象</h3>
             <div class="clear"></div>

@@ -137,16 +137,11 @@
     <div class="content_r">
 
         <div>
-            <?php
-            if($model->status=='2') {
-            ?>
-                <ul>
-                    <li><a href="<?php echo Yii::app()->baseUrl.'/mscompany/dashboard'?>">基本信息维护</a></li>
-                    <li><a href="<?php echo Yii::app()->baseUrl.'/msjobs/create'?>">职位信息发布</a></li>
-                </ul>
-            <?php
-            }
-            ?>
+            <ul>
+                <li><a href="<?php echo Yii::app()->baseUrl.'/mscompany/dashboard'?>">基本信息维护</a></li>
+                <li><a href="<?php echo Yii::app()->baseUrl.'/msjobs/create'?>">职位信息发布</a></li>
+                <li><a href="<?php echo Yii::app()->baseUrl.'/msjobs/create'?>">查看简历</a></li>
+            </ul>
         </div>
     </div>
 </div>

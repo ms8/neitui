@@ -51,8 +51,11 @@ class MsCompanyController extends Controller
 	 */
 	public function actionView($id)
 	{
+        /*取公司发布的职位信息*/
+        $jobs = MsJobs::model()->findAllByAttributes(array('company_id'=>$id));
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
+            'jobs'=>$jobs
 		));
 	}
 

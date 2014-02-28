@@ -51,8 +51,11 @@ class MsJobsController extends Controller
 	 */
 	public function actionView($id)
 	{
+        $job = $this->loadModel($id);
+        $company = MsCompany::model()->findByPk($job->company_id);
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+			'model'=>$job,
+            'company'=>$company
 		));
 	}
 
@@ -71,6 +74,12 @@ class MsJobsController extends Controller
 		{
 			$model->attributes=$_POST['MsJobs'];
             $model->createtime = date("Y-m-d H:i:s");
+            //取城市名称
+            $city = MsDictionary::model()->findByAttributes(array('code'=>$model->citycode));
+            $model->cityname = $city->name;
+            $member = Member::model()->findByPk(Yii::app()->user->id);
+            $company = MsCompany::model()->findByAttributes(array('account'=>$member->username));
+            $model->company_id = $company->id;
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}

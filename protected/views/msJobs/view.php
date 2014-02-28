@@ -1,33 +1,60 @@
-<?php
-/* @var $this MsJobsController */
-/* @var $model MsJobs */
+<div class="clearfix">
+    <div class="content_l">
+        <dl class="job_detail">
+            <dt>
+            <h1 >
+                <?php echo $model->title?>
+            </h1>
 
-$this->breadcrumbs=array(
-	'Ms Jobs'=>array('index'),
-	$model->title,
-);
+            </dt>
+            <dd class="job_request">
+                <div>发布时间：<?php echo $model->createtime?></div>
+            </dd>
+            <div class="clear"></div>
+            <dd class="job_bt">
+                <h3 class="description">职位描述</h3>
+                <p>
+                    <?php echo $model->description?>
+                </p>
+            </dd>
 
-$this->menu=array(
-	array('label'=>'List MsJobs', 'url'=>array('index')),
-	array('label'=>'Create MsJobs', 'url'=>array('create')),
-	array('label'=>'Update MsJobs', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete MsJobs', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage MsJobs', 'url'=>array('admin')),
-);
-?>
-
-<h1>View MsJobs #<?php echo $model->id; ?></h1>
-
-<?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
-		'id',
-		'title',
-		'bumen',
-		'salary',
-		'citycode',
-		'cityname',
-		'description',
-		'createtime',
-	),
-)); ?>
+            <dd>
+                <div>
+                    <button class="btn">投简历</button>
+                </div>
+            </dd>
+        </dl>
+        <div id="weibolist"></div>
+    </div>
+    <div class="content_r">
+        <dl class="job_company">
+            <div style="width: 190px;height: 110px;">
+                <a target="_blank" href="http://www.lagou.com/c/329.html">
+                    <img style="display:block;width: 190px;height: 110px;" alt="<?php echo $company->name?>"
+                         src="<?php echo Yii::app()->baseUrl.'/'.$company->logo?>" class="b2">
+                </a>
+            </div>
+            <div style="">
+                <?php echo $company->name?>
+            </div>
+            <dd>
+                <ul class="c_feature reset">
+                    <?php if($company->website != null){?>
+                    <li>
+                        <span>主页</span>
+                        <a rel="nofollow" title="<?php echo $company->website?>" target="_blank" href="<?php echo $company->website?>">
+                            <?php echo $company->website?>
+                        </a>
+                    </li>
+                    <?php }?>
+                    <?php if($company->address != null){?>
+                        <li>
+                            <span>地址</span>
+                            <?php echo $company->address?>
+                        </li>
+                    <?php }?>
+                </ul>
+            </dd>
+        </dl>
+    </div>
+</div>

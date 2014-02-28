@@ -5,6 +5,7 @@
  *
  * The followings are the available columns in table 'ms_jobs':
  * @property string $id
+ * @property string $company_id
  * @property string $title
  * @property string $bumen
  * @property string $salary
@@ -44,6 +45,7 @@ class MsJobs extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+			array('company_id', 'length', 'max'=>20),
 			array('title, bumen', 'length', 'max'=>100),
 			array('salary', 'length', 'max'=>10),
 			array('citycode, cityname', 'length', 'max'=>50),
@@ -51,7 +53,7 @@ class MsJobs extends CActiveRecord
 			array('createtime', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, title, bumen, salary, citycode, cityname, description, createtime', 'safe', 'on'=>'search'),
+			array('id, company_id, title, bumen, salary, citycode, cityname, description, createtime', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -73,13 +75,14 @@ class MsJobs extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'title' => 'Title',
-			'bumen' => 'Bumen',
-			'salary' => 'Salary',
-			'citycode' => 'Citycode',
-			'cityname' => 'Cityname',
-			'description' => 'Description',
-			'createtime' => 'Createtime',
+			'company_id' => 'Company',
+            'title' => '职位信息',
+            'bumen' => '所属部门',
+            'salary' => '月薪',
+            'citycode' => '城市',
+            'cityname' => 'Cityname',
+            'description' => '职位详细信息',
+            'createtime' => 'Createtime',
 		);
 	}
 
@@ -95,6 +98,7 @@ class MsJobs extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id,true);
+		$criteria->compare('company_id',$this->company_id,true);
 		$criteria->compare('title',$this->title,true);
 		$criteria->compare('bumen',$this->bumen,true);
 		$criteria->compare('salary',$this->salary,true);
