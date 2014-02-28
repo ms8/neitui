@@ -34,7 +34,7 @@
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="javascript;;"  onclick="deleteJianli(this)"><i class="icon-remove"></i></a>
+                                    <a href="javascript;;" id="<?php echo $value->id?>" onclick="deleteJianli(this)"><i class="icon-remove"></i></a>
                                 </td>
                                 <td><?php  echo $value->updatetime ?></td>
                                 <td><?php  echo $value->description ?></td>
@@ -136,12 +136,12 @@
                 type:'POST',
                 dataType:'json',
                 data:{'id':id},
-                url:'?r=kongjian/deletejianli',
+                url:'<?php echo Yii::app()->createUrl('/kongjian/deletejianli'); ?>',
                 success:function(json) {
                     var result = json.result;
                     if(result == "ok"){
                         alert('成功删除！');
-                        window.location.href="?r=kongjian/jianli";
+                        window.location.href="<?php echo Yii::app()->createUrl('/kongjian/jianli'); ?>";
                     }else{
                         alert('删除失败！');
                     }
