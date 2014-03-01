@@ -23,14 +23,17 @@
 <div style="position: absolute; left: 0px; top: 0px; visibility: visible;
         transform: translate(0px, 0px) scale(1); opacity: 1;" class="post-entry column_container one_fourth html_sort css_sort isotope-item">
     <div class="project-title-content">
-        <h5><a href="">Aliquam eu eros velit</a></h5>
+        <h5><a target="_blank" href="<?php echo $companys[0]->website?>">
+                <?php echo $companys[0]->name?>
+            </a>
+        </h5>
         <div class="project-title-bg"></div>
     </div>
-    <a href="">
+    <a target="_blank" href="<?php echo Yii::app()->baseUrl.'/mscompany/view/'.$companys[0]->id?>">
         <div class="portfolio-image">
             <div class="portfolio-image-bw" style="display: inline-block; width: 190px; height: 110px;">
                 <img style="opacity: 1; visibility: visible; position: absolute;"
-                     src="<?php echo Yii::app()->baseUrl.IMGAGES_GLOBAL?>img4.png"
+                     src="<?php echo Yii::app()->baseUrl.'/'.$companys[0]->logo?>"
                      alt="portfolio">
             </div>
         </div>
