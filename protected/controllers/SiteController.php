@@ -27,23 +27,9 @@ class SiteController extends Controller
 	}
 
 	public function actionIndex(){
-        if(!Yii::app()->user->isGuest){
-            $id = Yii::app()->user->id;
-            $member = Member::model()->findByPk($id);
-            if($member->type == '1'){ //应聘者
-                $this->redirect(array('/kongjian/jianli/'.$id));
-            }else{ //企业
-                $company = MsCompany::model()->findByAttributes(array('account'=>$member->username));
-                if($company == null){ //还未完善公司信息，跳转到创建公司信息页面
-                    $this->redirect(array('/mscompany/create'));
-                }else{
-                    $this->redirect(array('/mscompany/dashboard/'));
-                }
-            }
-        }else{
-            $this->render('index');
-        }
-
+        //取公司信息:已验证的公司
+        $companys = MsCompany::model()->findAllByAttributes(array('status'=>'2'));
+        $this->render('index',array('companys'=>$companys));
 	}
 
 	public function actionDown(){
@@ -92,7 +78,7 @@ class SiteController extends Controller
 
     public function actionLogin(){
         $model=new LoginForm;
-
+        $err_msg = "";
         if(!empty($_POST['LoginForm'])){
 
             //赋值给模型
@@ -102,19 +88,33 @@ class SiteController extends Controller
             $ajaxResArr = CJSON::decode($ajaxRes);
             //验证结果为空入库
             if(empty($ajaxResArr)){
-                if($model->validate() && $model->login()){
+//                if($model->validate() && $model->login()){
+                if($model->login()){
 //                    scoreAction::setScore(Yii::app()->user->id,'denglu','add',false);//登陆加积分
-                    die(CJSON::encode(array('status'=>1)));
+                    //die(CJSON::encode(array('status'=>1)));
 //                    $this->render('index');
+                    $member = Member::model()->findByAttributes(array('username'=>$model->username));
+                    if($member->type == '1'){ //应聘者
+                        $this->redirect(array('/kongjian/jianli/'.$member->id));
+                    }else{ //企业
+                        $company = MsCompany::model()->findByAttributes(array('account'=>$member->username));
+                        if($company == null){ //还未完善公司信息，跳转到创建公司信息页面
+                            $this->redirect(array('/mscompany/create'));
+                        }else{
+                            $this->redirect(array('/mscompany/dashboard/'));
+                        }
+                    }
                 }else{
-                    die(CJSON::encode(array('status'=>0)));
+                    $err_msg = "用户名密码错误";
+                    //die(CJSON::encode(array('status'=>0)));
                 }
             }else{
-                die($ajaxRes);
+                $err_msg = "用户名密码错误";
+                //die($ajaxRes);
             }
         }
-
-        $this->render('login',array('model'=>$model));
+        $this->render('login',array('model'=>$model,'msg'=>$err_msg));
+        //$this->render('login',array('model'=>$model));
 //        $this->render('login');
     }
 

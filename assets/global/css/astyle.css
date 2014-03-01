@@ -563,4 +563,17 @@ dl, dd {
     margin-right: 8px;
     padding: 0 6px;
 }
+/*错误提示信息*/
+#loginForm span.error {
+    margin: -10px 0 10px;
+}
+span.error {
+    background: url("../images/error.png") no-repeat scroll 0 3px rgba(0, 0, 0, 0);
+    color: #FF6A6A;
+    display: block;
+    font-size: 14px;
+    line-height: 22px;
+    margin: 5px 0 10px;
+    padding-left: 20px;
+}
 

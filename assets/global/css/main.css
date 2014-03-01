@@ -1816,13 +1816,13 @@ p.ajax_alert label{color:#ffb628;}
 }
 
 .project-title-content {
-	padding: 10px;
-	margin-top: 127px;
-	height: 20px;
-	z-index: 999;
-	width: 205px;
-	display: block;
-	position: absolute;
+    display: block;
+    height: 30px;
+    margin-top: 20px;
+    padding: 10px;
+    position: absolute;
+    width: 190px;
+    z-index: 999;
 }
 
 .project-title-content h5 {
@@ -1831,7 +1831,7 @@ p.ajax_alert label{color:#ffb628;}
 	color: #fff;
 	z-index: 9999;
 
-	margin-top: 30px;
+	margin-top: 50px;
 
 	-webkit-transition: all 0.2s ease;
 	-moz-transition: all 0.2s ease;
@@ -1888,8 +1888,8 @@ p.ajax_alert label{color:#ffb628;}
 
 
 .one_fourth .portfolio-image img {
-	width: 225px;
-	height: 162px;
+	width: 190px;
+	height: 110px;
 }
 
 .one_third .portfolio-image img {

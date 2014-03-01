@@ -19,7 +19,7 @@
     <input type="hidden" value="" id="resubmitToken">
     <div class="login_box">
         <?php $form=$this->beginWidget('CActiveForm', array(
-            'id'=>'login-form',
+            'id'=>'loginForm',
             'enableAjaxValidation'=>false,
             'action'=>Yii::app()->baseUrl.'/site/login',
             'htmlOptions'=>array('class'=>'login'),
@@ -31,7 +31,7 @@
             <span id="beError" style="display:none;" class="error"></span>
             <label for="remember" class="fl"><input type="checkbox" name="autoLogin" checked="checked" value="" id="remember"> 记住我</label>
             <a target="_blank" class="fr" href="http://www.lagou.com/reset.html">忘记密码？</a>
-            <input type="button" value="登 &nbsp; &nbsp; 录" id="submitLogin">
+            <input type="submit" value="登 &nbsp; &nbsp; 录" id="submitLogin">
 
         <?php $this->endWidget(); ?>
         <div class="login_right">
@@ -45,29 +45,21 @@
     <div class="login_box_btm"></div>
 </div>
 
+<input type="hidden" value="<?php echo $msg?>" id="msg">
+
 <script type="text/javascript">
-    $('#login-form').ajaxForm({
-        dataType:'json',
-        success:function processJson(data) {
-            var items = [];
-            $.each(data,function(key, val){var tem=[key,val];items.push(tem)});
-            var length = items.length;
-            if(data.status != 1){
-                //items[i][0]错误节点名称
-                //items[i][1]对应错误提示
-                for(var i=0;i<length;i++){
-                    $('#'+items[i][0]).parent().next().html('&nbsp;'+items[i][1]);
-                }
-            }else{
-                //alert('登陆成功');
-                window.location.href ="<?php echo Yii::app()->baseUrl.'/'; ?>";
-            }
-        }
-    });
+
     $("#submitLogin").click(
         function(){
 //            $("input").parent().next().html('');
             $('#login-form').submit();
         }
-    )
+    );
+    $(document).ready(function(){
+        var msg = $("#msg").val();
+        if(msg != ""){
+            $("#beError").text(msg);
+            $("#beError").show();
+        }
+    });
 </script>

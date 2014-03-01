@@ -28,7 +28,7 @@
     </div>
     <a href="">
         <div class="portfolio-image">
-            <div class="portfolio-image-bw" style="display: inline-block; width: 225px; height: 162px;">
+            <div class="portfolio-image-bw" style="display: inline-block; width: 190px; height: 110px;">
                 <img style="opacity: 1; visibility: visible; position: absolute;"
                      src="<?php echo Yii::app()->baseUrl.IMGAGES_GLOBAL?>img4.png"
                      alt="portfolio">
@@ -44,7 +44,7 @@
         <div class="project-title-bg"></div>
     </div>
     <a href="http://demo.cssmoban.com/cssthemes1/ftmp_186_oe/project.html"><div class="portfolio-image">
-            <div class="portfolio-image-bw" style="display: inline-block; width: 225px; height: 162px;">
+            <div class="portfolio-image-bw" style="display: inline-block; width: 190px; height: 110px;">
                 <img style="opacity: 1; visibility: visible; position: absolute;"
                      src="<?php echo Yii::app()->baseUrl.IMGAGES_GLOBAL?>img1.png"
                      alt="portfolio">
@@ -60,7 +60,7 @@
         <div class="project-title-bg"></div>
     </div>
     <a href="http://demo.cssmoban.com/cssthemes1/ftmp_186_oe/project.html"><div class="portfolio-image">
-            <div class="portfolio-image-bw" style="display: inline-block; width: 225px; height: 162px;">
+            <div class="portfolio-image-bw" style="display: inline-block; width: 190px; height: 110px;">
                 <img style="opacity: 1; visibility: visible; position: absolute;"
                      src="<?php echo Yii::app()->baseUrl.IMGAGES_GLOBAL?>img2.png"
                      alt="portfolio">
@@ -77,8 +77,8 @@
     </div>
     <a href="http://demo.cssmoban.com/cssthemes1/ftmp_186_oe/project.html">
         <div class="portfolio-image">
-            <div class="portfolio-image-bw" style="display: inline-block; width: 225px;
-                    height: 162px;">
+            <div class="portfolio-image-bw" style="display: inline-block; width: 190px;
+                    height: 110px;">
                 <img style="opacity: 1; visibility: visible; position: absolute;"
                      src="<?php echo Yii::app()->baseUrl.IMGAGES_GLOBAL?>img3.png"
                      alt="portfolio">
@@ -94,7 +94,7 @@
         <div class="project-title-bg"></div>
     </div>
     <a href="http://demo.cssmoban.com/cssthemes1/ftmp_186_oe/project.html"><div class="portfolio-image">
-            <div class="portfolio-image-bw" style="display: inline-block; width: 225px; height: 162px;">
+            <div class="portfolio-image-bw" style="display: inline-block; width: 190px; height: 110px;">
                 <img style="opacity: 1; visibility: visible; position: absolute;"
                      src="<?php echo Yii::app()->baseUrl.IMGAGES_GLOBAL?>img5.png"
                      alt="portfolio">
@@ -110,7 +110,7 @@
         <div class="project-title-bg"></div>
     </div>
     <a href="http://demo.cssmoban.com/cssthemes1/ftmp_186_oe/project.html"><div class="portfolio-image">
-            <div class="portfolio-image-bw" style="display: inline-block; width: 225px; height: 162px;">
+            <div class="portfolio-image-bw" style="display: inline-block; width: 190px; height: 110px;">
                 <img style="opacity: 1; visibility: visible; position: absolute;"
                      src="<?php echo Yii::app()->baseUrl.IMGAGES_GLOBAL?>img6.png"
                      alt="portfolio">
@@ -126,7 +126,7 @@
         <div class="project-title-bg"></div>
     </div>
     <a href="http://demo.cssmoban.com/cssthemes1/ftmp_186_oe/project.html"><div class="portfolio-image">
-            <div class="portfolio-image-bw" style="display: inline-block; width: 225px; height: 162px;">
+            <div class="portfolio-image-bw" style="display: inline-block; width: 190px; height: 110px;">
                 <img style="opacity: 1; visibility: visible; position: absolute;"
                      src="<?php echo Yii::app()->baseUrl.IMGAGES_GLOBAL?>img8.png"
                      alt="portfolio">
@@ -142,7 +142,7 @@
         <div class="project-title-bg"></div>
     </div>
     <a href="http://demo.cssmoban.com/cssthemes1/ftmp_186_oe/project.html"><div class="portfolio-image">
-            <div class="portfolio-image-bw" style="display: inline-block; width: 225px; height: 162px;">
+            <div class="portfolio-image-bw" style="display: inline-block; width: 190px; height: 110px;">
                 <img style="opacity: 1; visibility: visible; position: absolute;"
                      src="<?php echo Yii::app()->baseUrl.IMGAGES_GLOBAL?>img9.png"
                      alt="portfolio">
@@ -158,7 +158,7 @@
         <div class="project-title-bg"></div>
     </div>
     <a href="http://demo.cssmoban.com/cssthemes1/ftmp_186_oe/project.html"><div class="portfolio-image">
-            <div class="portfolio-image-bw" style="display: inline-block; width: 225px; height: 162px;">
+            <div class="portfolio-image-bw" style="display: inline-block; width: 190px; height: 110px;">
                 <img style="opacity: 1; visibility: visible; position: absolute;"
                      src="<?php echo Yii::app()->baseUrl.IMGAGES_GLOBAL?>img10.png"
                      alt="portfolio">
@@ -174,7 +174,7 @@
         <div class="project-title-bg"></div>
     </div>
     <a href="http://demo.cssmoban.com/cssthemes1/ftmp_186_oe/project.html"><div class="portfolio-image">
-            <div class="portfolio-image-bw" style="display: inline-block; width: 225px; height: 162px;">
+            <div class="portfolio-image-bw" style="display: inline-block; width: 190px; height: 110px;">
                 <img style="opacity: 1; visibility: visible; position: absolute;"
                      src="<?php echo Yii::app()->baseUrl.IMGAGES_GLOBAL?>img11.png"
                      alt="portfolio">
@@ -190,7 +190,7 @@
         <div class="project-title-bg"></div>
     </div>
     <a href="http://demo.cssmoban.com/cssthemes1/ftmp_186_oe/project.html"><div class="portfolio-image">
-            <div class="portfolio-image-bw" style="display: inline-block; width: 225px; height: 162px;">
+            <div class="portfolio-image-bw" style="display: inline-block; width: 190px; height: 110px;">
                 <img style="opacity: 1; visibility: visible; position: absolute;"
                      src="<?php echo Yii::app()->baseUrl.IMGAGES_GLOBAL?>img12.png"
                      alt="portfolio">
@@ -207,8 +207,8 @@
     </div>
     <a href="http://demo.cssmoban.com/cssthemes1/ftmp_186_oe/project.html">
         <div class="portfolio-image">
-            <div class="portfolio-image-bw" style="display: inline-block; width: 225px;
-                    height: 162px;">
+            <div class="portfolio-image-bw" style="display: inline-block; width: 190px;
+                    height: 110px;">
                 <img style="opacity: 1; visibility: visible; position: absolute;"
                      src="<?php echo Yii::app()->baseUrl.IMGAGES_GLOBAL?>img7.png"
                      alt="portfolio">
@@ -225,8 +225,8 @@
     </div>
     <a href="http://demo.cssmoban.com/cssthemes1/ftmp_186_oe/project.html">
         <div class="portfolio-image">
-            <div class="portfolio-image-bw" style="display: inline-block; width: 225px;
-                    height: 162px;">
+            <div class="portfolio-image-bw" style="display: inline-block; width: 190px;
+                    height: 110px;">
                 <img style="opacity: 1; visibility: visible; position: absolute;"
                      src="<?php echo Yii::app()->baseUrl.IMGAGES_GLOBAL?>img6.png"
                      alt="portfolio">
@@ -243,8 +243,8 @@
     </div>
     <a href="http://demo.cssmoban.com/cssthemes1/ftmp_186_oe/project.html">
         <div class="portfolio-image">
-            <div class="portfolio-image-bw" style="display: inline-block; width: 225px;
-                    height: 162px;">
+            <div class="portfolio-image-bw" style="display: inline-block; width: 190px;
+                    height: 110px;">
                 <img style="opacity: 1; visibility: visible; position: absolute;"
                      src="<?php echo Yii::app()->baseUrl.IMGAGES_GLOBAL?>img4.png"
                      alt="portfolio">
@@ -261,8 +261,8 @@
     </div>
     <a href="http://demo.cssmoban.com/cssthemes1/ftmp_186_oe/project.html">
         <div class="portfolio-image">
-            <div class="portfolio-image-bw" style="display: inline-block; width: 225px;
-                    height: 162px;">
+            <div class="portfolio-image-bw" style="display: inline-block; width: 190px;
+                    height: 110px;">
                 <img style="opacity: 1; visibility: visible; position: absolute;"
                      src="<?php echo Yii::app()->baseUrl.IMGAGES_GLOBAL?>img8.png"
                      alt="portfolio">
