@@ -32,7 +32,7 @@ class MsJobsController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','apply'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -44,6 +44,35 @@ class MsJobsController extends Controller
 			),
 		);
 	}
+
+    public function actionApply(){
+        $jobid = $_POST['id'];
+        if(Yii::app()->user->isGuest){
+            echo '0';//还未登录
+        }else{
+            $memberid = Yii::app()->user->id;
+            $member = Member::model()->findByPk($memberid);
+            $jianlis = MsJianli::model()->findAllByAttributes(array('userid'=>$memberid));
+            if($jianlis == null){
+                echo '1';//还没有简历，弹出对话框上传简历
+            }else{
+                //查找默认简历
+                $jianli = null;
+                foreach($jianlis as $tmp){
+                    if($tmp->flag == '1'){
+                        $jianli = $tmp;
+                        break;
+                    }
+                }
+                if($jianli == null){
+                    echo '2';//还没有简历，弹出对话框上传简历
+                }else{
+
+                }
+
+            }
+        }
+    }
 
 	/**
 	 * Displays a particular model.

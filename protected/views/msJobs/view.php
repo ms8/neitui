@@ -20,7 +20,7 @@
 
             <dd>
                 <div>
-                    <button class="btn">投简历</button>
+                    <button class="btn" id="submitbt" onclick="submitjl(<?php echo $model->id?>)">投简历</button>
                 </div>
             </dd>
         </dl>
@@ -29,7 +29,7 @@
     <div class="content_r">
         <dl class="job_company">
             <div style="width: 190px;height: 110px;">
-                <a target="_blank" href="http://www.lagou.com/c/329.html">
+                <a target="_blank" href="<?php echo $company->website?>">
                     <img style="display:block;width: 190px;height: 110px;" alt="<?php echo $company->name?>"
                          src="<?php echo Yii::app()->baseUrl.'/'.$company->logo?>" class="b2">
                 </a>
@@ -58,3 +58,21 @@
         </dl>
     </div>
 </div>
+
+<script>
+    function submitjl(id){
+        $.ajax({
+            type:'POST',
+            dataType:'json',
+            data:{'jobid':id},
+            url:'<?php echo Yii::app()->baseUrl.'/msjobs/apply'?>',
+            success:function(data) {
+                var i=0, length=data.length, service;
+                for(; i<length; i++) {
+                    service = data[i];
+                    $("#service_zone").append("<option value='"+service.id+"'>"+service.name+"</option>");
+                }
+            }
+        });
+    });
+</script>
