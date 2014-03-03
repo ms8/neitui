@@ -3,7 +3,7 @@
 <!-- Main Container -->
 <!--<section id="main-content">-->
 <!-- Container -->
-<div  class="container">
+<div  class="content">
     <div class="mian-content" id="portfolio">
         <section class="pe-container">
             <ul id="pe-thumbs" class="pe-thumbs">

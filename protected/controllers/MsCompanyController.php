@@ -138,7 +138,7 @@ class MsCompanyController extends Controller
                         $company->logo = $picPath;
                     }
                     //删除之前的图片
-                    $picCreate->deletePic($old_path);
+                    if(!$old_path == false) $picCreate->deletePic($old_path);
                 }
                 $company->save();
             }
