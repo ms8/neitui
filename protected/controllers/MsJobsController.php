@@ -28,11 +28,11 @@ class MsJobsController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','apply'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','apply'),
+				'actions'=>array('create','update'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -46,13 +46,13 @@ class MsJobsController extends Controller
 	}
 
     public function actionApply(){
-        $jobid = $_POST['id'];
+        $jobid = $_POST['jobid'];
         if(Yii::app()->user->isGuest){
             echo '0';//还未登录
         }else{
             $memberid = Yii::app()->user->id;
             $member = Member::model()->findByPk($memberid);
-            $jianlis = MsJianli::model()->findAllByAttributes(array('userid'=>$memberid));
+            $jianlis = MsJianli::model()->findAllByAttributes(array('userId'=>$memberid));
             if($jianlis == null){
                 echo '1';//还没有简历，弹出对话框上传简历
             }else{
@@ -65,9 +65,23 @@ class MsJobsController extends Controller
                     }
                 }
                 if($jianli == null){
-                    echo '2';//还没有简历，弹出对话框上传简历
-                }else{
-
+                    //没有默认简历，传递简历数组，让用户自己选择要投递的简历
+                    $jls = array();
+                    foreach($jianlis as $jltmp){
+                        $jls[] = array('id'=>$jltmp->id,'name'=>$jltmp->name);
+                    }
+                    echo json_encode($jls);
+                }else{ //直接投递默认简历
+                    //查找该职位的信息
+                    $job = MsJobs::model()->findByPk($jobid);
+                    $application = new MsApplication();
+                    $application->job_id = $jobid;
+                    $application->company_id = $job->company_id;
+                    $application->member_id = $memberid;
+                    $application->jianli_id = $jianli->id;
+                    $application->createtime = date("Y-m-d H:i:s");
+                    $application->save();
+                    echo '2';//投递成功
                 }
 
             }
@@ -82,9 +96,20 @@ class MsJobsController extends Controller
 	{
         $job = $this->loadModel($id);
         $company = MsCompany::model()->findByPk($job->company_id);
+        //该职位是否投过简历
+        $finish = '0';
+        if(!Yii::app()->user->isGuest){ //查看该职位是否投过简历
+            $app = MsApplication::model()->findByAttributes(array('member_id'=>Yii::app()->user->id,
+            'job_id'=>$id,'company_id'=>$job->company_id));
+            if($app != null){
+                $finish = '1';
+            }
+        }
+
 		$this->render('view',array(
 			'model'=>$job,
-            'company'=>$company
+            'company'=>$company,
+            'finish'=>$finish
 		));
 	}
 

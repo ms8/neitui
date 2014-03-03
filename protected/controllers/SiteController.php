@@ -95,7 +95,12 @@ class SiteController extends Controller
 //                    $this->render('index');
                     $member = Member::model()->findByAttributes(array('username'=>$model->username));
                     if($member->type == '1'){ //应聘者
-                        $this->redirect(array('/kongjian/jianli/'.$member->id));
+                        //从其他页面中的弹出框直接登录，不是从登录界面登录的，登录后要返回当前页面
+                        if(isset($_POST['loginflag']) && Yii::app()->request->urlReferrer != null){
+                            $this->redirect(Yii::app()->request->urlReferrer);
+                        }else{
+                            $this->redirect(array('/kongjian/jianli/'.$member->id));
+                        }
                     }else{ //企业
                         $company = MsCompany::model()->findByAttributes(array('account'=>$member->username));
                         if($company == null){ //还未完善公司信息，跳转到创建公司信息页面

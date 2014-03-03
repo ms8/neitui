@@ -48,7 +48,7 @@
     <div class="row">
         <div class="col-md-2 col-sm-2">
             <!-- Header -->
-            <h2 style="margin-bottom:0px"><a href="">快入职</a></h2>
+            <h2 style="margin-bottom:0px"><a href="<?php echo Yii::app()->baseUrl?>">快入职</a></h2>
             <!--            <img style="opacity: 1;" class="defaultimg" src="--><?php //echo Yii::app()->baseUrl.CSS_BOXCOL?><!--/logo.png" alt="" />-->
             <span class="sub-header">kuairuzhi.com</span>
         </div>
