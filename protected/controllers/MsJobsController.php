@@ -66,7 +66,11 @@ class MsJobsController extends Controller
                 }
                 if($jianli == null){
                     //没有默认简历，传递简历数组，让用户自己选择要投递的简历
-                    echo json_encode($jianlis);
+                    $jls = array();
+                    foreach($jianlis as $jltmp){
+                        $jls[] = array('id'=>$jltmp->id,'name'=>$jltmp->name);
+                    }
+                    echo json_encode($jls);
                 }else{ //直接投递默认简历
                     //查找该职位的信息
                     $job = MsJobs::model()->findByPk($jobid);

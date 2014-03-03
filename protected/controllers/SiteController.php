@@ -95,7 +95,8 @@ class SiteController extends Controller
 //                    $this->render('index');
                     $member = Member::model()->findByAttributes(array('username'=>$model->username));
                     if($member->type == '1'){ //应聘者
-                        if(Yii::app()->request->urlReferrer != null){
+                        //从其他页面中的弹出框直接登录，不是从登录界面登录的，登录后要返回当前页面
+                        if(isset($_POST['loginflag']) && Yii::app()->request->urlReferrer != null){
                             $this->redirect(Yii::app()->request->urlReferrer);
                         }else{
                             $this->redirect(array('/kongjian/jianli/'.$member->id));

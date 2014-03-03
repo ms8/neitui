@@ -72,6 +72,7 @@
 
     <div id="content" style="height: 170px;background-color: #71bd90;padding-top:50px">
         <form id="loginForm" class="login" method="post" action="<?php echo Yii::app()->baseUrl.'/site/login'?>">
+            <input type="hidden" name="loginflag" value="0">
             <div style="margin: 0px 0 10px 20px;">
                 <label>用户名</label>
                 <input id="username" name="LoginForm[username]">
@@ -115,6 +116,31 @@
     </div>
 </div>
 
+<!-- 弹出对话框让用户选择简历-->
+<div id="chooseDiv" style="display: none;width: 600px;height: 280px;background-color#f39c12;padding: 10px;position: absolute;top: 150px;left: 330px">
+    <div style="height: 40px;background-color: #088b69">
+        <div style="float: left">投递该职位</div>
+        <div style="float: right;font-size: 20px;cursor: pointer;margin-right: 20px;" id="choose-close">X</div>
+    </div>
+
+    <div style="height: 220px;background-color: #71bd90;padding-top:50px">
+        <form id="chooseForm" class="login" method="post" enctype="multipart/form-data"
+              action="<?php echo Yii::app()->baseUrl.'/kongjian/apply'?>">
+            <div class="col-sm-6">
+                <input name="companyid" value="<?php echo $company->id?>" type="hidden">
+                <input name="jobid" value="<?php echo $model->id?>" type="hidden">
+                <input name="jianliid" id="jianliid" value="" type="hidden">
+                <div id="jianlis">
+                </div>
+                投递其他职位时默认使用该简历：<br>
+                <input type="radio" value="1" name="defaultflag" checked>是 &nbsp;&nbsp;&nbsp;
+                <input type="radio" value="0" name="defaultflag" >否
+            </div>
+            <button class="btn btn-danger" id="choose_td" type="button">投简历</button>
+        </form>
+    </div>
+</div>
+
 <script>
     $("#login-close").live('click',function(){
         $("#loginDiv").hide();
@@ -125,6 +151,17 @@
     $("#upload-close").live('click',function(){
         $("#uploadDiv").hide();
     });
+    $("#choose-close").live('click',function(){
+        //清除里面动态生成的内容
+        $("#jianlis").empty();
+        $("#chooseDiv").hide();
+    });
+    $("#choose_td").live('click',function(){
+        var jianli_id = $('input[name="chosen"]:checked').val();
+        $("#jianliid").val(jianli_id);
+        $("#chooseForm").submit();
+    });
+
     function submitjl(id){
         $.ajax({
             type:'POST',
@@ -134,17 +171,20 @@
             success:function(data) {
                 if(data == '0'){//未登录，弹出登录框
                     $("#loginDiv").show();
-
                 }else if(data == '1'){//没有简历，弹出对话框上传简历
                     $("#uploadDiv").show();
                 }else if(data == '2'){ //投递成功，刷新页面
                     window.location.reload();
-                }else{
+                }else{ //让用户选择投递的简历，并设置为默认投递的简历
                     var i=0, length=data.length, jianli;
+                    var html_str = "";
                     for(; i<length; i++) {
                         jianli = data[i];
-
+                        html_str += "<div><input type='radio' name='chosen' value='"+jianli.id+"'>"
+                            +jianli.name+"</div>";
                     }
+                    $("#jianlis").append(html_str);
+                    $("#chooseDiv").show();
                 }
             }
         });

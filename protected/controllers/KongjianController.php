@@ -73,6 +73,28 @@ class KongjianController extends Controller
         echo $json_str;
     }
 
+    public function actionApply(){
+        if(!Yii::app()->user->isGuest){
+            if(isset($_POST['companyid'])&& isset($_POST['jobid']) && isset($_POST['jianliid'])){ //直接点击某职位的“投简历”进来的
+                //设置默认简历
+                if(isset($_POST['defaultflag']) && $_POST['defaultflag']=='1'){
+                    $jianli_id = (int)$_POST['jianliid'];
+                    MsJianli::model()->updateByPk($jianli_id,array('flag'=>'1'));
+                }
+                //投递简历
+                $application = new MsApplication();
+                $application->job_id = $_POST['jobid'];
+                $application->company_id = $_POST['companyid'];
+                $application->member_id = Yii::app()->user->id;
+                $application->jianli_id = $_POST['jianliid'];
+                $application->createtime = date("Y-m-d H:i:s");
+                $application->save();  //投递该职位
+                $this->redirect(Yii::app()->request->urlReferrer);
+            }
+        }
+
+    }
+
     public function actionJianli(){
         $message = "";
         if(!empty($_FILES['jianlifile'])){ //上传简历
