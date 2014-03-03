@@ -78,8 +78,6 @@ class KongjianController extends Controller
         if(!empty($_FILES['jianlifile'])){ //上传简历
             $model=new MsJianli();
             $fileName = $_FILES["jianlifile"]["name"];
-
-
             $dir_path = "upload/jianli/".date('Y-m-d').'/';
 
             list($s1, $s2) = explode(' ', microtime());
@@ -95,6 +93,11 @@ class KongjianController extends Controller
             }else{
                 if(!is_dir($dir_path)){
                     mkdir($dir_path, 0777,true);
+                }
+                if(isset($_POST['flag'])){ //直接点击某职位的“投简历”进来的
+                    $model->flag = $_POST['flag'];
+                }else{
+                    $model->flag = '0';//不是默认简历
                 }
                 $model->name = $fileName;
                 $model->filepath = $file_path;
@@ -113,14 +116,27 @@ class KongjianController extends Controller
                     }else{
                         move_uploaded_file($_FILES["jianlifile"]["tmp_name"],$file_path);
                         $model->save();
+                        if(isset($_POST['flag'])){ //直接点击某职位的“投简历”进来的
+                            $application = new MsApplication();
+                            $application->job_id = $_POST['jobid'];
+                            $application->company_id = $_POST['companyid'];
+                            $application->member_id = Yii::app()->user->id;
+                            $application->jianli_id = $model->id;
+                            $application->createtime = date("Y-m-d H:i:s");
+                            $application->save();  //投递该职位
+                        }
                     }
                 }
             }
 //            $jianlis = MsJianli::model()->findAll('userId=:userId',array(':userId'=>Yii::app()->user->id));
 //            $this->render('jianli', array('jianlis'=>$jianlis,'message'=>$message));
         }
-        $jianlis = MsJianli::model()->findAll('userId=:userId',array(':userId'=>Yii::app()->user->id));
-        $this->render('jianli', array('jianlis'=>$jianlis,'message'=>$message));
+        if(isset($_POST['flag'])){ //直接点击某职位的“投简历”进来的，还回到之前的页面
+            $this->redirect(Yii::app()->request->urlReferrer);
+        }else{
+            $jianlis = MsJianli::model()->findAll('userId=:userId',array(':userId'=>Yii::app()->user->id));
+            $this->render('jianli', array('jianlis'=>$jianlis,'message'=>$message));
+        }
     }
 
 	public function actionInfo(){
