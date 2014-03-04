@@ -156,8 +156,23 @@ class KongjianController extends Controller
         if(isset($_POST['flag'])){ //直接点击某职位的“投简历”进来的，还回到之前的页面
             $this->redirect(Yii::app()->request->urlReferrer);
         }else{
+            $jobs = MsApplication::model()->findAll('member_id=:userId',array(':userId'=>Yii::app()->user->id));
             $jianlis = MsJianli::model()->findAll('userId=:userId',array(':userId'=>Yii::app()->user->id));
-            $this->render('jianli', array('jianlis'=>$jianlis,'message'=>$message));
+            $this->render('jianli', array('jianlis'=>$jianlis,'message'=>$message,'jobs'=>$jobs));
+        }
+    }
+
+    //设置默认简历
+    public function actionSetDefault(){
+        if(!Yii::app()->user->isGuest && isset($_POST['id'])){
+            $member_id = Yii::app()->user->id;
+            $jianli_id = $_POST['id'];
+            MsJianli::model()->updateAll(array('flag'=>'0'),
+                'userId=:userid',array(':userid'=>$member_id));
+            MsJianli::model()->updateByPk($jianli_id,array('flag'=>'1'));
+            echo '1';
+        }else{
+            echo '0';
         }
     }
 

@@ -10,7 +10,38 @@
             <div class="panel panel-default">
                 <div class="panel-heading">已投递职位</div>
                 <div class="panel-body">
-                    Panel content
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>公司</th>
+                            <th>职位</th>
+                            <th>投递时间</th>
+                            <!--                            <th>备注</th>-->
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <?php foreach ($jobs as $key => $value) {?>
+                            <tr>
+                                <td>
+                                    <a href="<?php echo Yii::app()->createUrl('mscompany/view',array('id'=>$value->company_id)); ?>">
+                                        <?php  $company = MsCompany::model()->findByPk($value->company_id);
+                                        echo $company->name ?>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="<?php echo Yii::app()->createUrl('msjobs/view',array('id'=>$value->job_id)); ?>">
+                                        <?php  $job = MsJobs::model()->findByPk($value->job_id);
+                                        echo $job->title ?>
+                                    </a>
+                                </td>
+                                <td>
+                                    <?php  echo $value->createtime ?>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                        </tbody>
+                     </table>
                 </div>
             </div>
             <div class="panel panel-default">
@@ -19,9 +50,9 @@
                     <thead>
                         <tr>
                             <th>简历</th>
-                            <th>操作</th>
                             <th>修改时间</th>
-                            <th>备注</th>
+                            <th>操作</th>
+<!--                            <th>备注</th>-->
                         </tr>
                     </thead>
                     <tbody>
@@ -33,11 +64,17 @@
                                         <?php  echo $value->name ?>
                                     </a>
                                 </td>
+                                <td><?php  echo $value->updatetime ?></td>
                                 <td>
                                     <a href="javascript;;" id="<?php echo $value->id?>" onclick="deleteJianli(this)"><i class="icon-remove"></i></a>
+                                    <?php if($value->flag == '1'){?>
+                                        &nbsp;默认简历&nbsp;
+                                    <?php }else{?>
+                                        <button class="btn" onclick="setDefault(<?php echo $value->id?>)">设置默认</button>
+                                    <?php }?>
                                 </td>
-                                <td><?php  echo $value->updatetime ?></td>
-                                <td><?php  echo $value->description ?></td>
+
+<!--                                <td>--><?php // echo $value->description ?><!--</td>-->
                             </tr>
                         <?php } ?>
                     <?php }else{ ?>
@@ -148,5 +185,22 @@
                 }
             });
         }
+    }
+
+    /*设置默认简历*/
+    function setDefault(id){
+        $.ajax({
+            type:'POST',
+            dataType:'json',
+            data:{'id':id},
+            url:'<?php echo Yii::app()->request->hostInfo.Yii::app()->homeUrl.'/kongjian/setDefault'?>',
+            success:function(data) {
+                if(data == '1'){ //修改成功，刷新页面
+                    window.location.reload();
+                }else if(data=='0'){
+                    alert('抱歉，修改失败');
+                }
+            }
+        });
     }
 </script>
