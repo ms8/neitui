@@ -1,7 +1,4 @@
 <div class="login_wrapper">
-
-
-    <input type="hidden" value="ff8080814463e4530144640b46230de3" id="resubmitToken">
     <div class="login_box">
         <?php $form=$this->beginWidget('CActiveForm', array(
             'id'=>'loginForm',
@@ -25,8 +22,10 @@
 <!--                <span id="beError" style="display:none;" class="error"></span>-->
 <!--                <input type="password" style="width:96%;height: 40px;" placeholder="请输入密码" tabindex="2" name="password" id="password">-->
 <!--                -->
-                <?php echo $form->textField($model,'username',array('style'=>'width:96%;height: 40px;','value'=>'','placeholder'=>'请输入邮箱地址')); ?>
+                <?php echo $form->textField($model,'username',array('style'=>'width:96%;height: 40px;',
+                    'value'=>'','onblur'=>'checkUser(this)','placeholder'=>'请输入邮箱地址')); ?>
                 <?php echo $form->passwordField($model,'password',array('style'=>'width:96%;height: 40px;','placeholder'=>'请输入密码')); ?>
+                <span id="beError" class="error" style="display:none;"></span>
                 <label for="checkbox" class="fl">
                     <input type="checkbox" class="checkbox valid" checked="checked" name="checkbox" id="checkbox">
                     我已阅读并同意
@@ -43,6 +42,25 @@
 </div>
 
 <script>
+    var user_confict = false;
+    function checkUser(obj){
+        $.ajax({
+            type:'POST',
+            dataType:'json',
+            data:{'username':$(obj).val()},
+            url:'<?php echo Yii::app()->baseUrl.'/site/checkUser'?>',
+            success:function(data) {
+                if(data == '1'){
+                    $("#beError").text('用户名已被注册');
+                    $("#beError").show();
+                    user_confict = true;
+                }else{
+                    $("#beError").hide();
+                    user_confict = false;
+                }
+            }
+        });
+    }
     $("#submitLogin").live("click",function(){
         var type = $('input[name="type"]:checked').val();
         if(type == undefined){
@@ -51,6 +69,10 @@
         }
         var search_str = /^[\w\-\.]+@[\w\-\.]+(\.\w+)+$/;
         var email_val = $("#Member_username").val();
+        if(user_confict){
+            alert('用户名已被注册,请更换另一个用户名');
+            return;
+        }
         if(!search_str.test(email_val)){
             alert('请填写正确的邮箱地址');
             $('#Member_username').focus();

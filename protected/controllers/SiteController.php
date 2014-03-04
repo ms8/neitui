@@ -123,6 +123,127 @@ class SiteController extends Controller
 //        $this->render('login');
     }
 
+    public function actionCheckUser(){
+        $user = Member::model()->findByAttributes(array('username' => $_POST['username']));
+        if($user==null){
+            echo '0';
+        }else{
+            echo '1';
+        }
+    }
+
+    public function actionForgetpassword(){
+        $this->render('forgetpassword');
+    }
+
+    public function actionForget(){
+        if(isset($_POST['username'])){
+            $mail = new PHPMailer(); //建立邮件发送类
+            $address ="syd3050@163.com";
+            $mail->IsSMTP(); // 使用SMTP方式发送
+            $mail->Host = "smtp.163.com"; // 您的企业邮局域名
+            $mail->SMTPAuth = true; // 启用SMTP验证功能
+            $mail->Username = "gqlshare@163.com"; // 邮局用户名(请填写完整的email地址)
+            $mail->Password = 'gql111111'; // 邮局密码
+            $mail->Port=25;
+            $mail->CharSet='UTF-8';
+            $mail->From = "gqlshare@163.com"; //邮件发送者email地址
+            $mail->FromName = "快入职";
+            $mail->AddAddress("$address", $_POST['username']);//收件人地址，可以替换成任何想要接收邮件的email信箱,格式是AddAddress("收件人email","收件人姓名")
+            //$mail->AddReplyTo("", "");
+
+            //$mail->AddAttachment("/var/tmp/file.tar.gz"); // 添加附件
+            $mail->IsHTML(true); // set email format to HTML //是否使用HTML格式
+
+            //$mail->Subject = ""; //邮件标题
+            //产生随机码并记录到数据库
+            $memberModel=new Member();
+            $memberModel->password = $_POST['username'];
+            $memberModel->salt=Helper::randomCode();//加盐值
+            $serialNum = $memberModel->hashPassword();
+            $resetModel = new MsReset();
+            $resetModel->username = $_POST['username'];
+            $resetModel->serialnum = $serialNum;
+            $resetModel->createtime = date("Y-m-d H:i:s");
+            if(!$resetModel->save()){
+                //发送失败
+                $msg = array('flag'=>'0','reason'=>'生成随机码失败');
+                echo json_encode($msg);
+                exit;
+            }
+            $mail->Subject = "=?utf-8?B?" . base64_encode("重置密码链接") . "?=";
+            $mail->Body = "您好，".$_POST['username'].",请点击以下链接以修改密码<br>"
+            ."<a target='_blank' href='".Yii::app()->request->hostInfo.Yii::app()->homeUrl.'site/toReset?serial='
+                .$serialNum.
+                "'>".Yii::app()->request->hostInfo.Yii::app()->homeUrl.'/site/toReset?serial='.$serialNum."</a><br>"
+            ."如果链接不能打开，请将该链接复制到浏览器里直接访问。<br><br>"
+            ."<a target='_blank' href='".Yii::app()->request->hostInfo.Yii::app()->homeUrl
+            . "'>快入职网</a>，专注于应届生的招聘，海量的企业在等着你，快来投简历吧，快人一步找到好工作哦"; //邮件内容
+            //$mail->AltBody = "This is the body in plain text for non-HTML mail clients"; //附加信息，可以省略
+
+            if(!$mail->Send())
+            {   //发送失败
+                $msg = array('flag'=>'0','reason'=>$mail->ErrorInfo);
+                echo json_encode($msg);
+            }else{
+                echo "1"; //发送成功
+            }
+        }else{ //到首页
+            echo '-1';
+        }
+    }
+
+    public function actionResetpassword(){
+        $flag = false;
+        $password = "";
+        if(isset($_GET['username']) && isset($_GET['password']) ){
+            if(isset($_GET['serialnum'])){
+                $username = $_GET['username'];
+                $password = $_GET['password'];
+                $rm = MsReset::model()->findByAttributes(array('username'=>$username,
+                    'serialnum'=>$_GET['serialnum']));
+                if($rm != null){ //修改密码
+                    $memberModel = new Member();
+                    $memberModel->username = $username;
+                    $memberModel->password = $password;
+                    $memberModel->salt=Helper::randomCode();//加盐值
+                    $memberModel->password=$memberModel->hashPassword();
+                    Member::model()->updateAll(array('password'=>$memberModel->password,
+                            'salt'=>$memberModel->salt),
+                        'username=:username',array(':username'=>$memberModel->username));
+                    //删除对应记录
+                    MsReset::model()->deleteAllByAttributes(array('username'=>$username));
+                    $flag = true;
+                }
+            }
+        }
+        if($flag){
+            $model = new LoginForm();
+            $model->username = $memberModel->username;
+            $model->password = $password;
+            $model->login();
+        }
+        //到首页
+        $companys = MsCompany::model()->findAllByAttributes(array('status'=>'2'));
+        $this->render('index',array('companys'=>$companys));
+    }
+
+    public function actionToReset($serial){
+        if($serial!=null && $serial != ''){
+            //从数据库取该值并校验该值
+            $rm = MsReset::model()->findByAttributes(array('serialnum'=>$serial));
+            if($rm != null){
+                $this->render('resetpassword',array('username'=>$rm->username,'serialnum'=>$serial));
+            }else{
+                $companys = MsCompany::model()->findAllByAttributes(array('status'=>'2'));
+                $this->render('index',array('companys'=>$companys));
+            }
+        }else{  //到首页
+            $companys = MsCompany::model()->findAllByAttributes(array('status'=>'2'));
+            $this->render('index',array('companys'=>$companys));
+        }
+    }
+
     //注册
     public function actionRegister(){
 

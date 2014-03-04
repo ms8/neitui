@@ -16,7 +16,7 @@
                     <span id="beError" style="display:none;" class="error"></span>
                     <div>
                     <label for="remember"><input type="checkbox" name="autoLogin" checked="checked" value="" id="remember"> 记住我</label>
-                    <a target="_blank"  href="http://www.lagou.com/reset.html">忘记密码？</a>
+                    <a target="_blank"  href="<?php echo Yii::app()->baseUrl.'/site/forgetpassword'?>">忘记密码？</a>
                     </div>
                 </div>
                 <div class="col-md-4">
