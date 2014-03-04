@@ -48,7 +48,7 @@
             type:'POST',
             dataType:'json',
             data:{'username':$(obj).val()},
-            url:'<?php echo Yii::app()->baseUrl.'/site/checkUser'?>',
+            url:'<?php echo Yii::app()->request->hostInfo.Yii::app()->homeUrl.'/site/checkUser'?>',
             success:function(data) {
                 if(data == '1'){
                     $("#beError").text('用户名已被注册');

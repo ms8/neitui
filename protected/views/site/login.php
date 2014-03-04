@@ -4,7 +4,7 @@
             <?php $form=$this->beginWidget('CActiveForm', array(
                 'id'=>'loginForm',
                 'enableAjaxValidation'=>false,
-                'action'=>Yii::app()->baseUrl.'/site/login',
+                'action'=>Yii::app()->request->hostInfo.Yii::app()->homeUrl.'/site/login',
                 'htmlOptions'=>array('class'=>'login form-horizontal','role'=>'form'),
             )); ?>
     <!--            <input type="text" placeholder="请输入登录邮箱地址" tabindex="1" name="email" id="email">-->
@@ -16,7 +16,7 @@
                     <span id="beError" style="display:none;" class="error"></span>
                     <div>
                     <label for="remember"><input type="checkbox" name="autoLogin" checked="checked" value="" id="remember"> 记住我</label>
-                    <a target="_blank"  href="<?php echo Yii::app()->baseUrl.'/site/forgetpassword'?>">忘记密码？</a>
+                    <a target="_blank"  href="<?php echo Yii::app()->request->hostInfo.Yii::app()->homeUrl.'/site/forgetpassword'?>">忘记密码？</a>
                     </div>
                 </div>
                 <div class="col-md-4">

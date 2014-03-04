@@ -193,6 +193,23 @@ class SiteController extends Controller
         }
     }
 
+    public function actionDirectReset(){
+        if(!Yii::app()->user->isGuest && isset($_GET['password'])){
+            $member_id = Yii::app()->user->id;
+            $memberModel = new Member();
+            $memberModel->password = $_GET['password'];
+            $memberModel->salt=Helper::randomCode();//加盐值
+            $memberModel->password=$memberModel->hashPassword();
+            Member::model()->updateByPk($member_id,array('password'=>$memberModel->password,
+                'salt'=>$memberModel->salt));
+            $this->redirect(Yii::app()->request->urlReferrer);
+        }else{
+            //取公司信息:已验证的公司
+            $companys = MsCompany::model()->findAllByAttributes(array('status'=>'2'));
+            $this->render('index',array('companys'=>$companys));
+        }
+    }
+
     public function actionResetpassword(){
         $flag = false;
         $password = "";

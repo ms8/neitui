@@ -113,6 +113,16 @@
                     </form>
                 </div>
             </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">信息维护</div>
+                <div class="panel-body fade in">
+                    <form action="<?php echo Yii::app()->createUrl('site/directReset');?>">
+                        新密码:<input name="password" type="password" placeholder="输入新密码">
+                        <button id="resetPwd" class="btn btn-danger"  type="submit">重置密码</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
