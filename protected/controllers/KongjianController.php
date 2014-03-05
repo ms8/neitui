@@ -8,28 +8,26 @@ class KongjianController extends Controller
 	
 	public function actions()
 	{
-		list($s1, $s2) = explode(' ', microtime());   
-		$fileName = (float)sprintf('%.0f', (floatval($s1) + floatval($s2)) * 1000); 
-		$fileName.=rand(0,9999);
-		if(!empty($_GET['fileName'])){
-		  $fileName = $_GET['fileName'];
-		}
-		$path = $this->filePath[$_GET['filePath']];
-		$after = $_GET['after'];
-		$res = array(
-		  //上传图片
-		  'upload'=>array(
-		    'class'=>'application.extensions.swfupload.SWFUploadAction',
-		    'filepath'=>$path.$fileName.'.EXT',
-		    //注意这里是绝对路径,.EXT是文件后缀名替代符号
-		    //'onAfterUpload'=>array($this,'saveFile'),
-		  )
-		);
-		scoreAction::setScore(Yii::app()->user->id,'touxiang','add',false);//上传头像
-		if(!empty($after)){
-		  	$res['upload']['onAfterUpload'] = array($this,$after);
-		}
-		return $res;
+//		list($s1, $s2) = explode(' ', microtime());
+//		$fileName = (float)sprintf('%.0f', (floatval($s1) + floatval($s2)) * 1000);
+//		$fileName.=rand(0,9999);
+//		if(!empty($_GET['fileName'])){
+//		  $fileName = $_GET['fileName'];
+//		}
+//		$path = $this->filePath[$_GET['filePath']];
+//		$after = $_GET['after'];
+//		$res = array(
+//		  //上传图片
+//		  'upload'=>array(
+//		    'class'=>'application.extensions.swfupload.SWFUploadAction',
+//		    'filepath'=>$path.$fileName.'.EXT',
+//		  )
+//		);
+//		scoreAction::setScore(Yii::app()->user->id,'touxiang','add',false);//上传头像
+//		if(!empty($after)){
+//		  	$res['upload']['onAfterUpload'] = array($this,$after);
+//		}
+//		return $res;
 	}
 
 	public function init(){
@@ -116,7 +114,7 @@ class KongjianController extends Controller
                 if(!is_dir($dir_path)){
                     mkdir($dir_path, 0777,true);
                 }
-                if(isset($_POST['flag'])){ //直接点击某职位的“投简历”进来的
+                if(isset($_POST['flag'])){ //用户勾选了默认简历的设置选项
                     $model->flag = $_POST['flag'];
                 }else{
                     $model->flag = '0';//不是默认简历
@@ -136,9 +134,15 @@ class KongjianController extends Controller
                         && $type != ".mpeg4"  && $type != ".wmv" && $type != ".mp4" ) {
                         $message =  '请上传word文档或者avi,mpeg1,mpeg2,mpeg4,wmv,mp4格式的视频文件^_^';
                     }else{
+                        //如果该简历是默认简历，将其余简历设置为非默认简历
+                        if($model->flag == '1'){
+                            MsJianli::model()->updateAll(array('flag'=>'0'),
+                                'userId=:userid',array(':userid'=>Yii::app()->user->id));
+                        }
+
                         move_uploaded_file($_FILES["jianlifile"]["tmp_name"],$file_path);
                         $model->save();
-                        if(isset($_POST['flag'])){ //直接点击某职位的“投简历”进来的
+                        if(isset($_POST['jobid'])){ //直接点击某职位的“投简历”进来的
                             $application = new MsApplication();
                             $application->job_id = $_POST['jobid'];
                             $application->company_id = $_POST['companyid'];
@@ -153,7 +157,7 @@ class KongjianController extends Controller
 //            $jianlis = MsJianli::model()->findAll('userId=:userId',array(':userId'=>Yii::app()->user->id));
 //            $this->render('jianli', array('jianlis'=>$jianlis,'message'=>$message));
         }
-        if(isset($_POST['flag'])){ //直接点击某职位的“投简历”进来的，还回到之前的页面
+        if(isset($_POST['jobid'])){ //直接点击某职位的“投简历”进来的，还回到之前的页面
             $this->redirect(Yii::app()->request->urlReferrer);
         }else{
             $jobs = MsApplication::model()->findAll('member_id=:userId',array(':userId'=>Yii::app()->user->id));

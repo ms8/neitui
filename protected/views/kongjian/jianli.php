@@ -66,7 +66,7 @@
                                 </td>
                                 <td><?php  echo $value->updatetime ?></td>
                                 <td>
-                                    <a href="javascript;;" id="<?php echo $value->id?>" onclick="deleteJianli(this)"><i class="icon-remove"></i></a>
+                                    <a href="#" id="<?php echo $value->id?>" onclick="deleteJianli(this)"><i class="icon-remove"></i></a>
                                     <?php if($value->flag == '1'){?>
                                         &nbsp;默认简历&nbsp;
                                     <?php }else{?>
@@ -176,7 +176,7 @@
 <script>
     function deleteJianli(imgObj){
         var id = $(imgObj).attr('id');
-        var r=confirm("确定删除这份简历吗？")
+        var r=confirm("确定删除这份简历吗？");
         if (r==true)
         {
             $.ajax({

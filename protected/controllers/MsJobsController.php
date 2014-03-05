@@ -28,7 +28,7 @@ class MsJobsController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','apply'),
+				'actions'=>array('index','view','apply','jlUpload'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -44,6 +44,14 @@ class MsJobsController extends Controller
 			),
 		);
 	}
+
+    public function actionJlUpload(){
+        if(Yii::app()->user->isGuest){
+            echo '0';//还未登录
+        }else{
+            echo '1';//弹出对话框上传简历
+        }
+    }
 
     public function actionApply(){
         $jobid = $_POST['jobid'];
