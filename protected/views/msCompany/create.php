@@ -13,6 +13,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>您还没填写公司验证信息，请填写相关信息，验证通过后可发布相关职位和浏览简历</h1>
+<h3 style="color: #ffffff">您还没填写公司验证信息，请填写相关信息，验证通过后可发布相关职位和浏览简历</h3>
+<br>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
