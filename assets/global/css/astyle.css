@@ -16,10 +16,13 @@ h2{
     margin-top: 0;
 }
 a{
-    border-bottom: 1px dotted #ffffff;
+    /*border-bottom: 1px dotted #ffffff;*/
     color: #D01C00;
 }
 .header .row a:hover,a:focus{
+    color: #AB1700;
+}
+.header h3 a:hover{
     color: #AB1700;
 }
 .sub-header{
@@ -594,4 +597,17 @@ span.error {
     padding-left: 20px;
 }
 
-/*弹出框样式*/
+/*菜单样式*/
+.menu,.menu-active{
+    float:left;
+    width:30%;
+    border:1px #D01C00;
+    padding:22px 40px;
+    color:#D01C00;
+    font-size:25px;
+    cursor: pointer;
+}
+.menu-active,.header .menu:hover,.header .menu:focus{
+    background-color:#D01C00;
+    color:#ffffff;
+}

@@ -56,8 +56,11 @@
             <span class="sub-header">kuairuzhi.com</span>
         </div>
         <div class="col-md-6 col-sm-6">
-            <div style="float:left;width:30%;background-color:#D01C00;padding:22px 35px;color:#ffffff;font-size:25px;">首页</div>
-            <div  style="float:left;width:30%;border:1px #D01C00;padding:22px 35px;color:#D01C00;font-size:25px;">公司</div>
+            <div class="menu-active" id="menu-active">
+                首页
+            </div>
+            <div class="menu" name="menu">公司</div>
+            <div class="menu" name="menu">小组</div>
         </div>
         <div class="col-md-4 col-sm-4" style="margin-top:15px">
             <!-- Social media links -->
@@ -86,6 +89,15 @@
     $(document).ready(function() {
         $('.register_radio li input').click(function(e){
             $(this).parent('li').addClass('current').append('<em></em>').siblings().removeClass('current').find('em').remove();
+        });
+        $("div[name='menu']").hover(function(){
+            if($("#menu-active").attr('class') == 'menu-active' ){
+                $("#menu-active").attr('class','menu');
+            }
+        },function(){
+            if($("#menu-active").attr('class') == 'menu' ){
+                $("#menu-active").attr('class','menu-active');
+            }
         });
     });
     $(function() {
