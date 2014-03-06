@@ -2,7 +2,10 @@
 
 /*header style*/
 .header{
-    margin: 25px 0;
+    /*margin: 25px 0;*/
+    background-color: #f4f4f4;
+    height: 80px;
+    padding: 0px 175px;
 }
 .header .search{
     max-width: 250px;
@@ -14,10 +17,13 @@ h2{
 }
 a{
     border-bottom: 1px dotted #ffffff;
-    color: #ffffff;
+    color: #D01C00;
+}
+.header .row a:hover,a:focus{
+    color: #AB1700;
 }
 .sub-header{
-    color: #ffffff;
+    color: #D01C00;
 }
 .description{
     color: #ffffff;
@@ -25,11 +31,16 @@ a{
     padding: 5px 50px;
 }
 
+.tjl-btn:hover,.tjl-btn:focus{
+    background-color: #D01C00;
+    color: #ffffff;
+}
+
 .tjl-btn {
     -moz-user-select: none;
     background-image: none;
     background-color: #ffffff;
-    color: #017a5e;
+    color: #D01C00;
     border: 1px solid rgba(0, 0, 0, 0);
     border-radius: 4px;
     cursor: pointer;
@@ -44,11 +55,17 @@ a{
     white-space: nowrap;
 }
 
+.social .btn:hover,.social .btn:focus{
+    background-color: #D01C00;
+    color: #ffffff;
+}
+
 .social .btn{
     float: right;
     margin-left: 25px;
     background-color: #ffffff;
-    color: #017a5e;
+    color: #D01C00;
+    border-color: #D01C00;
 }
 
 /*登录界面样式*/
@@ -393,6 +410,10 @@ dl, dd {
     float: none;
     font-size: 14px;
     margin-right: 10px;
+}
+
+.social{
+    margin-top: 7px;
 }
 
 /*个人中心*/

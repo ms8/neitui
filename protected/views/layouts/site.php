@@ -42,28 +42,30 @@
     </style>
 </head>
 
-<body style="background-color: #019875;width: 960px;margin:0 auto;overflow:hidden;">
+<body style="margin:0 auto;overflow:hidden;">
 
 <div class="header">
-    <div class="row">
-        <div class="col-md-2 col-sm-2">
+<!--    <div class="row">-->
+        <div class="col-md-2 col-sm-2" style="margin-top:15px">
             <!-- Header -->
-            <h2 style="margin-bottom:0px"><a href="<?php echo Yii::app()->baseUrl?>">快入职</a></h2>
+            <h3 style="margin:0">
+                <a href="<?php echo Yii::app()->baseUrl?>">快入职</a>
+            </h3>
+            <img style="margin: -4px 0" src="<?php echo Yii::app()->CreateUrl(IMGAGES_GLOBAL.'jiantou.png')?>" alt="">
             <!--            <img style="opacity: 1;" class="defaultimg" src="--><?php //echo Yii::app()->baseUrl.CSS_BOXCOL?><!--/logo.png" alt="" />-->
             <span class="sub-header">kuairuzhi.com</span>
         </div>
         <div class="col-md-6 col-sm-6">
-            <div class="description">
-                应届生的公司内推平台
-            </div>
+            <div style="float:left;width:30%;background-color:#D01C00;padding:22px 35px;color:#ffffff;font-size:25px;">首页</div>
+            <div  style="float:left;width:30%;border:1px #D01C00;padding:22px 35px;color:#D01C00;font-size:25px;">公司</div>
         </div>
-        <div class="col-md-4 col-sm-4">
+        <div class="col-md-4 col-sm-4" style="margin-top:15px">
             <!-- Social media links -->
             <?php if(Yii::app()->user->isGuest){?>
                 <div class="social">
                     <button class="btn" onclick="window.open('<?php echo Yii::app()->baseUrl.'/site/register'?>')">注册</button>
                     <button class="btn" onclick="window.location.href='<?php echo Yii::app()->baseUrl.'/site/login'?>'">登录</button>
-                    <button class="btn">关于我们</button>
+<!--                    <button class="btn">关于我们</button>-->
                 </div>
             <?php }else{?>
                 <!-- 登录后出现的个人中心信息-->
@@ -74,10 +76,7 @@
                 <!-- -->
             <?php }?>
         </div>
-
-
-
-    </div>
+<!--    </div>-->
 </div>
 
 <?php echo $content ?>
