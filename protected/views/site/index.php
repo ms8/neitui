@@ -49,7 +49,7 @@
 </div>
 <!-- End Projects -->
 
-    <div class="search" style="margin:30px auto 0 auto;width:259px;border:1px solid  #D01C00;border-radius: 6px;" >
+    <div class="search" style="margin:30px auto 0 auto;width:259px;border-radius: 6px;" >
         <button onclick="submitjl()" id="submitbt" class="tjl-btn">马上投简历</button>
     </div>
 <!--    <button style="margin-left: 200px;width:20%;border-color: #D01C00;" onclick="submitjl()" id="submitbt" class="tjl-btn">马上投简历</button>-->

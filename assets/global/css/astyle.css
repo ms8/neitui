@@ -40,15 +40,15 @@ a{
 }
 
 .tjl-btn:hover,.tjl-btn:focus{
-    background-color: #D01C00;
+    background-color: #09654B;
     color: #ffffff;
 }
 
 .tjl-btn {
     -moz-user-select: none;
     background-image: none;
-    background-color: #ffffff;
-    color: #D01C00;
+    background-color: #0D956F;
+    color: #ffffff;
     border: 1px solid rgba(0, 0, 0, 0);
     border-radius: 4px;
     cursor: pointer;
@@ -64,16 +64,15 @@ a{
 }
 
 .social .btn:hover,.social .btn:focus{
-    background-color: #D01C00;
+    background-color: #09654b;
     color: #ffffff;
 }
 
 .social .btn{
     float: right;
     margin-left: 25px;
-    background-color: #ffffff;
-    color: #D01C00;
-    border-color: #D01C00;
+    background-color: #0B7A5B;
+    color: #ffffff;
 }
 
 /*登录界面样式*/
@@ -606,7 +605,7 @@ span.error {
 .menu,.menu-active{
     float:left;
     border:1px #00708B;
-    padding:10px 20px;
+    padding:10px 20px 5px;
     color:#ffffff;
     font-size:20px;
     cursor: pointer;

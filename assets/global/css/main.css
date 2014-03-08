@@ -810,6 +810,7 @@ div .no_padding_title h1{padding-right:0;}
 /* Page Styles */
 
 .content{
+    background-color: #F5F5F5;
 	display:block;
 	clear:both;
 	position: relative;
@@ -2065,7 +2066,7 @@ p.ajax_alert label{color:#ffb628;}
 
 #filters a {
     font-size:15px;
-	color: #484848;
+	color: #09654b;
 	outline: none;
 	font-family: 'Armata',"Helvetica Neue",Arial,Helvetica,Geneva,sans-serif;
 }
