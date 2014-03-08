@@ -40,6 +40,10 @@
 <input type="hidden" value="<?php echo $msg?>" id="msg">
 
 <script type="text/javascript">
+    //动态给背景上深绿色
+    var style = $("body").attr("style");
+    style = style+'background-color:#0D956F';
+    $("body").attr("style",style);
 
     $("#submitLogin").click(
         function(){
