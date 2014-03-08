@@ -56,11 +56,10 @@
             <span class="sub-header">kuairuzhi.com</span>
         </div>
         <div class="col-md-6 col-sm-6" style="padding-top:10px">
-            <div class="menu-active" id="menu-active">
+            <div class="menu-active" name="menu-active" id="">
                 首页
             </div>
-            <div class="menu" name="menu">公司</div>
-            <div class="menu" name="menu">小组</div>
+            <div class="menu" name="menu" id="mscompany">公司</div>
         </div>
         <div class="col-md-4 col-sm-4" style="margin-top:15px">
             <!-- Social media links -->
@@ -91,15 +90,25 @@
             $(this).parent('li').addClass('current').append('<em></em>').siblings().removeClass('current').find('em').remove();
         });
         $("div[name='menu']").hover(function(){
-            if($("#menu-active").attr('class') == 'menu-active' ){
-                $("#menu-active").attr('class','menu');
+            if($("div[name='menu-active']").attr('class') == 'menu-active' ){
+                $("div[name='menu-active']").attr('class','menu');
             }
         },function(){
-            if($("#menu-active").attr('class') == 'menu' ){
-                $("#menu-active").attr('class','menu-active');
+            if($("div[name='menu-active']").attr('class') == 'menu' ){
+                $("div[name='menu-active']").attr('class','menu-active');
             }
         });
     });
+
+    $("div[class^='menu']").live('click',function(){
+        var id = $(this).attr('id');
+        if(id==""){ //首页
+            window.location.href="<?php echo Yii::app()->baseUrl?>";
+        }else{
+            window.location.href="<?php echo Yii::app()->createUrl('/mscompany/index')?>";
+        }
+    });
+
     $(function() {
 
         var Photo	= (function() {
