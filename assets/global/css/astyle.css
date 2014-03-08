@@ -3,8 +3,9 @@
 /*header style*/
 .header{
     /*margin: 25px 0;*/
-    background-color: #f4f4f4;
-    height: 80px;
+    /*background-color: #2997CC;*/
+    background-color: #0D956F;
+    height: 70px;
     padding: 0px 175px;
 }
 .header .search{
@@ -17,16 +18,20 @@ h2{
 }
 a{
     /*border-bottom: 1px dotted #ffffff;*/
-    color: #D01C00;
+    color: #F5F5F5;
 }
 .header .row a:hover,a:focus{
-    color: #AB1700;
+    color: #00708B;
 }
-.header h3 a:hover{
-    color: #AB1700;
+.header h4 a:hover{
+    color: #ffffff;
 }
+.header h4 a{
+    font-size: 21px;
+}
+
 .sub-header{
-    color: #D01C00;
+    color: #F5F5F5;
 }
 .description{
     color: #ffffff;
@@ -600,14 +605,35 @@ span.error {
 /*菜单样式*/
 .menu,.menu-active{
     float:left;
-    width:30%;
-    border:1px #D01C00;
-    padding:22px 40px;
-    color:#D01C00;
-    font-size:25px;
+    border:1px #00708B;
+    padding:10px 20px;
+    color:#ffffff;
+    font-size:20px;
     cursor: pointer;
 }
 .menu-active,.header .menu:hover,.header .menu:focus{
-    background-color:#D01C00;
+    /*background-color: #00708B;*/
+    border-bottom: 4px solid #0b7a5b;
     color:#ffffff;
+}
+
+/*个人中心左侧菜单背景*/
+.panel-heading{
+    background-color: #ffffff !important;
+    color: #0D956F !important;
+}
+
+.panel-heading-active{
+    background-color: #e6e6e6 !important;
+    color: #0C8462 !important;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.panel-heading:hover,.panel-heading:focus{
+    cursor: pointer;
+    background-color: #e6e6e6 !important;
+    color: #0C8462 !important;
 }

@@ -33,7 +33,7 @@
                     <?php echo $form->textField($model,'email',array('class'=>'inp6')); ?>
                 </div>
             </div>
-            
+
             <div class="left2c">
                 <div class="left2c1"><?php echo $form->labelEx($model,'remark'); ?>:</div>
                 <div class="left2c21 bgcl2">
@@ -61,12 +61,12 @@
                     <?php echo $form->hiddenField($model,'photo'); ?>
 
                     <?php
-                        list($s1, $s2) = explode(' ', microtime());     
-                        $fileName = (float)sprintf('%.0f', (floatval($s1) + floatval($s2)) * 1000); 
+                        list($s1, $s2) = explode(' ', microtime());
+                        $fileName = (float)sprintf('%.0f', (floatval($s1) + floatval($s2)) * 1000);
                         $fileName.=rand(0,9999);
-                        
+
                         $filePath = 1; //小组头像图片路径编号
-                        
+
                         $this->widget('application.extensions.swfupload.SWFUpload',array(
                           'callbackJS'=>'swfupload_callback_user_photo',
                           'fileTypes'=> '*.jpg;*.jpeg;*.gif;*.png;',
@@ -103,7 +103,7 @@
             <div class="right5a2">小组可以有不超过5个的标签，用来描述小组的目的。标签作为关键词可以被用户搜索到。 多个标签之间用空格分隔开。 </div>
             <div class="right5a2">比如，"Philip K. Dick小组"可以用 "作者 作家 科幻 科学幻想 迪克"， "关中辰木" 可以用 "本地 同城 西北 陕西 西安"。小组名称本身可以被搜索，就不用再加在标签里了。 小组的名称、介绍、标签在创立后都可以随时更改。 </div> -->
         </div>
-        
+
     </div>
 
     <script>
@@ -117,7 +117,7 @@ $('#member-form').ajaxForm({
       if(data.status != 1){
         //items[i][0]错误节点名称
         //items[i][1]对应错误提示
-        for(var i=0;i<length;i++){  
+        for(var i=0;i<length;i++){
             alert(items[i][1]);
             return false;
         }
@@ -128,7 +128,7 @@ $('#member-form').ajaxForm({
   });
 
 //提交验证
-$('#sub').click( 
+$('#sub').click(
     function(){
         $('#member-form').submit();
         return false;

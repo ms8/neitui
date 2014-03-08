@@ -99,7 +99,7 @@ class SiteController extends Controller
                         if(isset($_POST['loginflag']) && Yii::app()->request->urlReferrer != null){
                             $this->redirect(Yii::app()->request->urlReferrer);
                         }else{
-                            $this->redirect(array('/kongjian/jianli/'.$member->id));
+                            $this->redirect(array('/kongjian/application'));
                         }
                     }else{ //企业
                         $company = MsCompany::model()->findByAttributes(array('account'=>$member->username));

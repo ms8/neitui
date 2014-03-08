@@ -1,51 +1,11 @@
 <div class="mian-content-inner">
-    <div class="row">
-        <div class="col-md-8">
-            <!--<div class="mynav">-->
-            <!--    <a --><?php //if($this->action->id == 'info'){ ?><!--class="bai"--><?php //} ?><!-- href="--><?php //echo $this->createUrl('/kongjian/info'); ?><!--">基本设置</a>-->
-            <!--    <a --><?php //if($this->action->id == 'changepwd'){ ?><!--class="bai"--><?php //} ?><!-- href="--><?php //echo $this->createUrl('/kongjian/changepwd'); ?><!--">修改密码</a>-->
-            <!--    <a --><?php //if($this->action->id == 'jianli' || $this->action->id == 'jianliupload'){ ?><!--class="bai"--><?php //} ?><!-- href="--><?php //echo $this->createUrl('/kongjian/jianli'); ?><!--">我的简历</a>-->
-            <!--    <a --><?php //if($this->action->id == 'myscore'){ ?><!--class="bai"--><?php //} ?><!-- href="--><?php //echo $this->createUrl('/kongjian/myscore'); ?><!--">我的积分</a>-->
-            <!--</div>-->
-            <div class="panel panel-default">
-                <div class="panel-heading">已投递职位</div>
-                <div class="panel-body">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>公司</th>
-                            <th>职位</th>
-                            <th>投递时间</th>
-                            <!--                            <th>备注</th>-->
-                        </tr>
-                        </thead>
+    <div class="row" style="background-color:#f5f5f5">
 
-                        <tbody>
-                        <?php foreach ($jobs as $key => $value) {?>
-                            <tr>
-                                <td>
-                                    <a href="<?php echo Yii::app()->createUrl('mscompany/view',array('id'=>$value->company_id)); ?>">
-                                        <?php  $company = MsCompany::model()->findByPk($value->company_id);
-                                        echo $company->name ?>
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href="<?php echo Yii::app()->createUrl('msjobs/view',array('id'=>$value->job_id)); ?>">
-                                        <?php  $job = MsJobs::model()->findByPk($value->job_id);
-                                        echo $job->title ?>
-                                    </a>
-                                </td>
-                                <td>
-                                    <?php  echo $value->createtime ?>
-                                </td>
-                            </tr>
-                        <?php } ?>
-                        </tbody>
-                     </table>
-                </div>
-            </div>
+        <?php $this->renderPartial('_tab',array('index'=>'jianli')); ?>
+
+        <div class="col-md-8" style="margin-top:40px;width:52%">
+
             <div class="panel panel-default">
-                <div class="panel-heading">简历</div>
                 <table class="table">
                     <thead>
                         <tr>
@@ -87,43 +47,9 @@
                     </tbody>
                 </table>
             </div>
+
         </div>
-        <div class="col-md-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">投递简历</div>
-                <div class="panel-body fade in">
-                    <div class="alert alert-success">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        <p> 1元，能买二分之一个安全套，能坐二分之一地铁，能获得一份高质量简历。投递简历，马上享有！
-                            <a class="alert-link" href="javascript:;">活动详情</a>
-                        </p>
-                    </div>
-                    <form action="<?php echo Yii::app()->baseUrl.'/kongjian/jianli'?>" method="post" class="form-horizontal" enctype="multipart/form-data">
-                        <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-4 control-label">简历:</label>
-                            <div class="col-sm-6">
-                                <input type="file" name="jianlifile" class=" class="form-control">
-                            </div>
-                        </div>
 
-
-                        <p>
-                            <button id="jianliSubmit" class="btn btn-danger btn-lg btn-block"  type="submit">上传简历</button>
-                        </p>
-                    </form>
-                </div>
-            </div>
-
-            <div class="panel panel-default">
-                <div class="panel-heading">信息维护</div>
-                <div class="panel-body fade in">
-                    <form action="<?php echo Yii::app()->createUrl('site/directReset');?>">
-                        新密码:<input name="password" type="password" placeholder="输入新密码">
-                        <button id="resetPwd" class="btn btn-danger"  type="submit">重置密码</button>
-                    </form>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 <?php if(Yii::app()->user->isGuest){?>

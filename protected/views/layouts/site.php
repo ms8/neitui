@@ -46,16 +46,16 @@
 
 <div class="header">
 <!--    <div class="row">-->
-        <div class="col-md-2 col-sm-2" style="margin-top:15px">
+        <div class="col-md-2 col-sm-2" style="margin-top:10px">
             <!-- Header -->
-            <h3 style="margin:0">
+            <h4 style="margin:0">
                 <a href="<?php echo Yii::app()->baseUrl?>">快入职</a>
-            </h3>
-            <img style="margin: -4px 0" src="<?php echo Yii::app()->CreateUrl(IMGAGES_GLOBAL.'jiantou.png')?>" alt="">
+            </h4>
+            <img style="margin: -3px 0" src="<?php echo Yii::app()->CreateUrl(IMGAGES_GLOBAL.'jiantou.png')?>" alt="">
             <!--            <img style="opacity: 1;" class="defaultimg" src="--><?php //echo Yii::app()->baseUrl.CSS_BOXCOL?><!--/logo.png" alt="" />-->
             <span class="sub-header">kuairuzhi.com</span>
         </div>
-        <div class="col-md-6 col-sm-6">
+        <div class="col-md-6 col-sm-6" style="padding-top:10px">
             <div class="menu-active" id="menu-active">
                 首页
             </div>

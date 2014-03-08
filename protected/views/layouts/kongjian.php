@@ -38,44 +38,63 @@
     </style>
 </head>
 
-<body style="background-color: #019875">
-<div  class="container">
+<body  style="margin:0 auto;overflow:hidden;">
+<!--<div  class="container">-->
     <div class="header">
-        <div class="row">
-            <div class="col-md-2 col-sm-2">
-                <!-- Header -->
-                <h2 style="margin-bottom:0px"><a href="<?php echo Yii::app()->baseUrl?>">面试吧</a></h2>
-                <!--            <img style="opacity: 1;" class="defaultimg" src="--><?php //echo Yii::app()->baseUrl.CSS_BOXCOL?><!--/logo.png" alt="" />-->
-                <span class="sub-header">mianshi8.com</span>
-            </div>
-            <div class="col-md-6 col-sm-6">
-                <div class="description">
-                    应届生的公司内推平台
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-4">
-                <!-- Social media links -->
-                <?php if(Yii::app()->user->isGuest){?>
-                    <div class="social">
-                        <button class="btn" >注册</button>
-                        <button class="btn" onclick="window.location.href='<?php echo Yii::app()->baseUrl.'/site/login'?>'">登录</button>
-                        <button class="btn">关于我们</button>
-                    </div>
-                <?php }else{?>
-                    <!-- 登录后出现的个人中心信息-->
-                    <div class="social">
-                        <a href="<?php echo Yii::app()->baseUrl.'/site/logout'?>">退出</a>
-                        <a href="<?php echo Yii::app()->baseUrl.'/kongjian/jianli/'.Yii::app()->user->id?>">个人中心</a>
-                    </div>
-                    <!-- -->
-                <?php }?>
-            </div>
+        <!--    <div class="row">-->
+        <div class="col-md-2 col-sm-2" style="margin-top:10px">
+            <!-- Header -->
+            <h4 style="margin:0">
+                <a href="<?php echo Yii::app()->baseUrl?>">快入职</a>
+            </h4>
+            <img style="margin: -3px 0" src="<?php echo Yii::app()->CreateUrl(IMGAGES_GLOBAL.'jiantou.png')?>" alt="">
+            <!--            <img style="opacity: 1;" class="defaultimg" src="--><?php //echo Yii::app()->baseUrl.CSS_BOXCOL?><!--/logo.png" alt="" />-->
+            <span class="sub-header">kuairuzhi.com</span>
         </div>
+        <div class="col-md-6 col-sm-6" style="padding-top:10px">
+            <div class="menu" >
+                首页
+            </div>
+            <div class="menu" name="menu">公司</div>
+            <div class="menu" name="menu">小组</div>
+        </div>
+        <div class="col-md-4 col-sm-4" style="margin-top:15px">
+            <!-- Social media links -->
+            <?php if(Yii::app()->user->isGuest){?>
+                <div class="social">
+                    <button class="btn" onclick="window.open('<?php echo Yii::app()->baseUrl.'/site/register'?>')">注册</button>
+                    <button class="btn" onclick="window.location.href='<?php echo Yii::app()->baseUrl.'/site/login'?>'">登录</button>
+                    <!--                    <button class="btn">关于我们</button>-->
+                </div>
+            <?php }else{?>
+                <!-- 登录后出现的个人中心信息-->
+                <div class="social">
+                    <a href="<?php echo Yii::app()->baseUrl.'/site/logout'?>">退出</a>
+                    <a href="<?php echo Yii::app()->baseUrl.'/kongjian/jianli/'.Yii::app()->user->id?>">个人中心</a>
+                </div>
+                <!-- -->
+            <?php }?>
+        </div>
+        <!--    </div>-->
     </div>
-    <div class="mian-content">
+<!--    <div class="mian-content">-->
     <?php echo $content ?>
-    </div>
- </div>
+<!--    </div>-->
+<!-- </div>-->
 
 </body>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("div[name='menu']").hover(function(){
+            if($("#menu-active").attr('class') == 'menu-active' ){
+                $("#menu-active").attr('class','menu');
+            }
+        },function(){
+            if($("#menu-active").attr('class') == 'menu' ){
+                $("#menu-active").attr('class','menu-active');
+            }
+        });
+    });
+
+</script>
 </html>
