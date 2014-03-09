@@ -1,7 +1,7 @@
 .pe-thumbs{
-    width: 910px;
+    width: auto;
     height: 310px;
-    margin: 10px auto;
+    margin: 0 auto;
     position: relative;
     background: transparent url(../images/2.jpg) center center;
     border: 2px solid #fff;
@@ -15,7 +15,7 @@
     left: 0px;
     width: 100%;
     height: 100%;
-    background: rgba(255,102,0,0.2);
+    background: #ECF0F1;
 }
 .pe-thumbs li{
     float:left;

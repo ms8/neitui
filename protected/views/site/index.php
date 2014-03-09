@@ -3,9 +3,8 @@
 <!-- Main Container -->
 <!--<section id="main-content">-->
 <!-- Container -->
-<div  class="content">
-    <div class="mian-content" id="portfolio">
-
+<section class="pad-top-25" id="our-services">
+    <div class="container">
         <div style="visibility: visible; opacity: 1;" class="sort_by_cat" id="filters" data-option-key="filter">
             <div id="filter-up"></div>
             <a href="#filter" data-option-value="*" class="active_sort">北京</a>
@@ -16,42 +15,38 @@
             <span class="text-sep">/</span>
             <a class="" href="#filter" data-option-value=".psd_sort">深圳</a>
         </div>
-
-        <section class="pe-container">
-            <ul id="pe-thumbs" class="pe-thumbs">
-                <?php foreach($companys as $company){?>
-                    <li>
-                        <a href="<?php echo Yii::app()->baseUrl.'/mscompany/view/'.$company->id?>">
-                            <img src="<?php echo Yii::app()->baseUrl.'/'.$company->logo?>" />
-                            <div class="pe-description">
-                                <h3><?php echo $company->name?></h3>
-                                <p><?php echo $company->description?></p>
-                            </div>
-                        </a>
-                    </li>
-                <?php }?>
-            </ul>
-        </section>
-    <!--<div class="header">-->
-    <!--    <div class="row">-->
-    <!--        <div class="col-md-12 col-sm-12">-->
-    <!--            <div class="description">-->
-    <!--                你还在挤招聘会吗？海量公司供你选择，24小时回复-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--    </div>-->
-    <!--</div>-->
-
-    <!-- Begin Projects-->
-
-
-
-</div>
-<!-- End Projects -->
-
-    <div class="search" style="margin:30px auto 0 auto;width:259px;border-radius: 6px;" >
-        <button onclick="submitjl()" id="submitbt" class="tjl-btn">马上投简历</button>
     </div>
+    <!-- /.container -->
+</section>
+<section class="pad-top-25">
+    <div class="container">
+        <ul id="pe-thumbs" class="pe-thumbs">
+            <?php foreach($companys as $company){?>
+                <li>
+                    <a href="<?php echo Yii::app()->baseUrl.'/mscompany/view/'.$company->id?>">
+                        <img src="<?php echo Yii::app()->baseUrl.'/'.$company->logo?>" />
+                        <div class="pe-description">
+                            <h3><?php echo $company->name?></h3>
+                            <p><?php echo $company->description?></p>
+                        </div>
+                    </a>
+                </li>
+            <?php }?>
+        </ul>
+    </div>
+</section>
+<!-- End Projects -->
+<section class="pad-25" id="action-box">
+    <div class="container">
+        <div class="action-box">
+            <h3>Hey, are you ready to buy this awesome theme?</h3>
+            <p>Pellentesque pulvinar, risus dictum tempor luctus, quam augue blandit sapien.</p>
+            <a class="btn btn-flat flat-color"  onclick="submitjl()" id="submitbt" href="javacript:;">马上投简历</a>
+        </div>
+        <!-- /.action-box -->
+    </div>
+    <!-- /.container -->
+</section>
 <!--    <button style="margin-left: 200px;width:20%;border-color: #D01C00;" onclick="submitjl()" id="submitbt" class="tjl-btn">马上投简历</button>-->
 
 <!--<div class="header">-->
@@ -65,7 +60,6 @@
 <!--    </div>-->
 <!--</div>-->
 
-</div>
 <!--    </section>-->
 
 <!-- 弹出登录框-->
