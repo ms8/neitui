@@ -19,17 +19,20 @@
 
     //    Yii::app()->clientScript->registerCssFile('common.css');
     //    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_GLOBAL.'style.css');
-    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_GLOBAL.'main.css');
-    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_GLOBAL.'bootstrap.css');
-    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_GLOBAL.'grid.css');
-//    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_GLOBAL.'jquery.css');
-    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_GLOBAL.'astyle.css');
+    //    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_GLOBAL.'main.css');
+    //    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_GLOBAL.'bootstrap.css');
+    //    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_GLOBAL.'grid.css');
+    //    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_GLOBAL.'jquery.css');
+    //    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_GLOBAL.'astyle.css');
     //    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_GLOBAL.'flexslider.css');
-//    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_GLOBAL.'css.css');
+    //    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_GLOBAL.'css.css');
     //    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_GLOBAL.'fontello/css/font-awesome.css');
     //    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_GLOBAL.'style.css');
     //    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_GLOBAL.'settings-ie8.css');
     Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_PATH.'photowall.css');
+    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_PATH.'retouch/bootstrap.css');
+    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_PATH.'retouch/skins.css');
+    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_PATH.'retouch/stylesheet.css');
 
     //    Yii::app()->clientScript->registerCssFile('common.css');
     Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.JS_GLOBAL.'twitter.js');
@@ -43,68 +46,69 @@
 </head>
 
 <body style="margin:0 auto;overflow:hidden;">
-
-<div class="header">
-<!--    <div class="row">-->
-        <div class="col-md-2 col-sm-2" style="margin-top:10px">
-            <!-- Header -->
-            <h4 style="margin:0">
-                <a href="<?php echo Yii::app()->baseUrl?>">快入职</a>
-            </h4>
-            <img style="margin: -3px 0" src="<?php echo Yii::app()->CreateUrl(IMGAGES_GLOBAL.'jiantou.png')?>" alt="">
-            <!--            <img style="opacity: 1;" class="defaultimg" src="--><?php //echo Yii::app()->baseUrl.CSS_BOXCOL?><!--/logo.png" alt="" />-->
-            <span class="sub-header">kuairuzhi.com</span>
-        </div>
-        <div class="col-md-6 col-sm-6" style="padding-top:10px">
-            <div class="menu" name="menu" id="">
-                首页
+<div class="color-skin-1" id="utter-wrapper">
+    <header data-offset-top="10" data-spy="affix" class="header affix-top" id="header">
+        <nav role="navigation" class="navbar navbar-default">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button data-target=".navbar-ex1-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="<?php echo Yii::app()->baseUrl?>" class="navbar-brand"><span>快</span>入职</a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse navbar-ex1-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="<?php echo Yii::app()->baseUrl?>">首页</a>
+                        </li>
+                        <li class="dropdown active">
+                            <a href="<?php echo Yii::app()->createUrl('/mscompany/index')?>">公司</a>
+                        </li>
+                        <?php if(!Yii::app()->user->isGuest){?>
+                            <li class="dropdown">
+                                <a data-toggle="dropdown" class="dropdown-toggle" href="#">个人中心</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="about.html">About Us</a></li>
+                                    <li><a href="team.html">Our Team</a></li>
+                                    <li><a href="services.html">Services</a></li>
+                                    <li><a href="faqs.html">FAQs</a></li>
+                                    <li><a href="404.html">Error 404</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="<?php echo Yii::app()->createUrl('/site/logout')?>">退出</a>
+                            </li>
+                        <?php }else{?>
+                            <li class="dropdown">
+                                <a href="<?php echo Yii::app()->createUrl('/site/login')?>">登录</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="<?php echo Yii::app()->createUrl('/site/register')?>">注册</a>
+                            </li>
+                            <li class="dropdown">
+                                <a data-toggle="dropdown" class="dropdown-toggle" href="#">关于我们</a>
+                            </li>
+                        <?php }?>
+                    </ul>
+                    <!-- /.nav -->
+                </div>
+                <!-- /.navbar-collapse -->
             </div>
-            <div class="menu-active" name="menu-active" id="mscompany">公司</div>
-        </div>
-        <div class="col-md-4 col-sm-4" style="margin-top:15px">
-            <!-- Social media links -->
-            <?php if(Yii::app()->user->isGuest){?>
-                <div class="social">
-                    <button class="btn" onclick="window.open('<?php echo Yii::app()->baseUrl.'/site/register'?>')">注册</button>
-                    <button class="btn" onclick="window.location.href='<?php echo Yii::app()->baseUrl.'/site/login'?>'">登录</button>
-<!--                    <button class="btn">关于我们</button>-->
-                </div>
-            <?php }else{?>
-                <!-- 登录后出现的个人中心信息-->
-                <div class="social">
-                    <a href="<?php echo Yii::app()->baseUrl.'/site/logout'?>">退出</a>
-                    <a href="<?php echo Yii::app()->baseUrl.'/kongjian/jianli/'.Yii::app()->user->id?>">个人中心</a>
-                </div>
-                <!-- -->
-            <?php }?>
-        </div>
-<!--    </div>-->
+            <!-- /.container -->
+        </nav>
+        <!-- /.navbar -->
+    </header>
 </div>
-
-<?php echo $content ?>
-
+<div class="main-wrapper">
+    <?php echo $content ?>
+</div>
 </body>
 <script type="text/javascript">
-    $(document).ready(function() {
-        $("div[name='menu']").hover(function(){
-            if($("div[name='menu-active']").attr('class') == 'menu-active' ){
-                $("div[name='menu-active']").attr('class','menu');
-            }
-        },function(){
-            if($("div[name='menu-active']").attr('class') == 'menu' ){
-                $("div[name='menu-active']").attr('class','menu-active');
-            }
-        });
-    });
-
-    $("div[class^='menu']").live('click',function(){
-        var id = $(this).attr('id');
-        if(id==""){ //首页
-            window.location.href="<?php echo Yii::app()->baseUrl?>";
-        }else{
-            window.location.href="<?php echo Yii::app()->createUrl('/mscompany/index')?>";
-        }
-    });
 
 </script>
 </html>

@@ -58,66 +58,54 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a href="index.html" class="navbar-brand"><span>快</span>入职</a>
+                    <a href="<?php echo Yii::app()->baseUrl?>" class="navbar-brand"><span>快</span>入职</a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <ul class="nav navbar-nav">
                         <li class="dropdown active">
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">首页</a>
-                            <ul class="dropdown-menu">
-                                <li class="active"><a href="index.html">Home Layout 1</a></li>
-                                <li><a href="index-2.html">Home Layout 2</a></li>
-                                <li><a href="index-3.html">Home Layout 3</a></li>
-                            </ul>
+                            <a href="<?php echo Yii::app()->baseUrl?>">首页</a>
+<!--                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">首页</a>-->
+<!--                            <ul class="dropdown-menu">-->
+<!--                                <li class="active"><a href="index.html">Home Layout 1</a></li>-->
+<!--                                <li><a href="index-2.html">Home Layout 2</a></li>-->
+<!--                                <li><a href="index-3.html">Home Layout 3</a></li>-->
+<!--                            </ul>-->
                         </li>
                         <li class="dropdown">
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">公司</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="elements.html">UI Elements</a></li>
-                                <li><a href="buttons.html">Buttons</a></li>
-                                <li><a href="icons.html">Icons</a></li>
-                                <li><a href="pricing.html">Pricing Tables</a></li>
-                            </ul>
+                            <a href="<?php echo Yii::app()->createUrl('/mscompany/index')?>">公司</a>
+<!--                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">公司</a>-->
+<!--                            <ul class="dropdown-menu">-->
+<!--                                <li><a href="elements.html">UI Elements</a></li>-->
+<!--                                <li><a href="buttons.html">Buttons</a></li>-->
+<!--                                <li><a href="icons.html">Icons</a></li>-->
+<!--                                <li><a href="pricing.html">Pricing Tables</a></li>-->
+<!--                            </ul>-->
                         </li>
-                        <li class="dropdown">
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">个人中心</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="about.html">About Us</a></li>
-                                <li><a href="team.html">Our Team</a></li>
-                                <li><a href="services.html">Services</a></li>
-                                <li><a href="faqs.html">FAQs</a></li>
-                                <li><a href="404.html">Error 404</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">登陆</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="portfolio-2.html">Portfolio 2 Columns</a></li>
-                                <li><a href="portfolio-3.html">Portfolio 3 Columns</a></li>
-                                <li><a href="portfolio-4.html">Portfolio 4 Columns</a></li>
-                                <li><a href="portfolio-item-1.html">Portfolio Item 1</a></li>
-                                <li><a href="portfolio-item-2.html">Portfolio Item 2</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">注册</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="blog-1.html">Blog Layout 1</a></li>
-                                <li><a href="blog-2.html">Blog Layout 2</a></li>
-                                <li><a href="blog-3.html">Blog Layout 3</a></li>
-                                <li><a href="blog-4.html">Blog Layout 4</a></li>
-                                <li><a href="post-1.html">Post Layout 1</a></li>
-                                <li><a href="post-2.html">Post Layout 2</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">关于我们</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="contact-1.html">Contact 1</a></li>
-                                <li><a href="contact-2.html">Contact 2</a></li>
-                            </ul>
-                        </li>
+                        <?php if(!Yii::app()->user->isGuest){?>
+                            <li class="dropdown">
+                                <a data-toggle="dropdown" class="dropdown-toggle" href="#">个人中心</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="<?php echo Yii::app()->createUrl('/kongjian/application')?>">投递职位</a></li>
+                                    <li><a href="<?php echo Yii::app()->createUrl('/kongjian/information')?>">个人信息</a></li>
+                                    <li><a href="<?php echo Yii::app()->createUrl('/kongjian/jianli')?>">我的简历</a></li>
+                                    <li><a href="<?php echo Yii::app()->createUrl('/kongjian/changepwd')?>">修改密码</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="<?php echo Yii::app()->createUrl('/site/logout')?>">退出</a>
+                            </li>
+                        <?php }else{?>
+                            <li class="dropdown">
+                                <a href="<?php echo Yii::app()->createUrl('/site/login')?>">登录</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="<?php echo Yii::app()->createUrl('/site/register')?>">注册</a>
+                            </li>
+                            <li class="dropdown">
+                                <a data-toggle="dropdown" class="dropdown-toggle" href="#">关于我们</a>
+                            </li>
+                        <?php }?>
                     </ul>
                     <!-- /.nav -->
                 </div>
@@ -137,24 +125,6 @@
         $('.register_radio li input').click(function(e){
             $(this).parent('li').addClass('current').append('<em></em>').siblings().removeClass('current').find('em').remove();
         });
-        $("div[name='menu']").hover(function(){
-            if($("div[name='menu-active']").attr('class') == 'menu-active' ){
-                $("div[name='menu-active']").attr('class','menu');
-            }
-        },function(){
-            if($("div[name='menu-active']").attr('class') == 'menu' ){
-                $("div[name='menu-active']").attr('class','menu-active');
-            }
-        });
-    });
-
-    $("div[class^='menu']").live('click',function(){
-        var id = $(this).attr('id');
-        if(id==""){ //首页
-            window.location.href="<?php echo Yii::app()->baseUrl?>";
-        }else{
-            window.location.href="<?php echo Yii::app()->createUrl('/mscompany/index')?>";
-        }
     });
 
     $(function() {

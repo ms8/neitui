@@ -251,6 +251,51 @@ class KongjianController extends Controller
 	);
     $this->render('changepwd',array('model'=>$model));
   }
+
+  public function actionInformation(){
+      if(!Yii::app()->user->isGuest){
+          $unitypes = MsDictionary::model()->findAllByAttributes(array('type'=>'unitype'));
+          $jianglis = MsDictionary::model()->findAllByAttributes(array('type'=>'jiangli'));
+          foreach($unitypes as $unitype){ //对应的学校类型名称
+              $uniarr[$unitype->code]=$unitype->name;
+          }
+          foreach($jianglis as $jiangli){ //对应的奖励类型名称
+              $jiangliarr[$jiangli->code]=$jiangli->name;
+          }
+          $id = Yii::app()->user->id;
+          $model=new MsStudents;
+          if(isset($_POST['MsStudents']))
+          {
+              $model->attributes=$_POST['MsStudents'];
+              $member = Member::model()->findByPk($id);
+              $model->mid=$id;
+              $model->username=$member->username;
+              foreach($unitypes as $unitype){ //搜索对应的学校类型名称
+                  if($unitype->code==$model->universitytype){
+                      $model->universitytypename = $unitype->name;
+                      break;
+                  }
+              }
+              foreach($jianglis as $jiangli){ //搜索对应的奖励类型名称
+                  if($jiangli->code==$model->jianglitype){
+                      $model->jiangliname = $jiangli->name;
+                      break;
+                  }
+              }
+              $model->createtime = date("Y-m-d H:i:s");
+              $model->updatetime = date("Y-m-d H:i:s");
+              $model->graduatetime = date("Y-m-d H:i:s");
+              $model->save();
+          }else{
+              $model = MsStudents::model()->findByAttributes(array('mid'=>$id));
+          }
+
+          $this->render('information',array('uniarr'=>$uniarr,'jiangliarr'=>$jiangliarr,'model'=>$model));
+      }else{
+          $this->redirect(Yii::app()->baseUrl);
+      }
+  }
+
   //我的积分
   public function actionMyscore(){
  
