@@ -73,11 +73,10 @@
                             <li class="dropdown">
                                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">个人中心</a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="about.html">About Us</a></li>
-                                    <li><a href="team.html">Our Team</a></li>
-                                    <li><a href="services.html">Services</a></li>
-                                    <li><a href="faqs.html">FAQs</a></li>
-                                    <li><a href="404.html">Error 404</a></li>
+                                    <li><a href="<?php echo Yii::app()->createUrl('/mscompany/dashboard')?>">公司信息</a></li>
+                                    <li><a href="<?php echo Yii::app()->createUrl('/mscompany/jobCreate')?>">职位信息</a></li>
+                                    <li><a href="<?php echo Yii::app()->createUrl('/mscompany/jianlis')?>">收到的简历</a></li>
+                                    <li><a href="<?php echo Yii::app()->createUrl('/mscompany/changepwd')?>">修改密码</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">

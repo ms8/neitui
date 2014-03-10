@@ -32,7 +32,7 @@ class MsCompanyController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','dashboard'),
+				'actions'=>array('create','update','dashboard','changepwd','jobCreate'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -44,6 +44,64 @@ class MsCompanyController extends Controller
 			),
 		);
 	}
+
+    public function actionJobCreate()
+    {
+        $model=new MsJobs;
+
+        // Uncomment the following line if AJAX validation is needed
+        // $this->performAjaxValidation($model);
+
+        if(isset($_POST['MsJobs']))
+        {
+            $model->attributes=$_POST['MsJobs'];
+            $model->createtime = date("Y-m-d H:i:s");
+            //取城市名称
+            $city = MsDictionary::model()->findByAttributes(array('code'=>$model->citycode));
+            $model->cityname = $city->name;
+            $member = Member::model()->findByPk(Yii::app()->user->id);
+            $company = MsCompany::model()->findByAttributes(array('account'=>$member->username));
+            $model->company_id = $company->id;
+            if($model->save())
+                $this->redirect(array('view','id'=>$model->id));
+        }
+
+        $this->render('create',array(
+            'model'=>$model,
+        ));
+    }
+
+    //修改密码
+    public function actionChangepwd()
+    {
+        $model=Member::model()->find('id = '.Yii::app()->user->id);
+        if(!empty($_POST['Member'])){
+            //获取验证错误,需要制定验证字段
+            $ajaxRes = CActiveForm::validate($model, array('oldpass','newpass','queren'),true,true);
+            $ajaxResArr = CJSON::decode($ajaxRes);
+            //验证结果为空入库
+            if(empty($ajaxResArr)){
+
+                $model->password = md5($model->newpass.$model->salt);
+
+                if($model->save(false)){
+                    $res = $model->attributes;
+                    $res['status'] = 1;
+                    die(CJSON::encode($res));
+                }else{
+                    die(CJSON::encode(array('status'=>0)));
+                }
+            }else{
+                die($ajaxRes);
+            }
+        }
+        $this->pageKeyword=array(
+            'title'=>'修改密码-'.Helper::siteConfig()->site_name,
+            'keywords'=>'修改密码-'.Helper::siteConfig()->site_name,
+            'description'=>'修改密码-'.Helper::siteConfig()->site_name,
+        );
+        $this->render('changepwd',array('model'=>$model));
+    }
 
 	/**
 	 * Displays a particular model.
