@@ -4,8 +4,9 @@
     margin: 0 auto;
     position: relative;
     background: transparent url(../images/2.jpg) center center;
-    border: 2px solid #fff;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    /*border: 2px solid #fff;*/
+    /*box-shadow: 0 1px 2px rgba(0,0,0,0.2);*/
+    padding: 0;
 }
 .pe-thumbs:before {
     content: "";
@@ -15,11 +16,13 @@
     left: 0px;
     width: 100%;
     height: 100%;
-    background: #ECF0F1;
+    /*background: #ECF0F1;*/
 }
 .pe-thumbs li{
     float:left;
     position: relative;
+    list-style: none;
+    margin: 5px;
 }
 .pe-thumbs li a,
 .pe-thumbs li a img{
@@ -27,13 +30,13 @@
     position: relative;
 }
 .pe-thumbs li a img{
-    width:100px;
-    opacity: 0.2;
+    width:113px;
+    opacity: 0.5;
 }
 .pe-thumbs li a div.pe-description{
     width: 200px;
-    height: 100px;
-    background: rgba(111,76,51,0.8);
+    height: 113px;
+    background: #F5F5F5;
     position: absolute;
     top: 0px;
     left: -200px;
@@ -50,9 +53,10 @@
     margin: 0px;
 }
 .pe-description p{
+    color: #2ECC71;
     padding: 10px 0px;
     margin: 10px;
-    font-size: 11px;
-    font-style: italic;
+    font-size: 14px;
+    font-family: "微软雅黑";
     border-top: 1px solid rgba(255,255,255,0.3);
 }
