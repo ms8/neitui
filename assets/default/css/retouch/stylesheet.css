@@ -829,12 +829,19 @@ blockquote small {
 .recent-posts > li:last-child {
     margin-bottom: 0;
 }
-.recent-posts img {
+.recent-posts img{
     float: left;
     height: 64px;
     margin-right: 10px;
     transition: all 0.2s ease 0s;
     width: 64px;
+}
+.recent-posts span {
+    float: left;
+    height: 24px;
+    margin-right: 10px;
+    transition: all 0.2s ease 0s;
+    width: 50px;
 }
 .recent-posts img:hover {
     opacity: 0.65;
