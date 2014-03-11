@@ -1372,6 +1372,7 @@ blockquote small {
 .team-member {
     border-radius: 3px;
     overflow: hidden;
+    border: 1px solid #ECF0F1;
 }
 .member-details {
     -moz-border-bottom-colors: none;
@@ -1384,6 +1385,7 @@ blockquote small {
     border-style: none solid solid;
     border-width: 0 1px 1px;
     padding: 20px;
+    font-size: 13px;
 }
 .member-details .member-name {
     margin-top: 0;
@@ -1572,4 +1574,19 @@ address {
 }
 .skin-chooser-wrap .list-inline > li .color-skin.active, .skin-chooser-wrap .list-inline > li .color-skin:hover {
     outline: 2px solid #2C3E50;
+}
+
+
+/*修改公司列表页面logo样式*/
+.img-responsive {
+    display: block;
+    height: 70px;
+    max-width: 100%;
+    width: 100px;
+}
+
+/*公司名称居中*/
+.member-thumb{
+   text-align: center;
+   padding: 20px 20px 0 20px;
 }

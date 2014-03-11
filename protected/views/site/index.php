@@ -62,8 +62,7 @@
 <section class="pad-25" id="action-box">
     <div class="container">
         <div class="action-box">
-            <h3>Hey, are you ready to buy this awesome theme?</h3>
-            <p>Pellentesque pulvinar, risus dictum tempor luctus, quam augue blandit sapien.</p>
+            <h3>有时候，选择比努力更重要，IT类应届生求职，就选快入职！</h3>
             <a class="btn btn-flat flat-color"  onclick="submitjl()" id="submitbt" href="javacript:;">马上投简历</a>
         </div>
         <!-- /.action-box -->
