@@ -32,7 +32,7 @@ class MsCompanyController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','dashboard','changepwd','jobCreate'),
+				'actions'=>array('create','update','dashboard','changepwd','jobCreate','jianlis'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -44,6 +44,29 @@ class MsCompanyController extends Controller
 			),
 		);
 	}
+
+    public function actionJianlis(){
+        $mid = Yii::app()->user->id;
+        $member = Member::model()->findByPk($mid);
+        $company = MsCompany::model()->findByAttributes(array('account'=>$member->username));
+        if($company != null){
+            $jianlis = MsApplication::model()->findAllByAttributes(array('company_id'=>$company->id));
+            $jobinfos=array();
+            foreach($jianlis as $jianli){
+                $job = MsJobs::model()->findByPk($jianli->job_id);
+                $jianliinfo = MsJianli::model()->findByPk($jianli->jianli_id);
+                $jobinfo=array();
+                $jobinfo['jobid']=$jianli->job_id;
+                $jobinfo['title']=$job->title;
+                $jobinfo['jianliid']=$jianli->jianli_id;
+                $jobinfo['jianliname']=$jianliinfo->name;
+//                $jobinfo['memberid']=$jianli->member_id;
+                $jobinfo['createtime']=$jianli->createtime;
+                $jobinfos[]=$jobinfo;
+            }
+            $this->render('jianlis',array('jobinfos'=>$jobinfos));
+        }
+    }
 
     public function actionJobCreate()
     {
