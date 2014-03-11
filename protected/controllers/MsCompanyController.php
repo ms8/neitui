@@ -32,7 +32,7 @@ class MsCompanyController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','dashboard','changepwd','jobCreate','jianlis'),
+				'actions'=>array('create','update','dashboard','changepwd','jobCreate','jianlis','search'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -44,6 +44,31 @@ class MsCompanyController extends Controller
 			),
 		);
 	}
+
+    public function actionSearch(){
+        $model=new MsStudents;
+        $persons = array();
+        $unitypes = MsDictionary::model()->findAllByAttributes(array('type'=>'unitype'));
+        $jianglis = MsDictionary::model()->findAllByAttributes(array('type'=>'jiangli'));
+        $degrees = MsDictionary::model()->findAllByAttributes(array('type'=>'degree'));
+        foreach($unitypes as $unitype){ //对应的学校类型名称
+            $uniarr[$unitype->code]=$unitype->name;
+        }
+        foreach($jianglis as $jiangli){ //对应的奖励类型名称
+            $jiangliarr[$jiangli->code]=$jiangli->name;
+        }
+        foreach($degrees as $degree){ //对应的学历类型名称
+            $degreearr[$degree->code]=$degree->name;
+        }
+        if(isset($_POST['MsStudents'])){
+            $model->attributes=$_POST['MsStudents'];
+            $persons = $model->findAllByAttributes(array('hasoffer'=>'0','sex'=>$model->sex,'degree'=>$model->degree,
+                'universitytype'=>$model->universitytype));
+
+        }
+        $this->render('search',array('uniarr'=>$uniarr,'jiangliarr'=>$jiangliarr,
+            'degreearr'=>$degreearr,'model'=>$model,'persons'=>$persons));
+    }
 
     public function actionJianlis(){
         $mid = Yii::app()->user->id;
