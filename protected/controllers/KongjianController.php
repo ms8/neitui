@@ -256,11 +256,15 @@ class KongjianController extends Controller
       if(!Yii::app()->user->isGuest){
           $unitypes = MsDictionary::model()->findAllByAttributes(array('type'=>'unitype'));
           $jianglis = MsDictionary::model()->findAllByAttributes(array('type'=>'jiangli'));
+          $degrees = MsDictionary::model()->findAllByAttributes(array('type'=>'degree'));
           foreach($unitypes as $unitype){ //对应的学校类型名称
               $uniarr[$unitype->code]=$unitype->name;
           }
           foreach($jianglis as $jiangli){ //对应的奖励类型名称
               $jiangliarr[$jiangli->code]=$jiangli->name;
+          }
+          foreach($degrees as $degree){ //对应的学历类型名称
+              $degreearr[$degree->code]=$degree->name;
           }
           $id = Yii::app()->user->id;
           $model=new MsStudents;
@@ -282,15 +286,33 @@ class KongjianController extends Controller
                       break;
                   }
               }
+              foreach($degrees as $degree){
+                  if($degree->code==$model->degree){
+                      $model->degreename = $degree->name;
+                      break;
+                  }
+              }
               $model->createtime = date("Y-m-d H:i:s");
               $model->updatetime = date("Y-m-d H:i:s");
               $model->graduatetime = date("Y-m-d H:i:s");
-              $model->save();
+              $tmp = MsStudents::model()->findByAttributes(array('username'=>$model->username));
+              if($tmp == null){
+                  $model->save();
+              }else{
+                  $model->id = $tmp->id;
+                  $model->setIsNewRecord(false);
+                  $model->update();
+              }
+
           }else{
               $model = MsStudents::model()->findByAttributes(array('mid'=>$id));
+              if($model==null){
+                  $model = new MsStudents();
+              }
           }
 
-          $this->render('information',array('uniarr'=>$uniarr,'jiangliarr'=>$jiangliarr,'model'=>$model));
+          $this->render('information',array('uniarr'=>$uniarr,'jiangliarr'=>$jiangliarr,
+              'degreearr'=>$degreearr,'model'=>$model));
       }else{
           $this->redirect(Yii::app()->baseUrl);
       }

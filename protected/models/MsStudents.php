@@ -9,6 +9,9 @@
  * @property string $username
  * @property string $graduatetime
  * @property string $hasoffer
+ * @property string $sex
+ * @property string $degree
+ * @property string $degreename
  * @property string $universitytype
  * @property string $universitytypename
  * @property string $universityname
@@ -16,6 +19,7 @@
  * @property string $jiangliname
  * @property string $projects
  * @property string $peixun
+ * @property string $skill
  * @property string $createtime
  * @property string $updatetime
  */
@@ -51,17 +55,17 @@ class MsStudents extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('mid, username', 'required'),
-			array('mid', 'length', 'max'=>20),
+			array('mid, degreename', 'length', 'max'=>20),
 			array('username', 'length', 'max'=>64),
-			array('hasoffer', 'length', 'max'=>1),
-			array('universitytype, jianglitype', 'length', 'max'=>10),
+			array('hasoffer, sex', 'length', 'max'=>1),
+			array('degree, universitytype, jianglitype', 'length', 'max'=>10),
 			array('universitytypename, universityname, jiangliname', 'length', 'max'=>50),
 			array('projects', 'length', 'max'=>2000),
-			array('peixun', 'length', 'max'=>1000),
+			array('peixun, skill', 'length', 'max'=>1000),
 			array('graduatetime, createtime, updatetime', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, mid, username, graduatetime, hasoffer, universitytype, universitytypename, universityname, jianglitype, jiangliname, projects, peixun, createtime, updatetime', 'safe', 'on'=>'search'),
+			array('id, mid, username, graduatetime, hasoffer, sex, degree, degreename, universitytype, universitytypename, universityname, jianglitype, jiangliname, projects, peixun, skill, createtime, updatetime', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -86,14 +90,18 @@ class MsStudents extends CActiveRecord
 			'mid' => 'Mid',
 			'username' => 'Username',
 			'graduatetime' => 'Graduatetime',
-			'hasoffer' => '已经找到工作？',
-			'universitytype' => '学校类型',
-			'universitytypename' => 'Universitytypename',
-			'universityname' => '学校名称',
-			'jianglitype' => '曾获奖励',
-			'jiangliname' => 'Jiangliname',
-			'projects' => '项目经验',
-			'peixun' => '培训经历',
+            'degreename' => 'Degreename',
+            'sex' => '♂♀：',
+            'degree' => '学历',
+            'hasoffer' => '已经找到工作？',
+            'universitytype' => '学校类型',
+            'universitytypename' => 'Universitytypename',
+            'universityname' => '学校名称',
+            'jianglitype' => '曾获奖励',
+            'jiangliname' => 'Jiangliname',
+            'projects' => '项目经验',
+            'peixun' => '培训经历',
+			'skill' => '你那闪闪发光的技能',
 			'createtime' => 'Createtime',
 			'updatetime' => 'Updatetime',
 		);
@@ -115,6 +123,9 @@ class MsStudents extends CActiveRecord
 		$criteria->compare('username',$this->username,true);
 		$criteria->compare('graduatetime',$this->graduatetime,true);
 		$criteria->compare('hasoffer',$this->hasoffer,true);
+		$criteria->compare('sex',$this->sex,true);
+		$criteria->compare('degree',$this->degree,true);
+		$criteria->compare('degreename',$this->degreename,true);
 		$criteria->compare('universitytype',$this->universitytype,true);
 		$criteria->compare('universitytypename',$this->universitytypename,true);
 		$criteria->compare('universityname',$this->universityname,true);
@@ -122,6 +133,7 @@ class MsStudents extends CActiveRecord
 		$criteria->compare('jiangliname',$this->jiangliname,true);
 		$criteria->compare('projects',$this->projects,true);
 		$criteria->compare('peixun',$this->peixun,true);
+		$criteria->compare('skill',$this->skill,true);
 		$criteria->compare('createtime',$this->createtime,true);
 		$criteria->compare('updatetime',$this->updatetime,true);
 
