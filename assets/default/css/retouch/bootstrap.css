@@ -3632,7 +3632,7 @@ textarea.input-group-sm > .form-control, textarea.input-group-sm > .input-group-
 .pager li > a, .pager li > span {
     background-color: #18BC9C;
     border: 1px solid rgba(0, 0, 0, 0);
-    border-radius: 15px;
+    border-radius: 5px;
     display: inline-block;
     padding: 5px 14px;
 }

@@ -1413,6 +1413,12 @@ blockquote small {
     border-color: #ECF0F1;
     border-radius: 3px;
 }
+.member-content{
+    display: inline-block;
+    height:200px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
 @media (min-width: 992px) {
     .layout-2 .main {
         float: right;

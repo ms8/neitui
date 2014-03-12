@@ -1,6 +1,7 @@
 <?php
-/* @var $this MsCompanyController */
-/* @var $data MsCompany */
+if ($index%4===0 && $index !=0){
+    echo "</div><div class='row items'>";
+}
 ?>
 
 <div class="col-sm-6 col-md-3 team-member-wrap">
@@ -14,10 +15,12 @@
             </div>
         </div>
         <div class="member-details">
-            <span class="position">【吸引力】 <?php echo CHtml::encode($data->tags); ?></span>
-            <p>【公司介绍】 <?php echo CHtml::encode($data->description); ?></p>
-            <p>【招聘职位】 <?php echo CHtml::encode($data->description); ?></p>
-            <p class="text-center"><a class="btn btn-flat flat-primary" href="<?php echo Yii::app()->baseUrl.'/mscompany/view/'.$data->id?>">投简历</a></p>
+            <div class="member-content">
+                <span class="position">【吸引力】 <?php echo CHtml::encode($data->tags); ?></span>
+                <p>【公司介绍】 <?php echo CHtml::encode($data->description); ?></p>
+                <p>【招聘职位】 <?php echo CHtml::encode($data->description); ?></p>
+            </div>
+            <p class="text-center"><a class="btn btn-flat flat-primary" href="<?php echo Yii::app()->baseUrl.'/mscompany/view/'.$data->id?>">查看详情</a></p>
         </div>
     </div>
 

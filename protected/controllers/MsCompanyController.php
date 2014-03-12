@@ -288,7 +288,14 @@ class MsCompanyController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('MsCompany');
+        $criteria = new CDbCriteria;
+		$dataProvider=new CActiveDataProvider('MsCompany',array(
+                'criteria'=>$criteria,
+                'pagination' => array(
+                    'pageSize' => 8,
+                ),
+            )
+        );
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));

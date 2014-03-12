@@ -5,7 +5,7 @@
 <!-- Container -->
 <section class="pad-top-25" id="our-services">
     <div class="container">
-        <div style="visibility: visible; opacity: 1;" class="sort_by_cat" id="filters" data-option-key="filter">
+        <div  class="sort_by_cat" id="filters" data-option-key="filter">
             <span id="filter-up">公司所在城市：</span>
             <a href="#filter" data-option-value="*" class="active_sort">北京</a>
             <span class="text-sep">/</span>
