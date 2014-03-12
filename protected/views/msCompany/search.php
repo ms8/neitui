@@ -46,12 +46,15 @@
     <div class="container">
         <?php foreach($persons as $person){?>
             <div class="action-box">
-                <p><?php echo $person->username?></p>
-                <p><?php echo $person->degreename?></p>
-                <p><?php echo $person->universityname?></p>
-                <p><?php echo $person->skill?></p>
-                <p><?php echo $person->projects?></p>
-                <p><?php echo $person->peixun?></p>
+                <p>姓名：<?php echo $person->realname?></p>
+                <p>联系方式：<?php echo $person->phone?></p>
+                <p>邮箱：<?php echo $person->username?></p>
+                <p>学历：<?php echo $person->degreename?></p>
+                <p>毕业学校：<?php echo $person->universityname?></p>
+                <p>所获奖励：<?php echo $person->jiangliname?></p>
+                <p>技能：<?php echo $person->skill?></p>
+                <p>项目经历：<?php echo $person->projects?></p>
+                <p>培训经历：<?php echo $person->peixun?></p>
             </div>
         <?php } ?>
     </div>

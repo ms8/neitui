@@ -46,28 +46,44 @@ class MsCompanyController extends Controller
 	}
 
     public function actionSearch(){
-        $model=new MsStudents;
-        $persons = array();
-        $unitypes = MsDictionary::model()->findAllByAttributes(array('type'=>'unitype'));
-        $jianglis = MsDictionary::model()->findAllByAttributes(array('type'=>'jiangli'));
-        $degrees = MsDictionary::model()->findAllByAttributes(array('type'=>'degree'));
-        foreach($unitypes as $unitype){ //对应的学校类型名称
-            $uniarr[$unitype->code]=$unitype->name;
-        }
-        foreach($jianglis as $jiangli){ //对应的奖励类型名称
-            $jiangliarr[$jiangli->code]=$jiangli->name;
-        }
-        foreach($degrees as $degree){ //对应的学历类型名称
-            $degreearr[$degree->code]=$degree->name;
-        }
-        if(isset($_POST['MsStudents'])){
-            $model->attributes=$_POST['MsStudents'];
-            $persons = $model->findAllByAttributes(array('hasoffer'=>'0','sex'=>$model->sex,'degree'=>$model->degree,
-                'universitytype'=>$model->universitytype));
+        $id=Yii::app()->user->id;
+        $member = Member::model()->findByPk($id);
+        if($member->type == '2'){ //只有企业用户才有权限查找人
+            $model=new MsStudents;
+            $persons = array();
+            $unitypes = MsDictionary::model()->findAllByAttributes(array('type'=>'unitype'));
+            $jianglis = MsDictionary::model()->findAllByAttributes(array('type'=>'jiangli'));
+            $degrees = MsDictionary::model()->findAllByAttributes(array('type'=>'degree'));
+            foreach($unitypes as $unitype){ //对应的学校类型名称
+                $uniarr[$unitype->code]=$unitype->name;
+            }
+            foreach($jianglis as $jiangli){ //对应的奖励类型名称
+                $jiangliarr[$jiangli->code]=$jiangli->name;
+            }
+            foreach($degrees as $degree){ //对应的学历类型名称
+                $degreearr[$degree->code]=$degree->name;
+            }
+            if(isset($_POST['MsStudents'])){
+                $model->attributes=$_POST['MsStudents'];
+                $params = array();
+                $params['hasoffer']='0';
+                if($model->sex != null){
+                    $params['sex']=$model->sex;
+                }
+                if($model->sex != null){
+                    $params['degree']=$model->degree;
+                }
+                if($model->sex != null){
+                    $params['universitytype']=$model->universitytype;
+                }
+                $persons = $model->findAllByAttributes($params);
 
+            }
+            $this->render('search',array('uniarr'=>$uniarr,'jiangliarr'=>$jiangliarr,
+                'degreearr'=>$degreearr,'model'=>$model,'persons'=>$persons));
+        }else{
+            $this->redirect(array('/site/index'));
         }
-        $this->render('search',array('uniarr'=>$uniarr,'jiangliarr'=>$jiangliarr,
-            'degreearr'=>$degreearr,'model'=>$model,'persons'=>$persons));
     }
 
     public function actionJianlis(){

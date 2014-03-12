@@ -12,6 +12,18 @@
             <?php echo $form->errorSummary($model); ?>
 
             <div class="row">
+                <?php echo $form->labelEx($model,'realname'); ?>
+                <?php echo $form->textField($model,'realname',array('size'=>50,'maxlength'=>50)); ?>
+                <?php echo $form->error($model,'realname'); ?>
+            </div>
+
+            <div class="row">
+                <?php echo $form->labelEx($model,'phone'); ?>
+                <?php echo $form->textField($model,'phone',array('size'=>20,'maxlength'=>20)); ?>
+                <?php echo $form->error($model,'phone'); ?>
+            </div>
+
+            <div class="row">
                 <?php echo $form->labelEx($model,'universitytype'); ?>
                 <?php echo $form->radioButtonList($model,'universitytype',$uniarr,
                     array('separator'=>'&nbsp;','labelOptions'=>array('class'=>'radiolabel')) )?>
