@@ -97,10 +97,11 @@
                             </li>
                         <?php }else{?>
                             <li class="dropdown">
-                                <a href="<?php echo Yii::app()->createUrl('/site/login')?>">登录</a>
+<!--                                <a href="--><?php //echo Yii::app()->createUrl('/site/login')?><!--">登录</a>-->
+                                <a href="#"  data-toggle="modal" data-target="#myModal">登录</a>
                             </li>
                             <li class="dropdown">
-                                <a href="<?php echo Yii::app()->createUrl('/site/register')?>">注册</a>
+                                <a href="#"data-toggle="modal" data-target="#registerModal">注册</a>
                             </li>
                             <li class="dropdown">
                                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">关于我们</a>
@@ -207,5 +208,162 @@
     </div>
     <!-- /.container -->
 </footer>
+
+<!-- Modal login-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">登录</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" method="post" action="<?php echo Yii::app()->createUrl('site/login')?>" class="login-form" >
+                    <div class="form-group">
+                        <label >用户名</label>
+                        <input type="text" required="" placeholder="用户名"  id="username" class="form-control">
+
+                    </div>
+                    <div class="form-group">
+                        <label >密码</label>
+                        <input type="password" required=""  placeholder="密码" id="password" class="form-control">
+                        <span id="errMsg" style="display:none;color: red"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="remember">
+                            <input type="checkbox" name="autoLogin" checked="checked" id="remember">
+                            记住我
+                        </label>
+                        <a target="_blank"  href="<?php echo Yii::app()->request->hostInfo.Yii::app()->homeUrl.'/site/forgetpassword'?>">忘记密码？</a>
+                    </div>
+                    <button class="btn btn-flat flat-color" type="button" onclick="login()">登录</button>
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div>
+</div>
+
+<!-- 注册 -->
+<!-- Modal login-->
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">注册用户</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" method="post" action="<?php echo Yii::app()->createUrl('site/login')?>" class="login-form" >
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-flat flat-success btn-bordered">
+                            <input type="radio" value="1" name="type" id="type1"> 应聘者
+                        </label>
+                        <label class="btn btn-flat flat-success btn-bordered">
+                            <input type="radio" value="2" name="type" id="type2"> 企业
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label >用户名</label>
+                        <input type="text" required="" onblur="checkUser(this)" placeholder="请输入邮箱地址"  id="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label >密码</label>
+                        <input type="password" required=""  placeholder="密码" id="rpassword" class="form-control">
+                        <span id="errRegMsg" style="display:none;color: red"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="checkbox" class="fl">
+                            <input type="checkbox" class="checkbox valid" checked="checked" name="checkbox" id="checkbox">
+                            我已阅读并同意
+                            <a target="_blank" href="http://www.lagou.com/privacy.html">《快入职用户协议》</a>
+                        </label>
+                    </div>
+                    <button class="btn btn-flat flat-color" type="button" onclick="register()">注册</button>
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div>
+</div>
+<!-- /.modal -->
+
 </body>
+
+<script type="text/javascript">
+    function login(){
+        var username = $("#username").val();
+        var password = $("#password").val();
+        $.ajax({
+            type:'POST',
+            dataType:'json',
+            data:{'username':username,'password':password},
+            url:'<?php echo Yii::app()->createUrl('site/login')?>',
+            success:function(data) {
+                if(data == 'fail'){
+                    $("#errMsg").text('用户名或密码错误');
+                    $("#errMsg").show();
+                }else {
+                    window.location.href="<?php echo Yii::app()->baseUrl?>"+data;
+                }
+            }
+        });
+    }
+    var user_conflict=false;
+    function checkUser(obj){
+        $.ajax({
+            type:'POST',
+            dataType:'json',
+            data:{'username':$(obj).val()},
+            url:'<?php echo Yii::app()->request->hostInfo.Yii::app()->homeUrl.'/site/checkUser'?>',
+            success:function(data) {
+                if(data == '1'){
+                    $("#errRegMsg").text('用户名已被注册');
+                    $("#errRegMsg").show();
+                    user_conflict = true;
+                }else{
+                    $("#beError").hide();
+                    user_conflict = false;
+                }
+            }
+        });
+    }
+
+    function register(){
+        var username = $("#email").val();
+        var password = $("#rpassword").val();
+        var type = $('input[name="type"]:checked').val();
+        if(type == undefined){
+            alert('您是应聘者还是企业用户呢？请选择对应的角色。')
+            return;
+        }
+        var search_str = /^[\w\-\.]+@[\w\-\.]+(\.\w+)+$/;
+        if(user_conflict){
+            alert('用户名已被注册,请更换另一个用户名');
+            return;
+        }
+        if(!search_str.test(username)){
+            alert('请填写正确的邮箱地址');
+            $('#Member_username').focus();
+            return false;
+        }
+        if($("#checkbox").attr("checked")!='checked'){
+            alert('非常抱歉，您需要同意我们的注册协议才能注册');
+            return false;
+        }
+        $.ajax({
+            type:'POST',
+            dataType:'json',
+            data:{'username':username,'password':password,'type':type},
+            url:'<?php echo Yii::app()->createUrl('site/register')?>',
+            success:function(data) {
+                if(data == 'fail'){
+                    $("#errRegMsg").text('注册失败');
+                    $("#errRegMsg").show();
+                }else {
+                    window.location.href="<?php echo Yii::app()->baseUrl?>"+data;
+                }
+            }
+        });
+    }
+</script>
+
 </html>

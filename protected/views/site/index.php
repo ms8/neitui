@@ -84,31 +84,6 @@
 
 <!--    </section>-->
 
-<!-- 弹出登录框-->
-<div id="loginDiv" style="display: none;width: 600px;height: 280px;background-color#f39c12;padding: 10px;position: absolute;top: 150px;left: 330px">
-    <div id="header" style="height: 40px;background-color: #088b69">
-        <div style="float: left">登录</div>
-        <div style="float: right;font-size: 20px;cursor: pointer;margin-right: 20px;" id="login-close">X</div>
-    </div>
-
-    <div id="content" style="height: 170px;background-color: #71bd90;padding-top:50px">
-        <form id="loginForm" class="login" method="post" action="<?php echo Yii::app()->baseUrl.'/site/login'?>">
-            <input type="hidden" name="loginflag" value="0">
-            <div style="margin: 0px 0 10px 20px;">
-                <label>用户名</label>
-                <input id="username" name="LoginForm[username]">
-            </div>
-            <div style="margin-left: 20px;">
-                <label>密码</label>
-                <input id="password" name="LoginForm[password]">
-            </div>
-        </form>
-    </div>
-
-    <div id="footer" style="height: 50px;">
-        <button id="loginbt" style="float: right;margin-top:-30px;margin-right:20px;width:50px;height:30px">登录</button>
-    </div>
-</div>
 <!-- -->
 <!-- 弹出对话框上传简历-->
 <div id="uploadDiv" style="display: none;width: 600px;height: 280px;background-color#f39c12;padding: 10px;position: absolute;top: 150px;left: 330px">

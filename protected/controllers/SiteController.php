@@ -79,48 +79,68 @@ class SiteController extends Controller
     public function actionLogin(){
         $model=new LoginForm;
         $err_msg = "";
-        if(!empty($_POST['LoginForm'])){
-
-            //赋值给模型
-            $model->attributes=$_POST['LoginForm'];
-            //获取验证错误
-            $ajaxRes = CActiveForm::validate($model, array('username','password'));
-            $ajaxResArr = CJSON::decode($ajaxRes);
-            //验证结果为空入库
-            if(empty($ajaxResArr)){
-//                if($model->validate() && $model->login()){
-                if($model->login()){
-//                    scoreAction::setScore(Yii::app()->user->id,'denglu','add',false);//登陆加积分
-                    //die(CJSON::encode(array('status'=>1)));
-//                    $this->render('index');
-                    $member = Member::model()->findByAttributes(array('username'=>$model->username));
-                    if($member->type == '1'){ //应聘者
-                        //从其他页面中的弹出框直接登录，不是从登录界面登录的，登录后要返回当前页面
-                        if(isset($_POST['loginflag']) && Yii::app()->request->urlReferrer != null){
-                            $this->redirect(Yii::app()->request->urlReferrer);
-                        }else{
-                            $this->redirect(array('/kongjian/application'));
-                        }
-                    }else{ //企业
-                        $company = MsCompany::model()->findByAttributes(array('account'=>$member->username));
-                        if($company == null){ //还未完善公司信息，跳转到创建公司信息页面
-                            $this->redirect(array('/mscompany/create'));
-                        }else{
-                            $this->redirect(array('/mscompany/dashboard/'));
-                        }
-                    }
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $model->username = $username;
+        $model->password = $password;
+        if($model->login()){
+            $member = Member::model()->findByAttributes(array('username'=>$model->username));
+            $returnUrl="";
+            if($member->type == '1'){ //应聘者
+                //从其他页面中的弹出框直接登录，不是从登录界面登录的，登录后要返回当前页面
+                if(isset($_POST['loginflag']) && Yii::app()->request->urlReferrer != null){
+                    $returnUrl = Yii::app()->request->urlReferrer;
                 }else{
-                    $err_msg = "用户名密码错误";
-                    //die(CJSON::encode(array('status'=>0)));
+                    $returnUrl = '/kongjian/application';
                 }
-            }else{
-                $err_msg = "用户名密码错误";
-                //die($ajaxRes);
+            }else if($member->type == '2'){
+                $company = MsCompany::model()->findByAttributes(array('account'=>$member->username));
+                if($company == null){ //还未完善公司信息，跳转到创建公司信息页面
+                    $returnUrl = '/mscompany/create';
+                }else{
+                    $returnUrl = '/mscompany/dashboard/';
+                }
             }
+            die(CJSON::encode($returnUrl));
+        }else{
+            die(CJSON::encode('fail'));
         }
-        $this->render('login',array('model'=>$model,'msg'=>$err_msg));
-        //$this->render('login',array('model'=>$model));
-//        $this->render('login');
+//        if(!empty($_POST['LoginForm'])){
+//
+//            //赋值给模型
+//            $model->attributes=$_POST['LoginForm'];
+//            //获取验证错误
+//            $ajaxRes = CActiveForm::validate($model, array('username','password'));
+//            $ajaxResArr = CJSON::decode($ajaxRes);
+//            //验证结果为空入库
+//            if(empty($ajaxResArr)){
+//                if($model->login()){
+//                    $member = Member::model()->findByAttributes(array('username'=>$model->username));
+//                    if($member->type == '1'){ //应聘者
+//                        //从其他页面中的弹出框直接登录，不是从登录界面登录的，登录后要返回当前页面
+//                        if(isset($_POST['loginflag']) && Yii::app()->request->urlReferrer != null){
+//                            $this->redirect(Yii::app()->request->urlReferrer);
+//                        }else{
+//                            $this->redirect(array('/kongjian/application'));
+//                        }
+//                    }else{ //企业
+//                        $company = MsCompany::model()->findByAttributes(array('account'=>$member->username));
+//                        if($company == null){ //还未完善公司信息，跳转到创建公司信息页面
+//                            $this->redirect(array('/mscompany/create'));
+//                        }else{
+//                            $this->redirect(array('/mscompany/dashboard/'));
+//                        }
+//                    }
+//                }else{
+//                    $err_msg = "用户名密码错误";
+//                    die(CJSON::encode(array('status'=>0)));
+//                }
+//            }else{
+//                $err_msg = "用户名密码错误";
+//                die($ajaxRes);
+//            }
+//        }
+//        $this->render('login',array('model'=>$model,'msg'=>$err_msg));
     }
 
     public function actionCheckUser(){
@@ -270,58 +290,103 @@ class SiteController extends Controller
 
         //实例化用户模型
         $memberModel=new Member();
-        if(!empty($_POST['Member'])){
-            //赋值给模型
-            $memberModel->attributes=$_POST['Member'];
-            $input_password = $memberModel->password;
-            $memberModel->nickname = $memberModel->username;
-            $memberModel->email = $memberModel->username;
-            //验证
-            $ajaxRes 	= 	CActiveForm::validate($memberModel, array('username','nickname','password','passwordrepeat','verifyCode'));
-            $ajaxResArr = 	CJSON::decode($ajaxRes);
-            //验证结果
-            if(empty($ajaxResArr)){
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $type=$_POST['type'];
+        $memberModel->username = $username;
+        $memberModel->password = $password;
+        $memberModel->type=$type;
+        $memberModel->nickname = $memberModel->username;
+        $memberModel->email = $memberModel->username;
 
-                $score=Score::model()->find('id=1');
+        $score=Score::model()->find('id=1');
 
-                $memberModel->salt=Helper::randomCode();//加盐值
-                $memberModel->password=$memberModel->hashPassword();//密码
-                $memberModel->create_time=time();//创建时间
-                $memberModel->update_time=time();//更新时间
-                $memberModel->status=1;//状态
-                $memberModel->role_id=1;//状态
-                $memberModel->photo=rand(1,95).'.jpg';//头像
-                $memberModel->last_login_time=time();//登陆时间
-                $memberModel->last_login_ip=Yii::app()->request->UserHostAddress;//IP地址
-                $memberModel->score=$score->zhuce;//注册积分
-                $memberModel->bind_account = '';
+        $memberModel->salt=Helper::randomCode();//加盐值
+        $memberModel->password=$memberModel->hashPassword();//密码
+        $memberModel->create_time=time();//创建时间
+        $memberModel->update_time=time();//更新时间
+        $memberModel->status=1;//状态
+        $memberModel->role_id=1;//状态
+        $memberModel->photo=rand(1,95).'.jpg';//头像
+        $memberModel->last_login_time=time();//登陆时间
+        $memberModel->last_login_ip=Yii::app()->request->UserHostAddress;//IP地址
+        $memberModel->score=$score->zhuce;//注册积分
+        $memberModel->bind_account = '';
 //                $memberModel->email = '';
-                $memberModel->remark = '';
-                $memberModel->info = '';
-                $memberModel->save(false);
-                //创建用户积分
-                $memberModel->createrScore();
+        $memberModel->remark = '';
+        $memberModel->info = '';
+        $result = $memberModel->save(false);
+        //创建用户积分
+        $memberModel->createrScore();
 
-                //用户积分
-                $model = new LoginForm();
-                $model->username = $memberModel->username;
-                $model->password = $input_password;
-                $model->login();
+        //用户积分
+        $model = new LoginForm();
+        $model->username = $memberModel->username;
+        $model->password = $password;
+        $model->login();
 
-                if($memberModel->type == '2'){ //公司
-                    $this->redirect(array('/mscompany/create'));
-                }else{ //个人
-                    $this->redirect(array('/kongjian/jianli'));
-                }
-
-                //die(CJSON::encode(array('status'=>1)));
-            }else{
-                die($ajaxRes);
-            }
-
-        }else{
-            $this->render('register',array('model'=>$memberModel));
+        if($memberModel->type == '2'){ //公司
+            $ajaxRes = '/mscompany/create';
+        }else{ //个人
+            $ajaxRes ='/kongjian/jianli';
         }
+        if($result==false){
+            $ajaxRes = "fail";
+        }
+        die($ajaxRes);
+
+//        if(!empty($_POST['Member'])){
+//            //赋值给模型
+//            $memberModel->attributes=$_POST['Member'];
+//            $input_password = $memberModel->password;
+//            $memberModel->nickname = $memberModel->username;
+//            $memberModel->email = $memberModel->username;
+//            //验证
+//            $ajaxRes 	= 	CActiveForm::validate($memberModel, array('username','nickname','password','passwordrepeat','verifyCode'));
+//            $ajaxResArr = 	CJSON::decode($ajaxRes);
+//            //验证结果
+//            if(empty($ajaxResArr)){
+//
+//                $score=Score::model()->find('id=1');
+//
+//                $memberModel->salt=Helper::randomCode();//加盐值
+//                $memberModel->password=$memberModel->hashPassword();//密码
+//                $memberModel->create_time=time();//创建时间
+//                $memberModel->update_time=time();//更新时间
+//                $memberModel->status=1;//状态
+//                $memberModel->role_id=1;//状态
+//                $memberModel->photo=rand(1,95).'.jpg';//头像
+//                $memberModel->last_login_time=time();//登陆时间
+//                $memberModel->last_login_ip=Yii::app()->request->UserHostAddress;//IP地址
+//                $memberModel->score=$score->zhuce;//注册积分
+//                $memberModel->bind_account = '';
+////                $memberModel->email = '';
+//                $memberModel->remark = '';
+//                $memberModel->info = '';
+//                $memberModel->save(false);
+//                //创建用户积分
+//                $memberModel->createrScore();
+//
+//                //用户积分
+//                $model = new LoginForm();
+//                $model->username = $memberModel->username;
+//                $model->password = $input_password;
+//                $model->login();
+//
+//                if($memberModel->type == '2'){ //公司
+//                    $this->redirect(array('/mscompany/create'));
+//                }else{ //个人
+//                    $this->redirect(array('/kongjian/jianli'));
+//                }
+//
+//                //die(CJSON::encode(array('status'=>1)));
+//            }else{
+//                die($ajaxRes);
+//            }
+//
+//        }else{
+//            $this->render('register',array('model'=>$memberModel));
+//        }
     }
 
     //退出登陆
