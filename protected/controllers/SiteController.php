@@ -333,7 +333,7 @@ class SiteController extends Controller
         if($result==false){
             $ajaxRes = "fail";
         }
-        die($ajaxRes);
+        die(CJSON::encode($ajaxRes));
 
 //        if(!empty($_POST['Member'])){
 //            //赋值给模型

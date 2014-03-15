@@ -1,88 +1,113 @@
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="clearfix col-md-9 main">
+                <div class="post-wrapper">
+                    <div class="media">
+                        <a href="#" class="pull-left">
+                            <img alt="<?php echo $model->name?>"  class="media-object" style="width: 190px; height: 190px;" src="<?php echo Yii::app()->baseUrl.'/'.$model->logo?>">
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading"><?php echo $model->name?></h4>
+                            <?php if($model->status == '1'){ ?>
+                                <div style="color: red">公司信息未验证，暂时不能发布招聘信息和阅读简历</div>
+                            <?php }?>
+                            <p><?php echo $model->description?></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="post-wrapper">
+                    <div class="subpage-title">
+                        <h5>招聘职位</h5>
+                    </div>
+                    <div id="accordion" class="panel-group">
+                        <?php foreach($jobs as $job){?>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a href="#collapse<?php echo $job->id?>" job-id="<?php echo $job->id?>" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle collapsed">
+                                        <span title="Java" class="pos"><?php echo $job->title?></span>
+                                        <span class="job-terms"><?php echo $job->createtime?></span>
+                                        <span class="job-city"><?php echo $job->cityname?></span>
+                                    </a>
+                                </h4>
+                            </div>
+                            <div class="panel-collapse collapse" id="collapse<?php echo $job->id?>" style="height: 0px;">
+                                <div class="panel-body"></div>
+                            </div>
+                        </div>
+                        <?php }?>
+                    </div>
+<!--                    <ul id="jobList" class="job-details-list">-->
+<!--                        --><?php //foreach($jobs as $job){?>
+<!--                            <li>-->
+<!--                                    <a target="_blank"-->
+<!--                                   href="--><?php //echo Yii::app()->baseUrl.'/msjobs/view/'.$job->id?><!--">-->
+<!--                                        <span title="Java" class="pos">--><?php //echo $job->title?><!--</span>-->
+<!--                                        <span class="job-terms">--><?php //echo $job->createtime?><!--</span>-->
+<!--                                        <span class="job-city">--><?php //echo $job->cityname?><!--</span>-->
+<!--                                    </a>-->
+<!--                            </li>-->
+<!--                        --><?php //}?>
+<!--                    </ul>-->
+                </div>
 
-<div class="clearfix">
-    <div class="content_l">
-        <?php if($model->status == '1'){ ?>
-        <div style="color: red">公司信息未验证，暂时不能发布招聘信息和阅读简历</div>
-        <?php }?>
-        <div class="c_detail">
-            <div class="c_logo">
-                <div id="logoShow">
-                    <img width="190" height="190" alt="<?php echo $model->name?>"
-                         src="<?php echo Yii::app()->baseUrl.'/'.$model->logo?>">
+            </div>
+            <div class="col-md-3 sidebar">
+                <div class="widget popular-posts">
+                    <div class="subpage-title">
+                        <h5>基本信息</h5>
+                    </div>
+                    <dl class="dl-horizontal companyInfo">
+                        <dt>地点</dt>
+                        <dd>北京</dd>
+                        <dt>领域</dt>
+                        <dd>互联网</dd>
+                        <dt>规模</dt>
+                        <dd>150</dd>
+                        <dt>网址</dt>
+                        <dd><a href="<?php echo $model->website?>" target="_blank">
+                                <?php echo $model->website?>
+                            </a></dd>
+                        <dt>地址</dt>
+                        <dd><?php echo $model->address?></dd>
+                    </dl>
+                </div>
+                <div class="widget tagcloud">
+                    <div class="subpage-title">
+                        <h5>公司印象</h5>
+                    </div>
+                    <ul class="tagcloud-list">
+                        <?php
+                        $tags = explode(' ',$model->tags);
+                        foreach($tags as $tag){
+                            ?>
+                            <li><a href="#"><?php echo $tag?></a></li>
+                        <?php
+                        }
+                        ?>
+                    </ul>
                 </div>
             </div>
-            <div class="c_box">
-                <h2 ><?php echo $model->name?></h2>
-                <div class="clear"></div>
-                <span>主页：</span>
-                    <a href="<?php echo $model->website?>" target="_blank">
-                        <?php echo $model->website?>
-                    </a>
-
-                <h5>地址：<?php echo $model->address?></h5>
-            </div>
-            <div class="clear"></div>
         </div>
-
-        <!--[if IE 7]> <br /> <![endif]-->
-
-        <!--公司简介  -->
-        <dl class="c_section">
-            <dt>
-            <h2><em></em>公司介绍</h2>
-            </dt>
-            <dd>
-                <div class="c_intro">
-                    <?php echo $model->name?>&nbsp;&nbsp;
-                    <?php echo $model->description?>
-                </div>
-            </dd>
-        </dl>
-
-        <!--有招聘职位  -->
-        <dl class="c_section">
-            <dt>
-            <h2><em></em>招聘职位</h2>
-<!--            <span class="jobsTotal">该公司近两月共有 <i>1</i> 个职位正在招聘</span>-->
-            </dt>
-            <dd>
-                <ul id="jobList" class="reset c_jobs">
-                    <?php foreach($jobs as $job){?>
-                        <li>
-                            <a target="_blank"
-                               href="<?php echo Yii::app()->baseUrl.'/msjobs/view/'.$job->id?>">
-                                <h3>
-                                    <span title="Java" class="pos"><?php echo $job->title?></span>
-                                    <span><?php echo $job->cityname?></span>
-                                </h3>
-                                <span><?php echo $job->createtime?></span>
-                            </a>
-                        </li>
-                    <?php }?>
-                </ul>
-
-            </dd>
-        </dl>
-        <!-- <div id="flag"></div> -->
-
     </div>
+</section>
+<script type="text/javascript">
+    $(function(){
+        $('#accordion').on('show.bs.collapse', function (options,target) {
+            var jobId = $(target).attr("job-id");
+            var $content = $("#collapse"+jobId+" .panel-body");
+            if($content.html() == "") {
+                $.ajax({
+                    type:'POST',
+                    dataType:'json',
+                    url:'<?php echo Yii::app()->createUrl('msjobs/view')?>'+"/"+jobId,
+                    success:function(data) {
+                        $content.html(data.description);
+                    }
+                });
+            }
 
-    <div class="content_r">
-        <div class="r_box">
-            <h3 >公司印象</h3>
-            <div class="clear"></div>
-            <ul id="hasLabels" class="reset clearfix">
-                <?php
-                $tags = explode(' ',$model->tags);
-                foreach($tags as $tag){
-                    ?>
-                    <li><span><?php echo $tag?></span></li>
-                <?php
-                }
-                ?>
-            </ul>
-        </div>
-
-
-    </div>
-</div>
+        })
+    })
+</script>

@@ -543,7 +543,7 @@ if (typeof jQuery === "undefined") { throw new Error("Bootstrap requires jQuery"
     if (this.transitioning || this.$element.hasClass('in')) return
 
     var startEvent = $.Event('show.bs.collapse')
-    this.$element.trigger(startEvent)
+    this.$element.trigger(startEvent,this.options.target)
     if (startEvent.isDefaultPrevented()) return
 
     var actives = this.$parent && this.$parent.find('> .panel > .in')
@@ -670,7 +670,7 @@ if (typeof jQuery === "undefined") { throw new Error("Bootstrap requires jQuery"
       if ($parent) $parent.find('[data-toggle=collapse][data-parent="' + parent + '"]').not($this).addClass('collapsed')
       $this[$target.hasClass('in') ? 'addClass' : 'removeClass']('collapsed')
     }
-
+    option.target = this;
     $target.collapse(option)
   })
 

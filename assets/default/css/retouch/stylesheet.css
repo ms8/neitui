@@ -1596,3 +1596,59 @@ address {
    text-align: center;
    padding: 20px 20px 0 20px;
 }
+
+/*公司基本信息*/
+.dl-horizontal.companyInfo{
+    margin: 0 auto;
+}
+.dl-horizontal.companyInfo dt{
+    width: 20%;
+    margin-bottom: 10px;
+    text-align: left;
+}
+.dl-horizontal.companyInfo dd{
+    margin-left: 20%;
+}
+/*公司详细页logo 描述*/
+.media-body{
+    font-size: 14px;
+    line-height: 25px;
+    padding:0 15px;
+}
+
+.media-heading{
+    margin-bottom: 20px;
+}
+/*职位列表*/
+.job-details-list{
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+}
+.job-details-list li{
+    border-left:4px solid #2ECC71;
+    line-height: 25px;
+    padding: 2px 10px 2px 10px;
+    margin-bottom: 10px;
+}
+.job-details-list li a{
+    display: inline-block;
+    width: 100%;
+    height: 25px;
+    color:#95A5A6;
+}
+.job-details-list li:hover,.job-details-list li a:hover{
+    background-color: #dde7d3;
+}
+.job-terms{
+    float:right;
+}
+.job-city{
+    float:right;
+    margin-right: 200px;
+}
+
+/*内容区*/
+.main-wrapper{
+    min-height: 600px;
+}

@@ -19,14 +19,14 @@
 
     //    Yii::app()->clientScript->registerCssFile('common.css');
     //    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_GLOBAL.'style.css');
-    //    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_GLOBAL.'main.css');
-    //    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_GLOBAL.'bootstrap.css');
-    //    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_GLOBAL.'grid.css');
-    //    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_GLOBAL.'jquery.css');
-    //    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_GLOBAL.'astyle.css');
+//    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_GLOBAL.'main.css');
+//    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_GLOBAL.'bootstrap.css');
+//    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_GLOBAL.'grid.css');
+//    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_GLOBAL.'jquery.css');
+//    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_GLOBAL.'astyle.css');
     //    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_GLOBAL.'flexslider.css');
-    //    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_GLOBAL.'css.css');
-        Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_PATH.'font-awesome/css/font-awesome.css');
+//    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_GLOBAL.'css.css');
+    //    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_GLOBAL.'fontello/css/font-awesome.css');
     //    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_GLOBAL.'style.css');
     //    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_GLOBAL.'settings-ie8.css');
     Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_PATH.'photowall.css');
@@ -65,30 +65,31 @@
                     <ul class="nav navbar-nav">
                         <li class="dropdown">
                             <a href="<?php echo Yii::app()->baseUrl?>">首页</a>
-                            <!--                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">首页</a>-->
-                            <!--                            <ul class="dropdown-menu">-->
-                            <!--                                <li class="active"><a href="index.html">Home Layout 1</a></li>-->
-                            <!--                                <li><a href="index-2.html">Home Layout 2</a></li>-->
-                            <!--                                <li><a href="index-3.html">Home Layout 3</a></li>-->
-                            <!--                            </ul>-->
+<!--                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">首页</a>-->
+<!--                            <ul class="dropdown-menu">-->
+<!--                                <li class="active"><a href="index.html">Home Layout 1</a></li>-->
+<!--                                <li><a href="index-2.html">Home Layout 2</a></li>-->
+<!--                                <li><a href="index-3.html">Home Layout 3</a></li>-->
+<!--                            </ul>-->
                         </li>
-                        <li class="dropdown  active" >
+                        <li class="dropdown  active">
                             <a href="<?php echo Yii::app()->createUrl('/mscompany/index')?>">公司</a>
-                            <!--                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">公司</a>-->
-                            <!--                            <ul class="dropdown-menu">-->
-                            <!--                                <li><a href="elements.html">UI Elements</a></li>-->
-                            <!--                                <li><a href="buttons.html">Buttons</a></li>-->
-                            <!--                                <li><a href="icons.html">Icons</a></li>-->
-                            <!--                                <li><a href="pricing.html">Pricing Tables</a></li>-->
-                            <!--                            </ul>-->
+<!--                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">公司</a>-->
+<!--                            <ul class="dropdown-menu">-->
+<!--                                <li><a href="elements.html">UI Elements</a></li>-->
+<!--                                <li><a href="buttons.html">Buttons</a></li>-->
+<!--                                <li><a href="icons.html">Icons</a></li>-->
+<!--                                <li><a href="pricing.html">Pricing Tables</a></li>-->
+<!--                            </ul>-->
                         </li>
                         <?php if(!Yii::app()->user->isGuest){?>
                             <li class="dropdown">
                                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">个人中心</a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="<?php echo Yii::app()->createUrl('/mscompany/dashboard')?>">公司信息</a></li>
-                                    <li><a href="<?php echo Yii::app()->createUrl('/mscompany/jianlis')?>">收到的简历</a></li>
-                                    <li><a href="<?php echo Yii::app()->createUrl('/mscompany/changepwd')?>">修改密码</a></li>
+                                    <li><a href="<?php echo Yii::app()->createUrl('/kongjian/application')?>">投递职位</a></li>
+                                    <li><a href="<?php echo Yii::app()->createUrl('/kongjian/information')?>">个人信息</a></li>
+                                    <li><a href="<?php echo Yii::app()->createUrl('/kongjian/jianli')?>">我的简历</a></li>
+                                    <li><a href="<?php echo Yii::app()->createUrl('/kongjian/changepwd')?>">修改密码</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -116,7 +117,7 @@
     </header>
 </div>
 <div class="main-wrapper">
-    <?php echo $content ?>
+<?php echo $content ?>
 </div>
 <footer class="footer" id="footer-1">
     <div class="container">
@@ -196,7 +197,7 @@
                                 <img alt="Ortofon Concorde S-120 (#1211)" src="http://farm9.staticflickr.com/8552/10217169844_a83bb0c26f_s.jpg">
                             </a>
                         </li>
-                    </ul>
+                        </ul>
                 </div>
                 <!-- /.flickr-photos -->
             </div>

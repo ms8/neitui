@@ -6,7 +6,7 @@ class MsJobsController extends Controller
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='//layouts/site';
+	public $layout='//layouts/jobs';
 
 	/**
 	 * @return array action filters
@@ -114,11 +114,14 @@ class MsJobsController extends Controller
             }
         }
 
-		$this->render('view',array(
-			'model'=>$job,
-            'company'=>$company,
-            'finish'=>$finish
-		));
+//		$this->render('view',array(
+//			'model'=>$job,
+//            'company'=>$company,
+//            'finish'=>$finish
+//		));
+        echo json_encode(array(
+            'description'=>$job->description,
+        ));
 	}
 
 	/**
