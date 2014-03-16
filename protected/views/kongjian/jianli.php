@@ -1,18 +1,15 @@
-<div class="mian-content-inner">
-    <div class="row" style="background-color:#f5f5f5">
-
-        <?php $this->renderPartial('_tab',array('index'=>'jianli')); ?>
-
-        <div class="col-md-8" style="margin-top:40px;width:52%">
-
-            <div class="panel panel-default">
+<section class="pad-25" id="action-box">
+    <div class="container">
+        <div class="alert alert-success alert-dismissable">
+            <strong>已投递的职位</strong>
+        </div>
+        <div class="action-box">
                 <table class="table">
                     <thead>
                         <tr>
                             <th>简历</th>
                             <th>修改时间</th>
                             <th>操作</th>
-<!--                            <th>备注</th>-->
                         </tr>
                     </thead>
                     <tbody>
@@ -26,15 +23,13 @@
                                 </td>
                                 <td><?php  echo $value->updatetime ?></td>
                                 <td>
-                                    <a href="#" id="<?php echo $value->id?>" onclick="deleteJianli(this)"><i class="icon-remove"></i></a>
+                                    <button id="<?php echo $value->id?>" class="btn btn-flat flat-color" onclick="deleteJianli(this)">删除</button>&nbsp;&nbsp;
                                     <?php if($value->flag == '1'){?>
                                         &nbsp;默认简历&nbsp;
                                     <?php }else{?>
-                                        <button class="btn" onclick="setDefault(<?php echo $value->id?>)">设置默认</button>
+                                        <button class="btn btn-flat flat-color" onclick="setDefault(<?php echo $value->id?>)">设置默认</button>
                                     <?php }?>
                                 </td>
-
-<!--                                <td>--><?php // echo $value->description ?><!--</td>-->
                             </tr>
                         <?php } ?>
                     <?php }else{ ?>
@@ -46,12 +41,10 @@
                     <?php }?>
                     </tbody>
                 </table>
-            </div>
-
         </div>
-
     </div>
-</div>
+</section>
+
 <?php if(Yii::app()->user->isGuest){?>
 <script>
     $('.addGroup').click(function(){

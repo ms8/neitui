@@ -1,50 +1,44 @@
-<div class="mian-content-inner">
-    <div class="row" style="background-color:#f5f5f5">
-
-        <?php $this->renderPartial('_tab',array('index'=>'application')); ?>
-
-        <div class="col-md-8" style="margin-top:40px;width:52%">
-            <div class="panel panel-default">
-<!--                <div class="panel-heading">已投递职位</div>-->
-                <div class="panel-body">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>公司</th>
-                            <th>职位</th>
-                            <th>投递时间</th>
-                            <!--                            <th>备注</th>-->
-                        </tr>
-                        </thead>
-
-                        <tbody>
-                        <?php foreach ($jobs as $key => $value) {?>
-                            <tr>
-                                <td>
-                                    <a href="<?php echo Yii::app()->createUrl('mscompany/view',array('id'=>$value->company_id)); ?>">
-                                        <?php  $company = MsCompany::model()->findByPk($value->company_id);
-                                        echo $company->name ?>
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href="<?php echo Yii::app()->createUrl('msjobs/view',array('id'=>$value->job_id)); ?>">
-                                        <?php  $job = MsJobs::model()->findByPk($value->job_id);
-                                        echo $job->title ?>
-                                    </a>
-                                </td>
-                                <td>
-                                    <?php  echo $value->createtime ?>
-                                </td>
-                            </tr>
-                        <?php } ?>
-                        </tbody>
-                     </table>
-                </div>
-            </div>
+<section class="pad-25" id="action-box">
+    <div class="container">
+        <div class="alert alert-success alert-dismissable">
+            <strong>已投递的职位</strong>
         </div>
+        <div class="action-box">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th style="width: 30%">公司</th>
+                    <th style="width: 30%">职位</th>
+                    <th style="width: 30%">投递时间</th>
+                </tr>
+                </thead>
 
+                <tbody>
+                <?php foreach ($jobs as $key => $value) {?>
+                    <tr>
+                        <td>
+                            <a href="<?php echo Yii::app()->createUrl('mscompany/view',array('id'=>$value->company_id)); ?>">
+                                <?php  $company = MsCompany::model()->findByPk($value->company_id);
+                                echo $company->name ?>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="<?php echo Yii::app()->createUrl('msjobs/view',array('id'=>$value->job_id)); ?>">
+                                <?php  $job = MsJobs::model()->findByPk($value->job_id);
+                                echo $job->title ?>
+                            </a>
+                        </td>
+                        <td>
+                            <?php  echo $value->createtime ?>
+                        </td>
+                    </tr>
+                <?php } ?>
+                </tbody>
+             </table>
+        </div>
     </div>
-</div>
+</section>
+
 <?php if(Yii::app()->user->isGuest){?>
 <script>
     $('.addGroup').click(function(){
