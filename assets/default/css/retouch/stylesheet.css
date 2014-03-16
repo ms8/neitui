@@ -109,6 +109,10 @@ a:focus {
 #header .navbar-nav > li > a {
     font-weight: 700;
 }
+#header .navbar-nav > li > a i{
+    font-size: 16px;
+    margin-left: 5px;
+}
 #header .navbar-nav > li > .dropdown-menu {
     font-size: 13px;
 }
