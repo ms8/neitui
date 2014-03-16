@@ -2,7 +2,7 @@
 
 class KongjianController extends Controller
 {
-	public $layout='kongjian';
+	public $layout='site';
 
 	public $filePath;
 	
