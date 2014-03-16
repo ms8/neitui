@@ -100,6 +100,11 @@
 <?php } ?>
 
 <script>
+    $(function(){
+        //菜单选中个人中心
+        $(".nav li.active").removeClass("active");
+        $(".nav li:eq(2)").addClass("active");
+    })
     function deleteJianli(imgObj){
         var id = $(imgObj).attr('id');
         var r=confirm("确定删除这份简历吗？");

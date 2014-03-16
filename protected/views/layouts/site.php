@@ -82,7 +82,7 @@
                         </li>
                         <?php if(!Yii::app()->user->isGuest){?>
                             <li class="dropdown">
-                                <a data-toggle="dropdown" class="dropdown-toggle" href="#">个人中心</a>
+                                <a data-toggle="dropdown" class="dropdown-toggle" href="#">个人中心<i class="icon-sort-down"></i></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="<?php echo Yii::app()->createUrl('/kongjian/application')?>">投递职位</a></li>
                                     <li><a href="<?php echo Yii::app()->createUrl('/kongjian/information')?>">个人信息</a></li>
