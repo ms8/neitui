@@ -121,6 +121,7 @@ class MsJobsController extends Controller
 //		));
         echo json_encode(array(
             'description'=>$job->description,
+            'finish'=>$finish
         ));
 	}
 

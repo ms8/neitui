@@ -40,3 +40,10 @@ $this->menu=array(
      </section>
      </div>
 </section>
+<script type="text/javascript">
+    $(function(){
+        //菜单选中公司
+        $(".nav li.active").removeClass("active");
+        $(".nav li:eq(1)").addClass("active");
+    })
+</script>
