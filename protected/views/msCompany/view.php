@@ -102,7 +102,7 @@
                 <h4 class="modal-title">上传并投递简历</h4>
             </div>
             <div class="modal-body">
-                <form role="form" method="post" enctype="multipart/form-data"  action="<?php echo Yii::app()->baseUrl.'/kongjian/jianli'?>"  class="form-horizontal" >
+                <form role="form" method="post" enctype="multipart/form-data"    class="form-horizontal" >
                     <div class="form-group">
                         <label for="inputPassword3" class="col-sm-3 control-label">选择简历:</label>
                         <div class="col-sm-9">
@@ -120,7 +120,7 @@
                     </div>
                     <div class="form-group">
                         <label for="inputPassword3" class="col-sm-3 control-label">
-                            <button id="jianliSubmit" class="btn btn-danger"  type="submit">上传简历</button>
+                            <button id="jianliSubmit" class="btn btn-danger"  type="button">上传简历</button>
                         </label>
                     </div>
                 </form>
@@ -166,7 +166,7 @@
                     $('#myModal').modal('show')
                 }else if(data == '1'){//没有简历，弹出对话框上传简历
                     $("#uploadDiv input[name='jobid']").val(id);
-                    $("#uploadDiv").modal('show')
+                    $("#uploadDiv").modal('show');
                 }else if(data == '2'){ //投递成功，刷新页面
                     $("#collapse"+id+" .panel-body .status").html('<button class="btn btn-default" type="button" disabled="disabled">该职位已投</button>');
                 }else{ //让用户选择投递的简历，并设置为默认投递的简历
@@ -188,7 +188,23 @@
         $(".nav li.active").removeClass("active");
         $(".nav li:eq(1)").addClass("active");
 
+        //上传简历
+        $("#jianliSubmit").click(function(){
+                var targetEle = $(".status","#collapse"+$("input[name='jobid']",this.form).val());
+                $(this.form).ajaxSubmit({
+                    url:"<?php echo Yii::app()->baseUrl.'/kongjian/jianli'?>",
+                    dataType:"json",
+                    success:function(data){
+                        if(data.status == 1){
+                            $("#uploadDiv").modal('hide');
+                            targetEle.html('<button class="btn btn-default" type="button" disabled="disabled">该职位已投</button>');
+                        }
+                    }
+                });
+        })
 
+
+        //展开职位信息
         $('#accordion').on('show.bs.collapse', function (options,target) {
             var jobId = $(target).attr("job-id");
             var $content = $("#collapse"+jobId+" .panel-body");

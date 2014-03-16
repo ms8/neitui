@@ -166,7 +166,8 @@ class KongjianController extends Controller
 //            $this->render('jianli', array('jianlis'=>$jianlis,'message'=>$message));
         }
         if(isset($_POST['jobid'])){ //直接点击某职位的“投简历”进来的，还回到之前的页面
-            $this->redirect(Yii::app()->request->urlReferrer);
+//            $this->redirect(Yii::app()->request->urlReferrer);
+            die(CJSON::encode(array('status'=>1)));
         }else{
             if(Yii::app()->user->isGuest){
                 $this->redirect(array('/site/login'));
