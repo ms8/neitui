@@ -1,49 +1,44 @@
-<div class="mian-content-inner">
-    <div class="row" style="background-color:#f5f5f5">
-
-        <?php $this->renderPartial('_tab',array('index'=>'jianlis')); ?>
-
-        <div class="col-md-8" style="margin-top:40px;width:52%">
-            <div class="panel panel-default">
-<!--                <div class="panel-heading">已投递职位</div>-->
-                <div class="panel-body">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>职位</th>
-                            <th>简历</th>
-                            <th>投递时间</th>
-                            <!--                            <th>备注</th>-->
-                        </tr>
-                        </thead>
-
-                        <tbody>
-                        <?php foreach ($jobinfos as $jobinfo) {?>
-                            <tr>
-                                <td>
-                                    <a href="<?php echo Yii::app()->createUrl('msjobs/view',
-                                        array('id'=>$jobinfo['jobid'])); ?>">
-                                        <?php  echo $jobinfo['title'] ?>
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href="<?php echo Yii::app()->createUrl('kongjian/jianlidownload',array('id'=>$jobinfo['jianliid'])); ?>">
-                                        <?php  echo $jobinfo['jianliname'] ?>
-                                    </a>
-                                </td>
-                                <td>
-                                    <?php  echo $jobinfo['createtime'] ?>
-                                </td>
-                            </tr>
-                        <?php } ?>
-                        </tbody>
-                     </table>
-                </div>
-            </div>
+<section class="pad-25" id="action-box">
+    <div class="container">
+        <div class="alert alert-success alert-dismissable">
+            <strong>收到的简历</strong>
         </div>
+        <div class="action-box">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th style="width: 30%">职位</th>
+                    <th style="width: 50%">简历</th>
+                    <th style="width: 20%">投递时间</th>
+                    <!--                            <th>备注</th>-->
+                </tr>
+                </thead>
 
+                <tbody>
+                <?php foreach ($jobinfos as $jobinfo) {?>
+                    <tr>
+                        <td>
+                            <a href="<?php echo Yii::app()->createUrl('msjobs/view',
+                                array('id'=>$jobinfo['jobid'])); ?>">
+                                <?php  echo $jobinfo['title'] ?>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="<?php echo Yii::app()->createUrl('kongjian/jianlidownload',array('id'=>$jobinfo['jianliid'])); ?>">
+                                <?php  echo $jobinfo['jianliname'] ?>
+                            </a>
+                        </td>
+                        <td>
+                            <?php  echo $jobinfo['createtime'] ?>
+                        </td>
+                    </tr>
+                <?php } ?>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
+</section>
+
 <?php if(Yii::app()->user->isGuest){?>
 <script>
     $('.addGroup').click(function(){
