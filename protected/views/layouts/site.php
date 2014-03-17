@@ -80,7 +80,10 @@
 <!--                                <li><a href="pricing.html">Pricing Tables</a></li>-->
 <!--                            </ul>-->
                         </li>
-                        <?php if(!Yii::app()->user->isGuest){?>
+                        <?php if(!Yii::app()->user->isGuest){
+                                $user=Member::model()->findByPk(Yii::app()->user->id);
+                                if($user->type == '1'){
+                        ?>
                             <li class="dropdown">
                                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">个人中心<i class="icon-sort-down"></i></a>
                                 <ul class="dropdown-menu">
@@ -90,10 +93,24 @@
                                     <li><a href="<?php echo Yii::app()->createUrl('/kongjian/changepwd')?>">修改密码</a></li>
                                 </ul>
                             </li>
+                        <?php   }else{ ?>
+                            <li class="dropdown">
+                                <a data-toggle="dropdown" class="dropdown-toggle" href="#">个人中心<i class="icon-sort-down"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="<?php echo Yii::app()->createUrl('/mscompany/dashboard')?>">公司信息</a></li>
+                                    <li><a href="<?php echo Yii::app()->createUrl('/msjobs/create')?>">职位信息</a></li>
+                                    <li><a href="<?php echo Yii::app()->createUrl('/mscompany/jianlis')?>">收到的简历</a></li>
+                                    <li><a href="<?php echo Yii::app()->createUrl('/mscompany/changepwd')?>">修改密码</a></li>
+                                </ul>
+                            </li>
+                        <?php
+                                }
+                        ?>
                             <li class="dropdown">
                                 <a href="<?php echo Yii::app()->createUrl('/site/logout')?>">退出</a>
                             </li>
-                        <?php }else{?>
+                        <?php
+                        } else {?>
                             <li class="dropdown">
 <!--                                <a href="--><?php //echo Yii::app()->createUrl('/site/login')?><!--">登录</a>-->
                                 <a href="#"  data-toggle="modal" data-target="#myModal">登录</a>
