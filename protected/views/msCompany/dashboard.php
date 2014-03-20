@@ -1,38 +1,72 @@
+<section class="page-title-wrapper" id="page-title-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <h4>公司基本信息维护</h4>
+            </div>
+            <!-- /.col-sm-6 -->
+            <div class="col-xs-6 hidden-xs">
+
+                <ol class="breadcrumb pull-right">
+                    <li><?php if($model->status == '1'){ ?>
+                            <div style="color: red;">公司信息未验证，暂时不能发布招聘信息和阅读简历</div>
+                        <?php }?></li>
+                </ol>
+            </div>
+            <!-- /.col-xs-6 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</section>
 <section class="pad-25" id="action-box">
     <div class="container">
-        <div class="alert alert-success alert-dismissable">
-            <strong>公司基本信息维护</strong>
-            &nbsp;&nbsp;
-            <?php if($model->status == '1'){ ?>
-                <div style="color: red;">公司信息未验证，暂时不能发布招聘信息和阅读简历</div>
-            <?php }?>
-        </div>
-        <div class="action-box">
-            <!--公司基本信息  -->
-            <dl class="c_section">
-                <dt>
-                <h2><em></em>基本信息</h2>
-                </dt>
-                <dd>
-                    <div id="info-show" class="c_detail" style="margin-bottom: 0px;">
-                        <div class="c_logo">
-                            <div id="logoShow">
-                                <img width="190" height="190" alt="<?php echo $model->name?>"
-                                     src="<?php echo Yii::app()->baseUrl.'/'.$model->logo?>">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="media">
+                    <a class="pull-left" href="#">
+                        <img width="190" height="190" alt="<?php echo $model->name?>"
+                             src="<?php echo Yii::app()->baseUrl.'/'.$model->logo?>" />
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading"><?php echo $model->name?></h4>
+                        <div id="intro-info" class="c_intro">
+                            <div><?php echo $model->description?></div>
+                            <div style="float: right">
+                                <button class="btn" id="intro-update" >修改介绍</button>
                             </div>
                         </div>
-                        <div class="c_box">
-                            <h3 ><?php echo $model->name?></h3>
-                            <div class="clear"></div>
-                            <span>主页：</span>
-                            <a href="<?php echo $model->website?>" target="_blank">
-                                <?php echo $model->website?>
-                            </a>
-
-                            <h5>地址：<?php echo $model->address?></h5>
+                        <div id="intro-edit" class="r_box" style="display: none">
+                            <form method="post" action="<?php echo Yii::app()->baseUrl.'/mscompany/update'?>"
+                                  id="intro-update-form" >
+                                <input type="text" id="MsCompany_description" value="<?php echo $model->description?>"
+                                       name="MsCompany[description]" maxlength="1000" size="60">
+                                <div style="float: right">
+                                    <button type="button" class="btn" id="intro-cancel" >取消</button>
+                                    <button  class="btn" id="intro-save">保存</button>
+                                </div>
+                            </form>
                         </div>
-                        <div class="clear"></div>
-                        <div style="float: right">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div>
+                    <div class="subpage-title">
+                        <h5>基本信息</h5>
+                    </div>
+                    <div id="info-show" class="c_detail">
+                        <dl class="dl-horizontal companyInfo-edit">
+                            <dt>公司名称：</dt>
+                            <dd><?php echo $model->name?></dd>
+                            <dt>主页：</dt>
+                            <dd><a href="<?php echo $model->website?>" target="_blank">
+                                    <?php echo $model->website?>
+                                </a></dd>
+                            <dt>地址：</dt>
+                            <dd><?php echo $model->address?></dd>
+                        </dl>
+                        <div style="float:right">
                             <button class="btn" id="info-update" onclick="showEdit()">修改信息</button>
                         </div>
 
@@ -68,24 +102,23 @@
                             </div>
                         </form>
                     </div>
-                </dd>
-            </dl>
+                </div>
+            </div>
 
-            <!--[if IE 7]> <br /> <![endif]-->
-
-            <!--公司印象  -->
-            <dl class="c_section">
-                <dt>
-                <h2><em></em>公司印象</h2>
-                </dt>
-                <dd>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <div class="widget text" style="padding-right: 15px;">
+                    <div class="subpage-title">
+                        <h5>公司印象</h5>
+                    </div>
                     <div id="tag-info" class="r_box">
-                        <ul id="hasLabels" class="reset clearfix">
+                        <ul id="hasLabels" class="tagcloud-list">
                             <?php
                             $tags = explode(' ',$model->tags);
                             foreach($tags as $tag){
                                 ?>
-                                <li><span><?php echo $tag?></span></li>
+                                <li><a href="#"><?php echo $tag?></a></li>
                             <?php
                             }
                             ?>
@@ -100,43 +133,21 @@
                               id="tag-update-form" >
                             <input type="text" id="MsCompany_tags" value="<?php echo $model->tags?>"
                                    name="MsCompany[tags]" maxlength="500" size="60">
-                            <div style="float: right">
+                            <div style="float:right">
                                 <button type="button" class="btn" id="tag-cancel" >取消</button>
                                 <button  class="btn" id="tag-save">保存</button>
                             </div>
                         </form>
                     </div>
-                </dd>
-            </dl>
-
-            <!--公司简介  -->
-            <dl class="c_section">
-                <dt>
-                <h2><em></em>公司介绍</h2>
-                </dt>
-                <dd>
-                    <div id="intro-info" class="c_intro">
-                        <?php echo $model->description?>
-                        <div style="float: right">
-                            <button class="btn" id="intro-update" >修改介绍</button>
-                        </div>
-                    </div>
-                    <div id="intro-edit" class="r_box" style="display: none">
-                        <form method="post" action="<?php echo Yii::app()->baseUrl.'/mscompany/update'?>"
-                              id="intro-update-form" >
-                            <input type="text" id="MsCompany_description" value="<?php echo $model->description?>"
-                                   name="MsCompany[description]" maxlength="1000" size="60">
-                            <div style="float: right">
-                                <button type="button" class="btn" id="intro-cancel" >取消</button>
-                                <button  class="btn" id="intro-save">保存</button>
-                            </div>
-                        </form>
-                    </div>
-                </dd>
-            </dl>
+                </div>
+            </div>
         </div>
+
 </section>
 <script>
+    //菜单选中公司
+    $(".nav li.active").removeClass("active");
+    $(".nav li:eq(2)").addClass("active");
     function showEdit(){
         $("#info-show").hide();
         $("#info-edit").show();

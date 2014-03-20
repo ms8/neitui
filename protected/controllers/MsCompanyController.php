@@ -198,8 +198,7 @@ class MsCompanyController extends Controller
             //上传图片
             $msg="";
             $picCreate = new PicCreate();
-            $picPath = $picCreate->createPic('logo','upload/companylogo/'
-                ,1024*1024,array('.jpg','.jpeg','.png','gif'));
+            $picPath = $picCreate->createPic('logo','upload/companylogo/' ,1024*1024,array('.jpg','.jpeg','.png','gif'));
             if($picPath == ""){
                 $msg = "保存图片失败";
             }else{
@@ -259,8 +258,12 @@ class MsCompanyController extends Controller
                     if($picPath != ""){
                         $company->logo = $picPath;
                     }
-                    //删除之前的图片
-                    if(!$old_path == false) $picCreate->deletePic($old_path);
+                    try{
+                        //删除之前的图片
+                        if(!$old_path == false) $picCreate->deletePic($old_path);
+                    }catch(Exception $e){
+
+                    }
                 }
                 $company->save();
             }
