@@ -130,31 +130,33 @@
                         <h5>公司印象</h5>
                     </div>
                     <div id="tag-info" class="r_box">
+                        <input  id="MsCompany_tags" type="hidden" value="<?php echo $model->tags?>" />
                         <ul id="hasLabels" class="tagcloud-list">
                             <?php
                             $tags = explode(' ',$model->tags);
                             foreach($tags as $tag){
                                 ?>
-                                <li><a href="#"><?php echo $tag?></a></li>
+                                <li>
+                                    <span><?php echo $tag?></span>
+                                    <a  class="tag-remove" href="javascript:;" title="删除"><i class="icon-remove"></i></a>
+                                </li>
                             <?php
                             }
                             ?>
                         </ul>
-                        <div class="text-right" style="clear: both">
-                            <button class="btn btn-flat flat-color btn-rounded" id="tags-update" >修改标签</button>
-                        </div>
+                        <a  id="tag-add" class="tag-add" href="javascript:;"><i class="icon-plus-sign-alt"></i></a>
                     </div>
-                    <div id="tag-edit" class="r_box" style="display: none">
-                        <form method="post" action="<?php echo Yii::app()->baseUrl.'/mscompany/update'?>"
-                              id="tag-update-form" >
-                            <input type="text" id="MsCompany_tags" value="<?php echo $model->tags?>"
-                                   name="MsCompany[tags]" maxlength="500" size="60">
-                            <div class="text-right">
-                                <button type="button" class="btn btn-flat flat-color btn-rounded" id="tag-cancel" >取消</button>
-                                <button  class="btn btn-flat flat-color btn-rounded" id="tag-save">保存</button>
-                            </div>
-                        </form>
-                    </div>
+<!--                    <div id="tag-edit" class="r_box" style="display: none">-->
+<!--                        <form method="post" action="--><?php //echo Yii::app()->baseUrl.'/mscompany/update'?><!--"-->
+<!--                              id="tag-update-form" >-->
+<!--                            <input type="text" id="MsCompany_tags" value="--><?php //echo $model->tags?><!--"-->
+<!--                                   name="MsCompany[tags]" maxlength="500" size="60">-->
+<!--                            <div class="text-right">-->
+<!--                                <button type="button" class="btn btn-flat flat-color btn-rounded" id="tag-cancel" >取消</button>-->
+<!--                                <button  class="btn btn-flat flat-color btn-rounded" id="tag-save">保存</button>-->
+<!--                            </div>-->
+<!--                        </form>-->
+<!--                    </div>-->
                 </div>
             </div>
         </div>
@@ -208,10 +210,27 @@
         });
     })
 
+    //编辑公司印象
+    $('#tag-add').popover({
+        placement:"bottom",
+        html:true,
+        title:"",
+        content:'<ul class="recent-posts">' +
+               '<li> <input type="text" id="tags-new" class="form-control pad-bottom-5"' +
+            'name="MsCompany[tags]" maxlength="500" size="60" /></li>'+
+            '<li><i class="icon-quote-left icon-x pull-left icon-muted"></i>多个印象标签通过空格分开，例如：高富帅 白富美<i class="icon-quote-right icon-x pull-right icon-muted"></i></li>'+
+        '<li class="text-right">'+
+       ' <button type="button" class="btn btn-flat flat-success btn-bordered btn-rounded" id="tag-cancel" >取消</button>'+
+        '<button  class="btn btn-flat flat-success btn-bordered btn-rounded tag-save" id="tag-save">保存</button>'+
+        '</li>'+
+        '</ul>"'
+    });
+
     //菜单选中公司
     $(".nav li.active").removeClass("active");
     $(".nav li:eq(2)").addClass("active");
 
+    //职位详细信息
     $("#accordion .accordion-toggle").each(function(){
         var jobId = $(this).attr("job-id");
         var $content = $("#collapse"+jobId+" .panel-body");
@@ -233,7 +252,7 @@
         }
     })
 
-    //
+
     function showEdit(){
         $("#info-show").hide();
         $("#info-edit").show();
@@ -243,13 +262,8 @@
         $("#info-edit").hide();
     });
 
-    $("#tags-update").live('click',function(){
-        $("#tag-info").hide();
-        $("#tag-edit").show();
-    });
     $("#tag-cancel").live('click',function(){
-        $("#tag-info").show();
-        $("#tag-edit").hide();
+        $("#tag-add").popover("hide")
     });
     $("#intro-update").live('click',function(){
         $("#intro-info").hide();

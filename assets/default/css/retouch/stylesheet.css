@@ -963,13 +963,14 @@ blockquote small {
     padding-left: 0;
 }
 .tagcloud-list li {
-    border: 1px solid #ECF0F1;
+    /*border: 1px solid #ECF0F1;*/
+    border: 1px solid #e7ebec;
     float: left;
     margin-bottom: 5px;
     margin-right: 5px;
-    padding: 5px;
+    padding: 5px 14px;
 }
-.tagcloud-list li a {
+.tagcloud-list li a,.tagcloud-list li span {
     font-weight: 700;
 }
 #footer-1 .tagcloud-list li {
@@ -1684,6 +1685,27 @@ address {
     float: right;
     font-size: 16px;
     color: #2ECC71;
+    margin-left: 10px;
+}
+/*标签编辑*/
+.tagcloud-list li{
+    position: relative;
+}
+.tag-remove{
+    display: inline-block;
+    position:absolute;
+    padding: 2px;
+    font-weight: normal;
+    color: #2ECC71;
+    top: 0;
+    right:0;
+}
+.tag-add{
+    font-size: 25px;
+    color:#2ECC71 ;
+    margin-left: 10px;
+}
+.tag-save{
     margin-left: 10px;
 }
 /*内容区*/
