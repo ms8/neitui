@@ -1613,6 +1613,15 @@ address {
 .dl-horizontal.companyInfo dd{
     margin-left: 20%;
 }
+/*编辑公司基本信息*/
+.dl-horizontal.companyInfo-edit dt{
+    width: 50%;
+    margin-bottom: 10px;
+    text-align: left;
+}
+.dl-horizontal.companyInfo-edit dd{
+    margin-left: 20%;
+}
 /*公司详细页logo 描述*/
 .media-body{
     font-size: 14px;
