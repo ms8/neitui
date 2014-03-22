@@ -61,7 +61,11 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <ul class="nav navbar-nav">
+                        <?php if(Yii::app()->request->getUrl()==Yii::app()->homeUrl){?>
                         <li class="dropdown active">
+                        <?php }else{?>
+                        <li class="dropdown">
+                        <?php }?>
                             <a href="<?php echo Yii::app()->baseUrl?>">首页</a>
 <!--                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">首页</a>-->
 <!--                            <ul class="dropdown-menu">-->
@@ -290,7 +294,7 @@
                         <label for="checkbox" class="fl">
                             <input type="checkbox" class="checkbox valid" checked="checked" name="checkbox" id="checkbox">
                             我已阅读并同意
-                            <a target="_blank" href="http://www.lagou.com/privacy.html">《快入职用户协议》</a>
+                            <a target="_blank" href="<?php echo Yii::app()->createUrl('/site/privacy')?>">《快入职用户协议》</a>
                         </label>
                     </div>
                     <button class="btn btn-flat flat-color" type="button" onclick="register()">注册</button>
