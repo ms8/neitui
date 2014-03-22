@@ -29,7 +29,7 @@
                 <label for="checkbox" class="fl">
                     <input type="checkbox" class="checkbox valid" checked="checked" name="checkbox" id="checkbox">
                     我已阅读并同意
-                    <a target="_blank" href="http://www.lagou.com/privacy.html">《快入职用户协议》</a>
+                    <a target="_blank" href="<?php echo Yii::app()->createUrl('/site/privacy')?>">《快入职用户协议》</a>
                 </label>
 
             </div>

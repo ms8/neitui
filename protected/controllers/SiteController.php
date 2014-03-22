@@ -26,6 +26,10 @@ class SiteController extends Controller
 		);
 	}
 
+    public function actionPrivacy(){
+        $this->render('privacy');
+    }
+
 	public function actionIndex(){
         //取公司信息:已验证的公司
         $companys = MsCompany::model()->findAllByAttributes(array('status'=>'2'));

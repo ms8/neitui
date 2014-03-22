@@ -32,7 +32,7 @@ class MsJobsController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','maintain'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -44,6 +44,22 @@ class MsJobsController extends Controller
 			),
 		);
 	}
+
+    public function actionMaintain(){
+
+        if(!Yii::app()->user->isGuest){
+            $flag = '1';
+            $user = Member::model()->findByPk(Yii::app()->user->id);
+            $company = MsCompany::model()->findByAttributes(array('account'=>$user->username));
+            if($company!=null && $company->status != '1'){
+                $models=MsJobs::model()->findAllByAttributes(array('company_id'=>$company->id));
+                $flag = '2';  //已验证
+            }
+            $this->render('maintain',array(
+                'models'=>$models,'flag'=>$flag
+            ));
+        }
+    }
 
     public function actionJlUpload(){
         if(Yii::app()->user->isGuest){
