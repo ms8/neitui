@@ -226,8 +226,10 @@ class MsCompanyController extends Controller
             $id = Yii::app()->user->id;
             $member = Member::model()->findByPk($id);
             $model = MsCompany::model()->findByAttributes(array('account'=>$member->username));
+            $jobs = MsJobs::model()->findAllByAttributes(array('company_id'=>$model->id));
             $this->render('dashboard',array(
-                'model'=>$model
+                'model'=>$model,
+                'jobs'=>$jobs
             ));
         }else{
             //render 404页面
@@ -267,7 +269,8 @@ class MsCompanyController extends Controller
                 }
                 $company->save();
             }
-            $this->redirect(array('dashboard'));
+            die(CJSON::encode(array('status'=>0)));
+//            $this->redirect(array('dashboard'));
         }else{
             //303 没权限页面
         }

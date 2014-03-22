@@ -20,7 +20,7 @@ if ($index%4===0 && $index !=0){
                 <p>【公司介绍】 <?php echo CHtml::encode($data->description); ?></p>
                 <p>【招聘职位】 <?php echo CHtml::encode($data->description); ?></p>
             </div>
-            <p class="text-center"><a class="btn btn-flat flat-primary" href="<?php echo Yii::app()->baseUrl.'/mscompany/view/'.$data->id?>">查看详情</a></p>
+            <p class="text-center"><a class="btn btn-flat flat-color" href="<?php echo Yii::app()->baseUrl.'/mscompany/view/'.$data->id?>">查看详情</a></p>
         </div>
     </div>
 

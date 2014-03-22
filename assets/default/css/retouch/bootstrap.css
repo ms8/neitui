@@ -1282,9 +1282,9 @@ input[type="file"]:focus, input[type="radio"]:focus, input[type="checkbox"]:focu
     color: #2C3E50;
     display: block;
     font-size: 15px;
-    height: 43px;
+    height: 35px;
     line-height: 1.42857;
-    padding: 10px 15px;
+    padding: 5px 15px;
     transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
     vertical-align: middle;
     width: 100%;
