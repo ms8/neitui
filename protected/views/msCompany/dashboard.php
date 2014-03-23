@@ -164,6 +164,31 @@
 
 </section>
 <script>
+    //菜单选中公司
+    $(".nav li.active").removeClass("active");
+    $(".nav li:eq(2)").addClass("active");
+
+    //职位详细信息
+    $("#accordion .accordion-toggle").each(function(){
+        var jobId = $(this).attr("job-id");
+        var $content = $("#collapse"+jobId+" .panel-body");
+        if($content.html() == "") {
+            $.ajax({
+                type:'POST',
+                dataType:'json',
+                url:'<?php echo Yii::app()->createUrl('msjobs/view')?>'+"/"+jobId,
+                success:function(data) {
+                    var tempHtml = "<p>"+data.description+"</p>"
+                    if(data.finish == "0"){
+                        tempHtml += "<div class='text-center status'><button class='btn btn-flat flat-color btn-rounded' id='submitbt' onclick='submitjl("+jobId+")'>投简历</button></div>";
+                    }else{
+                        tempHtml += '<div class="text-center status"><button class="btn btn-default btn-rounded" type="button" disabled="disabled">该职位已投</button></div>';
+                    }
+                    $content.html(tempHtml);
+                }
+            });
+        }
+    })
     //编辑公司描述
     var um = UM.getEditor('myEditor',{
         toolbar:[
@@ -221,38 +246,68 @@
             '<li><i class="icon-quote-left icon-x pull-left icon-muted"></i>多个印象标签通过空格分开，例如：高富帅 白富美<i class="icon-quote-right icon-x pull-right icon-muted"></i></li>'+
         '<li class="text-right">'+
        ' <button type="button" class="btn btn-flat flat-success btn-bordered btn-rounded" id="tag-cancel" >取消</button>'+
-        '<button  class="btn btn-flat flat-success btn-bordered btn-rounded tag-save" id="tag-save">保存</button>'+
+        '<button  type="button" class="btn btn-flat flat-success btn-bordered btn-rounded tag-save" id="tag-save">保存</button>'+
         '</li>'+
         '</ul>"'
     });
 
-    //菜单选中公司
-    $(".nav li.active").removeClass("active");
-    $(".nav li:eq(2)").addClass("active");
-
-    //职位详细信息
-    $("#accordion .accordion-toggle").each(function(){
-        var jobId = $(this).attr("job-id");
-        var $content = $("#collapse"+jobId+" .panel-body");
-        if($content.html() == "") {
-            $.ajax({
-                type:'POST',
-                dataType:'json',
-                url:'<?php echo Yii::app()->createUrl('msjobs/view')?>'+"/"+jobId,
-                success:function(data) {
-                    var tempHtml = "<p>"+data.description+"</p>"
-                    if(data.finish == "0"){
-                        tempHtml += "<div class='text-center status'><button class='btn btn-flat flat-color btn-rounded' id='submitbt' onclick='submitjl("+jobId+")'>投简历</button></div>";
-                    }else{
-                        tempHtml += '<div class="text-center status"><button class="btn btn-default btn-rounded" type="button" disabled="disabled">该职位已投</button></div>';
-                    }
-                    $content.html(tempHtml);
-                }
-            });
+    //编辑标签
+    $("#hasLabels .tag-remove").live("click",function(){
+        var $that = $(this),
+            tags = $("#MsCompany_tags").val(),
+            removeTag = $that.prev("span").html();
+        $("#MsCompany_tags").val($.trim(tags.replace(removeTag, "")));
+        $.ajax({
+            type:'POST',
+            dataType:'json',
+            data:{MsCompany:{tags: $.trim(tags.replace(removeTag, ""))}},
+            url:"<?php echo Yii::app()->baseUrl.'/mscompany/update'?>",
+            success:function(data) {
+                $that.parent().remove();
+            }
+        });
+    });
+    $("#tag-save").live("click",function(){
+        var $that = $(this),
+            tags = $("#MsCompany_tags").val(),
+            newTags =$.trim($("#tags-new").val());
+        //如果新标签为空，隐藏弹窗口并返回
+        if($.trim(newTags) == ""){
+            $("#tag-add").popover("hide");
+            return;
         }
+        //新标签有内容继续处理
+        tags += " "+ newTags;
+        $("#MsCompany_tags").val(tags);
+        $.ajax({
+            type:'POST',
+            dataType:'json',
+            data:{MsCompany:{tags: tags}},
+            url:"<?php echo Yii::app()->baseUrl.'/mscompany/update'?>",
+            success:function(data) {
+                var tagsArr = newTags.split(" ");
+                for(var j = 0 ;j <  tagsArr.length ; j++ ){
+                       var liHtml = '<li><span>' + tagsArr[j] +'</span><a  class="tag-remove" href="javascript:;" title="删除"><i class="icon-remove"></i></a></li>'
+                    $("#hasLabels").append(liHtml);
+                }
+                $("#tag-add").popover("hide");
+            }
+        });
+    });
+    $("#tag-cancel").live("click",function(){
+        $("#tag-add").popover("hide");
+    });
+    $("body").click(function(e){
+        if($(".popover:hidden").length > 0){
+            return;
+        }
+        var target = (e.srcElement)?e.srcElement:e.target;
+        if($(target).parents('.popover-content').length == 0 && !$(target).hasClass("popover-content")
+            && !$(target).hasClass("icon-plus-sign-alt")){
+            $("#tag-add").popover("hide");
+        }
+
     })
-
-
     function showEdit(){
         $("#info-show").hide();
         $("#info-edit").show();
@@ -262,9 +317,8 @@
         $("#info-edit").hide();
     });
 
-    $("#tag-cancel").live('click',function(){
-        $("#tag-add").popover("hide")
-    });
+
+
     $("#intro-update").live('click',function(){
         $("#intro-info").hide();
         $("#intro-edit").show();
