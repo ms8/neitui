@@ -478,7 +478,7 @@ blockquote small {
     font-family: 'Montserrat',sans-serif;
     font-size: 12px;
     font-weight: 700;
-    padding: 10px 12px;
+    padding: 8px 10px;
     text-transform: uppercase;
     transition: all 0.2s ease 0s;
 }
@@ -963,13 +963,14 @@ blockquote small {
     padding-left: 0;
 }
 .tagcloud-list li {
-    border: 1px solid #ECF0F1;
+    /*border: 1px solid #ECF0F1;*/
+    border: 1px solid #e7ebec;
     float: left;
     margin-bottom: 5px;
     margin-right: 5px;
-    padding: 5px;
+    padding: 5px 14px;
 }
-.tagcloud-list li a {
+.tagcloud-list li a,.tagcloud-list li span {
     font-weight: 700;
 }
 #footer-1 .tagcloud-list li {
@@ -1614,10 +1615,20 @@ address {
     margin-left: 20%;
 }
 /*编辑公司基本信息*/
-.dl-horizontal.companyInfo-edit dt{
+.dl-horizontal.companyInfo-show dt{
     width: 50%;
     margin-bottom: 10px;
     text-align: left;
+}
+.dl-horizontal.companyInfo-show dd{
+    margin-left: 20%;
+}
+.dl-horizontal.companyInfo-edit dt{
+    width: 20%;
+    margin-bottom: 10px;
+    text-align: left;
+    height: 40px;
+    line-height: 40px;
 }
 .dl-horizontal.companyInfo-edit dd{
     margin-left: 20%;
@@ -1632,6 +1643,8 @@ address {
 .media-heading{
     margin-bottom: 20px;
 }
+/*公司编辑*/
+.intro-logo{width: 190px;height: 190px;}
 /*职位列表*/
 .job-details-list{
     list-style: none;
@@ -1653,14 +1666,48 @@ address {
 .job-details-list li:hover,.job-details-list li a:hover{
     background-color: #dde7d3;
 }
-.job-terms{
-    float:right;
+.panel-title span{
+    display: inline-block;
+}
+.job-title{
+    width:200px;
 }
 .job-city{
-    float:right;
-    margin-right: 200px;
+    /*float:right;*/
+    width:150px;
 }
-
+/*公司编辑*/
+.job-add{
+    margin-bottom: 20px;
+    padding-right: 15px;
+}
+.job-operate i{
+    float: right;
+    font-size: 16px;
+    color: #2ECC71;
+    margin-left: 10px;
+}
+/*标签编辑*/
+.tagcloud-list li{
+    position: relative;
+}
+.tag-remove{
+    display: inline-block;
+    position:absolute;
+    padding: 2px;
+    font-weight: normal;
+    color: #2ECC71;
+    top: 0;
+    right:0;
+}
+.tag-add{
+    font-size: 25px;
+    color:#2ECC71 ;
+    margin-left: 10px;
+}
+.tag-save{
+    margin-left: 10px;
+}
 /*内容区*/
 .main-wrapper{
     min-height: 600px;

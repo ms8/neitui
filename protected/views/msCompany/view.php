@@ -26,9 +26,9 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title">
                                     <a href="#collapse<?php echo $job->id?>" job-id="<?php echo $job->id?>" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle collapsed">
-                                        <span title="Java" class="pos"><?php echo $job->title?></span>
-                                        <span class="job-terms"><?php echo $job->createtime?></span>
+                                        <span class="job-title"><?php echo $job->title?></span>
                                         <span class="job-city"><?php echo $job->cityname?></span>
+                                        <span class="job-terms"><?php echo $job->createtime?></span>
                                     </a>
                                 </h4>
                             </div>
@@ -204,9 +204,9 @@
         })
 
 
-        //展开职位信息
-        $('#accordion').on('show.bs.collapse', function (options,target) {
-            var jobId = $(target).attr("job-id");
+        //职位信息
+        $("#accordion .accordion-toggle").each(function(){
+            var jobId = $(this).attr("job-id");
             var $content = $("#collapse"+jobId+" .panel-body");
             if($content.html() == "") {
                 $.ajax({
@@ -224,7 +224,8 @@
                     }
                 });
             }
-
         })
+
+
     })
 </script>
