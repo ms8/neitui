@@ -28,7 +28,7 @@ class MsCompanyController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','readJianli'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -367,4 +367,14 @@ class MsCompanyController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+    public function actionReadJianli($id){
+        $model = MsJianli::model()->findByPk($id);
+        if($model!=null){
+            $path = $model->filepath;
+            $pos = strripos($path,".");
+            $path = "/".substr($path,0,$pos).'.pdf';
+            $this->render("readJianli",array('path'=>$path));
+        }
+    }
 }
