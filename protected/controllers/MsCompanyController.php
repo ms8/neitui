@@ -227,9 +227,11 @@ class MsCompanyController extends Controller
             $member = Member::model()->findByPk($id);
             $model = MsCompany::model()->findByAttributes(array('account'=>$member->username));
             $jobs = MsJobs::model()->findAllByAttributes(array('company_id'=>$model->id));
+            $citys = MsDictionary::model()->findAllByAttributes(array('type'=>'city'));
             $this->render('dashboard',array(
                 'model'=>$model,
-                'jobs'=>$jobs
+                'jobs'=>$jobs,
+                'citys'=>$citys
             ));
         }else{
             //render 404页面

@@ -1,4 +1,7 @@
-
+<?php
+Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_PATH.'photowall.css');
+Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery.proximity.js', CClientScript::POS_BEGIN);
+?>
 
 <!-- Main Container -->
 <!--<section id="main-content">-->
@@ -33,7 +36,6 @@
                 </li>
             <?php }?>
             <li><a href="#"><img src="<?php echo Yii::app()->baseUrl.CSS_PATH?>images/thumbs/1.jpg" /><div class="pe-description"><h3>time</h3><p>Since time, and his predestinated end</p></div></a></li>
-            <li><a href="#"><img src="<?php echo Yii::app()->baseUrl.CSS_PATH?>images/thumbs/2.jpg" /><div class="pe-description"><h3>hopeful</h3><p>Abridged the circuit of his hopeful days</p></div></a></li>
             <li><a href="#"><img src="<?php echo Yii::app()->baseUrl.CSS_PATH?>images/thumbs/3.jpg" /><div class="pe-description"><h3>virtue</h3><p>Whiles both his youth and virtue did intend</p></div></a></li>
             <li><a href="#"><img src="<?php echo Yii::app()->baseUrl.CSS_PATH?>images/thumbs/4.jpg" /><div class="pe-description"><h3>endeavors</h3><p>The good endeavors of deserving praise</p></div></a></li>
             <li><a href="#"><img src="<?php echo Yii::app()->baseUrl.CSS_PATH?>images/thumbs/5.jpg" /><div class="pe-description"><h3>monument</h3><p>What memorable monument can last</p></div></a></li>
@@ -111,7 +113,6 @@
 </div>
 
 
-
 <script type="text/javascript">
     $("#login-close").live('click',function(){
         $("#loginDiv").hide();
@@ -157,7 +158,6 @@
     });
 
     $(function() {
-
         var Photo	= (function() {
 
             // list of thumbs

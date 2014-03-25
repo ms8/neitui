@@ -1,56 +1,85 @@
-<section class="page-title-wrapper" id="page-title-wrapper">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-6">
-                <h4>公司基本信息维护</h4>
+<?php
+Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_PATH.'umeditor/css/umeditor.css');
+Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umeditor/umeditor.config.js', CClientScript::POS_BEGIN);
+Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umeditor/umeditor.js', CClientScript::POS_BEGIN);
+Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umeditor/zh-cn.js', CClientScript::POS_BEGIN);
+?>
+<section id="action-box">
+    <div class="container  pad-25">
+        <?php if($model->status == '1'){ ?>
+            <div class="alert alert-danger alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>注意!</strong>
+                公司信息未验证，暂时不能发布招聘信息和阅读简历
             </div>
-            <!-- /.col-sm-6 -->
-            <div class="col-xs-6 hidden-xs">
-
-                <ol class="breadcrumb pull-right">
-                    <li><?php if($model->status == '1'){ ?>
-                            <div style="color: red;">公司信息未验证，暂时不能发布招聘信息和阅读简历</div>
-                        <?php }?></li>
-                </ol>
-            </div>
-            <!-- /.col-xs-6 -->
-        </div>
-        <!-- /.row -->
-    </div>
-    <!-- /.container -->
-</section>
-<section class="pad-25" id="action-box">
-    <div class="container">
+        <?php }?>
         <div class="row">
             <div class="col-md-9">
-                <div class="media">
-                    <a class="pull-left intro-logo" href="#">
-                        <img width="190" height="190" alt="<?php echo $model->name?>"
-                             src="<?php echo Yii::app()->baseUrl.'/'.$model->logo?>" />
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading"><?php echo $model->name?></h4>
-                        <div id="intro-info" class="c_intro">
-                            <div class="intro-des"><?php echo $model->description?></div>
-                            <div  class="text-right">
-                                <button class="btn btn-flat flat-success btn-rounded" id="intro-update" >修改介绍</button>
+                <div class="widget">
+                    <div class="media">
+                        <a class="pull-left intro-logo" href="#">
+                            <img width="190" height="190" alt="<?php echo $model->name?>"
+                                 src="<?php echo Yii::app()->baseUrl.'/'.$model->logo?>" />
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading"><?php echo $model->name?></h4>
+                            <div  class="text-right absolute-right-20">
+                                <a href="javascript:;" class="icon-operate"  id="intro-update" ><i class="icon-edit"></i></a>
                             </div>
-                        </div>
-                        <div id="intro-edit" class="r_box" style="display: none">
-                                <script type="text/plain" id="myEditor"><?php echo $model->description?></script>
-                                <div class="text-center pad-top-25">
-                                    <button type="button" class="btn btn-flat flat-success btn-bordered btn-rounded" id="intro-cancel" >取消</button>
-                                    <button  type="button" class="btn btn-flat flat-success btn-bordered btn-rounded" id="intro-save">保存</button>
-                                </div>
+                            <div id="intro-info" class="c_intro">
+                                <div class="intro-des"><?php echo $model->description?></div>
+                            </div>
+                            <div id="intro-edit" class="r_box" style="display: none">
+                                    <script type="text/plain" id="myEditor"><?php echo $model->description?></script>
+                                    <div class="text-center pad-top-25">
+                                        <button type="button" class="btn btn-flat flat-success btn-bordered btn-rounded" id="intro-cancel" >取消</button>
+                                        <button  type="button" class="btn btn-flat flat-success btn-bordered btn-rounded" id="intro-save">保存</button>
+                                    </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="post-wrapper">
-                    <div class="subpage-title">
-                        <h5>招聘职位</h5>
+                <div class="post-wrapper widget">
+                    <div>
+                        <div class="subpage-title">
+                            <h5>招聘职位</h5>
+                        </div>
+                        <div id="job-new" class="c_detail pad-bottom-25" style="display: none;">
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 control-label">职位信息：</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" name=MsJobs[title] placeholder="职位信息">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 control-label">城市：</label>
+                                    <div class="col-sm-6">
+                                        <?php foreach($citys as $city){  ?>
+                                            <label class="radio-inline">
+                                                <input type="radio"  name="city" <?php if($city->code=='beijing'){?>checked<?php }?>
+                                                       value="<?php echo $city->code?>" /><?php echo $city->name?>
+                                            </label>
+                                        <?php }?>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 control-label">职位描述：</label>
+                                    <div class="col-sm-8">
+                                        <script type="text/plain" id="MsJobs_description"></script>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <div class="text-center">
+                                <button type="button" class="btn btn-flat flat-success btn-bordered btn-rounded" id="job-cancel" >取消</button>
+                                <button type="button" class="btn btn-flat flat-success btn-bordered btn-rounded" id="job-save">保存</button>
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="text-right job-add">
-                        <button type="button" class="btn btn-flat flat-color btn-rounded" id="job-add">新增职位</button>
+                    <div class="absolute-right-20">
+                        <a href="javascript:;" class="icon-operate"  id="job-add" ><i class="icon-plus-sign-alt"></i></a>
                     </div>
                     <div id="accordion" class="panel-group">
                         <?php foreach($jobs as $job){?>
@@ -75,9 +104,12 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div>
+                <div class="widget">
                     <div class="subpage-title">
                         <h5>基本信息</h5>
+                    </div>
+                    <div class="text-right absolute-right-20">
+                        <a href="javascript:;" class="icon-operate"  id="info-update" ><i class="icon-edit"></i></a>
                     </div>
                     <div id="info-show" class="c_detail">
                         <dl class="dl-horizontal companyInfo-show">
@@ -90,13 +122,11 @@
                             <dt >地址：</dt>
                             <dd class="info-address"><?php echo $model->address?></dd>
                         </dl>
-                        <div class="text-right">
-                            <button class="btn btn-flat flat-color btn-rounded" id="info-update" onclick="showEdit()">修改信息</button>
-                        </div>
+
 
                     </div>
 
-                    <div id="info-edit" class="c_detail" style="margin-bottom: 0px;display: none;min-height: 140px;">
+                    <div id="info-edit" class="c_detail" style="display: none;">
                         <dl class="dl-horizontal companyInfo-edit">
                             <dt>logo：</dt>
                             <dd class="info-name">
@@ -119,15 +149,18 @@
                             </dd>
                         </dl>
 
-                        <div class="text-right">
+                        <div class="text-center">
                             <button type="button" class="btn btn-flat flat-success btn-bordered btn-rounded" id="info-cancel" >取消</button>
                             <button type="button" class="btn btn-flat flat-success btn-bordered btn-rounded" id="info-save">保存</button>
                         </div>
                     </div>
                 </div>
-                <div class="widget text">
+                <div class="widget text" style="position: relative">
                     <div class="subpage-title">
                         <h5>公司印象</h5>
+                    </div>
+                    <div class="absolute-right-20">
+                        <a  id="tag-add" class="icon-operate" href="javascript:;"><i class="icon-plus-sign-alt"></i></a>
                     </div>
                     <div id="tag-info" class="r_box">
                         <input  id="MsCompany_tags" type="hidden" value="<?php echo $model->tags?>" />
@@ -144,7 +177,6 @@
                             }
                             ?>
                         </ul>
-                        <a  id="tag-add" class="tag-add" href="javascript:;"><i class="icon-plus-sign-alt"></i></a>
                     </div>
 <!--                    <div id="tag-edit" class="r_box" style="display: none">-->
 <!--                        <form method="post" action="--><?php //echo Yii::app()->baseUrl.'/mscompany/update'?><!--"-->
@@ -190,6 +222,14 @@
         }
     })
     //编辑公司描述
+    $("#intro-update").click(function(){
+        $("#intro-info").hide();
+        $("#intro-edit").show();
+    })
+    $("#intro-cancel").click(function(){
+        $("#intro-info").show();
+        $("#intro-edit").hide();
+    })
     var um = UM.getEditor('myEditor',{
         toolbar:[
             'source | undo redo | bold italic underline strikethrough | superscript subscript | forecolor backcolor | removeformat |',
@@ -215,6 +255,14 @@
         });
     })
     //编辑基本信息
+    $("#info-update").click(function(){
+        $("#info-show").hide();
+        $("#info-edit").show();
+    })
+    $("#info-cancel").live('click',function(){
+        $("#info-show").show();
+        $("#info-edit").hide();
+    });
     $("#info-save").click(function(){
         var name = $("#MsCompany_name").val(),
             website = $("#MsCompany_website").val(),
@@ -236,9 +284,10 @@
     })
 
     //编辑公司印象
-    $('#tag-add').popover({
+    var popoverObj = $('#tag-add').popover({
         placement:"bottom",
         html:true,
+        container:"body",
         title:"",
         content:'<ul class="recent-posts">' +
                '<li> <input type="text" id="tags-new" class="form-control pad-bottom-5"' +
@@ -290,41 +339,88 @@
                        var liHtml = '<li><span>' + tagsArr[j] +'</span><a  class="tag-remove" href="javascript:;" title="删除"><i class="icon-remove"></i></a></li>'
                     $("#hasLabels").append(liHtml);
                 }
-                $("#tag-add").popover("hide");
+                //隐藏popover，使用hide会出现z-index值大遮住标签删除操作情况
+                var self = $("#tag-add").popover().data("bs.popover");
+                self.leave(self);
             }
         });
     });
     $("#tag-cancel").live("click",function(){
-        $("#tag-add").popover("hide");
+        //隐藏popover，使用hide会出现z-index值大遮住标签删除操作情况
+        var self = $("#tag-add").popover().data("bs.popover");
+        self.leave(self);
     });
     $("body").click(function(e){
-        if($(".popover:hidden").length > 0){
+        if($(".popover").length == 0 || $(".popover:hidden").length > 0){
             return;
         }
         var target = (e.srcElement)?e.srcElement:e.target;
         if($(target).parents('.popover-content').length == 0 && !$(target).hasClass("popover-content")
             && !$(target).hasClass("icon-plus-sign-alt")){
-            $("#tag-add").popover("hide");
+            //隐藏popover，使用hide会出现z-index值大遮住标签删除操作情况
+            var self = $("#tag-add").popover().data("bs.popover");
+            self.leave(self);
         }
 
     })
-    function showEdit(){
-        $("#info-show").hide();
-        $("#info-edit").show();
-    }
-    $("#info-cancel").live('click',function(){
-        $("#info-show").show();
-        $("#info-edit").hide();
+
+    //新增职位
+    $("#job-add").click(function(){
+        $("#job-new").show();
+        $(this).hide();
+    })
+    UM.getEditor('MsJobs_description',{
+        toolbar:[
+            'source | undo redo | bold italic underline strikethrough | superscript subscript | forecolor backcolor | removeformat |',
+            'insertorderedlist insertunorderedlist | selectall cleardoc paragraph | fontfamily fontsize' ,
+            '| justifyleft justifycenter justifyright justifyjustify |'
+        ]
+        ,initialFrameWidth:600 //初始化编辑器宽度,默认500
+        ,initialFrameHeight:200  //初始化编辑器高度,默认500
     });
+
+    $("#job-save").click(function(){
+        var title = $("#job-new input[name='MsJobs[title]']").val();
+        var citycode = $("#job-new input[name='city']").val();
+        var jobDesHtml = $("#MsJobs_description").html();
+        $.ajax({
+            type:'POST',
+            dataType:'json',
+            data:{MsJobs:{title:title,citycode:citycode,description:jobDesHtml}},
+            url:"<?php echo Yii::app()->baseUrl.'/msjobs/create'?>",
+            success:function(data) {
+                var nowTime = new Date();
+                var jobHtml = '<div class="panel panel-default">' +
+                                    '<div class="panel-heading">'+
+                                        '<h4 class="panel-title">'+
+                                            '<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" job-id="6" href="#collapse6">'+
+                                            '<span class="job-title">'+title+'</span>'+
+                                            '<span class="job-city">'+citycode+'</span>'+
+                                            '<span class="job-terms">'+nowTime+'</span>'+
+                                            '</a>'+
+                                             '<a class="job-operate" href="javascript:;"><i class="icon-edit"></i></a>'+
+                                             '<a class="job-operate" href="javascript:;"><i class="icon-trash"></i></a>'+
+                                        '</h4>'+
+                                    '</div>'+
+                                    '<div style="height: 0px;" id="collapse6" class="panel-collapse collapse">'+
+                                        '<div class="panel-body"><p>'+jobDesHtml+'</p>' +
+                                            '<div class="text-center status">' +
+                                                '<button onclick="submitjl(6)" id="submitbt" class="btn btn-flat flat-color btn-rounded">投简历</button>' +
+                                            '</div>' +
+                                        '</div>'+
+                                    '</div>'+
+                                '</div>';
+                $("#accordion").prepend(jobHtml);
+                $("#job-new").hide();
+
+            }
+        });
+    })
+    $("#job-cancel").click(function(){
+        $("#job-new").hide();
+        $("#job-add").show();
+    })
 
 
 
-    $("#intro-update").live('click',function(){
-        $("#intro-info").hide();
-        $("#intro-edit").show();
-    });
-    $("#intro-cancel").live('click',function(){
-        $("#intro-info").show();
-        $("#intro-edit").hide();
-    });
 </script>

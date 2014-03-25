@@ -1,6 +1,7 @@
 body {
-    color: #95A5A6;
-    font-family: 'Open Sans',sans-serif;
+    /*color: #95A5A6;*/
+    color: #8b9a9b;
+    font-family: '宋体',sans-serif;
     font-size: 12px;
 }
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
@@ -604,14 +605,14 @@ blockquote small {
     font-size: 14px;
 }
 .sidebar .subpage-title h5 {
-    font-size: 15px;
+    font-size: 16px;
 }
 .subpage-title h5:before, .subpage-title h5:after {
     background-color: #ECF0F1;
     bottom: 12px;
     content: "";
     display: inline-block;
-    height: 1px;
+    height: 0;
     left: 20px;
     margin: 0 -200% 0 0;
     position: relative;
@@ -1285,8 +1286,9 @@ blockquote small {
     top: 8px;
 }
 .widget {
-    overflow: hidden;
-    padding: 25px 0;
+    /*overflow: hidden;*/
+    position: relative;
+    padding: 25px 0 0 0 ;
 }
 .widget p:last-child {
     margin-bottom: 0;
@@ -1645,6 +1647,11 @@ address {
 }
 /*公司编辑*/
 .intro-logo{width: 190px;height: 190px;}
+.absolute-right-20{
+    position: absolute;
+    top:20px;
+    right:20px;
+}
 /*职位列表*/
 .job-details-list{
     list-style: none;
@@ -1673,7 +1680,6 @@ address {
     width:200px;
 }
 .job-city{
-    /*float:right;*/
     width:150px;
 }
 /*公司编辑*/
@@ -1700,7 +1706,7 @@ address {
     top: 0;
     right:0;
 }
-.tag-add{
+.icon-operate{
     font-size: 25px;
     color:#2ECC71 ;
     margin-left: 10px;
@@ -1711,4 +1717,11 @@ address {
 /*内容区*/
 .main-wrapper{
     min-height: 600px;
+}
+.c_detail{
+    position: relative;
+    min-height: 130px;
+}
+.companyInfo{
+    min-height: 140px;
 }

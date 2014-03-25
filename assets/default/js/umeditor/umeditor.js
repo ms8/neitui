@@ -9770,6 +9770,12 @@ UM.ui.define('separator', {
                 $span.insertAfter($container);
             }
             //初始化注册的ui组件
+            delete _editorUI["formula"];
+            delete _editorUI["link"];
+            delete _editorUI["video"];
+            delete _editorUI["image"];
+            delete _editorUI["emotion"];
+            delete _editorUI["map"];
             $.each(_editorUI,function(n,v){
                 var widget = v.call(editor,n);
                 if(widget){
