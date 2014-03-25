@@ -24,7 +24,7 @@
                             </a>
                         </td>
                         <td>
-                            <a href="<?php echo Yii::app()->createUrl('kongjian/jianlidownload',array('id'=>$jobinfo['jianliid'])); ?>">
+                            <a target="_blank" href="<?php echo Yii::app()->createUrl('mscompany/readjianli',array('id'=>$jobinfo['jianliid'])); ?>">
                                 <?php  echo $jobinfo['jianliname'] ?>
                             </a>
                         </td>

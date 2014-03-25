@@ -3,6 +3,16 @@
         <div class="alert alert-success alert-dismissable">
             <strong>已投递的职位</strong>
         </div>
+
+        <form id="uploadForm" class="login" method="post" enctype="multipart/form-data"
+              action="<?php echo Yii::app()->baseUrl.'/kongjian/jianli'?>">
+            <label for="inputPassword3" class="col-sm-1 control-label">简历:</label>
+            <div class="col-sm-6">
+                <input type="file" name="jianlifile" class=" class="form-control">
+            </div>
+            <button id="jianliSubmit" class="btn btn-danger"  type="submit">上传简历</button>
+        </form>
+
         <div class="action-box">
                 <table class="table">
                     <thead>
