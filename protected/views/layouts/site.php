@@ -39,7 +39,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a href="<?php echo Yii::app()->baseUrl?>" class="navbar-brand"><span>快</span>入职</a>
+                    <a href="<?php echo Yii::app()->baseUrl?>" class="navbar-brand">快<span>入职</span></a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -220,25 +220,35 @@
                 <h4 class="modal-title">登录</h4>
             </div>
             <div class="modal-body">
-                <form role="form" method="post" action="<?php echo Yii::app()->createUrl('site/login')?>" class="login-form" >
+                <form role="form" method="post" action="<?php echo Yii::app()->createUrl('site/login')?>" class="form-horizontal" >
                     <div class="form-group">
-                        <label >用户名</label>
-                        <input type="text" required="" placeholder="用户名"  id="username" class="form-control">
-
+                        <label for="username" class="col-sm-2 control-label">用户名:</label>
+                        <div class="col-sm-9">
+                            <input type="text" required="" placeholder="用户名"  id="username" class="form-control"/>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label >密码</label>
-                        <input type="password" required=""  placeholder="密码" id="password" class="form-control">
+                        <label for="password" class="col-sm-2 control-label">密码:</label>
+                        <div class="col-sm-9">
+                            <input type="password" required=""  placeholder="密码" id="password" class="form-control"/>
+                        </div>
                         <span id="errMsg" style="display:none;color: red"></span>
                     </div>
                     <div class="form-group">
-                        <label for="remember">
-                            <input type="checkbox" name="autoLogin" checked="checked" id="remember">
-                            记住我
-                        </label>
-                        <a target="_blank"  href="<?php echo Yii::app()->request->hostInfo.Yii::app()->homeUrl.'/site/forgetpassword'?>">忘记密码？</a>
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="autoLogin" checked="checked" id="remember"/> 记住我
+                                </label>
+                                <a target="_blank"  href="<?php echo Yii::app()->request->hostInfo.Yii::app()->homeUrl.'/site/forgetpassword'?>">忘记密码？</a>
+                            </div>
+                        </div>
                     </div>
-                    <button class="btn btn-flat flat-color" type="button" onclick="login()">登录</button>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button class="btn btn-flat flat-color col-sm-3" type="button" onclick="login()">登录</button>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div><!-- /.modal-content -->
@@ -255,32 +265,49 @@
                 <h4 class="modal-title">注册用户</h4>
             </div>
             <div class="modal-body">
-                <form role="form" method="post" action="<?php echo Yii::app()->createUrl('site/login')?>" class="login-form" >
-                    <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-flat flat-success btn-bordered">
-                            <input type="radio" value="1" name="type" id="type1"> 应聘者
-                        </label>
-                        <label class="btn btn-flat flat-success btn-bordered">
-                            <input type="radio" value="2" name="type" id="type2"> 企业
-                        </label>
+                <form role="form" method="post" action="<?php echo Yii::app()->createUrl('site/login')?>"  class="form-horizontal" >
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">角色:</label>
+                        <div class="col-sm-10">
+                            <div class="btn-group" data-toggle="buttons">
+                                <label class="btn btn-flat flat-success btn-bordered">
+                                    <input type="radio" value="1" name="type" id="type1"> 应聘者
+                                </label>
+                                <label class="btn btn-flat flat-success btn-bordered">
+                                    <input type="radio" value="2" name="type" id="type2"> 企业
+                                </label>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label >用户名</label>
-                        <input type="text" required="" onblur="checkUser(this)" placeholder="请输入邮箱地址"  id="email" class="form-control">
+                        <label class="col-sm-2 control-label">用户名:</label>
+                        <div class="col-sm-9">
+                            <input type="text" required="" onblur="checkUser(this)" placeholder="请输入邮箱地址"  id="email" class="form-control" />
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label >密码</label>
-                        <input type="password" required=""  placeholder="密码" id="rpassword" class="form-control">
+                        <label class="col-sm-2 control-label">密码:</label>
+                        <div class="col-sm-9">
+                             <input type="password" required=""  placeholder="密码" id="rpassword" class="form-control"/>
+                        </div>
                         <span id="errRegMsg" style="display:none;color: red"></span>
                     </div>
                     <div class="form-group">
-                        <label for="checkbox" class="fl">
-                            <input type="checkbox" class="checkbox valid" checked="checked" name="checkbox" id="checkbox">
-                            我已阅读并同意
-                            <a target="_blank" href="<?php echo Yii::app()->createUrl('/site/privacy')?>">《快入职用户协议》</a>
-                        </label>
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" class="checkbox valid" checked="checked" name="checkbox" id="checkbox"/>
+                                    我已阅读并同意
+                                </label>
+                                <a target="_blank" href="<?php echo Yii::app()->createUrl('/site/privacy')?>">《快入职用户协议》</a>
+                            </div>
+                        </div>
                     </div>
-                    <button class="btn btn-flat flat-color" type="button" onclick="register()">注册</button>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button class="btn btn-flat flat-color col-sm-3" type="button" onclick="register()">注册</button>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div><!-- /.modal-content -->

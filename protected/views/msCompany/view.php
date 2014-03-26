@@ -5,7 +5,7 @@
                 <div class="widget">
                     <div class="media">
                         <a href="#" class="pull-left">
-                            <img alt="<?php echo $model->name?>"  class="media-object" style="width: 190px; height: 190px;" src="<?php echo Yii::app()->baseUrl.'/'.$model->logo?>">
+                            <img alt="<?php echo $model->name?>"  class="media-object img-thumbnail" style="width: 190px; height: 190px;" src="<?php echo Yii::app()->baseUrl.'/'.$model->logo?>">
                         </a>
                         <div class="media-body">
                             <h4 class="media-heading"><?php echo $model->name?></h4>
