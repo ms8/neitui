@@ -30,6 +30,11 @@ class KongjianController extends Controller
 //		return $res;
 	}
 
+    public function actionViewInfo($id){
+        $model = MsStudents::model()->findByAttributes(array('mid'=>$id));
+        $this->render("view",array('model'=>$model));
+    }
+
 	public function init(){
 		Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery-1.7.1.min.js');
 		Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery.form.js');

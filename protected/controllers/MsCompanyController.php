@@ -100,8 +100,14 @@ class MsCompanyController extends Controller
                 $jobinfo['jobid']=$jianli->job_id;
                 $jobinfo['title']=$job->title;
                 $jobinfo['jianliid']=$jianli->jianli_id;
+                $path = $jianliinfo->filepath;
+                $pos = strripos($path,".");
+                $path = "/".substr($path,0,$pos).'.pdf';
+                $jobinfo['path']=$path;
                 $jobinfo['jianliname']=$jianliinfo->name;
-//                $jobinfo['memberid']=$jianli->member_id;
+                $jobinfo['memberid']=$jianliinfo->userId;
+                $member = Member::model()->findByPk($jianliinfo->userId);
+                $jobinfo['username']=$member->username;
                 $jobinfo['createtime']=$jianli->createtime;
                 $jobinfos[]=$jobinfo;
             }
