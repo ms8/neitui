@@ -1740,7 +1740,6 @@ address {
 }
 .radioTag span .myLabel{
     border: 2px solid #DCE4EC;
-    border-radius: 4px !important;
     color: #8B9A9B !important;
 }
 .radioTag span input[type="radio"]{
@@ -1748,7 +1747,6 @@ address {
 }
 /*选择其相邻的兄弟元素*/
 .radioTag span input[type="radio"]:checked + label{
-    border-radius: 4px !important;
     border-color: #2ECC71;
     color: #ffffff !important;
     background-color: #2ECC71;
