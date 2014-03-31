@@ -38,9 +38,10 @@
 
             <div class="form-group">
                 <?php echo $form->labelEx($model,'universitytype',array('class'=>'col-sm-2 control-label')); ?>
-                <div style="margin-top:7px">
+                <div class="radioTag" >
                     <?php echo $form->radioButtonList($model,'universitytype',$uniarr,
-                        array('separator'=>'&nbsp;','labelOptions'=>array('class'=>'')) )?>
+                        array('separator'=>'&nbsp;',
+                            'labelOptions'=>array('class'=>'btn btn-flat flat-success btn-bordered myLabel')) )?>
                 </div>
             </div>
 
@@ -55,25 +56,28 @@
 
             <div class="form-group">
                 <?php echo $form->labelEx($model,'degree',array('class'=>'col-sm-2 control-label')); ?>
-                <div style="margin-top:7px">
+                <div class="radioTag">
                 <?php echo $form->radioButtonList($model,'degree',$degreearr,
-                    array('separator'=>'&nbsp;','labelOptions'=>array()) )?>
+                    array('separator'=>'&nbsp;',
+                        'labelOptions'=>array('class'=>'btn btn-flat flat-success btn-bordered myLabel')) )?>
                 </div>
             </div>
 
             <div class="form-group">
                 <?php echo $form->labelEx($model,'jianglitype',array('class'=>'col-sm-2 control-label')); ?>
-                <div style="margin-top:7px">
+                <div class="radioTag">
                 <?php echo $form->radioButtonList($model,'jianglitype',$jiangliarr,
-                    array('separator'=>'&nbsp;','labelOptions'=>array('class'=>'radiolabel')) )?>
+                    array('separator'=>'&nbsp;',
+                        'labelOptions'=>array('class'=>'btn btn-flat flat-success btn-bordered myLabel')) )?>
                 </div>
             </div>
 
             <div class="form-group">
                 <?php echo $form->labelEx($model,'sex',array('class'=>'col-sm-2 control-label')); ?>
-                <div style="margin-top:7px">
+                <div class="radioTag">
                 <?php echo $form->radioButtonList($model,'sex', array('1'=>'男','0'=>'女'),
-                    array('separator'=>'&nbsp;','labelOptions'=>array('class'=>'radiolabel')) )?>
+                    array('separator'=>'&nbsp;',
+                        'labelOptions'=>array('class'=>'btn btn-flat flat-success btn-bordered myLabel')) )?>
                 </div>
             </div>
 
@@ -94,9 +98,10 @@
 
             <div class="form-group">
                 <?php echo $form->labelEx($model,'hasoffer',array('class'=>'col-sm-2 control-label')); ?>
-                <div style="margin-top:7px">
+                <div class="radioTag">
                 <?php echo $form->radioButtonList($model,'hasoffer', array('1'=>'是','0'=>'否'),
-                    array('separator'=>'&nbsp;','labelOptions'=>array('class'=>'radiolabel')) )?>
+                    array('separator'=>'&nbsp;',
+                        'labelOptions'=>array('class'=>'btn btn-flat flat-success btn-bordered myLabel')) )?>
                 </div>
             </div>
 
