@@ -104,9 +104,9 @@ class MsStudents extends CActiveRecord
             'universityname' => '学校名称：',
             'jianglitype' => '曾获奖励：',
             'jiangliname' => 'Jiangliname',
-            'projects' => '项目经验',
-            'peixun' => '培训经历',
-            'skill' => '你的技能特长',
+            'projects' => '项目经验：',
+            'peixun' => '培训经历：',
+            'skill' => '你的技能特长：',
 			'createtime' => 'Createtime',
 			'updatetime' => 'Updatetime',
 		);

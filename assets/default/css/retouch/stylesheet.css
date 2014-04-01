@@ -1751,3 +1751,38 @@ address {
     color: #ffffff !important;
     background-color: #2ECC71;
 }
+
+#base .form-control{
+    width: 50%;
+}
+#baseForm{
+    padding:0 50px;
+}
+#base .col-sm-10{
+    padding-left: 0;
+}
+#school .col-sm-10{
+    padding-left: 30px;
+    width: 56%;
+}
+#projects .col-sm-10{
+    padding-left: 0;
+}
+#infoType{
+    height: 70px;
+}
+#infoType li {
+    margin-right: 20px;
+}
+#infoType .active a{
+    color: #ffffff;
+}
+#infoType li a{
+    height: 60px;
+    width: 200px;
+    border: 1px solid #2ECC71;
+    line-height: 40px;
+    padding-left: 65px;
+    font-size: 17px;
+    color: #2ECC71;
+}

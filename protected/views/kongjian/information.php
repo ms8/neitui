@@ -4,6 +4,16 @@
 <!--            <strong>信息维护</strong>-->
 <!--            &nbsp;&nbsp;完善你的信息，让公司全都找到你~-->
 <!--        </div>-->
+
+        <?php
+        $form=$this->beginWidget('CActiveForm', array(
+            'id'=>'baseForm',
+            'enableAjaxValidation'=>false,
+            'action'=>Yii::app()->createUrl("/kongjian/information"),
+            'htmlOptions'=>array('class'=>'form-horizontal')
+        ));
+        ?>
+
         <ul id="infoType" class="portfolio-filter nav nav-pills" style="padding:0px">
             <li class="active">
                 <a data-filter="base" href="#">基本信息</a>
@@ -14,20 +24,13 @@
             <li>
                 <a data-filter="projects" href="#">项目经历</a>
             </li>
+            <li>
+                <input type="submit" value="保存" name="yt0" class="btn btn-flat flat-color"
+                       style="margin:10px -20px 0 140px;font-size:15px;width:80px;height:40px" >
+            </li>
         </ul>
 
-        <div class="action-box" id="base" style="min-height: 500px;">
-            <?php
-            $form=$this->beginWidget('CActiveForm', array(
-                'id'=>'baseForm',
-                'enableAjaxValidation'=>false,
-                'action'=>Yii::app()->createUrl("/kongjian/information"),
-                'htmlOptions'=>array('class'=>'form-horizontal')
-            ));
-            ?>
-
-            <?php echo $form->errorSummary($model); ?>
-
+        <div class="action-box" id="base" style="min-height: 350px;padding: 20px;">
             <div class="form-group">
                 <?php echo $form->labelEx($model,'realname',array('class'=>'col-sm-2 control-label')); ?>
                 <div class="col-sm-10">
@@ -58,7 +61,7 @@
 
             <div class="form-group">
                 <?php echo $form->labelEx($model,'skill',array('class'=>'col-sm-2 control-label')); ?>
-                <?php echo $form->textArea($model,'skill',array('rows'=>7, 'cols'=>70,'style'=>'width:81%','class'=>'form-control')); ?>
+                <?php echo $form->textArea($model,'skill',array('rows'=>4, 'cols'=>70,'style'=>'width:81%;margin-left:145px','class'=>'form-control')); ?>
             </div>
 
             <div class="form-group">
@@ -71,7 +74,7 @@
             </div>
         </div>
 
-        <div class="action-box" id="school" style="display: none;min-height: 300px;">
+        <div class="action-box" id="school" style="display: none;min-height: 350px;">
             <div class="form-group">
                 <?php echo $form->labelEx($model,'universitytype',array('class'=>'col-sm-2 control-label')); ?>
                 <div class="radioTag" >
@@ -109,23 +112,23 @@
             </div>
         </div>
 
-        <div class="action-box" id="projects" style="display: none;min-height: 510px;">
+        <div class="action-box" id="projects" style="display: none;min-height: 350px;">
             <div class="form-group">
                 <?php echo $form->labelEx($model,'projects',array('class'=>'col-sm-2 control-label')); ?>
-                <?php echo $form->textArea($model,'projects',array('rows'=>7, 'cols'=>70,'style'=>'width:81%','class'=>'form-control')); ?>
+                <?php echo $form->textArea($model,'projects',array('rows'=>5, 'cols'=>80,'style'=>'width:81%','class'=>'form-control')); ?>
             </div>
 
             <div class="form-group">
                 <?php echo $form->labelEx($model,'peixun',array('class'=>'col-sm-2 control-label')); ?>
-                <?php echo $form->textArea($model,'peixun',array('rows'=>7, 'cols'=>70,'style'=>'width:81%','class'=>'form-control')); ?>
+                <?php echo $form->textArea($model,'peixun',array('rows'=>5, 'cols'=>80,'style'=>'width:81%','class'=>'form-control')); ?>
             </div>
 
         </div>
 
-        <div class="form-group">
-            <input type="submit" value="保存" name="yt0" class="btn btn-flat flat-color"
-                   style="margin:-50px 0 0 695px;font-size:15px;width:80px;height:50px" >
-        </div>
+<!--        <div class="form-group">-->
+<!--            <input type="submit" value="保存" name="yt0" class="btn btn-flat flat-color"-->
+<!--                   style="margin:0px 0 0 695px;font-size:15px;width:80px;height:50px" >-->
+<!--        </div>-->
 
         <?php $this->endWidget(); ?>
     </div>
