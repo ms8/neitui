@@ -7,9 +7,9 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th style="width: 30%">公司</th>
-                    <th style="width: 30%">职位</th>
-                    <th style="width: 30%">投递时间</th>
+                    <th style="width: 40%">公司</th>
+                    <th style="width: 40%">职位</th>
+                    <th style="width: 20%">投递时间</th>
                 </tr>
                 </thead>
 
