@@ -205,26 +205,24 @@
 
 
         //职位信息
-        $("#accordion .accordion-toggle").each(function(){
-            var jobId = $(this).attr("job-id");
-            var $content = $("#collapse"+jobId+" .panel-body");
-            if($content.html() == "") {
-                $.ajax({
-                    type:'POST',
-                    dataType:'json',
-                    url:'<?php echo Yii::app()->createUrl('msjobs/view')?>'+"/"+jobId,
-                    success:function(data) {
-                        var tempHtml = "<p>"+data.description+"</p>"
-                        if(data.finish == "0"){
-                            tempHtml += "<div class='text-center status'><button class='btn btn-flat flat-color' id='submitbt' onclick='submitjl("+jobId+")'>投简历</button></div>";
-                        }else{
-                            tempHtml += '<div class="text-center status"><button class="btn btn-default" type="button" disabled="disabled">该职位已投</button></div>';
-                        }
-                        $content.html(tempHtml);
+        $.ajax({
+            type:'POST',
+            dataType:'json',
+            url:'<?php echo Yii::app()->createUrl("msjobs/view")."/".$model->id?>',
+            success:function(data) {
+                for(var i = 0; i < data.length; i++){
+                    var $content = $("#collapse"+data[i].job.id+" .panel-body");
+                    var tempHtml = "<p>"+data[i].job.description+"</p>"
+                    if(data[i].status == "0"){
+                        tempHtml += "<div class='text-center status'><button class='btn btn-flat flat-color' id='submitbt' onclick='submitjl("+data[i].job.id+")'>投简历</button></div>";
+                    }else{
+                        tempHtml += '<div class="text-center status"><button class="btn btn-default" type="button" disabled="disabled">该职位已投</button></div>';
                     }
-                });
+                    $content.html(tempHtml);
+
+                }
             }
-        })
+        });
 
 
     })

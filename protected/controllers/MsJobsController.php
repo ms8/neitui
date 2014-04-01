@@ -118,27 +118,23 @@ class MsJobsController extends Controller
 	 */
 	public function actionView($id)
 	{
-        $job = $this->loadModel($id);
-        $company = MsCompany::model()->findByPk($job->company_id);
-        //该职位是否投过简历
-        $finish = '0';
-        if(!Yii::app()->user->isGuest){ //查看该职位是否投过简历
-            $app = MsApplication::model()->findByAttributes(array('member_id'=>Yii::app()->user->id,
-            'job_id'=>$id,'company_id'=>$job->company_id));
-            if($app != null){
-                $finish = '1';
+        $jobs = MsJobs::model()->findAllByAttributes(array('company_id'=>$id));
+
+        $temAll = array();
+        foreach($jobs as $job){
+            //该职位是否投过简历
+            $finish = '0';
+            if(!Yii::app()->user->isGuest){ //查看该职位是否投过简历
+                $app = MsApplication::model()->findByAttributes(array('member_id'=>Yii::app()->user->id,
+                    'job_id'=>$job->id,'company_id'=>$id));
+                if($app != null){
+                    $finish = '1';
+                }
             }
+            array_push($temAll,array("job"=>$job,"status"=>$finish));
         }
 
-//		$this->render('view',array(
-//			'model'=>$job,
-//            'company'=>$company,
-//            'finish'=>$finish
-//		));
-        echo json_encode(array(
-            'description'=>$job->description,
-            'finish'=>$finish
-        ));
+        die(CJSON::encode($temAll));
 	}
 
 	/**
@@ -163,7 +159,8 @@ class MsJobsController extends Controller
             $company = MsCompany::model()->findByAttributes(array('account'=>$member->username));
             $model->company_id = $company->id;
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+                die(CJSON::encode($model));
+//				$this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('create',array(
@@ -186,8 +183,11 @@ class MsJobsController extends Controller
 		if(isset($_POST['MsJobs']))
 		{
 			$model->attributes=$_POST['MsJobs'];
+            $city = MsDictionary::model()->findByAttributes(array('code'=>$model->citycode));
+            $model->cityname = $city->name;
+            $model->createtime = date("Y-m-d H:i:s");
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+                die(CJSON::encode($model));
 		}
 
 		$this->render('update',array(
