@@ -1755,14 +1755,14 @@ address {
 #base .form-control{
     width: 50%;
 }
-#baseForm{
-    padding:0 50px;
-}
+/*#baseForm{*/
+    /*padding:0 50px;*/
+/*}*/
 #base .col-sm-10{
     padding-left: 0;
 }
 #school .col-sm-10{
-    padding-left: 30px;
+    padding-left: 15px;
     width: 56%;
 }
 #projects .col-sm-10{

@@ -1,15 +1,15 @@
 <section class="pad-25" id="action-box">
     <div class="container">
-        <div class="alert alert-success alert-dismissable">
+        <div class="alert">
             <strong>已投递的职位</strong>
         </div>
         <div class="action-box">
             <table class="table">
                 <thead>
                 <tr>
-                    <th style="width: 30%">公司</th>
-                    <th style="width: 30%">职位</th>
-                    <th style="width: 30%">投递时间</th>
+                    <th style="width: 40%">公司</th>
+                    <th style="width: 40%">职位</th>
+                    <th style="width: 20%">投递时间</th>
                 </tr>
                 </thead>
 

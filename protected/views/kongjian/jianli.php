@@ -1,29 +1,49 @@
 <section class="pad-25" id="action-box">
     <div class="container">
-        <div class="alert alert-success alert-dismissable">
-            <strong>已投递的职位</strong>
+<!--        <div class="alert">-->
+<!--            <strong>简历管理</strong>-->
+<!--        </div>-->
+
+        <ul id="infoType" class="portfolio-filter nav nav-pills" style="padding:0px;margin-bottom:15px">
+            <li class="active">
+                <a data-filter="manage" href="#">简历管理</a>
+            </li>
+            <li>
+                <a data-filter="upload" href="#">上传简历</a>
+            </li>
+        </ul>
+
+        <div id="upload"  style="display: none">
+            <div class="action-box">
+                <form id="uploadForm" class="login" method="post" enctype="multipart/form-data"
+                      action="<?php echo Yii::app()->baseUrl.'/kongjian/jianli'?>">
+                    <input id="lefile" type="file"  name="jianlifile" style="display:none">
+                    <div class="input-group" style="width:60%;float: left">
+                        <input id="photoCover" class="form-control" type="text" >
+                    <span class="input-group-addon" onclick="$('input[id=lefile]').click();">
+                        选择简历
+                    </span>
+                    </div>
+                    <div style="float: left;margin:2px 100px">
+                        <button id="jianliSubmit" class="btn btn-flat flat-color"  type="submit">上传简历</button>
+                    </div>
+                    <div style="clear: both;"></div>
+                </form>
+            </div>
         </div>
 
-        <form id="uploadForm" class="login" method="post" enctype="multipart/form-data"
-              action="<?php echo Yii::app()->baseUrl.'/kongjian/jianli'?>">
-            <label for="inputPassword3" class="col-sm-1 control-label">简历:</label>
-            <div class="col-sm-6">
-                <input type="file" name="jianlifile" class=" class="form-control">
-            </div>
-            <button id="jianliSubmit" class="btn btn-danger"  type="submit">上传简历</button>
-        </form>
-
-        <div class="action-box">
+        <div id="manage" >
+            <div class="action-box">
+                    <?php if($jianlis != null && count($jianlis)>0){ ?>
                 <table class="table">
                     <thead>
-                        <tr>
-                            <th>简历</th>
-                            <th>修改时间</th>
-                            <th>操作</th>
-                        </tr>
+                    <tr>
+                        <th>简历</th>
+                        <th>修改时间</th>
+                        <th>操作</th>
+                    </tr>
                     </thead>
                     <tbody>
-                    <?php if($jianlis != null && count($jianlis)>0){ ?>
                         <?php foreach ($jianlis as $key => $value) {?>
                             <tr>
                                 <td>
@@ -44,14 +64,15 @@
                         <?php } ?>
                     <?php }else{ ?>
                         <div class="top3">
-                            你还没上传简历哦~速度上传简历吧，可以上传word格式文档
-                            <br>或者avi,mpeg1,mpeg2,mpeg4,wmv,mp4格式的视频文件简介
-                            <br>~我们免费帮您投递~
+                            你还没上传简历哦~速度上传简历吧~，众多名企在等你~
                         </div>
                     <?php }?>
                     </tbody>
                 </table>
+            </div>
         </div>
+
+
     </div>
 </section>
 
@@ -105,8 +126,8 @@
 <script>
     $(function(){
         //菜单选中个人中心
-        $(".nav li.active").removeClass("active");
-        $(".nav li:eq(2)").addClass("active");
+        $("#header .nav li.active").removeClass("active");
+        $("#header .nav li:eq(2)").addClass("active");
     })
     function deleteJianli(imgObj){
         var id = $(imgObj).attr('id');
@@ -147,4 +168,22 @@
             }
         });
     }
+
+    $('input[id=lefile]').change(function() {
+        $('#photoCover').val($(this).val());
+    });
+
+    $(function(){
+        $('.portfolio-filter a').click(function () {
+            $("#infoType  li.active").removeClass("active");
+            $(this).parent().attr("class",'active');
+            var selector = $(this).attr('data-filter');
+            $("#manage").hide();
+            $("#upload").hide();
+            $("#"+selector).show();
+            return false;
+        });
+    });
+
+
 </script>
