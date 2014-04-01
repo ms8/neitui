@@ -32,7 +32,7 @@ class MsJobsController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','maintain'),
+				'actions'=>array('create','update','maintain','delete'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -203,10 +203,13 @@ class MsJobsController extends Controller
 	public function actionDelete($id)
 	{
 		$this->loadModel($id)->delete();
-
+        die(CJSON::encode("{status:1}"));
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+//		if(!isset($_GET['ajax'])){
+//            $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+//        }else{
+//            die(CJSON::encode("{status:1}"));
+//        }
 	}
 
 	/**

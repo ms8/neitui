@@ -1786,3 +1786,12 @@ address {
     font-size: 17px;
     color: #2ECC71;
 }
+/*操作按钮*/
+.operate button{
+    margin-right: 10px;
+}
+/*基本信息列表*/
+.info-name,.info-home,.info-address{
+    display: inline-block;
+    margin-left: -25px;
+}

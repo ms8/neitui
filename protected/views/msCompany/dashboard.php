@@ -23,18 +23,8 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umedit
                         </a>
                         <div class="media-body">
                             <h4 class="media-heading"><?php echo $model->name?></h4>
-                            <div  class="text-right absolute-right-20">
-                                <a href="javascript:;" class="icon-operate"  id="intro-update" ><i class="icon-edit"></i></a>
-                            </div>
                             <div id="intro-info" class="c_intro">
                                 <div class="intro-des"><?php echo $model->description?></div>
-                            </div>
-                            <div id="intro-edit" class="r_box" style="display: none">
-                                    <script type="text/plain" id="myEditor"><?php echo $model->description?></script>
-                                    <div class="text-center pad-top-25">
-                                        <button type="button" class="btn btn-flat flat-success btn-bordered btn-rounded" id="intro-cancel" >取消</button>
-                                        <button  type="button" class="btn btn-flat flat-success btn-bordered btn-rounded" id="intro-save">保存</button>
-                                    </div>
                             </div>
                         </div>
                     </div>
@@ -44,37 +34,49 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umedit
                         <div class="subpage-title">
                             <h5>招聘职位</h5>
                         </div>
-                        <div id="job-new" class="c_detail pad-bottom-25" style="display: none;">
-                            <form class="form-horizontal" role="form">
-                                <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-2 control-label">职位信息：</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" class="form-control" name=MsJobs[title] placeholder="职位信息">
+<!--                        <div id="job-new" class="c_detail pad-bottom-25" style="display: none">-->
+                        <div class="modal fade" id="job-new" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog"  style="width:750px">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title" id="myModalLabel">新增职位</h4>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-2 control-label">城市：</label>
-                                    <div class="col-sm-6">
-                                        <?php foreach($citys as $city){  ?>
-                                            <label class="radio-inline">
-                                                <input type="radio"  name="city" <?php if($city->code=='beijing'){?>checked<?php }?>
-                                                       value="<?php echo $city->code?>" /><?php echo $city->name?>
-                                            </label>
-                                        <?php }?>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-2 control-label">职位描述：</label>
-                                    <div class="col-sm-8">
-                                        <script type="text/plain" id="MsJobs_description"></script>
-                                    </div>
-                                </div>
-                            </form>
+                                    <div class="modal-body">
+                                        <form class="form-horizontal" role="form">
+                                            <div class="form-group">
+                                                <label for="inputEmail3" class="col-sm-2 control-label">职位信息：</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control" name=MsJobs[title] placeholder="职位信息">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputEmail3" class="col-sm-2 control-label">城市：</label>
+                                                <div class="col-sm-8">
+                                                    <?php foreach($citys as $city){  ?>
+                                                        <label class="radio-inline">
+                                                            <input type="radio"  name="city" <?php if($city->code=='beijing'){?>checked<?php }?> value="<?php echo $city->code?>" />
+                                                            <?php echo $city->name ?>
+                                                        </label>
+                                                    <?php }?>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputEmail3" class="col-sm-2 control-label">职位描述：</label>
+                                                <div class="col-sm-8">
+                                                    <script type='text/plain' id='MsJobs_description'></script>
+                                                </div>
+                                            </div>
+                                        </form>
 
-                            <div class="text-center operate">
-                                <button type="button" class="btn btn-flat flat-success btn-bordered btn-rounded" id="job-cancel" >取消</button>
-                                <button type="button" class="btn btn-flat flat-success btn-bordered btn-rounded" id="job-save">保存</button>
-                            </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" id="job-cancel" class="btn btn-flat flat-success btn-bordered btn-rounded" data-dismiss="modal">取消</button>
+                                        <button type="button"  id="job-save" class="btn btn-flat flat-success btn-bordered btn-rounded">保存</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+
                         </div>
 
                     </div>
@@ -113,48 +115,83 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umedit
                         <a href="javascript:;" class="icon-operate"  id="info-update" ><i class="icon-edit"></i></a>
                     </div>
                     <div id="info-show" class="c_detail">
-                        <dl class="dl-horizontal companyInfo-show">
-                            <dt>公司名称：</dt>
-                            <dd class="info-name"><?php echo $model->name?></dd>
-                            <dt>主页：</dt>
-                            <dd class="info-home"><a href="<?php echo $model->website?>" target="_blank">
-                                    <?php echo $model->website?>
-                                </a></dd>
-                            <dt >地址：</dt>
-                            <dd class="info-address"><?php echo $model->address?></dd>
-                        </dl>
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-4">名称：</label>
+                                <div class="col-sm-8">
+                                    <span class="info-name"><?php echo $model->name?></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-4">主页：</label>
+                                <div class="col-sm-8">
+                                    <span class="info-home">
+                                        <a href="<?php echo $model->website?>" target="_blank"><?php echo $model->website?> </a>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-4">地址：</label>
+                                <div class="col-sm-8">
+                                    <span class="info-address"><?php echo $model->address?></span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal fade" id="info-edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog"  style="width:750px">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title" id="myModalLabel">编辑基本信息</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="form-horizontal" id="info-form" role="form" enctype="multipart/form-data">
+                                        <div class="form-group">
+                                            <label for="inputEmail3" class="col-sm-2 control-label">logo：</label>
+                                            <div class="col-sm-6">
+                                                <input type="file" size="60" maxlength="100" name="logo" name="logo" value=""/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputEmail3" class="col-sm-2 control-label">名称：</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" id="MsCompany_name" value="<?php echo $model->name?>" class="form-control"
+                                                       name="MsCompany[name]" maxlength="100" size="60"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputEmail3" class="col-sm-2 control-label">主页：</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" id="MsCompany_website" value="<?php echo $model->website?>" class="form-control"
+                                                       name="MsCompany[website]" maxlength="100" size="60" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputEmail3" class="col-sm-2 control-label">地址：</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" id="MsCompany_address" value="<?php echo $model->address?>"  class="form-control"
+                                                       name="MsCompany[address]" maxlength="100" size="60" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputEmail3" class="col-sm-2 control-label">职位描述：</label>
+                                            <div class="col-sm-8">
+                                                <script type="text/plain" id="myEditor"><?php echo $model->description?></script>
+                                            </div>
+                                        </div>
+                                    </form>
 
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" id="info-cancel" class="btn btn-flat flat-success btn-bordered btn-rounded" data-dismiss="modal">取消</button>
+                                    <button type="button"  id="info-save" class="btn btn-flat flat-success btn-bordered btn-rounded">保存</button>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
 
                     </div>
 
-                    <div id="info-edit" class="c_detail" style="display: none;">
-                        <dl class="dl-horizontal companyInfo-edit">
-                            <dt>logo：</dt>
-                            <dd class="info-name">
-                                <input type="file" size="60" maxlength="100" name="logo" id="MsCompany_logo" value=""/>
-                            </dd>
-                            <dt>名称：</dt>
-                            <dd class="info-name">
-                                <input type="text" id="MsCompany_name" value="<?php echo $model->name?>" class="form-control"
-                                       name="MsCompany[name]" maxlength="100" size="60"/>
-                            </dd>
-                            <dt>主页：</dt>
-                            <dd class="info-name">
-                                <input type="text" id="MsCompany_website" value="<?php echo $model->website?>" class="form-control"
-                                       name="MsCompany[website]" maxlength="100" size="60" />
-                            </dd>
-                            <dt>地址：</dt>
-                            <dd class="info-name">
-                                <input type="text" id="MsCompany_address" value="<?php echo $model->address?>"  class="form-control"
-                                       name="MsCompany[address]" maxlength="100" size="60" />
-                            </dd>
-                        </dl>
-
-                        <div class="text-center">
-                            <button type="button" class="btn btn-flat flat-success btn-bordered btn-rounded" id="info-cancel" >取消</button>
-                            <button type="button" class="btn btn-flat flat-success btn-bordered btn-rounded" id="info-save">保存</button>
-                        </div>
-                    </div>
                 </div>
                 <div class="widget text" style="position: relative">
                     <div class="subpage-title">
@@ -179,17 +216,6 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umedit
                             ?>
                         </ul>
                     </div>
-<!--                    <div id="tag-edit" class="r_box" style="display: none">-->
-<!--                        <form method="post" action="--><?php //echo Yii::app()->baseUrl.'/mscompany/update'?><!--"-->
-<!--                              id="tag-update-form" >-->
-<!--                            <input type="text" id="MsCompany_tags" value="--><?php //echo $model->tags?><!--"-->
-<!--                                   name="MsCompany[tags]" maxlength="500" size="60">-->
-<!--                            <div class="text-right">-->
-<!--                                <button type="button" class="btn btn-flat flat-color btn-rounded" id="tag-cancel" >取消</button>-->
-<!--                                <button  class="btn btn-flat flat-color btn-rounded" id="tag-save">保存</button>-->
-<!--                            </div>-->
-<!--                        </form>-->
-<!--                    </div>-->
                 </div>
             </div>
         </div>
@@ -197,6 +223,14 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umedit
 
 </section>
 <script>
+    //职位所在城市列表
+    var cityHtml = "";
+    <?php foreach($citys as $city){  ?>
+        cityHtml += '<label class="radio-inline">';
+        cityHtml += '<input type="radio"  name="city" <?php if($city->code=='beijing'){?>checked<?php }?> value="<?php echo $city->code?>" />';
+        cityHtml += '<?php echo $city->name ?>';
+        cityHtml += '</label>';
+    <?php }?>
     //菜单选中公司
     $(".nav li.active").removeClass("active");
     $(".nav li:eq(2)").addClass("active");
@@ -220,16 +254,8 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umedit
             }
         }
     });
-    
-    //编辑公司描述
-    $("#intro-update").click(function(){
-        $("#intro-info").hide();
-        $("#intro-edit").show();
-    })
-    $("#intro-cancel").click(function(){
-        $("#intro-info").show();
-        $("#intro-edit").hide();
-    })
+
+    //编辑基本信息
     var um = UM.getEditor('myEditor',{
         toolbar:[
             'source | undo redo | bold italic underline strikethrough | superscript subscript | forecolor backcolor | removeformat |',
@@ -239,57 +265,53 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umedit
         ,initialFrameWidth:500 //初始化编辑器宽度,默认500
         ,initialFrameHeight:200  //初始化编辑器高度,默认500
     });
-    $("#intro-save").click(function(){
-        var tempHtml = $("#myEditor").html();
-        $.ajax({
-            type:'POST',
-            dataType:'json',
-            data:{MsCompany:{description:tempHtml}},
-            url:"<?php echo Yii::app()->baseUrl.'/mscompany/update'?>",
-            success:function(data) {
-                $("#intro-info .intro-des").html(tempHtml);
-                $("#intro-info").show();
-                $("#intro-edit").hide();
-
-            }
-        });
-    })
-    //编辑基本信息
     $("#info-update").click(function(){
-        $("#info-show").hide();
-        $("#info-edit").show();
+        $("#info-edit").modal("show");
     })
     $("#info-cancel").live('click',function(){
         $("#info-show").show();
         $("#info-edit").hide();
     });
     $("#info-save").click(function(){
-        var name = $("#MsCompany_name").val(),
-            website = $("#MsCompany_website").val(),
-            address = $("#MsCompany_address").val();
-        $.ajax({
-            type:'POST',
-            dataType:'json',
-            data:{MsCompany:{name:name,website:website,address:address}},
-            url:"<?php echo Yii::app()->baseUrl.'/mscompany/update'?>",
-            success:function(data) {
-                $("#info-show .info-name").html(name);
-                $("#info-show .info-home").html(website);
-                $("#info-show .info-address").html(address);
-                $("#info-show").show();
-                $("#info-edit").hide();
-
+        var tempHtml = $("#myEditor").html();
+        $("#info-form").ajaxSubmit({
+            url:"<?php echo Yii::app()->baseUrl.'/mscompany/update' ?>",
+            dataType:"json",
+            type:"post",
+            data:{MsCompany:{description:tempHtml}},
+            success:function(data){
+                if(data.status == 1){
+                }
             }
         });
+<!--        var name = $("#MsCompany_name").val(),-->
+<!--            website = $("#MsCompany_website").val(),-->
+<!--            address = $("#MsCompany_address").val(),-->
+<!--            tempHtml = $("#myEditor").html();-->
+<!--        $.ajax({-->
+<!--            type:'POST',-->
+<!--            dataType:'json',-->
+<!--            data:{MsCompany:{name:name,website:website,address:address,description:tempHtml}},-->
+<!--            url:"--><?php //echo Yii::app()->baseUrl.'/mscompany/update'?><!--",-->
+<!--            success:function(data) {-->
+<!--                $("#intro-info").prevAll("h4").html(name);-->
+<!--                $("#info-show .info-name").html(name);-->
+<!--                $("#info-show .info-home").html(website);-->
+<!--                $("#info-show .info-address").html(address);-->
+<!--                $("#intro-info .intro-des").html(tempHtml);-->
+<!--                $("#info-edit").modal("hide");-->
+<!---->
+<!--            }-->
+<!--        });-->
     })
 
     //编辑公司印象
     var popoverObj = $('#tag-add').popover({
-        placement:"bottom",
+        placement:"left",
         html:true,
         container:"body",
         title:"",
-        content:'<ul class="recent-posts">' +
+        content:'<ul class="recent-posts" style="width:300px">' +
                '<li> <input type="text" id="tags-new" class="form-control pad-bottom-5"' +
             'name="MsCompany[tags]" maxlength="500" size="60" /></li>'+
             '<li><i class="icon-quote-left icon-x pull-left icon-muted"></i>多个印象标签通过空格分开，例如：高富帅 白富美<i class="icon-quote-right icon-x pull-right icon-muted"></i></li>'+
@@ -366,8 +388,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umedit
 
     //新增职位
     $("#job-add").click(function(){
-        $("#job-new").show();
-        $(this).hide();
+        $('#job-new').modal('show')
     })
     UM.getEditor('MsJobs_description',{
         toolbar:[
@@ -375,10 +396,9 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umedit
             'insertorderedlist insertunorderedlist | selectall cleardoc paragraph | fontfamily fontsize' ,
             '| justifyleft justifycenter justifyright justifyjustify |'
         ]
-        ,initialFrameWidth:600 //初始化编辑器宽度,默认500
-        ,initialFrameHeight:200  //初始化编辑器高度,默认500
+        ,initialFrameWidth:500 //初始化编辑器宽度,默认500
+        ,initialFrameHeight:150  //初始化编辑器高度,默认500
     });
-
     $("#job-save").click(function(){
         var title = $("#job-new input[name='MsJobs[title]']").val();
         var citycode = $("#job-new input[name='city']:checked").val();
@@ -411,7 +431,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umedit
                                     '</div>'+
                                 '</div>';
                 $("#accordion").prepend(jobHtml);
-                $("#job-new").hide();
+                $("#job-new").modal("hide");
 
             }
         });
@@ -423,15 +443,44 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umedit
     //编辑职位
     $(".job-operate .icon-edit").live("click",function(){
         var $jobInfo = $(this).parent().prev();
+        $("#accordion .panel-title a").not(".collapsed").each(function(){
+            var collapseId = $(this).attr("href");
+            $(collapseId).collapse('hide');
+            $(this).addClass("collapsed");
+
+        })
         var jobId = $jobInfo.removeClass("collapsed").attr("href");
         if($(jobId+" form").length == 0){
-            var editForm = $("#job-new").clone().attr("id","job-edit");
             var desOperate = $(".panel-body .status",jobId).clone().hide();
-            $("#job-cancel",editForm).attr({id:"",onclick:"editCancel("+$jobInfo.attr("job-id")+")"});
-            $("#job-save",editForm).attr({id:"",onclick:"editSave("+$jobInfo.attr("job-id")+")"});
-            $("#MsJobs_description",editForm).parents(".col-sm-8").html("<script type='text/plain' id='job-edit-description"+ $jobInfo.attr("job-id") +"'>"+ $(".panel-body .description",jobId).html()+"<\/script>");
+            var editForm = '<div id="job-edit" class="c_detail pad-bottom-25">'+
+                                '<form class="form-horizontal" role="form">'+
+                                    '<div class="form-group">'+
+                                        '<label for="inputEmail3" class="col-sm-3 control-label">职位信息：</label>'+
+                                        '<div class="col-sm-8">'+
+                                            '<input type="text" class="form-control" name=MsJobs[title] placeholder="职位信息">'+
+                                        '</div>'+
+                                    '</div>'+
+                                    '<div class="form-group">'+
+                                        '<label for="inputEmail3" class="col-sm-3 control-label">城市：</label>'+
+                                        '<div class="col-sm-8">'+
+                                            cityHtml +
+                                        '</div>'+
+                                    '</div>'+
+                                    '<div class="form-group">'+
+                                        '<label for="inputEmail3" class="col-sm-3 control-label">职位描述：</label>'+
+                                        '<div class="col-sm-8">'+
+                                            "<script type='text/plain' id='job-edit-description"+ $jobInfo.attr("job-id")+ "'>"+ $(".panel-body .description",jobId).html()+"<\/script>"+
+                                        '</div>'+
+                                    '</div>'+
+                                '</form>'+
 
-            $(".panel-body",jobId).html(editForm.html()).append(desOperate);
+                                '<div class="text-center operate">'+
+                                    '<button type="button" class="btn btn-flat flat-success btn-bordered btn-rounded" onclick="editCancel('+$jobInfo.attr("job-id")+')">取消</button>'+
+                                    '<button type="button" class="btn btn-flat flat-success btn-bordered btn-rounded" onclick="editSave('+$jobInfo.attr("job-id")+')">保存</button>'+
+                                '</div>'+
+                    '</div>';
+
+            $(".panel-body",jobId).html(editForm).append(desOperate);
             //给编辑框赋值
             $("input[name='MsJobs[title]']",jobId).val($(".job-title",$jobInfo).html());
             $("input[name='city']",jobId).each(function(){
@@ -490,9 +539,19 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umedit
         $(".panel-body",$panel).prepend("<div class='description'>"+ jobDesHtml +"</div>");
         $(".panel-body .status",$panel).show();
     }
-    $("#job-edit-cancel").live("click",function(){
-
-
+    $(".job-operate .icon-trash").live("click",function(){
+        var $that = $(this);
+        var jobId = $(this).parent().prevAll('a[job-id]').attr("job-id");
+        $.ajax({
+            type:'POST',
+            dataType:'json',
+            data:{ajax:true},
+            url:"<?php echo Yii::app()->baseUrl.'/msjobs/delete/'?>"+jobId,
+            success:function(data) {
+                $that.parents(".panel").remove();
+                console.log(data);
+            }
+        });
     })
 
 </script>
