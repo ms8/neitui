@@ -14,7 +14,7 @@
         ));
         ?>
 
-        <ul id="infoType" class="portfolio-filter nav nav-pills" style="padding:0px">
+        <ul id="infoType" class="portfolio-filter nav nav-pills" style="padding:0px;margin-bottom:15px">
             <li class="active">
                 <a data-filter="base" href="#">基本信息</a>
             </li>
@@ -115,12 +115,12 @@
         <div class="action-box" id="projects" style="display: none;min-height: 350px;">
             <div class="form-group">
                 <?php echo $form->labelEx($model,'projects',array('class'=>'col-sm-2 control-label')); ?>
-                <?php echo $form->textArea($model,'projects',array('rows'=>5, 'cols'=>80,'style'=>'width:81%','class'=>'form-control')); ?>
+                <?php echo $form->textArea($model,'projects',array('rows'=>6, 'cols'=>80,'style'=>'width:81%','class'=>'form-control')); ?>
             </div>
 
             <div class="form-group">
                 <?php echo $form->labelEx($model,'peixun',array('class'=>'col-sm-2 control-label')); ?>
-                <?php echo $form->textArea($model,'peixun',array('rows'=>5, 'cols'=>80,'style'=>'width:81%','class'=>'form-control')); ?>
+                <?php echo $form->textArea($model,'peixun',array('rows'=>6, 'cols'=>80,'style'=>'width:81%','class'=>'form-control')); ?>
             </div>
 
         </div>
@@ -140,8 +140,6 @@
         $("#header .nav li.active").removeClass("active");
         $("#header .nav li:eq(2)").addClass("active");
 
-        var $container = $('#isotope-portfolio-container');
-        var $filter = $('.portfolio-filter');
         $('.portfolio-filter a').click(function () {
             $("#infoType  li.active").removeClass("active");
             $(this).parent().attr("class",'active');

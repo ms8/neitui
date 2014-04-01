@@ -1,6 +1,6 @@
 <section class="pad-25" id="action-box">
     <div class="container">
-        <div class="alert alert-success alert-dismissable">
+        <div class="alert">
             <strong>已投递的职位</strong>
         </div>
         <div class="action-box">

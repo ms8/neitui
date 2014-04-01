@@ -164,12 +164,12 @@ class KongjianController extends Controller
                             $application->createtime = date("Y-m-d H:i:s");
                             $application->save();  //投递该职位
                         }
-                        //***********将简历转换为pdf**************************
-                        if ($type == ".doc" || $type == ".docx"){
-                            $sender = new HttpSender();
-                            $url="http://localhost:8080/kuairuzhi/site/translate/".date('Y-m-d')."/".$fileName_store.$type;
-                            $sender->sock_get($url);
-                        }
+                        //***********将简历转换为pdf************************** 先注释掉
+//                        if ($type == ".doc" || $type == ".docx"){
+//                            $sender = new HttpSender();
+//                            $url="http://localhost:8080/kuairuzhi/site/translate/".date('Y-m-d')."/".$fileName_store.$type;
+//                            $sender->sock_get($url);
+//                        }
                         //**************************************************
                     }
                 }
