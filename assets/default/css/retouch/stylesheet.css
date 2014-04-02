@@ -1390,11 +1390,12 @@ blockquote small {
     -moz-border-left-colors: none;
     -moz-border-right-colors: none;
     -moz-border-top-colors: none;
-    border-color: -moz-use-text-color #ECF0F1 #ECF0F1;
+    /*border-color: -moz-use-text-color #ECF0F1 #ECF0F1;*/
     border-image: none;
-    border-right: 1px solid #ECF0F1;
+    /*border-right: 1px solid #ECF0F1;*/
     border-style: none solid solid;
-    border-width: 0 1px 1px;
+    /*border-width: 0 1px 1px;*/
+    border-width:0 ;
     padding: 20px;
     font-size: 13px;
 }

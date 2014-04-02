@@ -3,6 +3,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_PATH.'umeditor
 Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umeditor/umeditor.config.js', CClientScript::POS_BEGIN);
 Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umeditor/umeditor.js', CClientScript::POS_BEGIN);
 Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umeditor/zh-cn.js', CClientScript::POS_BEGIN);
+Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.js', CClientScript::POS_BEGIN);
 ?>
 <section id="action-box">
     <div class="container  pad-25">
@@ -276,12 +277,18 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umedit
         var tempHtml = $("#myEditor").html();
         $("#info-form").ajaxSubmit({
             url:"<?php echo Yii::app()->baseUrl.'/mscompany/update' ?>",
-            dataType:"json",
+            dataType:"html",
             type:"post",
-            data:{MsCompany:{description:tempHtml}},
+            data:{MsCompany:{description:encodeURIComponent(tempHtml)}},
             success:function(data){
-                if(data.status == 1){
-                }
+                data = JSON.parse(data);
+                $("#intro-info").prevAll("h4").html(data.name);
+                $("#info-show .info-name").html(data.name);
+                $("#info-show .info-home").html(data.website);
+                $(".intro-logo img").attr("src","<?php echo Yii::app()->baseUrl.'/'?>"+data.logo);
+                $("#info-show .info-address").html(data.address);
+                $("#intro-info .intro-des").html(tempHtml);
+                $("#info-edit").modal("hide");
             }
         });
 <!--        var name = $("#MsCompany_name").val(),-->

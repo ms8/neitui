@@ -277,7 +277,8 @@ class MsCompanyController extends Controller
                 }
                 $company->save();
             }
-            die(CJSON::encode(array('status'=>0)));
+            $company->description  = "";
+            die(CJSON::encode($company));
 //            $this->redirect(array('dashboard'));
         }else{
             //303 没权限页面
