@@ -168,17 +168,17 @@ class SiteController extends Controller
     public function actionForget(){
         if(isset($_POST['username'])){
             $mail = new PHPMailer(); //建立邮件发送类
-            $address ="syd3050@163.com";
+            $address =$_POST['username'];
             $mail->IsSMTP(); // 使用SMTP方式发送
-            $mail->Host = "smtp.163.com"; // 您的企业邮局域名
+            $mail->Host = "smtp.kuairuzhi.com"; // 您的企业邮局域名
             $mail->SMTPAuth = true; // 启用SMTP验证功能
-            $mail->Username = "gqlshare@163.com"; // 邮局用户名(请填写完整的email地址)
-            $mail->Password = 'gql111111'; // 邮局密码
+            $mail->Username = "admin@kuairuzhi.com"; // 邮局用户名(请填写完整的email地址)
+            $mail->Password = 'gqlshare111111'; // 邮局密码
             $mail->Port=25;
             $mail->CharSet='UTF-8';
-            $mail->From = "gqlshare@163.com"; //邮件发送者email地址
+            $mail->From = "admin@kuairuzhi.com"; //邮件发送者email地址
             $mail->FromName = "快入职";
-            $mail->AddAddress("$address", $_POST['username']);//收件人地址，可以替换成任何想要接收邮件的email信箱,格式是AddAddress("收件人email","收件人姓名")
+            $mail->AddAddress($address, $_POST['username']);//收件人地址，可以替换成任何想要接收邮件的email信箱,格式是AddAddress("收件人email","收件人姓名")
             //$mail->AddReplyTo("", "");
 
             //$mail->AddAttachment("/var/tmp/file.tar.gz"); // 添加附件
@@ -207,7 +207,7 @@ class SiteController extends Controller
                 "'>".Yii::app()->request->hostInfo.Yii::app()->homeUrl.'/site/toReset?serial='.$serialNum."</a><br>"
             ."如果链接不能打开，请将该链接复制到浏览器里直接访问。<br><br>"
             ."<a target='_blank' href='".Yii::app()->request->hostInfo.Yii::app()->homeUrl
-            . "'>快入职网</a>，专注于应届生的招聘，海量的企业在等着你，快来投简历吧，快人一步找到好工作哦"; //邮件内容
+            . "'>快入职网</a>，专注于IT相关专业的应届生招聘平台，海量的企业在等着你，快来投简历吧，快人一步找到好工作哦"; //邮件内容
             //$mail->AltBody = "This is the body in plain text for non-HTML mail clients"; //附加信息，可以省略
 
             if(!$mail->Send())

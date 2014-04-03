@@ -25,8 +25,8 @@
                 <a data-filter="projects" href="#">项目经历</a>
             </li>
             <li>
-                <input type="submit" value="保存" name="yt0" class="btn btn-flat flat-color"
-                       style="margin:10px -20px 0 140px;font-size:15px;width:80px;height:40px" >
+                <input type="submit" value="保存" name="yt0" class="btn btn-flat flat-primary btn-rounded"
+                       style="margin:10px -20px 0 158px;font-size:15px;width:80px;height:40px" >
             </li>
         </ul>
 
