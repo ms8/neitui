@@ -1797,3 +1797,7 @@ address {
     display: inline-block;
     margin-left: -25px;
 }
+
+#upload #uploadForm div span:hover{
+    cursor: pointer;
+}
