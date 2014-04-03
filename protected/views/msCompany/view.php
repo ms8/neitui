@@ -5,7 +5,7 @@
                 <div class="widget">
                     <div class="media">
                         <a href="#" class="pull-left">
-                            <img alt="<?php echo $model->name?>"  class="media-object img-thumbnail" style="width: 190px; height: 190px;" src="<?php echo Yii::app()->baseUrl.'/'.$model->logo?>">
+                            <img alt="<?php echo $model->name?>"  class="media-object" style="width: 190px; height: 190px;" src="<?php echo Yii::app()->baseUrl.'/'.$model->logo?>">
                         </a>
                         <div class="media-body">
                             <h4 class="media-heading"><?php echo $model->name?></h4>
@@ -17,7 +17,7 @@
                     </div>
                 </div>
                 <div class="widget">
-                    <div class="subpage-title">
+                    <div class="subpage-title noline">
                         <h5>招聘职位</h5>
                     </div>
                     <div id="accordion" class="panel-group">
@@ -55,7 +55,7 @@
             </div>
             <div class="col-md-3 sidebar">
                 <div class="widget popular-posts">
-                    <div class="subpage-title">
+                    <div class="subpage-title noline">
                         <h5>基本信息</h5>
                     </div>
                     <dl class="dl-horizontal companyInfo">
@@ -74,7 +74,7 @@
                     </dl>
                 </div>
                 <div class="widget tagcloud">
-                    <div class="subpage-title">
+                    <div class="subpage-title noline">
                         <h5>公司印象</h5>
                     </div>
                     <ul class="tagcloud-list">

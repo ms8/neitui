@@ -31,9 +31,14 @@ class SiteController extends Controller
     }
 
 	public function actionIndex(){
+        $allData = array();
         //取公司信息:已验证的公司
         $companys = MsCompany::model()->findAllByAttributes(array('status'=>'2'));
-        $this->render('index',array('companys'=>$companys));
+        foreach($companys as $company){
+            $jobs = MsJobs::model()->findAllByAttributes(array('company_id'=>$company->id));
+            array_push($allData,array('company'=>$company,'jobs'=>$jobs));
+        }
+        $this->render('index',array('companys'=>$allData));
 	}
 
 	public function actionDown(){

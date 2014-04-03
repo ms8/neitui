@@ -1,23 +1,23 @@
 body {
     /*color: #95A5A6;*/
     color: #8b9a9b;
-    font-family: '宋体',sans-serif;
-    font-size: 12px;
+    font-family:'微软雅黑', '宋体',sans-serif;
+    font-size: 13px;
 }
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     color: #2C3E50;
-    font-family: 'Montserrat',sans-serif;
+    font-family: '微软雅黑', '宋体',sans-serif;
     font-weight: 700;
 }
 iframe {
     border: 0 none;
 }
 input, button, select, textarea {
-    font-family: 'Montserrat',sans-serif;
+    font-family:'微软雅黑', '宋体',sans-serif;
 }
 a {
     color: #34495E;
-    font-family: 'Montserrat',sans-serif;
+    font-family: '微软雅黑', '宋体',sans-serif;
     transition: all 0.2s ease 0s;
 }
 a:hover, a:focus {
@@ -66,7 +66,7 @@ a:focus {
     border: 0 none;
     border-radius: 0;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
-    font-family: 'Montserrat',sans-serif;
+    font-family: '微软雅黑', '宋体',sans-serif;
     margin-bottom: 0;
     transition: all 0.2s ease 0s;
 }
@@ -345,7 +345,7 @@ a:focus {
 #page-title-wrapper {
     border-bottom: 1px solid #ECF0F1;
     box-shadow: 0 0 5px #ECF0F1;
-    font-family: 'Montserrat',sans-serif;
+    font-family: '微软雅黑', '宋体',sans-serif;
     padding: 35px 0;
 }
 #page-title-wrapper h4 {
@@ -395,7 +395,7 @@ a:focus {
     z-index: 2;
 }
 .nav-tabs > li > a {
-    font-family: 'Montserrat',sans-serif;
+    font-family: '微软雅黑', '宋体',sans-serif;
     font-weight: 700;
 }
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
@@ -413,7 +413,7 @@ a:focus {
 .progress {
     background-color: #F5F5F5;
     box-shadow: none;
-    font-family: 'Montserrat',sans-serif;
+    font-family: '微软雅黑', '宋体',sans-serif;
     height: 37px;
     margin-bottom: 5px;
 }
@@ -476,7 +476,7 @@ blockquote small {
     font-weight: 600;
 }
 .btn {
-    font-family: 'Montserrat',sans-serif;
+    font-family:'微软雅黑', '宋体',sans-serif;
     font-size: 12px;
     font-weight: 700;
     padding: 8px 10px;
@@ -616,12 +616,15 @@ blockquote small {
     bottom: 12px;
     content: "";
     display: inline-block;
-    height: 0;
+    height: 1px;
     left: 20px;
     margin: 0 -200% 0 0;
     position: relative;
     vertical-align: bottom;
     width: 200%;
+}
+.subpage-title.noline h5:before, .subpage-title.noline  h5:after{
+    height: 0;
 }
 .subpage-title h5:before {
     left: -20px;
@@ -790,7 +793,7 @@ blockquote small {
     padding: 20px 0;
 }
 #footer-2 {
-    font-family: 'Montserrat',sans-serif;
+    font-family: '微软雅黑', '宋体',sans-serif;
     padding: 35px 0;
 }
 #footer-2 .list-inline {
@@ -1092,11 +1095,11 @@ blockquote small {
 .pricing .price {
     background-color: #2ECC71;
     color: #FFFFFF;
-    font-family: 'Open Sans',sans-serif;
+    font-family: '微软雅黑', '宋体',sans-serif;
     padding: 20px;
 }
 .pricing .price h2 {
-    font-family: 'Open Sans',sans-serif;
+    font-family:'微软雅黑', '宋体',sans-serif;
     font-weight: 800;
 }
 .pricing .price .dollar {
@@ -1225,7 +1228,7 @@ blockquote small {
     position: relative;
 }
 .post-meta {
-    font-family: 'Montserrat',sans-serif;
+    font-family:'微软雅黑', '宋体',sans-serif;
     overflow: hidden;
     padding: 5px 0 10px;
 }
@@ -1299,7 +1302,7 @@ blockquote small {
 }
 .project-details-list {
     border: 1px solid #ECF0F1;
-    font-family: 'Montserrat',sans-serif;
+    font-family: '微软雅黑', '宋体',sans-serif;
     list-style: none outside none;
     margin: 0;
     overflow: hidden;
@@ -1390,13 +1393,13 @@ blockquote small {
     -moz-border-left-colors: none;
     -moz-border-right-colors: none;
     -moz-border-top-colors: none;
-    /*border-color: -moz-use-text-color #ECF0F1 #ECF0F1;*/
+    border-color: #f4f8f9;
     border-image: none;
     /*border-right: 1px solid #ECF0F1;*/
-    border-style: none solid solid;
+    border-style:solid none none ;
     /*border-width: 0 1px 1px;*/
-    border-width:0 ;
-    padding: 20px;
+    border-width:1px ;
+    padding: 10px 20px;
     font-size: 13px;
 }
 .member-details .member-name {
@@ -1415,7 +1418,8 @@ blockquote small {
 }
 .member-details .position {
     display: block;
-    font-family: 'Montserrat',sans-serif;
+    color: #587991;
+    font-family: '微软雅黑', '宋体',sans-serif;
     padding: 10px 0;
 }
 .member-details .social-links {
@@ -1427,9 +1431,14 @@ blockquote small {
 }
 .member-content{
     display: inline-block;
-    height:200px;
+    height:150px;
     overflow: hidden;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+}
+/*职位列表 by jdh*/
+.member-content ul{
+    padding-left: 20px;
+    margin-bottom: 2px;
 }
 @media (min-width: 992px) {
     .layout-2 .main {
@@ -1455,7 +1464,7 @@ a.comment-reply, .comment-date {
 }
 address {
     display: block;
-    font-family: 'Montserrat',sans-serif;
+    font-family: '微软雅黑', '宋体',sans-serif;
     font-style: normal;
     line-height: 23px;
     margin-bottom: 25px;
@@ -1605,8 +1614,8 @@ address {
 
 /*公司名称居中*/
 .member-thumb{
-   text-align: center;
-   padding: 20px 20px 0 20px;
+   text-align: left;
+   padding: 20px;
 }
 
 /*公司基本信息*/

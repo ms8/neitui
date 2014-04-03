@@ -26,11 +26,26 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery
         <ul id="pe-thumbs" class="pe-thumbs">
             <?php foreach($companys as $company){?>
                 <li>
-                    <a href="<?php echo Yii::app()->baseUrl.'/mscompany/view/'.$company->id?>">
-                        <img src="<?php echo Yii::app()->baseUrl.'/'.$company->logo?>" />
+                    <a href="<?php echo Yii::app()->baseUrl.'/mscompany/view/'.$company['company']->id?>">
+                        <img src="<?php echo Yii::app()->baseUrl.'/'.$company['company']->logo?>" />
                         <div class="pe-description">
-                            <h3><?php echo $company->name?></h3>
-                            <p><?php echo $company->description?></p>
+                            <h3><?php echo $company['company']->name?></h3>
+<!--                            <div class="subpage-title">-->
+<!--                                <h5>招聘信息</h5>-->
+<!--                            </div>-->
+                            <ul>
+                            <?php $i = 0 ;
+                                  foreach($company['jobs'] as $job){
+                                      if($i == 3){
+                                          echo  "<li>共".count($company['jobs'])."个职位信息</li>";
+                                          break;
+                                      }else{
+                                          echo "<li>".$job->title."</li>";
+                                          $i++;
+                                      }
+                                  }
+                            ?>
+                            </ul>
                         </div>
                     </a>
                 </li>
