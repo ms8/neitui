@@ -1801,3 +1801,7 @@ address {
 #upload #uploadForm div span:hover{
     cursor: pointer;
 }
+
+#apply:hover,#reset:hover{
+    cursor: pointer;
+}
