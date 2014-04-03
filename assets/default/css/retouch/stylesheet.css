@@ -1736,8 +1736,9 @@ address {
     margin:7px 0 0 145px;
 }
 .radioTag span label:hover{
+    background-color: #1ABC9C !important;
     color: #ffffff !important;
-    border-color: #2ECC71 !important;
+    border-color: #1ABC9C !important;
 }
 .radioTag span .myLabel{
     border: 2px solid #DCE4EC;
@@ -1748,9 +1749,9 @@ address {
 }
 /*选择其相邻的兄弟元素*/
 .radioTag span input[type="radio"]:checked + label{
-    border-color: #2ECC71;
+    border-color: #1ABC9C;
     color: #ffffff !important;
-    background-color: #2ECC71;
+    background-color: #1ABC9C;
 }
 
 #base .form-control{
