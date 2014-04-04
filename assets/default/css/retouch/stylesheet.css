@@ -1742,7 +1742,7 @@ address {
 
 /*radio 改为 标签*/
 .radioTag{
-    margin:7px 0 0 145px;
+    margin:7px 0 0 0px;
 }
 .radioTag span label:hover{
     background-color: #1ABC9C !important;
@@ -1773,7 +1773,7 @@ address {
     padding-left: 0;
 }
 #school .col-sm-10{
-    padding-left: 15px;
+    padding-left: 0px;
     width: 56%;
 }
 #projects .col-sm-10{
