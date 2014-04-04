@@ -180,7 +180,7 @@ class MsCompanyController extends Controller
 	public function actionView($id)
 	{
         /*取公司发布的职位信息*/
-        $jobs = MsJobs::model()->findAllByAttributes(array('company_id'=>$id));
+        $jobs = MsJobs::model()->findAllByAttributes(array('company_id'=>$id),array('order'=>'createtime desc'));
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
             'jobs'=>$jobs
@@ -232,7 +232,8 @@ class MsCompanyController extends Controller
             $id = Yii::app()->user->id;
             $member = Member::model()->findByPk($id);
             $model = MsCompany::model()->findByAttributes(array('account'=>$member->username));
-            $jobs = MsJobs::model()->findAllByAttributes(array('company_id'=>$model->id));
+            $jobs = MsJobs::model()->findAllByAttributes(array('company_id'=>$model->id),
+                array('order'=>'createtime desc'));
             $citys = MsDictionary::model()->findAllByAttributes(array('type'=>'city'));
             $this->render('dashboard',array(
                 'model'=>$model,
