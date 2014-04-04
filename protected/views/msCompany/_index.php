@@ -18,7 +18,7 @@ if ($index%4===0 && $index !=0){
             <div class="member-content">
                 <span class="position">
                     <strong>【公司印象】</strong>
-                    <?php echo CHtml::encode(Helper::truncate_utf8_string($data->tags,20));?>
+                    <?php echo CHtml::encode(Helper::truncate_utf8_string($data->tags,21));?>
                 </span>
 <!--                <p>【公司介绍】 --><?php //echo CHtml::encode($data->description); ?><!--</p>-->
                 <?php
@@ -27,7 +27,7 @@ if ($index%4===0 && $index !=0){
                     foreach($jobs as $job){
                         if($i ==0) echo "<ul>";
                         if($i == 4){
-                            echo  "</ul><div class='text-left' style='padding-left:5px;'>共".count($jobs)."个招聘职位</div>";
+                            echo  "</ul><div class='text-left' style='padding-left:5px;'><strong><i class='icon-hand-right'></i>&nbsp共".count($jobs)."个招聘职位</strong></div>";
                             break;
                         }else{
                             echo "<li>".$job->title;"</li>";

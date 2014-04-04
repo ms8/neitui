@@ -58,20 +58,34 @@
                     <div class="subpage-title noline">
                         <h5>基本信息</h5>
                     </div>
-                    <dl class="dl-horizontal companyInfo">
-                        <dt>地点</dt>
-                        <dd>北京</dd>
-                        <dt>领域</dt>
-                        <dd>互联网</dd>
-                        <dt>规模</dt>
-                        <dd>150</dd>
-                        <dt>网址</dt>
-                        <dd><a href="<?php echo $model->website?>" target="_blank">
-                                <?php echo $model->website?>
-                            </a></dd>
-                        <dt>地址</dt>
-                        <dd><?php echo $model->address?></dd>
-                    </dl>
+                    <div class="c_detail">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-4">名称：</label>
+                                <div class="col-sm-8">
+                                    <span class="info-name"><?php echo $model->name?></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-4">网址：</label>
+                                <div class="col-sm-8">
+                                    <span class="info-name">
+                                        <a href="<?php echo $model->website?>" target="_blank">
+                                            <?php echo $model->website?>
+                                        </a>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-4">地址：</label>
+                                <div class="col-sm-8">
+                                    <span class="info-name">
+                                       <?php echo $model->address?>
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <div class="widget tagcloud">
                     <div class="subpage-title noline">

@@ -78,14 +78,18 @@ a:focus {
     font-family: 'Open Sans',sans-serif;
     font-size: 24px;
     font-weight: 800;
-    padding-bottom: 20px;
-    padding-top: 20px;
+    /*padding-bottom: 20px;*/
+    /*padding-top: 20px;*/
+    padding-bottom: 0;
+    padding-top: 0;
     text-transform: uppercase;
 }
 #header.affix .navbar-brand {
     font-size: 23px;
-    padding-bottom: 25px;
-    padding-top: 25px;
+    /*padding-bottom: 25px;*/
+    /*padding-top: 25px;*/
+    padding-bottom: 0;
+    padding-top: 0;
 }
 #header .navbar-brand:hover, #header .navbar-brand:focus {
     color: #2C3E50;
@@ -178,11 +182,11 @@ a:focus {
         margin-right: -15px;
     }
     #header .navbar-nav > li > a {
-        padding: 20px;
+        padding: 21px;
         text-transform: uppercase;
     }
     #header.affix .navbar-nav > li > a {
-        padding: 25px 18px;
+        padding: 21px;
         text-transform: uppercase;
     }
     #header .navbar-nav > li > a:hover, #header .navbar-nav > li > a:focus {
@@ -1420,7 +1424,7 @@ blockquote small {
     display: block;
     color: #587991;
     font-family: '微软雅黑', '宋体',sans-serif;
-    padding: 10px 0;
+    padding: 0 0 10px 0;
 }
 .member-details .social-links {
     padding-top: 10px;
@@ -1734,7 +1738,10 @@ address {
 }
 .c_detail{
     position: relative;
-    min-height: 130px;
+    min-height: 150px;
+}
+.c_detail .form-group{
+    margin-bottom: 5px;
 }
 .companyInfo{
     min-height: 140px;

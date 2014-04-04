@@ -39,7 +39,10 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a href="<?php echo Yii::app()->baseUrl?>" class="navbar-brand">快<span>入职</span></a>
+                    <a href="<?php echo Yii::app()->baseUrl?>" class="navbar-brand">
+                        <img alt="快入职" src="<?php echo Yii::app()->baseUrl.CSS_PATH.'/images/logo.png'?>" width="240px" />
+<!--                        快<span>入职</span>-->
+                    </a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -85,7 +88,7 @@
                                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">个人中心<i class="icon-sort-down"></i></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="<?php echo Yii::app()->createUrl('/mscompany/dashboard')?>">公司信息</a></li>
-                                    <li><a href="<?php echo Yii::app()->createUrl('/msjobs/create')?>">职位信息</a></li>
+<!--                                    <li><a href="--><?php //echo Yii::app()->createUrl('/msjobs/create')?><!--">职位信息</a></li>-->
                                     <li><a href="<?php echo Yii::app()->createUrl('/mscompany/jianlis')?>">收到的简历</a></li>
                                     <li><a href="<?php echo Yii::app()->createUrl('/mscompany/changepwd')?>">修改密码</a></li>
                                 </ul>

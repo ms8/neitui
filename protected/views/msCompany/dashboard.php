@@ -32,7 +32,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
                 </div>
                 <div class="post-wrapper widget">
                     <div>
-                        <div class="subpage-title">
+                        <div class="subpage-title noline">
                             <h5>招聘职位</h5>
                         </div>
 <!--                        <div id="job-new" class="c_detail pad-bottom-25" style="display: none">-->
@@ -109,7 +109,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
             </div>
             <div class="col-md-3">
                 <div class="widget">
-                    <div class="subpage-title">
+                    <div class="subpage-title noline">
                         <h5>基本信息</h5>
                     </div>
                     <div class="text-right absolute-right-20">
@@ -195,7 +195,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
 
                 </div>
                 <div class="widget text" style="position: relative">
-                    <div class="subpage-title">
+                    <div class="subpage-title noline">
                         <h5>公司印象</h5>
                     </div>
                     <div class="absolute-right-20">
@@ -291,25 +291,6 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
                 $("#info-edit").modal("hide");
             }
         });
-<!--        var name = $("#MsCompany_name").val(),-->
-<!--            website = $("#MsCompany_website").val(),-->
-<!--            address = $("#MsCompany_address").val(),-->
-<!--            tempHtml = $("#myEditor").html();-->
-<!--        $.ajax({-->
-<!--            type:'POST',-->
-<!--            dataType:'json',-->
-<!--            data:{MsCompany:{name:name,website:website,address:address,description:tempHtml}},-->
-<!--            url:"--><?php //echo Yii::app()->baseUrl.'/mscompany/update'?><!--",-->
-<!--            success:function(data) {-->
-<!--                $("#intro-info").prevAll("h4").html(name);-->
-<!--                $("#info-show .info-name").html(name);-->
-<!--                $("#info-show .info-home").html(website);-->
-<!--                $("#info-show .info-address").html(address);-->
-<!--                $("#intro-info .intro-des").html(tempHtml);-->
-<!--                $("#info-edit").modal("hide");-->
-<!---->
-<!--            }-->
-<!--        });-->
     })
 
     //编辑公司印象
