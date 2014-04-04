@@ -53,13 +53,13 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputEmail3" class="col-sm-2 control-label">城市：</label>
-                                                <div class="col-sm-8">
-                                                    <?php foreach($citys as $city){  ?>
-                                                        <label class="radio-inline">
-                                                            <input type="radio"  name="city" <?php if($city->code=='beijing'){?>checked<?php }?> value="<?php echo $city->code?>" />
-                                                            <?php echo $city->name ?>
-                                                        </label>
-                                                    <?php }?>
+                                                <div  class="radioTag">
+                                                    <span>
+                                                        <?php foreach($citys as $city){  ?>
+                                                            <input id="<?php echo $city->code?>" type="radio"  name="city" <?php if($city->code=='beijing'){?>checked<?php }?> value="<?php echo $city->code?>" />
+                                                            <label style="margin-left:15px" class="btn btn-flat flat-success btn-bordered myLabel" for="<?php echo $city->code?>"><?php echo $city->name ?></label>
+                                                        <?php }?>
+                                                    </span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -440,7 +440,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
         var jobId = $jobInfo.removeClass("collapsed").attr("href");
         if($(jobId+" form").length == 0){
             var desOperate = $(".panel-body .status",jobId).clone().hide();
-            var editForm = '<div id="job-edit" class="c_detail pad-bottom-25">'+
+            var editForm = '<div id="job-edit" class="pad-bottom-25">'+
                                 '<form class="form-horizontal" role="form">'+
                                     '<div class="form-group">'+
                                         '<label for="inputEmail3" class="col-sm-3 control-label">职位信息：</label>'+
