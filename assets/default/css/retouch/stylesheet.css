@@ -1821,3 +1821,12 @@ address {
 #apply:hover,#reset:hover{
     cursor: pointer;
 }
+/*表格图标 by jdh*/
+.table i{
+    color:#2ECC71;
+}
+/*表单校验错误信息*/
+.errorMessage{
+    padding-top: 11px;
+    color: #E74C3C;
+}
