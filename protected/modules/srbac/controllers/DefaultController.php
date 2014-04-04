@@ -29,6 +29,9 @@ class DefaultController extends CController {
     {
       $model->attributes=$_POST['LoginForm'];
       if($model->validate() && $model->login()){
+          //记录到session中，退出时注销
+          $model = Admins::model()->findByAttributes(array('username'=>$model->username));
+          $_SESSION['admin_user'] = $model->userid;
         $this->redirect(Yii::app()->createUrl('/srbac/config/admin'));
       }
     }
@@ -39,6 +42,8 @@ class DefaultController extends CController {
   public function actionLogout()
   {
     Yii::app()->controller->module->getComponent('user')->logout();
+      //注销session
+      unset($_SESSION['admin_user']);
     $this->redirect(Yii::app()->createUrl('/srbac/default/login'));
   }
 

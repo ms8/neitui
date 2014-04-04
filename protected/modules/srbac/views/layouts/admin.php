@@ -10,6 +10,8 @@
 <link href="<?php echo Yii::app()->baseUrl?>/js/ymPrompt/skin/qq/ymPrompt.css" rel="stylesheet" type="text/css" />
 </head>
 <?php
+Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_PATH.'retouch/bootstrap.css');
+
       $userid = Yii::app()->controller->module->getComponent('user')->id;
       $sql = 'SELECT * FROM `'.Yii::app()->params['tablePrefix'].'itemchildren` LEFT JOIN `'.Yii::app()->params['tablePrefix'].'items` ON child = NAME WHERE parent IN (SELECT itemname FROM `'.Yii::app()->params['tablePrefix'].'assignments` WHERE userid = '.$userid.') ORDER BY sort asc';
 
