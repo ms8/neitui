@@ -223,15 +223,15 @@ class SiteController extends Controller
     }
 
     public function actionDirectReset(){
-        if(!Yii::app()->user->isGuest && isset($_GET['password'])){
+        if(!Yii::app()->user->isGuest && isset($_POST['password'])){
             $member_id = Yii::app()->user->id;
             $memberModel = new Member();
-            $memberModel->password = $_GET['password'];
+            $memberModel->password = $_POST['password'];
             $memberModel->salt=Helper::randomCode();//加盐值
             $memberModel->password=$memberModel->hashPassword();
-            Member::model()->updateByPk($member_id,array('password'=>$memberModel->password,
-                'salt'=>$memberModel->salt));
-            $this->redirect(Yii::app()->request->urlReferrer);
+            Member::model()->updateByPk($member_id,array('password'=>$memberModel->password, 'salt'=>$memberModel->salt));
+            die(CJSON::encode(array('status'=>1)));
+//            $this->redirect(Yii::app()->request->urlReferrer);
         }else{
             //取公司信息:已验证的公司
             $companys = MsCompany::model()->findAllByAttributes(array('status'=>'2'));
