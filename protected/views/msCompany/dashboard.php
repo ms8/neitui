@@ -315,11 +315,11 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
         var $that = $(this),
             tags = $("#MsCompany_tags").val(),
             removeTag = $that.prev("span").html();
-        $("#MsCompany_tags").val($.trim(tags.replace(removeTag, "")));
+        $("#MsCompany_tags").val($.trim(tags.replace(removeTag+" ", "").replace(removeTag, "")));
         $.ajax({
             type:'POST',
             dataType:'json',
-            data:{MsCompany:{tags: $.trim(tags.replace(removeTag, ""))}},
+            data:{MsCompany:{tags: $.trim(tags.replace(removeTag+" ", "").replace(removeTag, ""))}},
             url:"<?php echo Yii::app()->baseUrl.'/mscompany/update'?>",
             success:function(data) {
                 $that.parent().remove();

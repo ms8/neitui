@@ -1,6 +1,3 @@
-<?php
-Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'validate.js', CClientScript::POS_BEGIN);
-?>
 <section class="pad-25" id="action-box" xmlns="http://www.w3.org/1999/html">
     <div class="container">
         <div class="subpage-title noline">
@@ -17,9 +14,9 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'valida
                     </label>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">重复新密码:</label>
+                    <label class="col-sm-2 control-label">确认新密码:</label>
                     <div class="col-sm-5">
-                        <input name="password_confirm" class="form-control" type="password" placeholder="重复新密码">
+                        <input name="password_confirm" class="form-control" type="password" placeholder="确认新密码">
                     </div>
                     <label  class="col-sm-4  errorMessage text-left" error-message="password_confirm">
                     </label>
@@ -51,21 +48,42 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'valida
         ], function(errors, event) {
             if (errors.length > 0) {
                 for(var i = 0; i < errors.length ; i++){
-                    $("label[error-message='"+errors[i].name +"']").append(errors[i].message);
+                    $("label[error-message='"+errors[i].name +"']").empty().append(errors[i].message);
                 }
             }
         });
         //提交表单
-        $("#resetPwd").click(function(){
-            $("#resetPassword").ajaxSubmit({
-                url:"<?php echo Yii::app()->createUrl('site/directReset'); ?>",
-                dataType:"json",
-                type:"post",
-                success:function(data){
-                    data = JSON.parse(data);
+        $("#resetPwd").click((function(validate){
+            return function(){
+                if(validate._validateForm($("#resetPassword")[0])){
+                    $(".errorMessage").each(function(){
+                        $(this).empty();
+                    });
+                    $("#resetPassword").ajaxSubmit({
+                        url:"<?php echo Yii::app()->createUrl('site/directReset'); ?>",
+                        dataType:"json",
+                        type:"post",
+                        success:function(data){
+                            var $target = $('#resetPwd');
+                            if($("#successPopover").length == 0 ){
+                                $target.popover({
+                                    placement:"right",
+                                    html:true,
+                                    trigger:"manual",
+                                    container:"body",
+                                    title:"",
+                                    content:'<div id="successPopover">密码已经修改</div>'
+                                });
+                            }
+                            $target.popover('show');
+                            setTimeout(function(){
+                                $target.popover('hide');
+                            },2000);
+                        }
+                    })
                 }
-            })
-        })
+            }
+        })(validator))
 
     })
 </script>

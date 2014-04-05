@@ -1,7 +1,7 @@
 <section class="pad-25" id="action-box" xmlns="http://www.w3.org/1999/html">
     <div class="container">
-        <div class="alert">
-            <strong>修改密码</strong>
+        <div class="subpage-title noline">
+            <h5>修改密码</h5>
         </div>
         <div class="action-box">
             <form class="form-horizontal" action="<?php echo Yii::app()->createUrl('site/directReset');?>">

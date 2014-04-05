@@ -21,6 +21,7 @@
     Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery.form.js');
 //    Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery.proximity.js');
     Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_GLOBAL.'bootstrap.js');
+    Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'validate.js');
     ?>
     <style type="text/css">
     </style>
@@ -80,7 +81,7 @@
                                     <li><a href="<?php echo Yii::app()->createUrl('/kongjian/application')?>">投递职位</a></li>
                                     <li><a href="<?php echo Yii::app()->createUrl('/kongjian/information')?>">个人信息</a></li>
                                     <li><a href="<?php echo Yii::app()->createUrl('/kongjian/jianli')?>">我的简历</a></li>
-                                    <li><a href="<?php echo Yii::app()->createUrl('/kongjian/changepwd')?>">修改密码</a></li>
+                                    <li><a href="<?php echo Yii::app()->createUrl('/mscompany/changepwd')?>">修改密码</a></li>
                                 </ul>
                             </li>
                         <?php   }else{ ?>
@@ -223,22 +224,23 @@
                 <h4 class="modal-title">登录</h4>
             </div>
             <div class="modal-body">
-                <form role="form" method="post" action="<?php echo Yii::app()->createUrl('site/login')?>" class="form-horizontal" >
+                <form role="form" method="post" id="loginForm" action="<?php echo Yii::app()->createUrl('site/login')?>" class="form-horizontal" >
                     <div class="form-group">
-                        <label for="username" class="col-sm-2 control-label">用户名:</label>
-                        <div class="col-sm-9">
-                            <input type="text" required="" placeholder="用户名"  id="username" class="form-control"/>
+                        <label for="username" class="col-sm-2 control-label">账号:</label>
+                        <div class="col-sm-7">
+                            <input type="text" required="" placeholder="账号"  id="username" name="username" class="form-control"/>
                         </div>
+                        <div class="col-sm-3 errorMessage"></div>
                     </div>
                     <div class="form-group">
                         <label for="password" class="col-sm-2 control-label">密码:</label>
-                        <div class="col-sm-9">
-                            <input type="password" required=""  placeholder="密码" id="password" class="form-control"/>
+                        <div class="col-sm-7">
+                            <input type="password" required=""  placeholder="密码" id="password" name="password" class="form-control"/>
                         </div>
-                        <span id="errMsg" style="display:none;color: red"></span>
+                        <div class="col-sm-3 errorMessage" ></div>
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
+                        <div class="col-sm-offset-2 col-sm-4">
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" name="autoLogin" checked="checked" id="remember"/> 记住我
@@ -246,6 +248,7 @@
                                 <a target="_blank"  href="<?php echo Yii::app()->request->hostInfo.Yii::app()->homeUrl.'/site/forgetpassword'?>">忘记密码？</a>
                             </div>
                         </div>
+                        <div id="loginErr" class="col-sm-6 errorMessage"></div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
@@ -268,7 +271,7 @@
                 <h4 class="modal-title">注册用户</h4>
             </div>
             <div class="modal-body">
-                <form role="form" method="post" action="<?php echo Yii::app()->createUrl('site/login')?>"  class="form-horizontal" >
+                <form role="form" method="post"  class="form-horizontal" >
                     <div class="form-group">
                         <label class="col-sm-2 control-label">角色:</label>
                         <div class="col-sm-10">
@@ -283,7 +286,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">用户名:</label>
+                        <label class="col-sm-2 control-label">账号:</label>
                         <div class="col-sm-9">
                             <input type="text" required="" onblur="checkUser(this)" placeholder="请输入邮箱地址"  id="email" class="form-control" />
                         </div>
@@ -320,23 +323,46 @@
 </body>
 
 <script type="text/javascript">
+    //表单校验
+    var loginValitor = new FormValidator('loginForm', [{
+        name: 'username',
+        display: '账号',
+        rules: 'required'
+    },{
+        name: 'password',
+        display: '密码',
+        rules: 'required'}
+    ], function(errors) {
+        if (errors.length > 0) {
+            for(var i = 0; i < errors.length ; i++){
+                $("#"+errors[i].id).parent().next().empty().append(errors[i].message);
+//                $("label[error-message='"+errors[i].name +"']").empty().append(errors[i].message);
+            }
+        }
+    });
     function login(){
         var username = $("#username").val();
         var password = $("#password").val();
-        $.ajax({
-            type:'POST',
-            dataType:'json',
-            data:{'username':username,'password':password},
-            url:'<?php echo Yii::app()->createUrl('site/login')?>',
-            success:function(data) {
-                if(data == 'fail'){
-                    $("#errMsg").text('用户名或密码错误');
-                    $("#errMsg").show();
-                }else {
-                    window.location.href="<?php echo Yii::app()->baseUrl?>"+data;
+        $("#loginErr").text("");
+        if(loginValitor._validateForm($("#loginForm")[0])){
+            $(".errorMessage").each(function(){
+                $(this).empty();
+            });
+            $.ajax({
+                type:'POST',
+                dataType:'json',
+                data:{'username':username,'password':password},
+                url:'<?php echo Yii::app()->createUrl('site/login')?>',
+                success:function(data) {
+                    if(data == 'fail'){
+                        $("#loginErr").text('用户名或密码错误');
+                    }else {
+                        window.location.href="<?php echo Yii::app()->baseUrl?>"+data;
+                    }
                 }
-            }
-        });
+            });
+        }
+
     }
     var user_conflict=false;
     function checkUser(obj){
