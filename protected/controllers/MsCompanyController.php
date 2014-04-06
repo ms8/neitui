@@ -325,6 +325,7 @@ class MsCompanyController extends Controller
 	public function actionIndex()
 	{
         $criteria = new CDbCriteria;
+        $criteria->order = 'updatetime desc';
 		$dataProvider=new CActiveDataProvider('MsCompany',array(
                 'criteria'=>$criteria,
                 'pagination' => array(

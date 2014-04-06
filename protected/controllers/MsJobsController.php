@@ -162,6 +162,9 @@ class MsJobsController extends Controller
                 //同步更新权重表中的对应城市
                 $wm = new WeightManage();
                 $wm->cityUpdate($company->id,$model->citycode);
+                //同步更新公司表的updatetime，因为公司列表页面取数是从公司表取的，希望取的最新发布了职位的公司
+                $company->updatetime = date("Y-m-d H:i:s");
+                $company->update(false);
                 die(CJSON::encode($model));
             }
 //				$this->redirect(array('view','id'=>$model->id));
