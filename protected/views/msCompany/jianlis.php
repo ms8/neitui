@@ -20,7 +20,7 @@
                     <td>
                         <a id="<?php  echo $jobinfo['jobid'] ?>" data-toggle="modal" data-target="#job"
                            onclick="setJob(this)" href="#">
-                            <i class="icon-external-link"></i>&nbsp<?php  echo $jobinfo['title'] ?>
+                            <i class="icon-eye-open"></i>&nbsp<?php  echo $jobinfo['title'] ?>
                         </a>
                     </td>
                     <td>

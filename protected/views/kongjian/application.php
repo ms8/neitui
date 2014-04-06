@@ -1,41 +1,39 @@
 <section class="pad-25" id="action-box">
     <div class="container">
-        <div class="alert">
-            <strong>已投递的职位</strong>
+        <div class="subpage-title noline">
+            <h5>已投递的职位</h5>
         </div>
-        <div class="action-box">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th style="width: 40%">公司</th>
-                    <th style="width: 40%">职位</th>
-                    <th style="width: 20%">投递时间</th>
-                </tr>
-                </thead>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th style="width: 40%">公司</th>
+                <th style="width: 40%">职位</th>
+                <th style="width: 20%">投递时间</th>
+            </tr>
+            </thead>
 
-                <tbody>
-                <?php foreach ($jobs as $key => $value) {?>
-                    <tr>
-                        <td>
-                            <a href="<?php echo Yii::app()->createUrl('mscompany/view',array('id'=>$value->company_id)); ?>">
-                                <?php  $company = MsCompany::model()->findByPk($value->company_id);
-                                echo $company->name ?>
-                            </a>
-                        </td>
-                        <td>
-                            <a href="<?php echo Yii::app()->createUrl('msjobs/view',array('id'=>$value->job_id)); ?>">
-                                <?php  $job = MsJobs::model()->findByPk($value->job_id);
-                                echo $job->title ?>
-                            </a>
-                        </td>
-                        <td>
-                            <?php  echo $value->createtime ?>
-                        </td>
-                    </tr>
-                <?php } ?>
-                </tbody>
-             </table>
-        </div>
+            <tbody>
+            <?php foreach ($jobs as $key => $value) {?>
+                <tr>
+                    <td>
+                        <a href="<?php echo Yii::app()->createUrl('mscompany/view',array('id'=>$value->company_id)); ?>">
+                            <i class="icon-eye-open"></i>&nbsp&nbsp<?php  $company = MsCompany::model()->findByPk($value->company_id);
+                            echo $company->name ?>
+                        </a>
+                    </td>
+                    <td>
+<!--                        <a href="--><?php //echo Yii::app()->createUrl('msjobs/view',array('id'=>$value->job_id)); ?><!--">-->
+                            <?php  $job = MsJobs::model()->findByPk($value->job_id);
+                            echo $job->title ?>
+<!--                        </a>-->
+                    </td>
+                    <td>
+                        <?php  echo $value->createtime ?>
+                    </td>
+                </tr>
+            <?php } ?>
+            </tbody>
+         </table>
     </div>
 </section>
 
