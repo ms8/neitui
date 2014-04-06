@@ -109,7 +109,7 @@ class MsCompanyController extends Controller
                     $company = MsCompany::model()->findByPk($_POST['cid']);
                     //查询所有的职位城市
                     $jobs = MsJobs::model()->findAllByAttributes(array('company_id'=>$_POST['cid']));
-                    $citycodes = '';
+                    $citycodes = ';';
                     foreach($jobs as $job){
                         $citycodes=$citycodes.$job->citycode.';';
                     }

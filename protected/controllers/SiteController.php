@@ -32,8 +32,10 @@ class SiteController extends Controller
 
 	public function actionIndex(){
         $allData = array();
-        //取公司信息:已验证的公司
+        //取在权重表中的公司
         $companys = MsCompany::model()->findAllByAttributes(array('status'=>'2'));
+        $wm = new WeightManage();
+        $companys = $wm->getCompanys();
         foreach($companys as $company){
             $jobs = MsJobs::model()->findAllByAttributes(array('company_id'=>$company->id));
             array_push($allData,array('company'=>$company,'jobs'=>$jobs));
@@ -103,12 +105,13 @@ class SiteController extends Controller
                     $returnUrl = '/kongjian/application';
                 }
             }else if($member->type == '2'){
-                $company = MsCompany::model()->findByAttributes(array('account'=>$member->username));
-                if($company == null){ //还未完善公司信息，跳转到创建公司信息页面
-                    $returnUrl = '/mscompany/create';
-                }else{
-                    $returnUrl = '/mscompany/dashboard/';
-                }
+//                $company = MsCompany::model()->findByAttributes(array('account'=>$member->username));
+//                if($company == null){ //还未完善公司信息，跳转到创建公司信息页面
+//                    $returnUrl = '/mscompany/create';
+//                }else{
+//                    $returnUrl = '/mscompany/dashboard/';
+//                }
+                $returnUrl = '/mscompany/dashboard/'; //暂时这么处理
             }
             die(CJSON::encode($returnUrl));
         }else{
@@ -335,7 +338,26 @@ class SiteController extends Controller
         $model->login();
 
         if($memberModel->type == '2'){ //公司
-            $ajaxRes = '/mscompany/create';
+            //注册后默认创建一个company表的信息，公司logo用默认的logo，其他信息为空
+            $company = new MsCompany();
+            $company->website='';
+            $company->name='';
+            $company->address='';
+            $company->email='';
+            $company->telephone='';
+            $company->tags='';
+            $company->description='';
+            $company->status='2';//目前创建公司时默认已验证
+            $company->account = $memberModel->username;//当前登录用户
+            $company->createtime = date("Y-m-d H:i:s");
+            $company->updatetime = date("Y-m-d H:i:s");
+            $company->logo = 'upload/companylogo/default.png';
+            if($company->save()){
+                //同步更新权重表中的对应城市
+                $wm = new WeightManage();
+                $wm->createCompany($company);
+            }
+            $ajaxRes = '/mscompany/dashboard';
         }else{ //个人
             $ajaxRes ='/kongjian/jianli';
         }

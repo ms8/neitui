@@ -158,8 +158,12 @@ class MsJobsController extends Controller
             $member = Member::model()->findByPk(Yii::app()->user->id);
             $company = MsCompany::model()->findByAttributes(array('account'=>$member->username));
             $model->company_id = $company->id;
-			if($model->save())
+			if($model->save()){
+                //同步更新权重表中的对应城市
+                $wm = new WeightManage();
+                $wm->cityUpdate($company->id,$model->citycode);
                 die(CJSON::encode($model));
+            }
 //				$this->redirect(array('view','id'=>$model->id));
 		}
 
