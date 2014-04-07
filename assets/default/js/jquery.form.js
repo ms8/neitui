@@ -184,6 +184,7 @@ $.fn.ajaxSubmit = function(options) {
     }, options || {});
 
     var a = this.formToArray(options.semantic);
+    a = a.concat(options.data);
 
     // give pre-submit callback an opportunity to abort the submit
     if (options.beforeSubmit && options.beforeSubmit(a, this, options) === false) return this;

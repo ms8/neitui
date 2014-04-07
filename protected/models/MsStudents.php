@@ -24,6 +24,8 @@
  * @property string $skill
  * @property string $createtime
  * @property string $updatetime
+ * @property string $image
+ * @property string $description
  */
 class MsStudents extends CActiveRecord
 {
@@ -63,11 +65,12 @@ class MsStudents extends CActiveRecord
 			array('hasoffer, sex', 'length', 'max'=>1),
 			array('degree, universitytype, jianglitype', 'length', 'max'=>10),
 			array('projects', 'length', 'max'=>2000),
-			array('peixun, skill', 'length', 'max'=>1000),
+			array('peixun, skill, description', 'length', 'max'=>1000),
+			array('image', 'length', 'max'=>100),
 			array('graduatetime, createtime, updatetime', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, mid, username, realname, phone, graduatetime, hasoffer, sex, degree, degreename, universitytype, universitytypename, universityname, jianglitype, jiangliname, projects, peixun, skill, createtime, updatetime', 'safe', 'on'=>'search'),
+			array('id, mid, username, realname, phone, graduatetime, hasoffer, sex, degree, degreename, universitytype, universitytypename, universityname, jianglitype, jiangliname, projects, peixun, skill, createtime, updatetime, image, description', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -91,24 +94,25 @@ class MsStudents extends CActiveRecord
 			'id' => 'ID',
 			'mid' => 'Mid',
 			'username' => 'Username',
-
-            'degreename' => 'Degreename',
+			'realname' => '姓名：',
+			'phone' => '手机：',
 			'graduatetime' => 'Graduatetime',
-            'realname' => '姓名：',
-            'phone' => '手机号码：',
-            'sex' => '性别：',
-            'degree' => '学历：',
-            'hasoffer' => '已经找到工作？',
-            'universitytype' => '学校类型：',
-            'universitytypename' => 'Universitytypename',
-            'universityname' => '学校名称：',
-            'jianglitype' => '曾获奖励：',
-            'jiangliname' => 'Jiangliname',
-            'projects' => '项目经验：',
-            'peixun' => '培训经历：',
-            'skill' => '你的技能特长：',
+			'hasoffer' => 'Hasoffer',
+			'sex' => '性别：',
+			'degree' => 'Degree',
+			'degreename' => 'Degreename',
+			'universitytype' => 'Universitytype',
+			'universitytypename' => 'Universitytypename',
+			'universityname' => 'Universityname',
+			'jianglitype' => 'Jianglitype',
+			'jiangliname' => 'Jiangliname',
+			'projects' => 'Projects',
+			'peixun' => 'Peixun',
+			'skill' => 'Skill',
 			'createtime' => 'Createtime',
 			'updatetime' => 'Updatetime',
+			'image' => 'Image',
+			'description' => 'Description',
 		);
 	}
 
@@ -143,6 +147,8 @@ class MsStudents extends CActiveRecord
 		$criteria->compare('skill',$this->skill,true);
 		$criteria->compare('createtime',$this->createtime,true);
 		$criteria->compare('updatetime',$this->updatetime,true);
+		$criteria->compare('image',$this->image,true);
+		$criteria->compare('description',$this->description,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

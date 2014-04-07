@@ -30,7 +30,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
                         </div>
                     </div>
                 </div>
-                <div class="post-wrapper widget">
+                <div class="post-wrapper widget pad-bottom-25">
                     <div>
                         <div class="subpage-title noline">
                             <h5>招聘职位</h5>
@@ -279,7 +279,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
             url:"<?php echo Yii::app()->baseUrl.'/mscompany/update' ?>",
             dataType:"html",
             type:"post",
-            data:{MsCompany:{description:encodeURIComponent(tempHtml)}},
+            data:[{name:"MsCompany[description]",value:tempHtml}],
             success:function(data){
                 data = JSON.parse(data);
                 $("#intro-info").prevAll("h4").html(data.name);

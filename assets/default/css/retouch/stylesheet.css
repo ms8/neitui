@@ -1664,7 +1664,9 @@ address {
     margin-bottom: 20px;
 }
 /*公司编辑*/
-.intro-logo{width: 190px;height: 190px;}
+.intro-logo,.intro-image{
+    width: 190px;height: 190px;
+}
 .absolute-right-20{
     position: absolute;
     top:20px;
@@ -1738,7 +1740,7 @@ address {
 }
 .c_detail{
     position: relative;
-    min-height: 150px;
+    min-height: 145px;
 }
 .c_detail .form-group{
     margin-bottom: 5px;
@@ -1829,4 +1831,8 @@ address {
 .errorMessage{
     padding-top: 11px;
     color: #E74C3C;
+}
+/*个人信息项目经历描述*/
+.peixun-show,.project-show{
+    padding-right: 10px;
 }
