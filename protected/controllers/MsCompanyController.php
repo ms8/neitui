@@ -208,14 +208,18 @@ class MsCompanyController extends Controller
             if($picPath == ""){
                 $msg = "保存图片失败";
             }else{
-                $model->status='1';//未验证
+                $model->status='2';//目前创建公司时默认已验证
                 $member = MsMember::model()->findByPk(Yii::app()->user->id);
                 $model->account = $member->username;//当前登录用户
                 $model->createtime = date("Y-m-d H:i:s");
                 $model->updatetime = date("Y-m-d H:i:s");
                 $model->logo = $picPath;
-                if($model->save())
+                if($model->save()){
+                    //同步更新权重表中的对应城市
+                    $wm = new WeightManage();
+                    $wm->createCompany($model);
                     $this->redirect(array('dashboard'));
+                }
             }
 //
 //            if($model->save())
@@ -321,6 +325,7 @@ class MsCompanyController extends Controller
 	public function actionIndex()
 	{
         $criteria = new CDbCriteria;
+        $criteria->order = 'updatetime desc';
 		$dataProvider=new CActiveDataProvider('MsCompany',array(
                 'criteria'=>$criteria,
                 'pagination' => array(

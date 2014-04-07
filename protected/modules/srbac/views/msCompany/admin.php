@@ -83,8 +83,12 @@ $this->breadcrumbs=array(
             data:{'cid':cid},
             url:'<?php echo Yii::app()->baseUrl.'/srbac/mscompany/weight'?>',
             success:function(data) {
-                //alert();
-                window.location.reload();
+                if(data == true){
+                    alert('设置成功');
+                    //window.location.reload();
+                }else{
+                    alert('设置失败');
+                }
             }
         });
     }
