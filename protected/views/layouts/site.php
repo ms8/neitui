@@ -17,11 +17,12 @@
     Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_PATH.'retouch/bootstrap.css');
     Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_PATH.'retouch/skins.css');
     Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_PATH.'retouch/stylesheet.css');
-    Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery-1.7.1.min.js');
-    Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery.form.js');
+    Yii::app()->clientScript->registerCoreScript('jquery');
+//    Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery-1.7.1.min.js');
+    Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery.form.min.js');
 //    Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery.proximity.js');
-    Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_GLOBAL.'bootstrap.js');
-    Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'validate.js');
+    Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_GLOBAL.'bootstrap.min.js');
+    Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'validate.min.js');
     ?>
     <style type="text/css">
     </style>
@@ -191,17 +192,17 @@
                     <ul class="flickr-photos-list">
                         <li>
                             <a href="http://farm8.staticflickr.com/7373/10412001266_483a1e4c9d_b.jpg">
-                                <img alt="Jackie Martinez (#9963)" src="http://farm8.staticflickr.com/7373/10412001266_483a1e4c9d_s.jpg">
+<!--                                <img alt="Jackie Martinez (#9963)" src="http://farm8.staticflickr.com/7373/10412001266_483a1e4c9d_s.jpg">-->
                             </a>
                         </li>
                         <li>
                             <a href="http://farm4.staticflickr.com/3705/10278343103_dd92d24d07_b.jpg">
-                                <img alt="Tim Atlas - Lost in the Waiting Album Cover" src="http://farm4.staticflickr.com/3705/10278343103_dd92d24d07_s.jpg">
+<!--                                <img alt="Tim Atlas - Lost in the Waiting Album Cover" src="http://farm4.staticflickr.com/3705/10278343103_dd92d24d07_s.jpg">-->
                             </a>
                         </li>
                         <li>
                             <a href="http://farm9.staticflickr.com/8552/10217169844_a83bb0c26f_b.jpg">
-                                <img alt="Ortofon Concorde S-120 (#1211)" src="http://farm9.staticflickr.com/8552/10217169844_a83bb0c26f_s.jpg">
+<!--                                <img alt="Ortofon Concorde S-120 (#1211)" src="http://farm9.staticflickr.com/8552/10217169844_a83bb0c26f_s.jpg">-->
                             </a>
                         </li>
                         </ul>

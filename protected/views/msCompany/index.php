@@ -1,15 +1,15 @@
 <?php
 /* @var $this MsCompanyController */
 /* @var $dataProvider CActiveDataProvider */
-
-$this->breadcrumbs=array(
-	'Ms Companies',
-);
-
-$this->menu=array(
-	array('label'=>'Create MsCompany', 'url'=>array('create')),
-	array('label'=>'Manage MsCompany', 'url'=>array('admin')),
-);
+//
+//$this->breadcrumbs=array(
+//	'Ms Companies',
+//);
+//
+//$this->menu=array(
+//	array('label'=>'Create MsCompany', 'url'=>array('create')),
+//	array('label'=>'Manage MsCompany', 'url'=>array('admin')),
+//);
 ?>
 <section>
     <div class="container">
@@ -31,7 +31,7 @@ $this->menu=array(
      'template'=>'<div class="list">{items}</div>{pager}',
     'pager'=>array(
         'class'=>'CLinkPager',
-        'cssFile'=>"pagination",
+//        'cssFile'=>"pagination",
         'htmlOptions'=>array('class'=>'pagination'),
         'selectedPageCssClass'=>'active',
         'hiddenPageCssClass'=>'disabled',

@@ -1,9 +1,9 @@
 <?php
 Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_PATH.'umeditor/css/umeditor.css');
 Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umeditor/umeditor.config.js', CClientScript::POS_BEGIN);
-Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umeditor/umeditor.js', CClientScript::POS_BEGIN);
+Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umeditor/umeditor.min.js', CClientScript::POS_BEGIN);
 Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umeditor/zh-cn.js', CClientScript::POS_BEGIN);
-Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.js', CClientScript::POS_BEGIN);
+Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.min.js', CClientScript::POS_BEGIN);
 ?>
 <section id="action-box">
     <div class="container  pad-25">

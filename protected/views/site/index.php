@@ -1,6 +1,6 @@
 <?php
 Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_PATH.'photowall.css');
-Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery.proximity.js', CClientScript::POS_BEGIN);
+Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery.proximity.min.js', CClientScript::POS_BEGIN);
 ?>
 
 <!-- Main Container -->
