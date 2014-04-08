@@ -173,11 +173,11 @@
                         <h5>关注我们</h5>
                     </div>
                     <ul class="social-links">
-                        <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a></li>
-                        <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#" class="pinterest"><i class="fa fa-pinterest"></i></a></li>
-                        <li><a href="#" class="rss"><i class="fa fa-rss"></i></a></li>
+                        <li><a href="http://weibo.com/kuairuzhi" class="facebook" target="_blank"><i class="icon-weibo"></i></a></li>
+                         <li><a href="#" class="google-plus"><img alt="快入职微信号" src="<?php echo Yii::app()->baseUrl.CSS_PATH.'/images/weixin.png'?>" width="20px"/></a></li>
+<!--                        <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>-->
+<!--                        <li><a href="#" class="pinterest"><i class="fa fa-pinterest"></i></a></li>-->
+<!--                        <li><a href="#" class="rss"><i class="fa fa-rss"></i></a></li>-->
                     </ul>
                 </div>
                 <!-- /.tagcloud -->

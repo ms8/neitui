@@ -176,7 +176,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="inputEmail3" class="col-sm-2 control-label">职位描述：</label>
+                                            <label for="inputEmail3" class="col-sm-2 control-label">公司描述：</label>
                                             <div class="col-sm-8">
                                                 <script type="text/plain" id="myEditor"><?php echo $model->description?></script>
                                             </div>
@@ -205,7 +205,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
                         <input  id="MsCompany_tags" type="hidden" value="<?php echo $model->tags?>" />
                         <ul id="hasLabels" class="tagcloud-list">
                             <?php
-                            $tags = explode(' ',$model->tags);
+                            $tags = empty($model->tags) ? array() : explode(' ',$model->tags);
                             foreach($tags as $tag){
                                 ?>
                                 <li>
@@ -336,7 +336,8 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
             return;
         }
         //新标签有内容继续处理
-        tags += " "+ newTags;
+        if(typeof tags == "string" && !!tags) {tags = tags + " ";}
+        tags += newTags;
         $("#MsCompany_tags").val(tags);
         $.ajax({
             type:'POST',

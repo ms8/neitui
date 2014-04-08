@@ -260,6 +260,8 @@ a:focus {
 }
 .social-links > li {
     display: inline-block;
+    float: left;
+    margin-right: 10px;
 }
 .social-links > li a {
     border: 1px solid #BDC3C7;
@@ -269,6 +271,12 @@ a:focus {
     line-height: 30px;
     text-align: center;
     width: 30px;
+}
+.social-links > li i{
+    line-height: 30px;
+}
+.social-links > li img {
+    padding-top: 5px;
 }
 .social-links > li a.facebook:hover {
     background-color: #2F5A9A;
