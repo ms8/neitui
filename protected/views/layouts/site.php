@@ -111,7 +111,8 @@
                                 <a href="#"data-toggle="modal" data-target="#registerModal">注册</a>
                             </li>
                             <li class="dropdown">
-                                <a data-toggle="dropdown" class="dropdown-toggle" href="#">关于我们</a>
+<!--                                <a data-toggle="dropdown" class="dropdown-toggle" href="#">关于我们</a>-->
+                                <a href="#"data-toggle="modal" data-target="#adviceModal">意见反馈</a>
                             </li>
                         <?php }?>
                     </ul>
@@ -215,6 +216,43 @@
     </div>
     <!-- /.container -->
 </footer>
+
+<!-- Modal advice-->
+<div class="modal fade" id="adviceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">意见反馈</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" method="post" id="adviceForm" action="" class="form-horizontal" >
+                    <div class="form-group">
+                        <label for="username" class="col-sm-2 control-label">邮箱:</label>
+                        <div class="col-sm-7">
+                            <input type="text" required="" placeholder="邮箱"  id="emailAdvice" name="emailAdvice" class="form-control"/>
+                        </div>
+                        <div class="col-sm-3 errorMessage"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="col-sm-2 control-label">意见:</label>
+                        <div class="col-sm-7">
+                            <textarea class="form-control" style="width:400px" rows="5" cols="60" id="adviceContent"
+                                   name="adviceContent"
+                               placeholder="请填写您的宝贵意见，快入职期待为您提供更好的服务"></textarea>
+                        </div>
+                        <div class="col-sm-3 errorMessage" ></div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button class="btn btn-flat flat-color col-sm-3" type="button" onclick="advice()" >提交</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div>
+</div>
 
 <!-- Modal login-->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -324,6 +362,25 @@
 </body>
 
 <script type="text/javascript">
+    function advice(){
+        var email = $("#emailAdvice").val();
+        var advice = $("#adviceContent").val();
+        $.ajax({
+            type:'POST',
+            dataType:'json',
+            data:{'email':email,'advice':advice},
+            url:'<?php echo Yii::app()->createUrl('site/advice')?>',
+            success:function(data) {
+                if(data == true){
+                    alert('提交成功,谢谢您的意见');
+                }else {
+                    alert('服务器正忙，请稍后提交');
+                }
+                $('#adviceModal').modal('toggle');
+            }
+        });
+    }
+
     //表单校验
     var loginValitor = new FormValidator('loginForm', [{
         name: 'username',

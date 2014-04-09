@@ -30,6 +30,15 @@ class SiteController extends Controller
         $this->render('privacy');
     }
 
+    public function actionAdvice(){
+        $email = $_POST['email'];
+        $advice = $_POST['advice'];
+
+        $mailSender = new MailerMsg();
+        $result = $mailSender->send($email,'admin@kuairuzhi.com',$advice);
+        die(CJSON::encode($result));
+    }
+
 	public function actionIndex(){
         $allData = array();
         //取在权重表中的公司
