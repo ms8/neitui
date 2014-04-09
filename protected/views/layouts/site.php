@@ -101,6 +101,10 @@
                             <li class="dropdown">
                                 <a href="<?php echo Yii::app()->createUrl('/site/logout')?>">退出</a>
                             </li>
+                            <li class="dropdown">
+                                <!--                                <a data-toggle="dropdown" class="dropdown-toggle" href="#">关于我们</a>-->
+                                <a href="#"data-toggle="modal" data-target="#adviceModal">意见反馈</a>
+                            </li>
                         <?php
                         } else {?>
                             <li class="dropdown">
@@ -362,6 +366,20 @@
 </body>
 
 <script type="text/javascript">
+    $(function(){
+        $(document).keydown(function(e){
+            var curKey = e.which;
+            if(curKey == 13){
+                if($("#myModal").is(":visible")){//登录框提交
+                    login();
+                }else if($("#registerModal").is(":visible")){//注册框提交
+                    register();
+                }
+            }
+        });
+    });
+
+
     function advice(){
         var email = $("#emailAdvice").val();
         var advice = $("#adviceContent").val();
