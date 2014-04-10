@@ -21,9 +21,9 @@ class Controller extends CController
 	 */
 	public $breadcrumbs=array();
 	public $pageKeyword=array(
-				'title'=>'面试吧',
-				'keywords'=>'应届生、内推',
-				'description'=>'测试简介',
+				'title'=>'快入职',
+				'keywords'=>'it 应届生 求职',
+				'description'=>'专注it类应届生求职，提供高品质服务',
 		);
 
 }

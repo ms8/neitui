@@ -36,10 +36,10 @@ class KongjianController extends Controller
     }
 
 	public function init(){
-		Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery-1.7.1.min.js');
-		Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery.form.js');
-		Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_PATH.'common.css');
-		Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_PATH.'kongjian.css');
+//		Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery-1.7.1.min.js');
+//		Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery.form.js');
+//		Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_PATH.'common.css');
+//		Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_PATH.'kongjian.css');
 		$this->filePath=array(
 	     // 1=>Yii::app()->baseUrl.'/upload/user_photo/'.date('Y-m-d').'/',//套系(从upload目录开始)
             1=>'upload/user_photo/'.date('Y-m-d').'/',//套系(从upload目录开始)

@@ -50,28 +50,6 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery
                     </a>
                 </li>
             <?php }?>
-            <li><a href="#"><img src="<?php echo Yii::app()->baseUrl.CSS_PATH?>images/thumbs/1.jpg" /><div class="pe-description"><h3>time</h3><p>Since time, and his predestinated end</p></div></a></li>
-            <li><a href="#"><img src="<?php echo Yii::app()->baseUrl.CSS_PATH?>images/thumbs/3.jpg" /><div class="pe-description"><h3>virtue</h3><p>Whiles both his youth and virtue did intend</p></div></a></li>
-            <li><a href="#"><img src="<?php echo Yii::app()->baseUrl.CSS_PATH?>images/thumbs/4.jpg" /><div class="pe-description"><h3>endeavors</h3><p>The good endeavors of deserving praise</p></div></a></li>
-            <li><a href="#"><img src="<?php echo Yii::app()->baseUrl.CSS_PATH?>images/thumbs/5.jpg" /><div class="pe-description"><h3>monument</h3><p>What memorable monument can last</p></div></a></li>
-            <li><a href="#"><img src="<?php echo Yii::app()->baseUrl.CSS_PATH?>images/thumbs/6.jpg" /><div class="pe-description"><h3>name</h3><p>Whereon to build his never-blemished name</p></div></a></li>
-            <li><a href="#"><img src="<?php echo Yii::app()->baseUrl.CSS_PATH?>images/thumbs/7.jpg" /><div class="pe-description"><h3>life was graced</h3><p>But his own worth, wherein his life was graced</p></div></a></li>
-            <li><a href="#"><img src="<?php echo Yii::app()->baseUrl.CSS_PATH?>images/thumbs/8.jpg" /><div class="pe-description"><h3>the same</h3><p>Sith as that ever he maintained the same?</p></div></a></li>
-            <li><a href="#"><img src="<?php echo Yii::app()->baseUrl.CSS_PATH?>images/thumbs/9.jpg" /><div class="pe-description"><h3>oblivion</h3><p>Oblivion in the darkest day to come</p></div></a></li>
-            <li><a href="#"><img src="<?php echo Yii::app()->baseUrl.CSS_PATH?>images/thumbs/10.jpg" /><div class="pe-description"><h3>sin shall tread</h3><p>When sin shall tread on merit in the dust</p></div></a></li>
-            <li><a href="#"><img src="<?php echo Yii::app()->baseUrl.CSS_PATH?>images/thumbs/11.jpg" /><div class="pe-description"><h3>lamentable tomb</h3><p>Cannot rase out the lamentable tomb</p></div></a></li>
-            <li><a href="#"><img src="<?php echo Yii::app()->baseUrl.CSS_PATH?>images/thumbs/12.jpg" /><div class="pe-description"><h3>short-lived deserts</h3><p>Of his short-lived deserts; but still they must</p></div></a></li>
-            <li><a href="#"><img src="<?php echo Yii::app()->baseUrl.CSS_PATH?>images/thumbs/13.jpg" /><div class="pe-description"><h3>hearts and memories</h3><p>Even in the hearts and memories of men</p></div></a></li>
-            <li><a href="#"><img src="<?php echo Yii::app()->baseUrl.CSS_PATH?>images/thumbs/14.jpg" /><div class="pe-description"><h3>respect</h3><p>Claim fit respect, that they, in every limb</p></div></a></li>
-            <li><a href="#"><img src="<?php echo Yii::app()->baseUrl.CSS_PATH?>images/thumbs/15.jpg" /><div class="pe-description"><h3>comfort</h3><p>Remembering what he was, with comfort then</p></div></a></li>
-            <li><a href="#"><img src="<?php echo Yii::app()->baseUrl.CSS_PATH?>images/thumbs/16.jpg" /><div class="pe-description"><h3>pattern</h3><p>May pattern out one truly good, by him</p></div></a></li>
-            <li><a href="#"><img src="<?php echo Yii::app()->baseUrl.CSS_PATH?>images/thumbs/17.jpg" /><div class="pe-description"><h3>truly good</h3><p>For he was truly good, if honest care</p></div></a></li>
-            <li><a href="#"><img src="<?php echo Yii::app()->baseUrl.CSS_PATH?>images/thumbs/18.jpg" /><div class="pe-description"><h3>harmless conversation</h3><p>Of harmless conversation may commend</p></div></a></li>
-            <li><a href="#"><img src="<?php echo Yii::app()->baseUrl.CSS_PATH?>images/thumbs/19.jpg" /><div class="pe-description"><h3>recompensed</h3><p>Ill recompensed only in his end</p></div></a></li>
-            <li><a href="#"><img src="<?php echo Yii::app()->baseUrl.CSS_PATH?>images/thumbs/20.jpg" /><div class="pe-description"><h3>tongue</h3><p>Nor can the tongue of him who loved him least</p></div></a></li>
-            <li><a href="#"><img src="<?php echo Yii::app()->baseUrl.CSS_PATH?>images/thumbs/21.jpg" /><div class="pe-description"><h3>superlative</h3><p>To one superlative above the rest</p></div></a></li>
-            <li><a href="#"><img src="<?php echo Yii::app()->baseUrl.CSS_PATH?>images/thumbs/22.jpg" /><div class="pe-description"><h3>steady faith</h3><p>Of many men in steady faith reprove</p></div></a></li>
-
         </ul>
     </div>
 </section>
