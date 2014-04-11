@@ -8,15 +8,13 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery
 <!-- Container -->
 <section class="pad-top-25" id="our-services">
     <div class="container">
-        <div  class="sort_by_cat" id="filters" data-option-key="filter">
+        <div  class="filters" id="filters" data-option-key="filter">
             <span id="filter-up">公司所在城市：</span>
-            <a href="#filter" data-option-value="*" class="active_sort">北京</a>
+            <a href="<?php echo Yii::app()->baseUrl."/"?>" data-option-value="*" class="active_sort">北京</a>
             <span class="text-sep">/</span>
-            <a class="" href="#filter" data-option-value=".css_sort">上海</a>
-            <span class="text-sep">/</span>
-            <a class="" href="#filter" data-option-value=".html_sort">广州</a>
-            <span class="text-sep">/</span>
-            <a class="" href="#filter" data-option-value=".psd_sort">深圳</a>
+            <a class="disabled"  data-toggle="tooltip" title="抱歉，上海、广州、深圳的同学们还得等等">
+                上海<span class="text-sep">&nbsp/&nbsp</span>广州<span class="text-sep">&nbsp/&nbsp</span>深圳
+            </a>
         </div>
     </div>
     <!-- /.container -->
@@ -148,6 +146,9 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery
         $('.register_radio li input').click(function(e){
             $(this).parent('li').addClass('current').append('<em></em>').siblings().removeClass('current').find('em').remove();
         });
+        $('#filters .disabled').tooltip({
+            placement:"bottom"
+        })
     });
 
     $(function() {

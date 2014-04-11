@@ -138,7 +138,7 @@
             <div class="col-md-3">
                 <div class="widget about-us">
                     <div class="footer-brand"><span>快</span>入职</div>
-                    <p>快入职（隶属于北京搞起来科技有限公司）是专注应届生IT的招聘网站，以众多优质IT资源为依托，发布圈内招聘信息，为求职者提供人性化、个性化、专业化的信息服务，以让优质人才和优秀企业及时相遇为己任。</p>
+                    <p>快入职是专注IT类应届生的招聘网站，以众多优质IT资源为依托，发布圈内招聘信息，为IT应届生和优秀企业搭建快捷通道，以帮助应届生就业为己任。</p>
                 </div>
                 <!-- /.about-us -->
 
@@ -180,7 +180,7 @@
                     </div>
                     <ul class="social-links">
                         <li><a href="http://weibo.com/kuairuzhi" class="facebook" target="_blank"><i class="icon-weibo"></i></a></li>
-                         <li><a href="#" class="google-plus"><img alt="快入职微信号" src="<?php echo Yii::app()->baseUrl.CSS_PATH.'/images/weixin.png'?>" width="20px"/></a></li>
+                         <li><a href="javascript:;" class="weixin google-plus"><img alt="快入职微信号" src="<?php echo Yii::app()->baseUrl.CSS_PATH.'/images/weixin.png'?>" width="20px"/></a></li>
 <!--                        <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>-->
 <!--                        <li><a href="#" class="pinterest"><i class="fa fa-pinterest"></i></a></li>-->
 <!--                        <li><a href="#" class="rss"><i class="fa fa-rss"></i></a></li>-->
@@ -196,13 +196,14 @@
                     </div>
                     <ul class="flickr-photos-list">
                         <li>
-                            <a href="http://farm8.staticflickr.com/7373/10412001266_483a1e4c9d_b.jpg">
-<!--                                <img alt="Jackie Martinez (#9963)" src="http://farm8.staticflickr.com/7373/10412001266_483a1e4c9d_s.jpg">-->
+                            <a href="http://www.bcc.ac.cn/" target="_blank" title="北京市计算中心">
+                                <img alt="北京市计算中心" src="<?php echo Yii::app()->baseUrl.CSS_PATH.'/images/bcc.jpg'?>"/>
                             </a>
+
                         </li>
                         <li>
-                            <a href="http://farm4.staticflickr.com/3705/10278343103_dd92d24d07_b.jpg">
-<!--                                <img alt="Tim Atlas - Lost in the Waiting Album Cover" src="http://farm4.staticflickr.com/3705/10278343103_dd92d24d07_s.jpg">-->
+                            <a href="http://www.xinwaihui.com" target="_blank" title="新外汇">
+                                <img alt="新外汇" src="<?php echo Yii::app()->baseUrl.CSS_PATH.'/images/xinwaihui.jpg'?>"/>
                             </a>
                         </li>
                         <li>
@@ -376,6 +377,14 @@
                     register();
                 }
             }
+        });
+
+        $('.weixin').popover({
+            placement:"top",
+            html:true,
+            container:"body",
+            title:"",
+            content:'<img alt="快入职微信号" src="<?php echo Yii::app()->baseUrl.CSS_PATH.'/images/erweima.jpg'?>" width="150px"/>'
         });
     });
 

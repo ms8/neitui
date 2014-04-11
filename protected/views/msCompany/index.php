@@ -13,15 +13,13 @@
 ?>
 <section>
     <div class="container">
-    <div  class="sort_by_cat pad-top-25" id="filters" data-option-key="filter">
+    <div  class="filters pad-top-25" id="filters" data-option-key="filter">
         <span id="filter-up">公司所在城市：</span>
-        <a href="#filter" data-option-value="*" class="active_sort">北京</a>
+        <a href="<?php echo Yii::app()->baseUrl."/"?>" data-option-value="*" class="active_sort">北京</a>
         <span class="text-sep">/</span>
-        <a class="" href="#filter" data-option-value=".css_sort">上海</a>
-        <span class="text-sep">/</span>
-        <a class="" href="#filter" data-option-value=".html_sort">广州</a>
-        <span class="text-sep">/</span>
-        <a class="" href="#filter" data-option-value=".psd_sort">深圳</a>
+        <a class="disabled"  data-toggle="tooltip" title="抱歉，上海、广州、深圳的同学们还得等等">
+            上海<span class="text-sep">&nbsp/&nbsp</span>广州<span class="text-sep">&nbsp/&nbsp</span>深圳
+        </a>
     </div>
     <section class="pad-top-25">
 <?php $this->widget('zii.widgets.CListView', array(
@@ -45,5 +43,9 @@
         //菜单选中公司
         $(".nav li.active").removeClass("active");
         $(".nav li:eq(1)").addClass("active");
+
+        $('#filters .disabled').tooltip({
+            placement:"bottom"
+        })
     })
 </script>

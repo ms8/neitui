@@ -847,7 +847,7 @@ blockquote small {
 }
 .recent-posts > li {
     float: left;
-    margin-bottom: 10px;
+    /*margin-bottom: 10px;*/
     width: 100%;
 }
 .recent-posts > li:last-child {
@@ -865,7 +865,7 @@ blockquote small {
     height: 24px;
     margin-right: 10px;
     transition: all 0.2s ease 0s;
-    width: 50px;
+    width: 30px;
 }
 .recent-posts img:hover {
     opacity: 0.65;
@@ -929,6 +929,7 @@ blockquote small {
     height: 64px;
     transition: all 0.2s ease 0s;
     width: 64px;
+    opacity: 0.5;
 }
 .flickr-photos-list > li img:hover {
     opacity: 0.65;
@@ -1843,4 +1844,7 @@ address {
 /*个人信息项目经历描述*/
 .peixun-show,.project-show{
     padding-right: 10px;
+}
+.filters .disabled{
+    color: #cccccc;
 }
