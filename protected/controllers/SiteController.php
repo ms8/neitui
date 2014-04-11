@@ -360,7 +360,8 @@ class SiteController extends Controller
             $company->account = $memberModel->username;//当前登录用户
             $company->createtime = date("Y-m-d H:i:s");
             $company->updatetime = date("Y-m-d H:i:s");
-            $company->logo = 'upload/companylogo/default.png';
+            //$company->logo = 'upload/companylogo/default.png';
+            $company->logo = '';
             if($company->save()){
                 //同步更新权重表中的对应城市
                 $wm = new WeightManage();

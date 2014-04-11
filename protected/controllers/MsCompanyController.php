@@ -236,6 +236,9 @@ class MsCompanyController extends Controller
             $id = Yii::app()->user->id;
             $member = Member::model()->findByPk($id);
             $model = MsCompany::model()->findByAttributes(array('account'=>$member->username));
+            if($model->logo == null || $model->logo == ''){
+                $model->logo = 'upload/companylogo/default.jpg';
+            }
             $jobs = MsJobs::model()->findAllByAttributes(array('company_id'=>$model->id),
                 array('order'=>'createtime desc'));
             $citys = MsDictionary::model()->findAllByAttributes(array('type'=>'city'));
@@ -275,7 +278,7 @@ class MsCompanyController extends Controller
                     }
                     try{
                         //删除之前的图片
-                        if(!$old_path == false) $picCreate->deletePic($old_path);
+                        if($old_path != null && $old_path!='') $picCreate->deletePic($old_path);
                     }catch(Exception $e){
 
                     }
