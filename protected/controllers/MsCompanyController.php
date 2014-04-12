@@ -181,8 +181,12 @@ class MsCompanyController extends Controller
 	{
         /*取公司发布的职位信息*/
         $jobs = MsJobs::model()->findAllByAttributes(array('company_id'=>$id),array('order'=>'createtime desc'));
+        $model = $this->loadModel($id);
+        if($model->logo == null || $model->logo == ''){
+            $model->logo = 'upload/companylogo/default.jpg';
+        }
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+			'model'=>$model,
             'jobs'=>$jobs
 		));
 	}
@@ -267,6 +271,9 @@ class MsCompanyController extends Controller
             $company = MsCompany::model()->findByAttributes(array('account'=>$member->username));
             if(isset($_POST['MsCompany'])){
                 $company->attributes=$_POST['MsCompany'];
+                if(isset($_POST['editorValue']) && $_POST['editorValue']!=null){
+                    $company->description = $_POST['editorValue'];
+                }
                 if(isset($_FILES['logo']) && $_FILES['logo']!=null){ //更新logo
                     $old_path = $company->logo;
                     //上传图片

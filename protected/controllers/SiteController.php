@@ -47,6 +47,9 @@ class SiteController extends Controller
         $companys = $wm->getCompanys();
         foreach($companys as $company){
             $jobs = MsJobs::model()->findAllByAttributes(array('company_id'=>$company->id));
+            if($company->logo == null || $company->logo == ''){
+                $company->logo = 'upload/companylogo/default.jpg';
+            }
             array_push($allData,array('company'=>$company,'jobs'=>$jobs));
         }
         $this->render('index',array('companys'=>$allData));
@@ -369,7 +372,17 @@ class SiteController extends Controller
             }
             $ajaxRes = '/mscompany/dashboard';
         }else{ //个人
-            $ajaxRes ='/kongjian/jianli';
+            //注册后默认创建一个students表的信息
+            $student = new MsStudents();
+            $student->mid=$memberModel->id;
+            $student->username=$memberModel->username;
+            $student->createtime = date("Y-m-d H:i:s");
+            $student->updatetime = date("Y-m-d H:i:s");
+            if($student->save()){
+                $ajaxRes ='/kongjian/jianli';
+            }else{
+                //错误信息
+            }
         }
         if($result==false){
             $ajaxRes = "fail";

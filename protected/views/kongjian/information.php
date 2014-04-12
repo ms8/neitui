@@ -365,7 +365,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umedit
                 url:"<?php echo Yii::app()->baseUrl.'/kongjian/informationSave' ?>",
                 dataType:"html",
                 type:"post",
-                data:[{name:"MsStudents[description]",value:tempHtml}],
+//                data:[{name:"MsStudents[description]",value:tempHtml}],
                 success:function(data){
                     data = JSON.parse(data);
                     $(".intro-image img").attr("src","<?php echo Yii::app()->baseUrl.'/'?>"+data.model.image);

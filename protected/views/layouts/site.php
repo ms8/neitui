@@ -19,7 +19,7 @@
     Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_PATH.'retouch/stylesheet.css');
     Yii::app()->clientScript->registerCoreScript('jquery');
 //    Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery-1.7.1.min.js');
-    Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery.form.min.js');
+    Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery.form.js');
 //    Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery.proximity.js');
     Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_GLOBAL.'bootstrap.min.js');
     Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'validate.min.js');
@@ -54,7 +54,7 @@
                         <?php }else{?>
                         <li class="dropdown">
                         <?php }?>
-                            <a href="<?php echo Yii::app()->baseUrl?>">首页</a>
+                            <a href="<?php echo Yii::app()->baseUrl."/"?>">首页</a>
 <!--                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">首页</a>-->
 <!--                            <ul class="dropdown-menu">-->
 <!--                                <li class="active"><a href="index.html">Home Layout 1</a></li>-->

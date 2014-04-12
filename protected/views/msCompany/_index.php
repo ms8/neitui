@@ -8,7 +8,9 @@ if ($index%4===0 && $index !=0){
     <div class="team-member">
         <div class="member-thumb row">
             <div class="col-md-6">
-                <a href="<?php echo Yii::app()->baseUrl.'/mscompany/view/'.$data->id?>"><img alt="Member Image" class="img-responsive" src="<?php echo Yii::app()->baseUrl.'/'.$data->logo?>"></a>
+                <a href="<?php echo Yii::app()->baseUrl.'/mscompany/view/'.$data->id?>">
+                    <img alt="<?php echo CHtml::encode($data->name); ?>" class="img-responsive" src="<?php echo ($data->logo == null || $data->logo == '') ? (Yii::app()->baseUrl.'/'.'upload/companylogo/default.jpg') : (Yii::app()->baseUrl.'/'.$data->logo) ?>">
+                </a>
             </div>
             <div class="col-md-6">
                 <h5 class="member-name"><?php echo CHtml::encode($data->name); ?></h5>

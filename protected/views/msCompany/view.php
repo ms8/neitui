@@ -93,11 +93,13 @@
                     </div>
                     <ul class="tagcloud-list">
                         <?php
-                        $tags = explode(' ',$model->tags);
-                        foreach($tags as $tag){
-                            ?>
-                            <li><a href="#"><?php echo $tag?></a></li>
-                        <?php
+                        if($model->tags != null && $model->tags != ''){
+                            $tags = explode(' ',$model->tags);
+                            foreach($tags as $tag){
+                                echo '<li><a href="#">'. $tag .'</a></li>';
+                            }
+                        }else{
+                            echo '太低调了,还没公布公司印象.';
                         }
                         ?>
                     </ul>

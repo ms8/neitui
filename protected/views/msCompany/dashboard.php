@@ -279,7 +279,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
             url:"<?php echo Yii::app()->baseUrl.'/mscompany/update' ?>",
             dataType:"html",
             type:"post",
-            data:[{name:"MsCompany[description]",value:tempHtml}],
+//            data:[{name:"MsCompany[description]",value:tempHtml}],
             success:function(data){
                 data = JSON.parse(data);
                 $("#intro-info").prevAll("h4").html(data.name);

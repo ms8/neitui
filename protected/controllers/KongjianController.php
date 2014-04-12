@@ -286,6 +286,9 @@ class KongjianController extends Controller
           if($model==null){
               $model = new MsStudents();
           }
+          if($model->image == null || $model->image == ''){
+              $model->image = 'upload/companylogo/default.jpg';
+          }
           $this->render('information',array('uniarr'=>$uniarr,'jiangliarr'=>$jiangliarr,
               'degreearr'=>$degreearr,'model'=>$model));
 
@@ -316,6 +319,9 @@ class KongjianController extends Controller
                 $member = Member::model()->findByPk($id);
                 $model->mid=$id;
                 $model->username=$member->username;
+                if(isset($_POST['editorValue']) && $_POST['editorValue']!=null){
+                    $model->description = $_POST['editorValue'];
+                }
                 foreach($unitypes as $unitype){ //搜索对应的学校类型名称
                     if($unitype->code==$model->universitytype){
                         $model->universitytypename = $unitype->name;
@@ -363,6 +369,7 @@ class KongjianController extends Controller
                     $model->setIsNewRecord(false);
                     $model->update();
                 }
+                $model->description = "";
                 die(CJSON::encode(array('status'=>1,'model'=>$model)));
             }else{
                 die(CJSON::encode(array('status'=>0)));
