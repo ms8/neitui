@@ -340,10 +340,13 @@
                         <div class="col-sm-9">
                              <input type="password" required=""  placeholder="密码" id="rpassword" class="form-control"/>
                         </div>
-                        <span id="errRegMsg" style="display:none;color: red"></span>
+
+<!--                        <div style="clear:both"></div>-->
+<!--                        <label id="errRegMsg"  style="display:none;color: red" class="col-sm-5 control-label">用户名已经被注册</label>-->
+<!--                        <span id="errRegMsg"></span>-->
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
+                        <div class="col-sm-offset-2 col-sm-6">
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" class="checkbox valid" checked="checked" name="checkbox" id="checkbox"/>
@@ -352,6 +355,7 @@
                                 <a target="_blank" href="<?php echo Yii::app()->createUrl('/site/privacy')?>">《快入职用户协议》</a>
                             </div>
                         </div>
+                        <div id="errRegMsg" style="display: none" class="col-sm-3 errorMessage">用户名已经被注册</div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
@@ -462,7 +466,7 @@
                     $("#errRegMsg").show();
                     user_conflict = true;
                 }else{
-                    $("#beError").hide();
+                    $("#errRegMsg").hide();
                     user_conflict = false;
                 }
             }
