@@ -315,7 +315,7 @@
                 <h4 class="modal-title">注册用户</h4>
             </div>
             <div class="modal-body">
-                <form role="form" method="post"  class="form-horizontal" >
+                <form name="registerForm"  id="registerForm" role="form" method="post"  class="form-horizontal" >
                     <div class="form-group">
                         <label class="col-sm-2 control-label">角色:</label>
                         <div class="col-sm-10">
@@ -338,12 +338,16 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">密码:</label>
                         <div class="col-sm-9">
-                             <input type="password" required=""  placeholder="密码" id="rpassword" class="form-control"/>
+                             <input name="register_password" type="password" required=""  placeholder="密码" id="rpassword" class="form-control"/>
                         </div>
-
-<!--                        <div style="clear:both"></div>-->
-<!--                        <label id="errRegMsg"  style="display:none;color: red" class="col-sm-5 control-label">用户名已经被注册</label>-->
-<!--                        <span id="errRegMsg"></span>-->
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">确认密码:</label>
+                        <div class="col-sm-9">
+                            <input name="register_password_confirm" class="form-control" type="password" placeholder="确认密码">
+                        </div>
+<!--                        <label  class="col-sm-4  errorMessage text-left" error-message="password_confirm">-->
+<!--                        </label>-->
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-6">
@@ -359,7 +363,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button class="btn btn-flat flat-color col-sm-3" type="button" onclick="register()">注册</button>
+                            <button id="registerSubmit" class="btn btn-flat flat-color col-sm-3" type="button" >注册</button>
                         </div>
                     </div>
                 </form>
@@ -390,6 +394,37 @@
             title:"",
             content:'<img alt="快入职微信号" src="<?php echo Yii::app()->baseUrl.CSS_PATH.'/images/erweima.jpg'?>" width="150px"/>'
         });
+
+        //表单校验
+        var registerVal = new FormValidator('registerForm', [{
+            name: 'register_password',
+            display: '密码',
+            rules: 'required'
+        },{
+            name: 'register_password_confirm',
+            display: '确认密码',
+            rules: 'required|matches[register_password]'}
+        ], function(errors, event) {
+            if (errors.length > 0) {
+//                $("#errRegMsg").text(errors[0].name);
+//                $("#errRegMsg").show();
+                if (errors.length > 0) {
+                    for(var i = 0; i < errors.length ; i++){
+                        $("#errRegMsg").text(errors[i].message);
+                    }
+                    $("#errRegMsg").show();
+                }
+            }
+        });
+
+        //提交表单
+        $("#registerSubmit").click((function(validate){
+            return function(){
+                if(validate._validateForm($("#registerForm")[0])){
+                    register();
+                }
+            }
+        })(registerVal));
     });
 
 
@@ -472,6 +507,8 @@
             }
         });
     }
+
+
 
     function register(){
         var username = $("#email").val();
