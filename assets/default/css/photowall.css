@@ -32,6 +32,7 @@
 .pe-thumbs li a img{
     width:113px;
     opacity: 0.5;
+    border: 1px solid #DEE6E7;
 }
 .pe-thumbs li a div.pe-description{
     width: 230px;

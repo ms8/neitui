@@ -432,7 +432,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
     //编辑职位
     $(".job-operate .icon-edit").live("click",function(){
         var $jobInfo = $(this).parent().prev();
-        $("#accordion .panel-title a").not(".collapsed").each(function(){
+        $("#accordion .panel-title .accordion-toggle").not(".collapsed").each(function(){
             var collapseId = $(this).attr("href");
             $(collapseId).collapse('hide');
             $(this).addClass("collapsed");
