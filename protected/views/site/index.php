@@ -12,7 +12,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery
             <span id="filter-up">公司所在城市：</span>
             <a href="<?php echo Yii::app()->baseUrl."/"?>" data-option-value="*" class="active_sort">北京</a>
             <span class="text-sep">/</span>
-            <a class="disabled"  data-toggle="tooltip" title="抱歉，上海、广州、深圳的同学们还得等等">
+            <a class="disabled">
                 上海<span class="text-sep">&nbsp/&nbsp</span>广州<span class="text-sep">&nbsp/&nbsp</span>深圳
             </a>
         </div>
@@ -56,7 +56,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery
     <div class="container">
         <div class="action-box">
 <!--            <h3>有时候，选择比努力更重要，IT类应届生求职，就选快入职！</h3>-->
-            <h4 style="color: #727e7f;"><span style="color: #2C3E50">IT类应届生</span>专场，众多精挑细选的职位在等你，快去看看吧！</h4>
+            <h3 style="color: #727e7f;"><span style="color: #2C3E50">IT类应届生</span>专场，众多精挑细选的职位在等你，快去看看吧！</h3>
             <a class="btn btn-flat flat-color"  style="padding: 10px 15px;font-size: 13px;" id="submitbt" href="<?php echo Yii::app()->baseUrl.'/mscompany/index'?>">最新发布职位</a>
         </div>
         <!-- /.action-box -->
@@ -147,12 +147,31 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery
         $('.register_radio li input').click(function(e){
             $(this).parent('li').addClass('current').append('<em></em>').siblings().removeClass('current').find('em').remove();
         });
-        $('#filters .disabled').tooltip({
-            placement:"bottom"
-        })
+//        $('#filters .disabled').tooltip({
+//            placement:"bottom"
+//        })
+        $('#filters .disabled').popover({
+            placement:"bottom",
+            html:true,
+            trigger:'hover',
+            container:"body",
+            title:"",
+            content:'抱歉，上海、广州、深圳的同学们还得等等'
+        });
     });
 
     $(function() {
+        function getCurrentStyle(node) {
+            var style = null;
+
+            if(window.getComputedStyle) {
+                style = window.getComputedStyle(node, null);
+            }else{
+                style = node.currentStyle;
+            }
+
+            return style;
+        }
         var Photo	= (function() {
 
             // list of thumbs
@@ -174,7 +193,9 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery
 //                    minOpacity	: Number( $elems.css('opacity') )
                 },
                 init		= function() {
-
+                    if ( $.browser.msie &&  $.browser.version == "8.0"){
+                        settings.maxScale = 1.1;
+                    }
                     // minScale will be set in the CSS
                     settings.minScale = _getScaleVal() || 1;
                     // preload the images (thumbs)
@@ -189,14 +210,18 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery
             // Get Value of CSS Scale through JavaScript:
             // http://css-tricks.com/get-value-of-css-rotation-through-javascript/
                 _getScaleVal= function() {
-
-                    var st = window.getComputedStyle($elems.get(0), null),
+                    var st,tr;
+                    if(  window.getComputedStyle instanceof  Function){
+                        st = window.getComputedStyle($elems.get(0), null);
                         tr = st.getPropertyValue("-webkit-transform") ||
                             st.getPropertyValue("-moz-transform") ||
                             st.getPropertyValue("-ms-transform") ||
                             st.getPropertyValue("-o-transform") ||
                             st.getPropertyValue("transform") ||
                             "fail...";
+                    }else{
+                        tr = 'none';
+                    }
 
                     if( tr !== 'none' ) {
 
@@ -244,21 +269,22 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery
                             $desc		= $el.next(),
                             scaleVal	= proximity * ( settings.maxScale - settings.minScale ) + settings.minScale,
                             scaleExp	= 'scale(' + scaleVal + ')';
-
+//                        if ( $.browser.msie &&  $.browser.version == "8.0"){
+//                            $desc.css('display','block');
+//                        }
+                        if ( $.browser.msie &&  $.browser.version == "8.0"){
+                            $desc.css( 'width', 250 );
+                        }
                         // change the z-index of the element once it reaches the maximum scale value
                         // also, show the description container
                         if( scaleVal === settings.maxScale ) {
 
                             $li.css( 'z-index', 100 );
+//                            if( $desc.offset().left + $desc.width() > listL + listW ) {
+//                                    $desc.css( 'left', -$desc.width() - $desc.data( 'space_l' ) );
+//                            }
 
-                            if( $desc.offset().left + $desc.width() > listL + listW ) {
-
-                                $desc.css( 'left', -$desc.width() - $desc.data( 'space_l' ) );
-
-                            }
-
-                            $desc.fadeIn( 800 );
-
+                            $desc.fadeIn( 400 );
                         }
                         else {
 
@@ -267,7 +293,9 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery
                             $desc.stop(true,true).hide();
 
                         }
-
+                        if( $desc.offset().left + $desc.width() > listL + listW ) {
+                            $desc.css( 'left', -$desc.width() - $desc.data( 'space_l' ) );
+                        }
                         $el.css({
                             '-webkit-transform'	: scaleExp,
                             '-moz-transform'	: scaleExp,
@@ -276,6 +304,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery
                             'transform'			: scaleExp,
                             'opacity'			: ( proximity * ( settings.maxOpacity - settings.minOpacity ) + settings.minOpacity )
                         });
+
 
                     });
 

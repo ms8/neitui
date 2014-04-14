@@ -217,6 +217,7 @@ a:focus {
         border-width: 0 5px 5px;
         bottom: 0;
         content: "";
+        content\0:none;/*兼容ie8*/
         display: block;
         height: 0;
         left: 50%;
@@ -537,6 +538,7 @@ blockquote small {
 }
 .flat-success:hover, .flat-success.btn-bordered {
     background-color: rgba(0, 0, 0, 0);
+    background-color\0: #ffffff;
     color: #2ECC71;
 }
 .flat-success.btn-bordered.active{
@@ -596,6 +598,7 @@ blockquote small {
 }
 .flat-color:hover, .flat-color.btn-bordered {
     background-color: rgba(0, 0, 0, 0) !important;
+    background-color\0: #ffffff;
     color: #2ECC71;
 }
 .btn-flat:not(.btn-rounded) {
@@ -793,6 +796,7 @@ blockquote small {
     border-style: solid;
     border-width: 10px 10px 0;
     content: "";
+    content\0: none;/*兼容ie8*/
     display: block;
     height: 0;
     left: 50%;
