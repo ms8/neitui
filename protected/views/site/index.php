@@ -56,7 +56,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery
     <div class="container">
         <div class="action-box">
 <!--            <h3>有时候，选择比努力更重要，IT类应届生求职，就选快入职！</h3>-->
-            <h4 style="color: #727e7f;"><span style="color: #2C3E50">IT类应届生</span>专场，众多精挑细选的职位在等你，快去看看吧！</h4>
+            <h3 style="color: #727e7f;"><span style="color: #2C3E50">IT类应届生</span>专场，众多精挑细选的职位在等你，快去看看吧！</h3>
             <a class="btn btn-flat flat-color"  style="padding: 10px 15px;font-size: 13px;" id="submitbt" href="<?php echo Yii::app()->baseUrl.'/mscompany/index'?>">最新发布职位</a>
         </div>
         <!-- /.action-box -->

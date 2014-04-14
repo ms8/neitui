@@ -4590,6 +4590,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 @media (min-width: 768px) {
     .navbar-nav {
         float: left;
+        float\0:right;/*解决ie8出现跳动问题*/
         margin: 0;
     }
     .navbar-nav > li {
