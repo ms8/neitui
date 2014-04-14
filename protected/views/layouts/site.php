@@ -11,21 +11,21 @@
     <meta name="description" content="<?php echo $this->pageKeyword['description'];  ?>" >
     <meta property="qc:admins" content="" />
     <meta property="wb:webmaster" content="" />
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="<?php echo Yii::app()->baseUrl.JS_PATH.'html5shiv.js'?>"></script>
+    <script type="text/javascript" src="<?php echo Yii::app()->baseUrl.JS_PATH.'respond.min.js'?>"></script>
+    <![endif]-->
+
     <?php
     Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_PATH.'font-awesome/css/font-awesome.css');
-//    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_PATH.'photowall.css');
     Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_PATH.'retouch/bootstrap.css');
     Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_PATH.'retouch/skins.css');
     Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_PATH.'retouch/stylesheet.css');
     Yii::app()->clientScript->registerCoreScript('jquery');
-//    Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery-1.7.1.min.js');
     Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery.form.js');
-//    Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery.proximity.js');
     Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_GLOBAL.'bootstrap.min.js');
     Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'validate.min.js');
     ?>
-    <style type="text/css">
-    </style>
 </head>
 
 <body style="margin:0 auto;">
@@ -55,22 +55,9 @@
                         <li class="dropdown">
                         <?php }?>
                             <a href="<?php echo Yii::app()->baseUrl."/"?>">首页</a>
-<!--                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">首页</a>-->
-<!--                            <ul class="dropdown-menu">-->
-<!--                                <li class="active"><a href="index.html">Home Layout 1</a></li>-->
-<!--                                <li><a href="index-2.html">Home Layout 2</a></li>-->
-<!--                                <li><a href="index-3.html">Home Layout 3</a></li>-->
-<!--                            </ul>-->
                         </li>
                         <li class="dropdown">
                             <a href="<?php echo Yii::app()->createUrl('/mscompany/index')?>">公司</a>
-<!--                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">公司</a>-->
-<!--                            <ul class="dropdown-menu">-->
-<!--                                <li><a href="elements.html">UI Elements</a></li>-->
-<!--                                <li><a href="buttons.html">Buttons</a></li>-->
-<!--                                <li><a href="icons.html">Icons</a></li>-->
-<!--                                <li><a href="pricing.html">Pricing Tables</a></li>-->
-<!--                            </ul>-->
                         </li>
                         <?php if(!Yii::app()->user->isGuest){
                                 $user=Member::model()->findByPk(Yii::app()->user->id);
@@ -108,14 +95,12 @@
                         <?php
                         } else {?>
                             <li class="dropdown">
-<!--                                <a href="--><?php //echo Yii::app()->createUrl('/site/login')?><!--">登录</a>-->
                                 <a href="#"  data-toggle="modal" data-target="#myModal">登录</a>
                             </li>
                             <li class="dropdown">
                                 <a href="#"data-toggle="modal" data-target="#registerModal">注册</a>
                             </li>
                             <li class="dropdown">
-<!--                                <a data-toggle="dropdown" class="dropdown-toggle" href="#">关于我们</a>-->
                                 <a href="#"data-toggle="modal" data-target="#adviceModal">意见反馈</a>
                             </li>
                         <?php }?>
@@ -132,7 +117,7 @@
 <div class="main-wrapper">
 <?php echo $content ?>
 </div>
-<footer class="footer" id="footer-1">
+<div class="footer" id="footer-1">
     <div class="container">
         <div class="row">
             <div class="col-md-3">
@@ -181,9 +166,7 @@
                     <ul class="social-links">
                         <li><a href="http://weibo.com/kuairuzhi" class="facebook" target="_blank"><i class="icon-weibo"></i></a></li>
                          <li><a href="javascript:;" class="weixin google-plus"><img alt="快入职微信号" src="<?php echo Yii::app()->baseUrl.CSS_PATH.'/images/weixin.png'?>" width="20px"/></a></li>
-<!--                        <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>-->
-<!--                        <li><a href="#" class="pinterest"><i class="fa fa-pinterest"></i></a></li>-->
-<!--                        <li><a href="#" class="rss"><i class="fa fa-rss"></i></a></li>-->
+                        <img alt="快入职微信号" src="<?php echo Yii::app()->baseUrl.CSS_PATH.'/images/erweima.jpg'?>" width="0"/><!-- 预加载图片 -->
                     </ul>
                 </div>
                 <!-- /.tagcloud -->
@@ -199,19 +182,13 @@
                             <a href="http://www.bcc.ac.cn/" target="_blank" title="北京市计算中心">
                                 <img alt="北京市计算中心" src="<?php echo Yii::app()->baseUrl.CSS_PATH.'/images/bcc.jpg'?>"/>
                             </a>
-
                         </li>
                         <li>
                             <a href="http://www.xinwaihui.com" target="_blank" title="新外汇">
                                 <img alt="新外汇" src="<?php echo Yii::app()->baseUrl.CSS_PATH.'/images/xinwaihui.jpg'?>"/>
                             </a>
                         </li>
-                        <li>
-                            <a href="http://farm9.staticflickr.com/8552/10217169844_a83bb0c26f_b.jpg">
-<!--                                <img alt="Ortofon Concorde S-120 (#1211)" src="http://farm9.staticflickr.com/8552/10217169844_a83bb0c26f_s.jpg">-->
-                            </a>
-                        </li>
-                        </ul>
+                    </ul>
                 </div>
                 <!-- /.flickr-photos -->
             </div>
@@ -220,7 +197,7 @@
         <!-- /.row -->
     </div>
     <!-- /.container -->
-</footer>
+</div>
 
 <!-- Modal advice-->
 <div class="modal fade" id="adviceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
