@@ -140,12 +140,13 @@ class KongjianController extends Controller
 
                 $picsize = $_FILES['jianlifile']['size'];
                 if ($picsize > 2*1024000) {
-                    $message =  '图片大小不能超过2M';
+                    $message =  '文件大小不能超过2M';
                 }else{
                     if ($type != ".doc" && $type != ".docx"  && $type != ".wps"
-                        && $type != ".avi"  && $type != ".mpeg1" && $type != ".mpeg2"
-                        && $type != ".mpeg4"  && $type != ".wmv" && $type != ".mp4" ) {
-                        $message =  '请上传word文档或者avi,mpeg1,mpeg2,mpeg4,wmv,mp4格式的视频文件^_^';
+//                        && $type != ".avi"  && $type != ".mpeg1" && $type != ".mpeg2"
+//                        && $type != ".mpeg4"  && $type != ".wmv" && $type != ".mp4"
+                    ) {
+                        $message =  '请上传word文档！';
                     }else{
                         //如果该简历是默认简历，将其余简历设置为非默认简历
                         if($model->flag == '1'){
@@ -179,7 +180,11 @@ class KongjianController extends Controller
         }
         if(isset($_POST['jobid'])){ //直接点击某职位的“投简历”进来的，还回到之前的页面
 //            $this->redirect(Yii::app()->request->urlReferrer);
-            die(CJSON::encode(array('status'=>1)));
+            if($message == ''){
+                die(CJSON::encode(array('status'=>1)));
+            }else{
+                die(CJSON::encode(array('status'=>0,'message'=>$message)));
+            }
         }else{
             if(Yii::app()->user->isGuest){
                 $this->redirect(array('/site/login'));

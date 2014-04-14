@@ -153,7 +153,7 @@
                         <li>
                             <span>邮箱</span>
                             <h5>
-                                shenyd@kuairuzhi.com
+                                admin@kuairuzhi.com
                             </h5>
                         </li>
                         <li>

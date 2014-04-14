@@ -146,30 +146,85 @@
 
 </div>
 <!-- 弹出对话框让用户选择简历-->
-<div id="chooseDiv" style="display: none;width: 600px;height: 280px;background-color#f39c12;padding: 10px;position: absolute;top: 150px;left: 330px">
-    <div style="height: 40px;background-color: #088b69">
-        <div style="float: left">投递该职位</div>
-        <div style="float: right;font-size: 20px;cursor: pointer;margin-right: 20px;" id="choose-close">X</div>
+<!--<div id="chooseDiv" style="display: none;width: 600px;height: 280px;background-color#f39c12;padding: 10px;position: absolute;top: 150px;left: 330px">-->
+<!--    <div style="height: 40px;background-color: #088b69">-->
+<!--        <div style="float: left">投递该职位</div>-->
+<!--        <div style="float: right;font-size: 20px;cursor: pointer;margin-right: 20px;" id="choose-close">X</div>-->
+<!--    </div>-->
+<!---->
+<!--    <div style="height: 220px;background-color: #71bd90;padding-top:50px">-->
+<!--        <form id="chooseForm" class="login" method="post" enctype="multipart/form-data"-->
+<!--              action="--><?php //echo Yii::app()->baseUrl.'/kongjian/apply'?><!--">-->
+<!--            <div class="col-sm-6">-->
+<!--                <input name="companyid" value="--><?php //echo $model->id?><!--" type="hidden">-->
+<!--                <input name="jobid"  type="hidden">-->
+<!--                <input name="jianliid" id="jianliid" value="" type="hidden">-->
+<!--                <div id="jianlis">-->
+<!--                </div>-->
+<!--                投递其他职位时默认使用该简历：<br>-->
+<!--                <input type="radio" value="1" name="defaultflag" checked>是 &nbsp;&nbsp;&nbsp;-->
+<!--                <input type="radio" value="0" name="defaultflag" >否-->
+<!--            </div>-->
+<!--            <button class="btn btn-danger" id="choose_td" type="button">投简历</button>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!-- 弹出对话框上传简历-->
+<div class="modal fade" id="chooseDiv" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">选择简历</h4>
+            </div>
+            <div class="modal-body">
+                <form  action="<?php echo Yii::app()->baseUrl.'/kongjian/apply'?>" role="form" method="post" enctype="multipart/form-data"   id="chooseForm"   class="form-horizontal" >
+                    <input name="companyid" value="<?php echo $model->id?>" type="hidden">
+                    <input name="jobid" id="jobid"  type="hidden">
+                    <input name="jianliid" id="jlid" value="" type="hidden">
+                    <input name="defaultflag" id="isdefault" value="1" type="hidden">
+                    <div id="jianlis" class="form-group">
+<!--                        <label for="inputPassword3" class="col-sm-3 control-label">选择简历:</label>-->
+<!--                        <div class="col-sm-9">-->
+<!--                            <input type="file" name="jianlifile" class=" class="form-control">-->
+<!--                        </div>-->
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword3" style="line-height: 30px;" class="col-sm-3 control-label">设置为默认简历：</label>
+                        <div class="col-sm-5">
+                            <div class="radio" name="isdefault">
+                                <ins class="checked" value="1" ></ins>
+                                <span>是</span>
+                            </div>
+                            <div class="radio" name="isdefault">
+                                <ins class="" value="0" ></ins>
+                                <span>否</span>
+                            </div>
+<!--                            <input type="radio" value="1" name="defaultflag" checked>是 &nbsp;&nbsp;&nbsp;-->
+<!--                            <input type="radio" value="0" name="defaultflag" >否-->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label">
+                            <button id="choose_td" class="btn btn-flat flat-color"  type="button">投简历</button>
+                        </label>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
-    <div style="height: 220px;background-color: #71bd90;padding-top:50px">
-        <form id="chooseForm" class="login" method="post" enctype="multipart/form-data"
-              action="<?php echo Yii::app()->baseUrl.'/kongjian/apply'?>">
-            <div class="col-sm-6">
-                <input name="companyid" value="<?php echo $model->id?>" type="hidden">
-                <input name="jobid"  type="hidden">
-                <input name="jianliid" id="jianliid" value="" type="hidden">
-                <div id="jianlis">
-                </div>
-                投递其他职位时默认使用该简历：<br>
-                <input type="radio" value="1" name="defaultflag" checked>是 &nbsp;&nbsp;&nbsp;
-                <input type="radio" value="0" name="defaultflag" >否
-            </div>
-            <button class="btn btn-danger" id="choose_td" type="button">投简历</button>
-        </form>
-    </div>
 </div>
+
 <script type="text/javascript">
+
+    $("#choose_td").live('click',function(){
+        //var jianli = $('input[name="chosen"]:checked').val();
+        //$("#jianliid").val(jianli);
+        $("#chooseForm").submit();
+    });
+
     //投简历
     function submitjl(id){
         $.ajax({
@@ -188,13 +243,18 @@
                 }else{ //让用户选择投递的简历，并设置为默认投递的简历
                     var i=0, length=data.length, jianli;
                     var html_str = "";
+                    $("#jianlis").empty();
                     for(; i<length; i++) {
                         jianli = data[i];
-                        html_str += "<div><input type='radio' name='chosen' value='"+jianli.id+"'>"
-                            +jianli.name+"</div>";
+//                        html_str += "<div><input type='radio' name='chosen' value='"+jianli.id+"'>"
+//                            +jianli.name+"</div>";
+                        //
+                        html_str += '<div class="radio" name="jlid"><ins   value="'
+                            +jianli.id+'"></ins><span>'+jianli.name+'</span></div>';
                     }
+                    $("#jobid").val(id);
                     $("#jianlis").append(html_str);
-                    $("#chooseDiv").show();
+                    $("#chooseDiv").modal('show');
                 }
             }
         });
@@ -214,10 +274,12 @@
                         if(data.status == 1){
                             $("#uploadDiv").modal('hide');
                             targetEle.html('<button class="btn btn-default" type="button" disabled="disabled">该职位已投</button>');
+                        }else{
+                            alert(data.message);
                         }
                     }
                 });
-        })
+        });
 
 
         //职位信息
@@ -240,6 +302,77 @@
             }
         });
 
+    });
 
-    })
+    (function($) {
+        $.icheck = {
+            init: function() {
+                var _this = this;
+                _this._checkbox = "checkbox";
+                _this._radio = "radio";
+                _this._disabled = "disabled";
+                _this._enable = "enable";
+                _this._checked = "checked";
+                _this._hover = "hover";
+                _this._arrtype = [_this._checkbox, _this._radio];
+                _this._mobile = /ipad|iphone|ipod|android|blackberry|windows phone|opera mini|silk/i.test(navigator.userAgent);
+                $.each(_this._arrtype, function(k, v) {
+                    _this.click(v);
+                    if(!_this._mobile){
+                        _this.mouseover(v);
+                        _this.mouseout(v);
+                    }
+                });
+            },
+            click: function(elem) {
+                var _this = this;
+                elem = "." + elem;
+                $(document).on("click", elem, function() {
+                    var $this = $(this),
+                        _ins = $this.find("ins");
+                    if (!(_ins.hasClass(_this._disabled) || _ins.hasClass(_this._enable))) {
+                        if ( !! _ins.hasClass(_this._checked)) {
+                            _ins.removeClass(_this._checked).addClass(_this._hover);
+                        } else {
+                            var _name ="";
+                            if (/radio/ig.test(elem)) {
+                                _name =$this.attr("name");
+                                $(elem + "[name=" + _name + "]").find("ins").removeClass(_this._checked);
+                            }
+                            $(elem).find("ins").removeClass(_this._hover);
+                            _ins.addClass(_this._checked);
+                            //给与id它的name 相同的input 赋值
+                            $("#"+_name).val(_ins.attr("value"));
+//                            var ttt = _ins.attr("value");
+//                            ttt="";
+                        }
+                    }
+                });
+            },
+            mouseover: function(elem) {
+                var _this = this;
+                elem = "." + elem;
+                $(document).on("mouseover", elem, function() {
+                    var $this = $(this);
+                    var _ins = $this.find("ins");
+                    if (!(_ins.hasClass(_this._disabled) || _ins.hasClass(_this._enable) || _ins.hasClass(_this._checked))) {
+                        _ins.addClass(_this._hover);
+                        $this.css("cursor","pointer");
+                    } else{
+                        $this.css("cursor","default");
+                    }
+                });
+            },
+            mouseout: function(elem) {
+                var _this = this;
+                elem = "." + elem;
+                $(document).on("mouseout", elem, function() {
+                    $(elem).find("ins").removeClass(_this._hover);
+                });
+            }
+        };
+
+        $.icheck.init();
+
+    })(jQuery);
 </script>
