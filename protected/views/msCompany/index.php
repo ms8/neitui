@@ -17,7 +17,7 @@
         <span id="filter-up">公司所在城市：</span>
         <a href="<?php echo Yii::app()->baseUrl."/"?>" data-option-value="*" class="active_sort">北京</a>
         <span class="text-sep">/</span>
-        <a class="disabled"  data-toggle="tooltip" title="抱歉，上海、广州、深圳的同学们还得等等">
+        <a class="disabled">
             上海<span class="text-sep">&nbsp/&nbsp</span>广州<span class="text-sep">&nbsp/&nbsp</span>深圳
         </a>
     </div>
@@ -44,8 +44,13 @@
         $(".nav li.active").removeClass("active");
         $(".nav li:eq(1)").addClass("active");
 
-        $('#filters .disabled').tooltip({
-            placement:"bottom"
-        })
+        $('#filters .disabled').popover({
+            placement:"bottom",
+            html:true,
+            trigger:'hover',
+            container:"body",
+            title:"",
+            content:'抱歉，上海、广州、深圳的同学们还得等等'
+        });
     })
 </script>

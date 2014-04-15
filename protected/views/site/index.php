@@ -63,22 +63,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery
     </div>
     <!-- /.container -->
 </section>
-<!--    <button style="margin-left: 200px;width:20%;border-color: #D01C00;" onclick="submitjl()" id="submitbt" class="tjl-btn">马上投简历</button>-->
 
-<!--<div class="header">-->
-<!--    <div class="row">-->
-<!---->
-<!--        <div class="col-md-12 col-sm-12">-->
-<!--            <div class="search">-->
-<!--                <button class="tjl-btn"  id="submitbt" onclick="submitjl()">马上投简历</button>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-
-<!--    </section>-->
-
-<!-- -->
 <!-- 弹出对话框上传简历-->
 <div id="uploadDiv" style="display: none;width: 600px;height: 280px;background-color#f39c12;padding: 10px;position: absolute;top: 150px;left: 330px">
     <div style="height: 40px;background-color: #088b69">
