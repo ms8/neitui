@@ -261,12 +261,14 @@
                         <div class="col-sm-3 errorMessage" ></div>
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-4">
+                        <div class="col-sm-offset-2 col-sm-7">
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" name="autoLogin" checked="checked" id="remember"/> 记住我
                                 </label>
                                 <a target="_blank"  href="<?php echo Yii::app()->request->hostInfo.Yii::app()->homeUrl.'/site/forgetpassword'?>">忘记密码？</a>
+                                &nbsp;|&nbsp;&nbsp;还没有账号？
+                                <a onclick="$('#myModal').modal('hide')" href="#"data-toggle="modal" data-target="#registerModal">马上注册</a>
                             </div>
                         </div>
                         <div id="loginErr" class="col-sm-6 errorMessage"></div>
@@ -408,6 +410,8 @@
     function advice(){
         var email = $("#emailAdvice").val();
         var advice = $("#adviceContent").val();
+        if(email == "" || advice == "")
+            return;
         $.ajax({
             type:'POST',
             dataType:'json',

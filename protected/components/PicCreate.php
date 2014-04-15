@@ -51,6 +51,7 @@ class PicCreate {
     }
 
     public function deletePic($path){
-        unlink($path);
+        if(file_exists($path))
+            unlink($path);
     }
 }

@@ -360,7 +360,8 @@ class KongjianController extends Controller
                     }
                     try{
                         //删除之前的图片
-                        if(!$old_path == false) $picCreate->deletePic($old_path);
+//                        if(!$old_path == false) $picCreate->deletePic($old_path);
+                        if($old_path !=null && $old_path !="") $picCreate->deletePic($old_path);
                     }catch(Exception $e){
 
                     }
