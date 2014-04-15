@@ -3,6 +3,7 @@
 <head>
     <meta name="baidu-site-verification" content="t4WhrRxoqk" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=8" >
     <meta name="robots" content="all" />
     <meta name="author" content="mianshi8@qq.com" />
     <meta name="Copyright" content="mianshi8" />
@@ -15,7 +16,6 @@
     <script type="text/javascript" src="<?php echo Yii::app()->baseUrl.JS_PATH.'html5shiv.js'?>"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->baseUrl.JS_PATH.'respond.min.js'?>"></script>
     <![endif]-->
-
     <?php
     Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_PATH.'font-awesome/css/font-awesome.css');
     Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_PATH.'retouch/bootstrap.css');
