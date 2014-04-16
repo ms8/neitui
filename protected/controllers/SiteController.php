@@ -48,7 +48,7 @@ class SiteController extends Controller
         foreach($companys as $company){
             $jobs = MsJobs::model()->findAllByAttributes(array('company_id'=>$company->id));
             if($company->logo == null || $company->logo == ''){
-                $company->logo = 'upload/companylogo/default.jpg';
+                $company->logo = 'upload/companylogo/default.png';
             }
             array_push($allData,array('company'=>$company,'jobs'=>$jobs));
         }

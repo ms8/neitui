@@ -538,7 +538,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
             url:"<?php echo Yii::app()->baseUrl.'/msjobs/delete/'?>"+jobId,
             success:function(data) {
                 $that.parents(".panel").remove();
-                console.log(data);
+//                console.log(data);
             }
         });
     })

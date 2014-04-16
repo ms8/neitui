@@ -25,7 +25,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery
             <?php foreach($companys as $company){?>
                 <li>
                     <a href="<?php echo Yii::app()->baseUrl.'/mscompany/view/'.$company['company']->id?>">
-                        <img src="<?php echo Yii::app()->baseUrl.'/'.$company['company']->logo?>" />
+                        <img  alt="<?php echo $company['company']->name?>" src="<?php echo Yii::app()->baseUrl.'/'.$company['company']->logo?>" />
                         <div class="pe-description">
                             <h3><?php echo $company['company']->name?></h3>
 <!--                            <div class="subpage-title">-->

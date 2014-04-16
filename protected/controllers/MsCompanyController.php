@@ -183,7 +183,7 @@ class MsCompanyController extends Controller
         $jobs = MsJobs::model()->findAllByAttributes(array('company_id'=>$id),array('order'=>'createtime desc'));
         $model = $this->loadModel($id);
         if($model->logo == null || $model->logo == ''){
-            $model->logo = 'upload/companylogo/default.jpg';
+            $model->logo = 'upload/companylogo/default.png';
         }
 		$this->render('view',array(
 			'model'=>$model,
@@ -241,7 +241,7 @@ class MsCompanyController extends Controller
             $member = Member::model()->findByPk($id);
             $model = MsCompany::model()->findByAttributes(array('account'=>$member->username));
             if($model->logo == null || $model->logo == ''){
-                $model->logo = 'upload/companylogo/default.jpg';
+                $model->logo = 'upload/companylogo/default.png';
             }
             $jobs = MsJobs::model()->findAllByAttributes(array('company_id'=>$model->id),
                 array('order'=>'createtime desc'));

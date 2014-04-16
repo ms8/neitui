@@ -292,7 +292,7 @@ class KongjianController extends Controller
               $model = new MsStudents();
           }
           if($model->image == null || $model->image == ''){
-              $model->image = 'upload/companylogo/default.jpg';
+              $model->image = 'upload/avatar/default.jpg';
           }
           $this->render('information',array('uniarr'=>$uniarr,'jiangliarr'=>$jiangliarr,
               'degreearr'=>$degreearr,'model'=>$model));

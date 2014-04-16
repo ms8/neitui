@@ -5,13 +5,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=8" >
     <meta name="robots" content="all" />
-    <meta name="author" content="mianshi8@qq.com" />
-    <meta name="Copyright" content="mianshi8" />
+    <meta name="author" content="admin@kuairuzhi.com" />
     <title><?php echo $this->pageKeyword['title'];  ?></title>
     <meta name="keywords" content="<?php echo $this->pageKeyword['keywords'];  ?>" >
     <meta name="description" content="<?php echo $this->pageKeyword['description'];  ?>" >
-    <meta property="qc:admins" content="" />
-    <meta property="wb:webmaster" content="" />
     <!--[if lt IE 9]>
     <script type="text/javascript" src="<?php echo Yii::app()->baseUrl.JS_PATH.'html5shiv.js'?>"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->baseUrl.JS_PATH.'respond.min.js'?>"></script>
@@ -22,9 +19,9 @@
     Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_PATH.'retouch/skins.css');
     Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_PATH.'retouch/stylesheet.css');
     Yii::app()->clientScript->registerCoreScript('jquery');
-    Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery.form.js');
-    Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_GLOBAL.'bootstrap.min.js');
-    Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'validate.min.js');
+//    Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery.form.js');
+//    Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_GLOBAL.'bootstrap.min.js');
+//    Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'validate.min.js');
     ?>
 </head>
 
@@ -41,7 +38,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a href="<?php echo Yii::app()->baseUrl?>" class="navbar-brand">
+                    <a href="http://www.kuairuzhi.com/" class="navbar-brand">
                         <img alt="快入职" src="<?php echo Yii::app()->baseUrl.CSS_PATH.'/images/logo.png'?>" width="240px" />
 <!--                        快<span>入职</span>-->
                     </a>
@@ -123,7 +120,7 @@
             <div class="col-md-3">
                 <div class="widget about-us">
                     <div class="footer-brand"><span>快</span>入职</div>
-                    <p>快入职是专注IT类应届生的招聘网站，以众多优质IT资源为依托，发布圈内招聘信息，为IT应届生和优秀企业搭建快捷通道，以帮助应届生就业为己任。</p>
+                    <p><a href="http://www.kuairuzhi.com/" target="_blank"><strong>快入职</strong></a>是专注IT类应届生的招聘网站，以众多优质IT资源为依托，发布圈内招聘信息，为IT应届生和优秀企业搭建快捷通道，以帮助应届生就业为己任。</p>
                 </div>
                 <!-- /.about-us -->
 
@@ -352,7 +349,11 @@
 </div>
 <!-- /.modal -->
 </body>
-
+<?php
+Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery.form.js');
+Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_GLOBAL.'bootstrap.min.js');
+Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'validate.min.js');
+?>
 <script type="text/javascript">
     $(function(){
         $(document).keydown(function(e){
@@ -369,6 +370,7 @@
         $('.weixin').popover({
             placement:"top",
             html:true,
+            trigger:'hover',
             container:"body",
             title:"",
             content:'<img alt="快入职微信号" src="<?php echo Yii::app()->baseUrl.CSS_PATH.'/images/erweima.jpg'?>" width="150px"/>'

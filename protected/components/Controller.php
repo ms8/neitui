@@ -21,9 +21,9 @@ class Controller extends CController
 	 */
 	public $breadcrumbs=array();
 	public $pageKeyword=array(
-				'title'=>'快入职',
-				'keywords'=>'it 应届生 求职',
-				'description'=>'专注it类应届生求职，提供高品质服务',
+				'title'=>'快入职 | 专注it类应届生求职',
+				'keywords'=>'快入职，应届生，应届生求职，应届生招聘，求职，垂直招聘，垂直互联网招聘, 快入职官网, 快入职百科, IT招聘,O2O招聘, LBS招聘, 社交招聘, 校园招聘, 校招',
+				'description'=>'快入职是专注IT类应届生的招聘网站，以众多优质IT资源为依托，发布圈内招聘信息，为IT应届生和优秀企业搭建快捷通道，以帮助应届生就业为己任。',
 		);
 
 }
