@@ -1852,3 +1852,22 @@ address {
 .filters .disabled{
     color: #cccccc;
 }
+
+/*radio*/
+.checkbox,.radio{display: inline-block;*display: inline;*zoom:1;height: 24px; line-height: 24px; margin-right: 20px;}
+.checkbox ins,.radio ins{
+    display: inline-block;
+    *display: inline;
+    *zoom:1; width: 23px; height: 22px; vertical-align: middle;
+    background: url('../images/radio.png') no-repeat;
+    margin-right: 8px; -webkit-transition:all 0.1s linear;
+    -moz-transition:all 0.1s linear; -o-transition:all 0.1s linear;
+    -ms-transition:all 0.1s linear; transition:all 0.1s linear;
+    vertical-align: middle;
+}
+.radio ins{background-position: -120px 0px; }
+.radio .hover{background-position: -144px 0px;}
+.radio .checked{background-position: -168px 0px;}
+.radio .enable{background-position: -214px 0px;}
+.radio .disabled{background-position: -191px 0px;}
+.checkbox span,.radio span{display: inline-block;*display: inline;*zoom:1;vertical-align: middle; }

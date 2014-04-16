@@ -94,6 +94,8 @@
             </div>
         </div>
 
+        <input type="hidden" id="message" value="<?php echo $message?>">
+
         <div id="manage" >
 <!--            <div class="action-box">-->
 <!--                    --><?php //if($jianlis != null && count($jianlis)>0){ ?>
@@ -190,6 +192,11 @@
         //菜单选中个人中心
         $("#header .nav li.active").removeClass("active");
         $("#header .nav li:eq(2)").addClass("active");
+
+        var returnMsg = $("#message").val();
+        if(returnMsg != ''){
+            alert(returnMsg);
+        }
     })
     function deleteJianli(imgObj){
         var id = $(imgObj).attr('id');
