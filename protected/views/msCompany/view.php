@@ -66,6 +66,7 @@
                                     <span class="info-name"><?php echo $model->name?></span>
                                 </div>
                             </div>
+                            <?php if($model->website != null && $model->website != ''){ ?>
                             <div class="form-group">
                                 <label for="inputEmail3" class="col-sm-4">网址：</label>
                                 <div class="col-sm-8">
@@ -76,6 +77,7 @@
                                     </span>
                                 </div>
                             </div>
+                            <?php } if($model->address != null && $model->address != ''){?>
                             <div class="form-group">
                                 <label for="inputEmail3" class="col-sm-4">地址：</label>
                                 <div class="col-sm-8">
@@ -84,6 +86,7 @@
                                     </span>
                                 </div>
                             </div>
+                            <?php } ?>
                         </form>
                     </div>
                 </div>

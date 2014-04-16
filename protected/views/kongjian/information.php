@@ -145,14 +145,6 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umedit
                                      </span>
                                 </div>
                             </div>
-<!--                            <div class="form-group">-->
-<!--                                <label  class="col-sm-5">找到工作？</label>-->
-<!--                                <div class="col-sm-7">-->
-<!--                                    <span class="info-hasoffer">-->
-<!--                                        --><?php // echo $model->hasoffer == 1 ? '是':'否'; ?>
-<!--                                     </span>-->
-<!--                                </div>-->
-<!--                            </div>-->
                         </form>
                     </div>
                     <div class="modal fade" id="info-edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
