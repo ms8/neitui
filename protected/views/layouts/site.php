@@ -258,10 +258,10 @@
                         <div class="col-sm-7">
                             <input type="password" required=""  placeholder="密码" id="password" name="password" class="form-control"/>
                         </div>
-                        <div class="col-sm-3 errorMessage" ></div>
+                        <div id="loginErr" class="col-sm-3 errorMessage" ></div>
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-7">
+                        <div class="col-sm-offset-2 col-sm-8">
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" name="autoLogin" checked="checked" id="remember"/> 记住我
@@ -271,11 +271,11 @@
                                 <a onclick="$('#myModal').modal('hide')" href="#"data-toggle="modal" data-target="#registerModal">马上注册</a>
                             </div>
                         </div>
-                        <div id="loginErr" class="col-sm-6 errorMessage"></div>
+
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button class="btn btn-flat flat-color col-sm-3" type="button" onclick="login()">登录</button>
+                        <div class="col-sm-offset-2 col-sm-3">
+                            <button class="btn btn-flat flat-color col-sm-12" type="button" onclick="login()">登录</button>
                         </div>
                     </div>
                 </form>
