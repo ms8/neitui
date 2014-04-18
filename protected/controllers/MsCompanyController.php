@@ -335,6 +335,9 @@ class MsCompanyController extends Controller
 	public function actionIndex()
 	{
         $criteria = new CDbCriteria;
+        $criteria->select = 't.*';
+
+        $criteria->join = 'inner JOIN ms_jobs ON ms_jobs.company_id=t.id';
         $criteria->order = 'updatetime desc';
 		$dataProvider=new CActiveDataProvider('MsCompany',array(
                 'criteria'=>$criteria,

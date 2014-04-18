@@ -47,6 +47,8 @@ class SiteController extends Controller
         $companys = $wm->getCompanys();
         foreach($companys as $company){
             $jobs = MsJobs::model()->findAllByAttributes(array('company_id'=>$company->id));
+            if($jobs == null)
+                continue;  //只取发布了招聘岗位的公司信息
             if($company->logo == null || $company->logo == ''){
                 $company->logo = 'upload/companylogo/default.png';
             }
