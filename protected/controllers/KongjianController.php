@@ -66,7 +66,13 @@ class KongjianController extends Controller
         $jianli = MsJianli::model()->findByPk($id);
         $json_str = CJSON::encode(array('result'=>'false'));
         if($jianli != null){
-            unlink($jianli->filepath);
+            if(file_exists($jianli->filepath))
+                unlink($jianli->filepath);
+            $pdf = $jianli->filepath;
+            $pdf = substr($pdf,0,strpos($pdf,'.'));
+            $pdf = $pdf.'.pdf';
+            if(file_exists($pdf))
+                unlink($pdf);
             $count = MsJianli::model()->deleteByPk($id);
             if($count >0){
                 $json_str = CJSON::encode(array('result'=>'ok'));
@@ -166,11 +172,12 @@ class KongjianController extends Controller
                             $application->save();  //投递该职位
                         }
                         //***********将简历转换为pdf************************** 先注释掉
-//                        if ($type == ".doc" || $type == ".docx"){
-//                            $sender = new HttpSender();
-//                            $url="http://localhost:8080/kuairuzhi/site/translate/".date('Y-m-d')."/".$fileName_store.$type;
-//                            $sender->sock_get($url);
-//                        }
+                        if ($type == ".doc" || $type == ".docx"){
+                            $sender = new HttpSender();
+//                            $url="http://localhost:8080/wtopdf/site/translate/".$model->id.'/'.date('Y-m-d')."/".$fileName_store.$type;
+                            $url="http://localhost:8080/kuairuzhi/site/translate/".$model->id.'/'.date('Y-m-d')."/".$fileName_store.$type;
+                            $sender->sock_get($url);
+                        }
                         //**************************************************
                     }
                 }

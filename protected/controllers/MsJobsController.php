@@ -32,7 +32,7 @@ class MsJobsController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','maintain','delete'),
+				'actions'=>array('create','update','maintain','delete','detail'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -110,6 +110,15 @@ class MsJobsController extends Controller
 
             }
         }
+    }
+
+    public function actionDetail($id){
+        $job = MsJobs::model()->findByPk($id);
+        $result = array('description'=>'');
+        if($job != null){
+            $result = array('description'=>$job->description);
+        }
+        die(CJSON::encode($result));
     }
 
 	/**

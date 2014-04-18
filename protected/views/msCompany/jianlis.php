@@ -77,15 +77,15 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_GLOBAL.'pdf/
 ?>
 
 <script type="text/javascript">
-
     function setJob(obj){
         $("#jobtitle").text($(obj).text());
         $.ajax({
             type:'POST',
             dataType:'json',
-            url:'<?php echo Yii::app()->createUrl('msjobs/view')?>'+"/"+$(obj).attr("id"),
+            url:'<?php echo Yii::app()->createUrl('msjobs/detail')?>'+"/"+$(obj).attr("id"),
             success:function(data) {
-                $("#jobcontent").text(data.description);
+                var detail = data.description;
+                $("#jobcontent").html(detail);
             }
         });
     }
