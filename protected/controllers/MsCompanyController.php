@@ -335,14 +335,15 @@ class MsCompanyController extends Controller
 	public function actionIndex()
 	{
         $criteria = new CDbCriteria;
-        $criteria->select = 'distinct t.*';
+        $criteria->select = 't.*';
 
         $criteria->join = 'inner JOIN ms_jobs ON ms_jobs.company_id=t.id';
         $criteria->order = 'updatetime desc';
+        $criteria->distinct = true;
 		$dataProvider=new CActiveDataProvider('MsCompany',array(
                 'criteria'=>$criteria,
                 'pagination' => array(
-                    'pageSize' => 12,
+                    'pageSize' => 1,
                 ),
             )
         );
