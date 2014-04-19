@@ -73,6 +73,8 @@ class KongjianController extends Controller
             $pdf = $pdf.'.pdf';
             if(file_exists($pdf))
                 unlink($pdf);
+            //删除简历内容
+            KrzJlcontent::model()->deleteAllByAttributes(array('jid'=>$id));
             $count = MsJianli::model()->deleteByPk($id);
             if($count >0){
                 $json_str = CJSON::encode(array('result'=>'ok'));
