@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=8" >
     <meta name="robots" content="all" />
     <meta name="author" content="admin@kuairuzhi.com" />
+    <link rel="shortcut icon" href="<?php echo Yii::app()->baseUrl.CSS_PATH.'images/favicon.ico'?>" />
     <title><?php echo $this->pageKeyword['title'];  ?></title>
     <meta name="keywords" content="<?php echo $this->pageKeyword['keywords'];  ?>" >
     <meta name="description" content="<?php echo $this->pageKeyword['description'];  ?>" >
