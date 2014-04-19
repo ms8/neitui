@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=8" >
     <meta name="robots" content="all" />
     <meta name="author" content="admin@kuairuzhi.com" />
+    <link rel="shortcut icon" href="<?php echo Yii::app()->baseUrl.CSS_PATH.'images/favicon.ico'?>" />
     <title><?php echo $this->pageKeyword['title'];  ?></title>
     <meta name="keywords" content="<?php echo $this->pageKeyword['keywords'];  ?>" >
     <meta name="description" content="<?php echo $this->pageKeyword['description'];  ?>" >
@@ -261,7 +262,7 @@
                         <div class="col-sm-offset-2 col-sm-8">
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" name="autoLogin" checked="checked" id="remember"/> 记住我
+                                    <input type="checkbox" name="autoLogin"  id="remember"/> 记住我
                                 </label>
                                 <a target="_blank"  href="<?php echo Yii::app()->request->hostInfo.Yii::app()->homeUrl.'/site/forgetpassword'?>">忘记密码？</a>
                                 &nbsp;|&nbsp;&nbsp;还没有账号？
@@ -366,6 +367,27 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'valida
                 }
             }
         });
+
+        //记住密码
+        var cookie = SubCookieUtil.getAll("loginInfo");
+        if (cookie != null){
+            document.getElementById("remember").checked = true ;
+            $("#username").val(cookie.name);
+            $("#password").val(cookie.password);
+        }
+        $("#remember").click(function(){
+            if (this.checked){
+                if (cookie != null){
+                    return;
+                }else{
+                    var now = new Date()
+                    var expiresDate = new Date(now.getTime() + 1000 * 60 * 60 * 24 * 7)
+                    SubCookieUtil.setAll("loginInfo",{name:$("#username").val(),password: $("#password").val()},expiresDate);
+                }
+            }else{
+                SubCookieUtil.unsetAll("loginInfo");
+            }
+        })
 
         $('.weixin').popover({
             placement:"top",
