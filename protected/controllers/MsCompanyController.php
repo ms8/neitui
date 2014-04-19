@@ -339,10 +339,11 @@ class MsCompanyController extends Controller
 
         $criteria->join = 'inner JOIN ms_jobs ON ms_jobs.company_id=t.id';
         $criteria->order = 'updatetime desc';
+        $criteria->distinct = true;
 		$dataProvider=new CActiveDataProvider('MsCompany',array(
                 'criteria'=>$criteria,
                 'pagination' => array(
-                    'pageSize' => 12,
+                    'pageSize' => 1,
                 ),
             )
         );
