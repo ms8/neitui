@@ -343,7 +343,7 @@ class MsCompanyController extends Controller
 		$dataProvider=new CActiveDataProvider('MsCompany',array(
                 'criteria'=>$criteria,
                 'pagination' => array(
-                    'pageSize' => 1,
+                    'pageSize' => 12,
                 ),
             )
         );
