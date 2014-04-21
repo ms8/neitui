@@ -4,8 +4,8 @@
             <div class="clearfix col-md-9 main">
                 <div class="widget">
                     <div class="media">
-                        <a href="<?php echo $model->website?>" target="_blank" class="pull-left">
-                            <img alt="快入职 | 应届生招聘 |<?php echo $model->name?>"  class="media-object" style="width: 190px; height: 190px;" src="<?php echo Yii::app()->baseUrl.'/'.$model->logo?>">
+                        <a href="<?php echo $model->website?>" target="_blank" class="pull-left intro-logo">
+                            <img alt="快入职 | 应届生招聘 |<?php echo $model->name?>"  class="media-object" src="<?php echo Yii::app()->baseUrl.'/'.$model->logo?>">
                         </a>
                         <div class="media-body">
                             <h4 class="media-heading"><?php echo $model->name?></h4>

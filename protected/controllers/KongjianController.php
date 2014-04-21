@@ -279,32 +279,70 @@ class KongjianController extends Controller
     $this->render('changepwd',array('model'=>$model));
   }
 
-  public function actionInformation(){
-      if(!Yii::app()->user->isGuest){
-          $unitypes = MsDictionary::model()->findAllByAttributes(array('type'=>'unitype'));
-          $jianglis = MsDictionary::model()->findAllByAttributes(array('type'=>'jiangli'));
-          $degrees = MsDictionary::model()->findAllByAttributes(array('type'=>'degree'));
-          foreach($unitypes as $unitype){ //对应的学校类型名称
-              $uniarr[$unitype->code]=$unitype->name;
-          }
-          foreach($jianglis as $jiangli){ //对应的奖励类型名称
-              $jiangliarr[$jiangli->code]=$jiangli->name;
-          }
-          foreach($degrees as $degree){ //对应的学历类型名称
-              $degreearr[$degree->code]=$degree->name;
-          }
-          $id = Yii::app()->user->id;
-          $model=new MsStudents;
+    public function actionDashboard(){
+        if(!Yii::app()->user->isGuest){
+            $unitypes = MsDictionary::model()->findAllByAttributes(array('type'=>'unitype'));
+            $jianglis = MsDictionary::model()->findAllByAttributes(array('type'=>'jiangli'));
+            $degrees = MsDictionary::model()->findAllByAttributes(array('type'=>'degree'));
+            foreach($unitypes as $unitype){ //对应的学校类型名称
+                $uniarr[$unitype->code]=$unitype->name;
+            }
+            foreach($jianglis as $jiangli){ //对应的奖励类型名称
+                $jiangliarr[$jiangli->code]=$jiangli->name;
+            }
+            foreach($degrees as $degree){ //对应的学历类型名称
+                $degreearr[$degree->code]=$degree->name;
+            }
+            $id = Yii::app()->user->id;
+            $model=new MsStudents;
 
-          $model = MsStudents::model()->findByAttributes(array('mid'=>$id));
-          if($model==null){
-              $model = new MsStudents();
+            $model = MsStudents::model()->findByAttributes(array('mid'=>$id));
+            if($model==null){
+                $model = new MsStudents();
+            }
+            if($model->image == null || $model->image == ''){
+                $model->image = 'upload/avatar/default.jpg';
+            }
+            $this->render('dashboard',array('uniarr'=>$uniarr,'jiangliarr'=>$jiangliarr,
+                'degreearr'=>$degreearr,'model'=>$model));
+
+        }else{
+            $this->redirect(Yii::app()->baseUrl);
+        }
+    }
+
+  public function actionInformation($id){
+      if(!Yii::app()->user->isGuest){
+          $userId = Yii::app()->user->id;
+          $user = MsMember::model()->findByAttributes(array('id'=>$userId));
+          if($user != null &&  $user->type == 2){
+              $unitypes = MsDictionary::model()->findAllByAttributes(array('type'=>'unitype'));
+              $jianglis = MsDictionary::model()->findAllByAttributes(array('type'=>'jiangli'));
+              $degrees = MsDictionary::model()->findAllByAttributes(array('type'=>'degree'));
+              foreach($unitypes as $unitype){ //对应的学校类型名称
+                  $uniarr[$unitype->code]=$unitype->name;
+              }
+              foreach($jianglis as $jiangli){ //对应的奖励类型名称
+                  $jiangliarr[$jiangli->code]=$jiangli->name;
+              }
+              foreach($degrees as $degree){ //对应的学历类型名称
+                  $degreearr[$degree->code]=$degree->name;
+              }
+
+              $model=new MsStudents;
+              $model = MsStudents::model()->findByAttributes(array('mid'=>$id));
+              if($model==null){
+                  $model = new MsStudents();
+              }
+              if($model->image == null || $model->image == ''){
+                  $model->image = 'upload/avatar/default.jpg';
+              }
+              $this->render('information',array('uniarr'=>$uniarr,'jiangliarr'=>$jiangliarr,
+                  'degreearr'=>$degreearr,'model'=>$model));
+          }else{
+
           }
-          if($model->image == null || $model->image == ''){
-              $model->image = 'upload/avatar/default.jpg';
-          }
-          $this->render('information',array('uniarr'=>$uniarr,'jiangliarr'=>$jiangliarr,
-              'degreearr'=>$degreearr,'model'=>$model));
+
 
       }else{
           $this->redirect(Yii::app()->baseUrl);
@@ -359,7 +397,7 @@ class KongjianController extends Controller
                 $model->graduatetime = date("Y-m-d H:i:s");
                 $tmp = MsStudents::model()->findByAttributes(array('username'=>$model->username));
                 if(isset($_FILES['image']) && $_FILES['image']!=null){ //更新logo
-                    $old_path = $tmp->image;
+                    $old_path = $tmp == null ? null : $tmp->image;
                     //上传图片
                     $picCreate = new PicCreate();
                     $picPath = $picCreate->createPic('image','upload/avatar/'
@@ -375,7 +413,7 @@ class KongjianController extends Controller
 
                     }
                 }else{
-                    $model->image = $tmp->image;
+                    $model->image = $tmp == null ? null : $tmp->image;
                 }
                 if($tmp == null){
                     $model->save();

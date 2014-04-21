@@ -107,6 +107,7 @@ class MsCompanyController extends Controller
                 $jobinfo['jianliname']=$jianliinfo->name;
                 $jobinfo['memberid']=$jianliinfo->userId;
                 $member = Member::model()->findByPk($jianliinfo->userId);
+                $jobinfo['userid']=$member->id;
                 $jobinfo['username']=$member->username;
                 $jobinfo['createtime']=$jianli->createtime;
                 $jobinfos[]=$jobinfo;
@@ -343,7 +344,7 @@ class MsCompanyController extends Controller
 		$dataProvider=new CActiveDataProvider('MsCompany',array(
                 'criteria'=>$criteria,
                 'pagination' => array(
-                    'pageSize' => 1,
+                    'pageSize' => 12,
                 ),
             )
         );

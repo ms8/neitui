@@ -230,7 +230,8 @@
             url:'<?php echo Yii::app()->request->hostInfo.Yii::app()->homeUrl.'/kongjian/setDefault'?>',
             success:function(data) {
                 if(data == '1'){ //修改成功，刷新页面
-                    window.location.reload();
+//                    window.location.reload();
+                    window.location.href();//避免重复提交表单
                 }else if(data=='0'){
                     alert('抱歉，修改失败');
                 }

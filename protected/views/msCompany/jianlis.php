@@ -24,7 +24,9 @@
                         </a>
                     </td>
                     <td>
-                        <?php  echo $jobinfo['username'] ?>
+                        <a   target="_blank" href="<?php echo Yii::app()->createUrl('/kongjian/information')."/".$jobinfo['userid']?>">
+                            <i class="icon-eye-open"></i>&nbsp<?php  echo $jobinfo['username'] ?>
+                        </a>
                     </td>
                     <td>
                         <a id="<?php  echo $jobinfo['path'] ?>" data-toggle="modal" data-target="#jianli" href="#" onclick="setPath(this)">

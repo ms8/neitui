@@ -1680,6 +1680,9 @@ address {
 .intro-logo,.intro-image{
     width: 190px;height: 190px;
 }
+.intro-logo img,.intro-image img{
+    width:100%;
+}
 .absolute-right-20{
     position: absolute;
     top:20px;
