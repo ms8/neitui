@@ -178,6 +178,7 @@ class KongjianController extends Controller
                             $sender = new HttpSender();
 //                            $url="http://localhost:8080/wtopdf/site/translate/".$model->id.'/'.date('Y-m-d')."/".$fileName_store.$type;
                             $url="http://localhost:8080/kuairuzhi/site/translate/".$model->id.'/'.date('Y-m-d')."/".$fileName_store.$type;
+//                            $url="http://123.1.157.170:8080/kuairuzhi/site/translate/37/2014-04-21/13980786170695229.doc";
                             $sender->sock_get($url);
                         }
                         //**************************************************
