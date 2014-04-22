@@ -19,7 +19,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
                 <div class="widget">
                     <div class="media">
                         <a class="pull-left intro-logo" href="#">
-                            <img width="190" height="190" alt="<?php echo $model->name?>"
+                            <img  alt="<?php echo $model->name?>"
                                  src="<?php echo Yii::app()->baseUrl.'/'.$model->logo?>" />
                         </a>
                         <div class="media-body">

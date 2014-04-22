@@ -65,7 +65,7 @@
                                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">个人中心<i class="icon-sort-down"></i></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="<?php echo Yii::app()->createUrl('/kongjian/application')?>">投递职位</a></li>
-                                    <li><a href="<?php echo Yii::app()->createUrl('/kongjian/information')?>">个人信息</a></li>
+                                    <li><a href="<?php echo Yii::app()->createUrl('/kongjian/dashboard')?>">个人信息</a></li>
                                     <li><a href="<?php echo Yii::app()->createUrl('/kongjian/jianli')?>">我的简历</a></li>
                                     <li><a href="<?php echo Yii::app()->createUrl('/mscompany/changepwd')?>">修改密码</a></li>
                                 </ul>

@@ -107,6 +107,7 @@ class MsCompanyController extends Controller
                 $jobinfo['jianliname']=$jianliinfo->name;
                 $jobinfo['memberid']=$jianliinfo->userId;
                 $member = Member::model()->findByPk($jianliinfo->userId);
+                $jobinfo['userid']=$member->id;
                 $jobinfo['username']=$member->username;
                 $jobinfo['createtime']=$jianli->createtime;
                 $jobinfos[]=$jobinfo;
