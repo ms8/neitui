@@ -176,8 +176,9 @@ class KongjianController extends Controller
                         //***********将简历转换为pdf************************** 先注释掉
                         if ($type == ".doc" || $type == ".docx"){
                             $sender = new HttpSender();
-//                            $url="http://localhost:8080/wtopdf/site/translate/".$model->id.'/'.date('Y-m-d')."/".$fileName_store.$type;
                             $url="http://localhost:8080/kuairuzhi/site/translate/".$model->id.'/'.date('Y-m-d')."/".$fileName_store.$type;
+                            //$url="http://localhost:8080/kuairuzhi/site/translate/".$model->id.'/'.date('Y-m-d')."/".$fileName_store.$type;
+                            //$url="http://123.1.157.170:8080/kuairuzhi/site/translate/40/2014-04-22/13981347599155121.doc";
                             $sender->sock_get($url);
                         }
                         //**************************************************
