@@ -59,7 +59,8 @@ return array(
 
 		'user'=>array(
 			'allowAutoLogin'=>true,
-			'loginUrl'=>'/public/login',
+            'authTimeout'=>3600, //1小时
+			'loginUrl'=>'/',
 			'guestName'=>'main',
 			'stateKeyPrefix'=>'zidongdenglu',
 		),

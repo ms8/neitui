@@ -18,18 +18,26 @@ if ($index%4===0 && $index !=0){
         </div>
         <div class="member-details">
             <div class="member-content">
+                <?php if($data->tags != null && $data->tags != ""){?>
                 <span class="position">
                     <strong>【公司印象】</strong>
                     <?php echo CHtml::encode(Helper::truncate_utf8_string($data->tags,21));?>
                 </span>
+                <?php } ?>
 <!--                <p>【公司介绍】 --><?php //echo CHtml::encode($data->description); ?><!--</p>-->
                 <?php
-                    $jobs = MsJobs::model()->findAllByAttributes(array('company_id'=>$data->id));
+                    $criteria = new CDbCriteria;
+                    $criteria->order = 'createtime desc';
+                    $jobs = MsJobs::model()->findAllByAttributes(array('company_id'=>$data->id),$criteria);
                     $i = 0;
+                    $time = null;
                     foreach($jobs as $job){
-                        if($i ==0) echo "<ul>";
-                        if($i == 4){
-                            echo  "</ul><div class='text-left' style='padding-left:5px;'><strong><i class='icon-hand-right'></i>&nbsp共".count($jobs)."个招聘职位</strong></div>";
+                        if($i ==0) {
+                            $time = $job->createtime;
+                            echo "<ul>";
+                        };
+                        if($i == 3){
+                            echo  "</ul><div class='text-left' style='padding:0 0 2px 5px;'><i class='icon-hand-right'></i>&nbsp共".count($jobs)."个招聘职位</div>";
                             break;
                         }else{
                             echo "<li>".$job->title;"</li>";
@@ -37,6 +45,7 @@ if ($index%4===0 && $index !=0){
                         }
                         $i++;
                     }
+                    echo "<div class='text-left' style='padding:5px 0 0 5px;'><i class='icon-time'></i>&nbsp".$time."</div>";
                 ?>
             </div>
             <p class="text-center"><a class="btn btn-flat flat-color" href="<?php echo Yii::app()->baseUrl.'/mscompany/view/'.$data->id?>">查看详情</a></p>
