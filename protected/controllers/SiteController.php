@@ -251,8 +251,9 @@ class SiteController extends Controller
 //            $this->redirect(Yii::app()->request->urlReferrer);
         }else{
             //取公司信息:已验证的公司
-            $companys = MsCompany::model()->findAllByAttributes(array('status'=>'2'));
-            $this->render('index',array('companys'=>$companys));
+//            $companys = MsCompany::model()->findAllByAttributes(array('status'=>'2'));
+//            $this->render('index',array('companys'=>$companys));
+            $this->redirect(array('/site/index'));
         }
     }
 
@@ -287,8 +288,9 @@ class SiteController extends Controller
             $model->login();
         }
         //到首页
-        $companys = MsCompany::model()->findAllByAttributes(array('status'=>'2'));
-        $this->render('index',array('companys'=>$companys));
+//        $companys = MsCompany::model()->findAllByAttributes(array('status'=>'2'));
+//        $this->render('index',array('companys'=>$companys));
+        $this->redirect(array('/site/index'));
     }
 
     public function actionToReset($serial){
