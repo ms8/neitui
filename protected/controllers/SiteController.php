@@ -300,12 +300,10 @@ class SiteController extends Controller
             if($rm != null){
                 $this->render('resetpassword',array('username'=>$rm->username,'serialnum'=>$serial));
             }else{
-                $companys = MsCompany::model()->findAllByAttributes(array('status'=>'2'));
-                $this->render('index',array('companys'=>$companys));
+                $this->redirect(array('/site/index'));
             }
         }else{  //到首页
-            $companys = MsCompany::model()->findAllByAttributes(array('status'=>'2'));
-            $this->render('index',array('companys'=>$companys));
+            $this->redirect(array('/site/index'));
         }
     }
 
