@@ -35,7 +35,7 @@ class SiteController extends Controller
         $advice = $_POST['advice'];
 
         $mailSender = new MailerMsg();
-        $result = $mailSender->send($email,'admin@kuairuzhi.com',$advice);
+        $result = $mailSender->send($email,'jiangdonghai@kuairuzhi.com',$advice);
         die(CJSON::encode($result));
     }
 
