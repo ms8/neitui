@@ -291,7 +291,7 @@ class MsCompanyController extends Controller
 
                     }
                 }
-                $company->save();
+                $company->save(false);
             }
             $company->description  = "";
             die(CJSON::encode($company));
