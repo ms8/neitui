@@ -94,6 +94,8 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_GLOBAL.'pdf/
 
     function setPath(obj){
         var url = "<?php echo Yii::app()->baseUrl?>"+$(obj).attr("id");
+        //清空
+        $("#viewer").text("");
         // Fetch the PDF document from the URL using promices
         PDFJS.getDocument(url).then(function getPdfForm(pdf) {
             // Rendering all pages starting from first
