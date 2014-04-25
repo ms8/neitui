@@ -210,7 +210,7 @@
                     </div>
                     <div class="form-group">
                         <label for="inputPassword3" class="col-sm-2 control-label">
-                            <button id="choose_td" class="btn btn-flat flat-color"  type="button">投简历</button>
+                            <button id="choose_td" class="btn btn-flat flat-color" type="button">投简历</button>
                         </label>
                     </div>
                 </form>
@@ -295,7 +295,17 @@
                     var $content = $("#collapse"+data[i].job.id+" .panel-body");
                     var tempHtml = "<p>"+data[i].job.description+"</p>"
                     if(data[i].status == "0"){
-                        tempHtml += "<div class='text-center status'><button class='btn btn-flat flat-color' id='submitbt' onclick='submitjl("+data[i].job.id+")'>投简历</button></div>";
+                        tempHtml += "<div class='text-center status'><button class='btn btn-flat flat-color' " +
+                            <?php
+                            if(!Yii::app()->user->isGuest){
+                                $user = Member::model()->findByPk(Yii::app()->user->id);
+                                if($user!=null && $user->type=='2'){ //企业用户不能投简历
+                                ?>
+                            "disabled='disabled' "+
+                        <?php }
+                        }?>
+
+                            "id='submitbt' onclick='submitjl("+data[i].job.id+")'>投简历</button></div>";
                     }else{
                         tempHtml += '<div class="text-center status"><button class="btn btn-default" type="button" disabled="disabled">该职位已投</button></div>';
                     }

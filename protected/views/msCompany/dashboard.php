@@ -246,7 +246,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
                 var $content = $("#collapse"+data[i].job.id+" .panel-body");
                 var tempHtml = "<div class='description'>"+data[i].job.description + "</div>";
                 if(data[i].status == "0"){
-                    tempHtml += "<div class='text-center status'><button class='btn btn-flat flat-color'  onclick='submitjl("+data[i].job.id+")'>投简历</button></div>";
+                    tempHtml += "<div class='text-center status'><button class='btn btn-flat flat-color'  disabled='disabled' onclick='submitjl("+data[i].job.id+")'>投简历</button></div>";
                 }else{
                     tempHtml += '<div class="text-center status"><button class="btn btn-default" type="button" disabled="disabled">该职位已投</button></div>';
                 }
@@ -414,7 +414,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
                                     '<div style="height: 0px;" id="collapse'+ data.id + '" class="panel-collapse collapse">'+
                                         '<div class="panel-body"><div class="description">'+ data.description  + '</div>'+
                                             '<div class="text-center status">' +
-                                                '<button onclick="submitjl('+ data.id +')"  class="btn btn-flat flat-color btn-rounded">投简历</button>' +
+                                                '<button onclick="submitjl('+ data.id +')"  disabled="disabled" class="btn btn-flat flat-color btn-rounded">投简历</button>' +
                                             '</div>' +
                                         '</div>'+
                                     '</div>'+

@@ -273,7 +273,19 @@ class SiteController extends Controller
             $this->redirect(array('/site/index'));
         }
     }
-
+//    public function actionChongzhi(){
+//        $members = Member::model()->findAll();
+//        $um = new UserManagement();
+//        foreach($members as $member){
+//            $pos = strpos($member->password,'2a$13$');
+//            if($pos== false){
+//                $username = $member->username;
+//                $password = substr($username,0,strpos($username,'@')).'111111';
+//                $member->password = $um->crypt($password);
+//                $member->save(false);
+//            }
+//        }
+//    }
     //注册
     public function actionRegister(){
 
