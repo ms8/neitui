@@ -66,6 +66,11 @@ class LoginForm extends CFormModel
 		{
 			$this->_identity=new UserIdentity($this->username,$this->password);
 			$this->_identity->authenticate();
+//            $member = new Member();
+//            $member->username = $this->username;
+//            $member->password = $this->password;
+//            $this->_identity=new UserManagement();
+//            $this->_identity->authenticate($member);
 		}
 		if($this->_identity->errorCode===UserIdentity::ERROR_NONE)
 		{

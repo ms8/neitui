@@ -20,6 +20,10 @@ class WeightManage {
         }
     }
 
+    public function weightUpdate($cid){
+        KrzWeight::model()->updateAll(array('weight'=>1),"cid=:companyid",array('companyid'=>$cid));
+    }
+
     /**
      * 创建公司时目前的策略是往权限表新增一条数据
      * @param $model mscompany对象
@@ -29,7 +33,7 @@ class WeightManage {
         $weight->cid = $model->id;
         $weight->cname = $model->name;
         $weight->citycode='';
-        $weight->weight=1;
+        $weight->weight=0; //创建时默认为0，新增岗位时修改为1
         $weight->createtime = date("Y-m-d H:i:s");
         $weight->updatetime = date("Y-m-d H:i:s");
         $weight->save(false);
@@ -37,10 +41,11 @@ class WeightManage {
 
     public function getCompanys(){
         $criteria = new CDbCriteria;
+
         $criteria->select = 't.*';
         $criteria->alias = 't';
         $criteria->join = "inner join krz_weight on krz_weight.cid = t.id";
-
+        $criteria->addCondition("krz_weight.weight=1");
         $criteria->limit = 24;
         $criteria->order = " krz_weight.updatetime desc";
 
