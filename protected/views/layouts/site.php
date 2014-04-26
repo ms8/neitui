@@ -68,6 +68,7 @@
                                     <li><a href="<?php echo Yii::app()->createUrl('/kongjian/dashboard')?>">个人信息</a></li>
                                     <li><a href="<?php echo Yii::app()->createUrl('/kongjian/jianli')?>">我的简历</a></li>
                                     <li><a href="<?php echo Yii::app()->createUrl('/mscompany/changepwd')?>">修改密码</a></li>
+                                    <li><a href="<?php echo Yii::app()->createUrl('/site/logout')?>">退出</a></li>
                                 </ul>
                             </li>
                         <?php   }else{ ?>
@@ -78,14 +79,12 @@
 <!--                                    <li><a href="--><?php //echo Yii::app()->createUrl('/msjobs/create')?><!--">职位信息</a></li>-->
                                     <li><a href="<?php echo Yii::app()->createUrl('/mscompany/jianlis')?>">收到的简历</a></li>
                                     <li><a href="<?php echo Yii::app()->createUrl('/mscompany/changepwd')?>">修改密码</a></li>
+                                    <li><a href="<?php echo Yii::app()->createUrl('/site/logout')?>">退出</a></li>
                                 </ul>
                             </li>
                         <?php
                                 }
                         ?>
-                            <li class="dropdown">
-                                <a href="<?php echo Yii::app()->createUrl('/site/logout')?>">退出</a>
-                            </li>
                             <li class="dropdown">
                                 <!--                                <a data-toggle="dropdown" class="dropdown-toggle" href="#">关于我们</a>-->
                                 <a href="#"data-toggle="modal" data-target="#adviceModal">意见反馈</a>
@@ -208,9 +207,9 @@
             <div class="modal-body">
                 <form role="form" method="post" id="adviceForm" action="" class="form-horizontal" >
                     <div class="form-group">
-                        <label for="username" class="col-sm-2 control-label">邮箱:</label>
+                        <label for="username" class="col-sm-2 control-label">您的邮箱:</label>
                         <div class="col-sm-7">
-                            <input type="text" required="" placeholder="邮箱"  id="emailAdvice" name="emailAdvice" class="form-control"/>
+                            <input type="text" required="" placeholder="请填写您的邮箱地址，方便我们联系您"  id="emailAdvice" name="emailAdvice" class="form-control"/>
                         </div>
                         <div class="col-sm-3 errorMessage"></div>
                     </div>
@@ -443,7 +442,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'valida
             url:'<?php echo Yii::app()->createUrl('site/advice')?>',
             success:function(data) {
                 if(data == true){
-                    alert('提交成功,谢谢您的意见');
+                    alert('提交成功,稍后我们将通过'+email+'这个地址与您联系\n谢谢您的宝贵意见，快入职期待为您提供更好的服务');
                 }else {
                     alert('服务器正忙，请稍后提交');
                 }
