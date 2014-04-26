@@ -27,7 +27,13 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umedit
                             <h4 class="media-heading"><?php echo $model->realname?></h4>
                             <div id="intro-info" class="c_intro">
                                 <div class="intro-des">
-                                    <p><?php echo $model->description ?></p>
+                                    <p>
+                                        <?php if($model->description==null || $model->description==""){?>
+                                            请填写您的个人描述，例如您的优点和缺点，您的研究方向和成果，
+                                            <br>在校期间所获的奖励，在校期间所担任的职务和在该职务上的贡献，
+                                            <br>您的兴趣爱好等信息。便于企业更全面的了解您。
+                                        <?php }else{echo $model->description;}?>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -193,7 +199,8 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umedit
                                         <div class="form-group">
                                             <label for="MsStudents[skill]" class="col-sm-2 control-label">技能特长：</label>
                                             <div class="col-sm-8">
-                                                <?php echo $form->textArea($model,'skill',array('rows'=>4, 'cols'=>70,'class'=>'form-control')); ?>
+                                                <?php echo $form->textArea($model,'skill',array('placeholder'=>'填写技能特长，便于企业更快找到您。例如可以填写"精通C,C++,Java语音，精通Android开发"等',
+                                                    'rows'=>4, 'cols'=>70,'class'=>'form-control')); ?>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -256,14 +263,14 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umedit
                                      </span>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label  class="col-sm-5">获得奖励：</label>
-                                <div class="col-sm-7">
-                                    <span class="college-jiangli">
-                                          <?php echo $model->jiangliname?>
-                                     </span>
-                                </div>
-                            </div>
+<!--                            <div class="form-group">-->
+<!--                                <label  class="col-sm-5">获得奖励：</label>-->
+<!--                                <div class="col-sm-7">-->
+<!--                                    <span class="college-jiangli">-->
+<!--                                          --><?php //echo $model->jiangliname?>
+<!--                                     </span>-->
+<!--                                </div>-->
+<!--                            </div>-->
                         </form>
                     </div>
                     <div class="modal fade" id="college-edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -302,14 +309,14 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umedit
                                             </div>
                                         </div>
 
-                                        <div class="form-group">
-                                            <?php echo $form->labelEx($model,'jianglitype',array('class'=>'col-sm-2 control-label')); ?>
-                                            <div class="col-sm-10 radioTag">
-                                                <?php echo $form->radioButtonList($model,'jianglitype',$jiangliarr,
-                                                    array('separator'=>'&nbsp;',
-                                                        'labelOptions'=>array('class'=>'btn btn-flat flat-success btn-bordered myLabel')) )?>
-                                            </div>
-                                        </div>
+<!--                                        <div class="form-group">-->
+<!--                                            --><?php //echo $form->labelEx($model,'jianglitype',array('class'=>'col-sm-2 control-label')); ?>
+<!--                                            <div class="col-sm-10 radioTag">-->
+<!--                                                --><?php //echo $form->radioButtonList($model,'jianglitype',$jiangliarr,
+//                                                    array('separator'=>'&nbsp;',
+//                                                        'labelOptions'=>array('class'=>'btn btn-flat flat-success btn-bordered myLabel')) )?>
+<!--                                            </div>-->
+<!--                                        </div>-->
 
                                     </form>
 
