@@ -215,7 +215,7 @@
                     </div>
                     <div class="form-group">
                         <label for="inputPassword3" style="line-height: 30px;" class="col-sm-3 control-label">设置为默认简历：</label>
-                        <div class="col-sm-5">
+                        <div class="col-sm-5"  id="setDefault" >
                             <div class="radio" name="isdefault">
                                 <ins class="checked" value="1" ></ins>
                                 <span>是</span>
@@ -243,6 +243,14 @@
     $("#choose_td").live('click',function(){
         //var jianli = $('input[name="chosen"]:checked').val();
         //$("#jianliid").val(jianli);
+        if($("#jianlis .radio .checked").length <=0){
+            alert("请选择简历");
+            return;
+        }
+        if($("#setDefault .radio .checked").length <=0){
+            alert("该简历是否作为默认简历？");
+            return;
+        }
         $("#chooseForm").submit();
     });
 
