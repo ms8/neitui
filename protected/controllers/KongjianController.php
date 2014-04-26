@@ -66,18 +66,22 @@ class KongjianController extends Controller
         $jianli = MsJianli::model()->findByPk($id);
         $json_str = CJSON::encode(array('result'=>'false'));
         if($jianli != null){
-            if(file_exists($jianli->filepath))
-                unlink($jianli->filepath);
-            $pdf = $jianli->filepath;
-            $pdf = substr($pdf,0,strpos($pdf,'.'));
-            $pdf = $pdf.'.pdf';
-            if(file_exists($pdf))
-                unlink($pdf);
-            //删除简历内容
-            KrzJlcontent::model()->deleteAllByAttributes(array('jid'=>$id));
-            $count = MsJianli::model()->deleteByPk($id);
-            if($count >0){
-                $json_str = CJSON::encode(array('result'=>'ok'));
+            if($jianli->userId == Yii::app()->user->id){ //只能删除自己的简历
+                if(file_exists($jianli->filepath))
+                    unlink($jianli->filepath);
+                $pdf = $jianli->filepath;
+                $pdf = substr($pdf,0,strpos($pdf,'.'));
+                $pdf = $pdf.'.pdf';
+                if(file_exists($pdf))
+                    unlink($pdf);
+                //删除简历内容
+                KrzJlcontent::model()->deleteAllByAttributes(array('jid'=>$id));
+                $count = MsJianli::model()->deleteByPk($id);
+                //删除投递信息
+                MsApplication::model()->deleteAllByAttributes(array('jianli_id'=>$id));
+                if($count >0){
+                    $json_str = CJSON::encode(array('result'=>'ok'));
+                }
             }
         }
 

@@ -123,23 +123,43 @@
             <div class="modal-body">
                 <form role="form" method="post" enctype="multipart/form-data"    class="form-horizontal" >
                     <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-3 control-label">选择简历:</label>
+                        <label for="inputPassword3" class="col-sm-2 control-label">选择简历:</label>
                         <div class="col-sm-9">
-                            <input type="file" name="jianlifile" class=" class="form-control">
+<!--                            <input type="file" name="jianlifile" class=" class="form-control">-->
+                            <input id="lefile" type="file"  name="jianlifile" style="display:none">
+                            <div class="input-group">
+                                <input id="photoCover" class="form-control" type="text" >
+                            <span id="apply" class="input-group-addon" onclick="$('input[id=lefile]').click();">
+                                选择简历
+                            </span>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-3 control-label">设置为默认简历：</label>
-                        <div class="col-sm-9">
-                             <input name="companyid" value="<?php echo $model->id?>" type="hidden">
+<!--                        <label for="inputPassword3" class="col-sm-3 control-label">设置为默认简历：</label>-->
+<!--                        <div class="col-sm-9">-->
+<!--                             <input name="companyid" value="--><?php //echo $model->id?><!--" type="hidden">-->
+<!--                            <input name="jobid"  type="hidden">-->
+<!--                            <input type="radio" value="1" name="flag" checked>是 &nbsp;&nbsp;&nbsp;-->
+<!--                            <input type="radio" value="0" name="flag" >否-->
+<!--                        </div>-->
+                        <label for="inputPassword3" style="line-height: 30px;" class="col-sm-3 control-label">设置为默认简历：</label>
+                        <div class="col-sm-5">
+                            <input name="companyid" value="<?php echo $model->id?>" type="hidden">
                             <input name="jobid"  type="hidden">
-                            <input type="radio" value="1" name="flag" checked>是 &nbsp;&nbsp;&nbsp;
-                            <input type="radio" value="0" name="flag" >否
+                            <div class="radio" name="flag">
+                                <ins class="checked" value="1" ></ins>
+                                <span>是</span>
+                            </div>
+                            <div class="radio" name="flag">
+                                <ins class="" value="0" ></ins>
+                                <span>否</span>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-3 control-label">
-                            <button id="jianliSubmit" class="btn btn-danger"  type="button">上传简历</button>
+                        <label for="inputPassword3" class="col-sm-11 control-label">
+                            <button id="jianlisubmit" class="btn btn-flat flat-color"  style="padding:10px 16px;border-radius:3px" type="button">上传简历</button>
                         </label>
                     </div>
                 </form>
@@ -204,8 +224,6 @@
                                 <ins class="" value="0" ></ins>
                                 <span>否</span>
                             </div>
-<!--                            <input type="radio" value="1" name="defaultflag" checked>是 &nbsp;&nbsp;&nbsp;-->
-<!--                            <input type="radio" value="0" name="defaultflag" >否-->
                         </div>
                     </div>
                     <div class="form-group">
@@ -226,6 +244,10 @@
         //var jianli = $('input[name="chosen"]:checked').val();
         //$("#jianliid").val(jianli);
         $("#chooseForm").submit();
+    });
+
+    $('input[id=lefile]').change(function() {
+        $('#photoCover').val($(this).val());
     });
 
     //投简历
@@ -268,7 +290,7 @@
         $(".nav li:eq(1)").addClass("active");
 
         //上传简历
-        $("#jianliSubmit").click(function(){
+        $("#jianlisubmit").click(function(){
                 var targetEle = $(".status","#collapse"+$("input[name='jobid']",this.form).val());
                 $(this.form).ajaxSubmit({
                     url:"<?php echo Yii::app()->baseUrl.'/kongjian/jianli'?>",
