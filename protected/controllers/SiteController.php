@@ -62,7 +62,7 @@ class SiteController extends Controller
             }
         }
         //职位信息
-        $sql = "select c.logo,c.id as cid,c.name,j.id as jid,j.title,j.createtime,j.description "
+        $sql = "select c.logo,c.id as cid,c.name,c.tags,j.id as jid,j.title,j.createtime "
             ." from ms_jobs j, ms_company c where  j.company_id = c.id "
             .$condition." order by j.createtime desc";
         $criteria=new CDbCriteria();
