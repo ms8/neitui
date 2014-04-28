@@ -11,7 +11,7 @@
                     <div class="subpage-title noline">
                         <h5>招聘职位</h5>
                     </div>
-                    <div class="job_search">
+                    <div class="job_search pad-top-5">
                         <dl class="dl-horizontal">
                             <dt>城市</dt>
                             <dd>
@@ -48,32 +48,54 @@
                                 <a href="/job?city=14">其他</a>
                             </dd>
                         </dl>
-
                     </div>
-                    <div class="panel-group" >
-                        <?php foreach($jobs as $row):?>
-                            <?php echo $row["logo"]?>&nbsp;&nbsp;
-                            <?php echo $row["cid"]?>&nbsp;&nbsp;
-                            <?php echo $row["name"]?>&nbsp;&nbsp;
-                            <?php echo $row["jid"]?>&nbsp;&nbsp;
-                            <?php echo $row["title"]?>&nbsp;&nbsp;
-                            <?php echo $row["createtime"]?>&nbsp;&nbsp;
-                            <?php echo $row["description"]?>
-                            <br>
-                        <?php endforeach;?>
+                    <div class="pad-top-25">
+                        <table class="table table-condensed jobs">
+<!--                            <thead>-->
+<!--                            <tr>-->
+<!--                                <th style="width: 10%">头像</th>-->
+<!--                                <th style="width: 60%">工作信息</th>-->
+<!--                                <th style="width: 20%">投递时间</th>-->
+<!--                            </tr>-->
+<!--                            </thead>-->
+
+                            <tbody>
+                            <?php foreach($jobs as $job) {?>
+                                <tr>
+                                    <td>
+                                        <img  src="<?php echo Yii::app()->baseUrl."/".$job['logo']?>" alt="快入职微信号">
+                                    </td>
+                                    <td>
+                                        <p>
+                                            <a href="<?php echo Yii::app()->baseUrl.'/mscompany/view/'.$job['cid'] ?>"><?php echo $job['name'];?></a>
+                                            <a href="<?php echo Yii::app()->baseUrl.'/mscompany/view/'.$job['jid'] ?>"><?php echo $job['title'];?></a>
+                                        </p>
+                                        <?php  echo $job['description'] ?>
+                                    </td>
+                                    <td>
+                                        <?php  echo $job['createtime'] ?>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="text-center" >
+<!--                        --><?php //foreach($jobs as $row):?>
+<!--                            --><?php //echo $row["logo"]?><!--&nbsp;&nbsp;-->
+<!--                            --><?php //echo $row["cid"]?><!--&nbsp;&nbsp;-->
+<!--                            --><?php //echo $row["name"]?><!--&nbsp;&nbsp;-->
+<!--                            --><?php //echo $row["jid"]?><!--&nbsp;&nbsp;-->
+<!--                            --><?php //echo $row["title"]?><!--&nbsp;&nbsp;-->
+<!--                            --><?php //echo $row["createtime"]?><!--&nbsp;&nbsp;-->
+<!--                            --><?php //echo $row["description"]?>
+<!--                            <br>-->
+<!--                        --><?php //endforeach;?>
                         <?php
                         //分页widget代码:
                         $this->widget('CLinkPager',array('pages'=>$pages,'selectedPageCssClass'=>'active','hiddenPageCssClass'=>'disabled', 'htmlOptions'=>array('class'=>'pagination')));
                         ?>
                     </div>
-                </div>
-
-            </section>
-            <!-- End Projects -->
-            <section class="pad-25" id="action-box">
-                <div class="action-box">
-                    <h3>IT类应届生专场，众多精挑细选的职位在等你，快去看看吧！</h3>
-                    <a class="btn btn-flat flat-color"  style="padding: 10px 15px;font-size: 13px;" id="submitbt" href="<?php echo Yii::app()->baseUrl.'/mscompany/index'?>">最新发布职位</a>
                 </div>
             </section>
         </div>
@@ -84,9 +106,9 @@
                         <h5>关注我们</h5>
                     </div>
                     <ul class="social-links">
-                        <li class="weixin"><img  src="/neitui/assets/default/css//images/erweima.jpg" alt="快入职微信号"></li>
+                        <li class="weixin"><img  src="<?php echo Yii::app()->baseUrl.CSS_PATH.'images/erweima.jpg'?>" alt="快入职微信号"/></li>
                         <li class="weibo">
-                            <img  src="/neitui/assets/default/css//images/weibo.png" alt="快入职微博号">
+                            <img  src="<?php echo Yii::app()->baseUrl.CSS_PATH.'images/weibo.png'?>" alt="快入职微博号"/>
                             <wb:follow-button uid="5099334861" type="red_2" width="130" height="24" ></wb:follow-button>
                         </li>
                     </ul>

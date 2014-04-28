@@ -1533,7 +1533,7 @@ th {
 .table-condensed thead > tr > td,
 .table-condensed tbody > tr > td,
 .table-condensed tfoot > tr > td {
-    padding: 5px;
+    padding: 10px;
 }
 
 .table-bordered {
@@ -4973,7 +4973,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .pagination > li > span {
     position: relative;
     float: left;
-    padding: 10px 15px;
+    padding: 5px 10px;
     margin-left: -1px;
     line-height: 1.428571429;
     text-decoration: none;

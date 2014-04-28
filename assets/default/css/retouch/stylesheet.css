@@ -1951,3 +1951,8 @@ address {
 .flickr-photos-list .des:hover{
     display: block;
 }
+/*职位列表*/
+.jobs img{
+    width: 64px;
+    height:64px;
+}
