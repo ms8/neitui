@@ -1952,6 +1952,9 @@ address {
     display: block;
 }
 /*职位列表*/
+.table.jobs tbody > tr > td{
+    vertical-align: middle;
+}
 .jobs img{
     width: 64px;
     height:64px;

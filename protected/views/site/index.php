@@ -49,28 +49,34 @@
                             </dd>
                         </dl>
                     </div>
-                    <div class="pad-top-25">
-                        <table class="table table-condensed jobs">
-<!--                            <thead>-->
-<!--                            <tr>-->
-<!--                                <th style="width: 10%">头像</th>-->
-<!--                                <th style="width: 60%">工作信息</th>-->
-<!--                                <th style="width: 20%">投递时间</th>-->
-<!--                            </tr>-->
-<!--                            </thead>-->
+                    <div>
+                        <table class="table jobs">
+                            <thead>
+                            <tr>
+                                <th style="width: 10%"></th>
+                                <th style="width: 20%"></th>
+                                <th style="width: 20%"></th>
+                                <th style="width: 20%"></th>
+                                <th style="width: 20%"></th>
+                            </tr>
+                            </thead>
 
                             <tbody>
                             <?php foreach($jobs as $job) {?>
                                 <tr>
                                     <td>
-                                        <img  src="<?php echo Yii::app()->baseUrl."/".$job['logo']?>" alt="快入职微信号">
+                                        <img  src="<?php echo Yii::app()->baseUrl."/".$job['logo']?>" alt="<?php echo $job['title'];?>">
                                     </td>
                                     <td>
                                         <p>
-                                            <a href="<?php echo Yii::app()->baseUrl.'/mscompany/view/'.$job['cid'] ?>"><?php echo $job['name'];?></a>
                                             <a href="<?php echo Yii::app()->baseUrl.'/mscompany/view/'.$job['jid'] ?>"><?php echo $job['title'];?></a>
                                         </p>
-                                        <?php  echo $job['description'] ?>
+                                    </td>
+                                    <td>
+                                        <a href="<?php echo Yii::app()->baseUrl.'/mscompany/view/'.$job['cid'] ?>"><?php echo $job['name'];?></a>
+                                    </td>
+                                    <td>
+                                        <p><?php  echo $job['tags'] ?></p>
                                     </td>
                                     <td>
                                         <?php  echo $job['createtime'] ?>
