@@ -40,21 +40,21 @@ class SiteController extends Controller
     }
 
 	public function actionIndex(){
-        $allData = array();
-        //取在权重表中的公司
-        //$companys = MsCompany::model()->findAllByAttributes(array('status'=>'2'));
-        $wm = new WeightManage();
-        $companys = $wm->getCompanys();
-        foreach($companys as $company){
-            $jobs = MsJobs::model()->findAllByAttributes(array('company_id'=>$company->id));
-            if($jobs == null)
-                continue;  //只取发布了招聘岗位的公司信息
-            if($company->logo == null || $company->logo == ''){
-                $company->logo = 'upload/companylogo/default.png';
-            }
-            array_push($allData,array('company'=>$company,'jobs'=>$jobs));
-        }
-        $this->render('index',array('companys'=>$allData));
+        $sql = "select c.logo,c.id as cid,c.name,j.id as jid,j.title,j.createtime,j.description "
+        ." from ms_jobs j, ms_company c where  j.company_id = c.id order by j.createtime desc";
+        $criteria=new CDbCriteria();
+        $result = Yii::app()->db->createCommand($sql)->query();
+        $pages=new CPagination($result->rowCount);
+        $pages->pageSize=2;
+        $pages->applyLimit($criteria);
+        $result=Yii::app()->db->createCommand($sql." LIMIT :offset,:limit");
+        $result->bindValue(':offset', $pages->currentPage*$pages->pageSize);
+        $result->bindValue(':limit', $pages->pageSize);
+        $jobs=$result->query();
+        $this->render('index',array(
+            'jobs'=>$jobs,
+            'pages'=>$pages,
+        ));
 	}
 
 	public function actionDown(){
