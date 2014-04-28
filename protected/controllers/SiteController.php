@@ -55,9 +55,16 @@ class SiteController extends Controller
             }
             array_push($allData,array('company'=>$company,'jobs'=>$jobs));
         }
+        $condition = "";
+        if(isset($_GET['skill'])){
+            if( $_GET['skill']!="all"){
+                $condition = " and j.description like '%".$_GET['skill']."%'";
+            }
+        }
         //职位信息
         $sql = "select c.logo,c.id as cid,c.name,j.id as jid,j.title,j.createtime,j.description "
-        ." from ms_jobs j, ms_company c where  j.company_id = c.id order by j.createtime desc";
+            ." from ms_jobs j, ms_company c where  j.company_id = c.id "
+            .$condition." order by j.createtime desc";
         $criteria=new CDbCriteria();
         $result = Yii::app()->db->createCommand($sql)->query();
         $pages=new CPagination($result->rowCount);
@@ -67,10 +74,13 @@ class SiteController extends Controller
         $result->bindValue(':offset', $pages->currentPage*$pages->pageSize);
         $result->bindValue(':limit', $pages->pageSize);
         $jobs=$result->query();
-        $this->render('index',array(
+        //取技能字典信息
+        $skills = MsDictionary::model()->findAllByAttributes(array('type'=>'skill'));
+        $this->render('index_new',array(
             'jobs'=>$jobs,
             'pages'=>$pages,
             'companys'=>$allData,
+            'skills'=>$skills
         ));
 	}
 
