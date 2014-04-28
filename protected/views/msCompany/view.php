@@ -25,15 +25,31 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <a href="#collapse<?php echo $job->id?>" job-id="<?php echo $job->id?>" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle collapsed">
-                                        <span class="job-title"><?php echo $job->title?></span>
-                                        <span class="job-city"><?php echo $job->cityname?></span>
-                                        <span class="job-terms"><?php echo $job->createtime?></span>
+                                    <a href="#collapse<?php echo $job['job']->id?>" job-id="<?php echo $job['job']->id?>" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle collapsed">
+                                        <span class="job-title"><?php echo $job['job']->title?></span>
+                                        <span class="job-city"><?php echo $job['job']->cityname?></span>
+                                        <span class="job-terms"><?php echo $job['job']->createtime?></span>
                                     </a>
                                 </h4>
                             </div>
-                            <div class="panel-collapse collapse" id="collapse<?php echo $job->id?>" style="height: 0px;">
-                                <div class="panel-body"></div>
+                            <div class="panel-collapse collapse" id="collapse<?php echo $job['job']->id?>" style="height: 0px;">
+                                <div class="panel-body">
+                                    <p><?php echo $job['job']->description?></p>
+                                    <div class='text-center status'>
+                                        <?php if($job['status'] == '0'){?>
+                                            <button class='btn btn-flat flat-color'
+                                        <?php if(!Yii::app()->user->isGuest){
+                                                  $user = Member::model()->findByPk(Yii::app()->user->id);
+                                                  if($user!=null && $user->type=='2'){ //企业用户不能投简历
+                                        ?>
+                                                      disabled='disabled'
+                                        <?php }}?>
+                                            id='submitbt' onclick='submitjl(<?php echo $job['job']->id?>)'>投简历</button>
+                                        <?php }else{?>
+                                            <button class="btn btn-default" type="button" disabled="disabled">该职位已投</button>
+                                        <?php }?>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <?php }?>
@@ -316,24 +332,25 @@
 
 
         //职位信息
-        $.ajax({
+        /*$.ajax({
             type:'POST',
             dataType:'json',
-            url:'<?php echo Yii::app()->createUrl("msjobs/view")."/".$model->id?>',
+            url:'<?php// echo Yii::app()->createUrl("msjobs/view")."/".$model->id?>',
             success:function(data) {
                 for(var i = 0; i < data.length; i++){
                     var $content = $("#collapse"+data[i].job.id+" .panel-body");
                     var tempHtml = "<p>"+data[i].job.description+"</p>"
                     if(data[i].status == "0"){
                         tempHtml += "<div class='text-center status'><button class='btn btn-flat flat-color' " +
-                            <?php
+                            <?php /*
                             if(!Yii::app()->user->isGuest){
                                 $user = Member::model()->findByPk(Yii::app()->user->id);
                                 if($user!=null && $user->type=='2'){ //企业用户不能投简历
+ */
                                 ?>
                             "disabled='disabled' "+
-                        <?php }
-                        }?>
+                            <?php// }
+                            //}?>
 
                             "id='submitbt' onclick='submitjl("+data[i].job.id+")'>投简历</button></div>";
                     }else{
@@ -344,6 +361,7 @@
                 }
             }
         });
+        */
 
     });
 

@@ -127,23 +127,40 @@ class MsJobsController extends Controller
 	 */
 	public function actionView($id)
 	{
-        $jobs = MsJobs::model()->findAllByAttributes(array('company_id'=>$id));
+//        $jobs = MsJobs::model()->findAllByAttributes(array('company_id'=>$id));
+//
+//        $temAll = array();
+//        foreach($jobs as $job){
+//            //该职位是否投过简历
+//            $finish = '0';
+//            if(!Yii::app()->user->isGuest){ //查看该职位是否投过简历
+//                $app = MsApplication::model()->findByAttributes(array('member_id'=>Yii::app()->user->id,
+//                    'job_id'=>$job->id,'company_id'=>$id));
+//                if($app != null){
+//                    $finish = '1';
+//                }
+//            }
+//            array_push($temAll,array("job"=>$job,"status"=>$finish));
+//        }
+//
+//        die(CJSON::encode($temAll));
 
-        $temAll = array();
-        foreach($jobs as $job){
-            //该职位是否投过简历
+        $model = MsJobs::model()->findByPk($id);
+        if($model != null){
             $finish = '0';
             if(!Yii::app()->user->isGuest){ //查看该职位是否投过简历
                 $app = MsApplication::model()->findByAttributes(array('member_id'=>Yii::app()->user->id,
-                    'job_id'=>$job->id,'company_id'=>$id));
+                    'job_id'=>$id,'company_id'=>$model->company_id));
                 if($app != null){
                     $finish = '1';
                 }
             }
-            array_push($temAll,array("job"=>$job,"status"=>$finish));
+            $company = MsCompany::model()->findByPk($model->company_id);
+            $this->render('view',array(
+                'model'=>$model,'company'=>$company,'finish'=>$finish,
+            ));
         }
 
-        die(CJSON::encode($temAll));
 	}
 
 	/**
