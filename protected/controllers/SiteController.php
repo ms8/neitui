@@ -76,7 +76,7 @@ class SiteController extends Controller
         $jobs=$result->query();
         //取技能字典信息
         $skills = MsDictionary::model()->findAllByAttributes(array('type'=>'skill'));
-        $this->render('index_new',array(
+        $this->render('index',array(
             'jobs'=>$jobs,
             'pages'=>$pages,
             'companys'=>$allData,
