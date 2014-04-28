@@ -186,9 +186,22 @@ class MsCompanyController extends Controller
         if($model->logo == null || $model->logo == ''){
             $model->logo = 'upload/companylogo/default.png';
         }
+        //该职位是否投过简历
+        $finish = '0';
+        $temAll = array();
+        foreach($jobs as $job){
+            if(!Yii::app()->user->isGuest){ //查看该职位是否投过简历
+                $app = MsApplication::model()->findByAttributes(array('member_id'=>Yii::app()->user->id,
+                    'job_id'=>$job->id,'company_id'=>$id));
+                if($app != null){
+                    $finish = '1';
+                }
+            }
+            array_push($temAll,array("job"=>$job,"status"=>$finish));
+        }
 		$this->render('view',array(
 			'model'=>$model,
-            'jobs'=>$jobs
+            'jobs'=>$temAll
 		));
 	}
 
