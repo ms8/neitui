@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns:wb="http://open.weibo.com/wb">
 <head>
     <meta name="baidu-site-verification" content="t4WhrRxoqk" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -349,6 +349,7 @@
 </div>
 <!-- /.modal -->
 </body>
+<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
 <?php
 Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery.form.js');
 Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_GLOBAL.'bootstrap.min.js');
@@ -387,15 +388,6 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'valida
                 SubCookieUtil.unsetAll("loginInfo");
             }
         })
-
-        $('.weixin').popover({
-            placement:"top",
-            html:true,
-            trigger:'hover',
-            container:"body",
-            title:"",
-            content:'<img alt="快入职微信号" src="<?php echo Yii::app()->baseUrl.CSS_PATH.'/images/erweima.jpg'?>" width="150px"/>'
-        });
 
         //表单校验
         var registerVal = new FormValidator('registerForm', [{

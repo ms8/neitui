@@ -1,68 +1,120 @@
 <?php
-Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_PATH.'photowall.css');
-Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery.proximity.min.js', CClientScript::POS_BEGIN);
+//Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_PATH.'photowall.css');
+//Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery.proximity.min.js', CClientScript::POS_BEGIN);
 ?>
 
-<!-- Main Container -->
-<!--<section id="main-content">-->
-<!-- Container -->
-<section class="pad-top-25" id="our-services">
-    <div class="container">
-        <div  class="filters" id="filters" data-option-key="filter">
-            <span id="filter-up">公司所在城市：</span>
-            <a href="<?php echo Yii::app()->baseUrl."/"?>" data-option-value="*" class="active_sort">北京</a>
-            <span class="text-sep">/</span>
-            <a class="disabled">
-                上海<span class="text-sep">&nbsp/&nbsp</span>广州<span class="text-sep">&nbsp/&nbsp</span>深圳
-            </a>
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+            <section class="pad-top-25">
+                <div class="widget">
+                    <div class="subpage-title noline">
+                        <h5>招聘职位</h5>
+                    </div>
+                    <div class="job_search">
+                        <dl class="dl-horizontal">
+                            <dt>城市</dt>
+                            <dd>
+                                <a class="active" href="/job?city=0">全部</a>
+                                <a href="/job?city=11">北京</a>
+                                <a href="/job?city=12">上海</a>
+                                <a href="/job?city=13">广州</a>
+                                <a href="/job?city=14">深圳</a>
+                            </dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                            <dt>行业</dt>
+                            <dd>
+                                <a class="active" href="/job?city=0">全部</a>
+                                <a href="/job?city=11">互联网</a>
+                                <a href="/job?city=12">游戏</a>
+                                <a href="/job?city=13">电子商务</a>
+                                <a href="/job?city=14">金融</a>
+                                <a href="/job?city=14">IT/软件</a>
+                                <a href="/job?city=14">其他</a>
+                            </dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                            <dt>技能</dt>
+                            <dd>
+                                <a class="active" href="/job?city=0">全部</a>
+                                <a href="/job?city=11">JAVA</a>
+                                <a href="/job?city=12">C++/C</a>
+                                <a href="/job?city=13">Andriod</a>
+                                <a href="/job?city=14">WEB前端</a>
+                                <a href="/job?city=14">数据库</a>
+                                <a href="/job?city=14">测试</a>
+                                <a href="/job?city=14">运维</a>
+                                <a href="/job?city=14">其他</a>
+                            </dd>
+                        </dl>
+
+                    </div>
+                    <div class="panel-group" >
+                        <?php foreach($jobs as $row):?>
+                            <?php echo $row["logo"]?>&nbsp;&nbsp;
+                            <?php echo $row["cid"]?>&nbsp;&nbsp;
+                            <?php echo $row["name"]?>&nbsp;&nbsp;
+                            <?php echo $row["jid"]?>&nbsp;&nbsp;
+                            <?php echo $row["title"]?>&nbsp;&nbsp;
+                            <?php echo $row["createtime"]?>&nbsp;&nbsp;
+                            <?php echo $row["description"]?>
+                            <br>
+                        <?php endforeach;?>
+                        <?php
+                        //分页widget代码:
+                        $this->widget('CLinkPager',array('pages'=>$pages,'selectedPageCssClass'=>'active','hiddenPageCssClass'=>'disabled', 'htmlOptions'=>array('class'=>'pagination')));
+                        ?>
+                    </div>
+                </div>
+
+            </section>
+            <!-- End Projects -->
+            <section class="pad-25" id="action-box">
+                <div class="action-box">
+                    <h3>IT类应届生专场，众多精挑细选的职位在等你，快去看看吧！</h3>
+                    <a class="btn btn-flat flat-color"  style="padding: 10px 15px;font-size: 13px;" id="submitbt" href="<?php echo Yii::app()->baseUrl.'/mscompany/index'?>">最新发布职位</a>
+                </div>
+            </section>
+        </div>
+        <div class="col-md-3">
+            <section class="pad-top-25">
+                <div class="widget">
+                    <div class="subpage-title noline">
+                        <h5>关注我们</h5>
+                    </div>
+                    <ul class="social-links">
+                        <li class="weixin"><img  src="/neitui/assets/default/css//images/erweima.jpg" alt="快入职微信号"></li>
+                        <li class="weibo">
+                            <img  src="/neitui/assets/default/css//images/weibo.png" alt="快入职微博号">
+                            <wb:follow-button uid="5099334861" type="red_2" width="130" height="24" ></wb:follow-button>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <section class="pad-top-5">
+                <div class="widget">
+                    <div class="subpage-title noline">
+                        <h5>热门企业</h5>
+                    </div>
+                    <div class="company-show">
+                        <ul class="flickr-photos-list">
+                            <?php foreach($companys as $company){?>
+                                <li>
+                                    <a href="<?php echo Yii::app()->baseUrl.'/mscompany/view/'.$company['company']->id?>">
+                                        <img  alt="<?php echo $company['company']->name?>" src="<?php echo Yii::app()->baseUrl.'/'.$company['company']->logo?>" />
+                                        <div class="des"><strong><?php echo $company['company']->name?></strong></div>
+                                    </a>
+
+                                </li>
+                            <?php }?>
+                        </ul>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
-    <!-- /.container -->
-</section>
-<section class="pad-top-25">
-    <div class="container">
-        <ul id="pe-thumbs" class="pe-thumbs">
-            <?php foreach($companys as $company){?>
-                <li>
-                    <a href="<?php echo Yii::app()->baseUrl.'/mscompany/view/'.$company['company']->id?>">
-                        <img  alt="<?php echo $company['company']->name?>" src="<?php echo Yii::app()->baseUrl.'/'.$company['company']->logo?>" />
-                        <div class="pe-description">
-                            <h3><?php echo $company['company']->name?></h3>
-<!--                            <div class="subpage-title">-->
-<!--                                <h5>招聘信息</h5>-->
-<!--                            </div>-->
-                            <ul>
-                            <?php $i = 0 ;
-                                  foreach($company['jobs'] as $job){
-                                      if($i == 3){
-                                          echo  "<li>共".count($company['jobs'])."个职位信息</li>";
-                                          break;
-                                      }else{
-                                          echo "<li>".$job->title."</li>";
-                                          $i++;
-                                      }
-                                  }
-                            ?>
-                            </ul>
-                        </div>
-                    </a>
-                </li>
-            <?php }?>
-        </ul>
-    </div>
-</section>
-<!-- End Projects -->
-<section class="pad-25" id="action-box">
-    <div class="container">
-        <div class="action-box">
-<!--            <h3>有时候，选择比努力更重要，IT类应届生求职，就选快入职！</h3>-->
-            <h3 style="color: #727e7f;"><span style="color: #2C3E50">IT类应届生</span>专场，众多精挑细选的职位在等你，快去看看吧！</h3>
-            <a class="btn btn-flat flat-color"  style="padding: 10px 15px;font-size: 13px;" id="submitbt" href="<?php echo Yii::app()->baseUrl.'/mscompany/index'?>">最新发布职位</a>
-        </div>
-        <!-- /.action-box -->
-    </div>
-    <!-- /.container -->
-</section>
+</div>
 
 <!-- 弹出对话框上传简历-->
 <div id="uploadDiv" style="display: none;width: 600px;height: 280px;background-color#f39c12;padding: 10px;position: absolute;top: 150px;left: 330px">
@@ -126,202 +178,9 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery
             }
         });
     };
-</script>
-<script type="text/javascript">
     $(document).ready(function() {
         $('.register_radio li input').click(function(e){
             $(this).parent('li').addClass('current').append('<em></em>').siblings().removeClass('current').find('em').remove();
         });
-//        $('#filters .disabled').tooltip({
-//            placement:"bottom"
-//        })
-        $('#filters .disabled').popover({
-            placement:"bottom",
-            html:true,
-            trigger:'hover',
-            container:"body",
-            title:"",
-            content:'抱歉，上海、广州、深圳的同学们还得等等'
-        });
-    });
-
-    $(function() {
-        function getCurrentStyle(node) {
-            var style = null;
-
-            if(window.getComputedStyle) {
-                style = window.getComputedStyle(node, null);
-            }else{
-                style = node.currentStyle;
-            }
-
-            return style;
-        }
-        var Photo	= (function() {
-
-            // list of thumbs
-            var $list		= $('#pe-thumbs'),
-            // list's width and offset left.
-            // this will be used to know the position of the description container
-                listW		= $list.width(),
-                listL		= $list.offset().left,
-            // the images
-                $elems		= $list.find('img'),
-            // the description containers
-                $descrp		= $list.find('div.pe-description'),
-            // maxScale : maximum scale value the image will have
-            // minOpacity / maxOpacity : minimum (set in the CSS) and maximum values for the image's opacity
-                settings	= {
-                    maxScale	: 1.3,
-                    maxOpacity	: 0.9,
-                    minOpacity	: 0.5
-//                    minOpacity	: Number( $elems.css('opacity') )
-                },
-                init		= function() {
-                    if ( $.browser.msie &&  $.browser.version == "8.0"){
-                        settings.maxScale = 1.1;
-                    }
-                    // minScale will be set in the CSS
-                    settings.minScale = _getScaleVal() || 1;
-                    // preload the images (thumbs)
-                    _loadImages( function() {
-
-                        _calcDescrp();
-                        _initEvents();
-
-                    });
-
-                },
-            // Get Value of CSS Scale through JavaScript:
-            // http://css-tricks.com/get-value-of-css-rotation-through-javascript/
-                _getScaleVal= function() {
-                    var st,tr;
-                    if(  window.getComputedStyle instanceof  Function){
-                        st = window.getComputedStyle($elems.get(0), null);
-                        tr = st.getPropertyValue("-webkit-transform") ||
-                            st.getPropertyValue("-moz-transform") ||
-                            st.getPropertyValue("-ms-transform") ||
-                            st.getPropertyValue("-o-transform") ||
-                            st.getPropertyValue("transform") ||
-                            "fail...";
-                    }else{
-                        tr = 'none';
-                    }
-
-                    if( tr !== 'none' ) {
-
-                        var values = tr.split('(')[1].split(')')[0].split(','),
-                            a = values[0],
-                            b = values[1],
-                            c = values[2],
-                            d = values[3];
-
-                        return Math.sqrt( a * a + b * b );
-
-                    }
-
-                },
-            // calculates the style values for the description containers,
-            // based on the settings variable
-                _calcDescrp	= function() {
-
-                    $descrp.each( function(i) {
-
-                        var $el		= $(this),
-                            $img	= $el.prev(),
-                            img_w	= $img.width(),
-                            img_h	= $img.height(),
-                            img_n_w	= settings.maxScale * img_w,
-                            img_n_h	= settings.maxScale * img_h,
-                            space_t = ( img_n_h - img_h ) / 2,
-                            space_l = ( img_n_w - img_w ) / 2;
-
-                        $el.data( 'space_l', space_l ).css({
-                            height	: settings.maxScale * $el.height(),
-                            top		: -space_t,
-                            left	: img_n_w - space_l
-                        });
-
-                    });
-
-                },
-                _initEvents	= function() {
-
-                    $elems.on('proximity.Photo', { max: 80, throttle: 10, fireOutOfBounds : true }, function(event, proximity, distance) {
-
-                        var $el			= $(this),
-                            $li			= $el.closest('li'),
-                            $desc		= $el.next(),
-                            scaleVal	= proximity * ( settings.maxScale - settings.minScale ) + settings.minScale,
-                            scaleExp	= 'scale(' + scaleVal + ')';
-//                        if ( $.browser.msie &&  $.browser.version == "8.0"){
-//                            $desc.css('display','block');
-//                        }
-                        if ( $.browser.msie &&  $.browser.version == "8.0"){
-                            $desc.css( 'width', 250 );
-                        }
-                        // change the z-index of the element once it reaches the maximum scale value
-                        // also, show the description container
-                        if( scaleVal === settings.maxScale ) {
-
-                            $li.css( 'z-index', 100 );
-//                            if( $desc.offset().left + $desc.width() > listL + listW ) {
-//                                    $desc.css( 'left', -$desc.width() - $desc.data( 'space_l' ) );
-//                            }
-
-                            $desc.fadeIn( 400 );
-                        }
-                        else {
-
-                            $li.css( 'z-index', 1 );
-
-                            $desc.stop(true,true).hide();
-
-                        }
-                        if( $desc.offset().left + $desc.width() > listL + listW ) {
-                            $desc.css( 'left', -$desc.width() - $desc.data( 'space_l' ) );
-                        }
-                        $el.css({
-                            '-webkit-transform'	: scaleExp,
-                            '-moz-transform'	: scaleExp,
-                            '-o-transform'		: scaleExp,
-                            '-ms-transform'		: scaleExp,
-                            'transform'			: scaleExp,
-                            'opacity'			: ( proximity * ( settings.maxOpacity - settings.minOpacity ) + settings.minOpacity )
-                        });
-
-
-                    });
-
-                },
-                _loadImages	= function( callback ) {
-
-                    var loaded 	= 0,
-                        total	= $elems.length;
-
-                    $elems.each( function(i) {
-
-                        var $el = $(this);
-
-                        $('<img/>').load( function() {
-
-                            ++loaded;
-                            if( loaded === total )
-                                callback.call();
-
-                        }).attr( 'src', $el.attr('src') );
-
-                    });
-
-                };
-
-            return {
-                init	: init
-            };
-
-        })();
-
-        Photo.init();
-
     });
 </script>

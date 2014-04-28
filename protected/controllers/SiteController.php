@@ -40,6 +40,22 @@ class SiteController extends Controller
     }
 
 	public function actionIndex(){
+        //公司信息
+        $allData = array();
+        //取在权重表中的公司
+        //$companys = MsCompany::model()->findAllByAttributes(array('status'=>'2'));
+        $wm = new WeightManage();
+        $companys = $wm->getCompanys();
+        foreach($companys as $company){
+            $jobs = MsJobs::model()->findAllByAttributes(array('company_id'=>$company->id));
+            if($jobs == null)
+                continue;  //只取发布了招聘岗位的公司信息
+            if($company->logo == null || $company->logo == ''){
+                $company->logo = 'upload/companylogo/default.png';
+            }
+            array_push($allData,array('company'=>$company,'jobs'=>$jobs));
+        }
+        //职位信息
         $sql = "select c.logo,c.id as cid,c.name,j.id as jid,j.title,j.createtime,j.description "
         ." from ms_jobs j, ms_company c where  j.company_id = c.id order by j.createtime desc";
         $criteria=new CDbCriteria();
@@ -54,6 +70,7 @@ class SiteController extends Controller
         $this->render('index',array(
             'jobs'=>$jobs,
             'pages'=>$pages,
+            'companys'=>$allData,
         ));
 	}
 
