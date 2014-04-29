@@ -23,29 +23,18 @@
                             </dd>
                         </dl>
                         <dl class="dl-horizontal">
-                            <dt>行业</dt>
-                            <dd>
-                                <a class="active" href="/job?city=0">全部</a>
-                                <a href="/job?city=11">互联网</a>
-                                <a href="/job?city=12">游戏</a>
-                                <a href="/job?city=13">电子商务</a>
-                                <a href="/job?city=14">金融</a>
-                                <a href="/job?city=14">IT/软件</a>
-                                <a href="/job?city=14">其他</a>
-                            </dd>
-                        </dl>
-                        <dl class="dl-horizontal">
                             <dt>技能</dt>
                             <dd>
-                                <a class="active" href="/job?city=0">全部</a>
-                                <a href="/job?city=11">JAVA</a>
-                                <a href="/job?city=12">C++/C</a>
-                                <a href="/job?city=13">Andriod</a>
-                                <a href="/job?city=14">WEB前端</a>
-                                <a href="/job?city=14">数据库</a>
-                                <a href="/job?city=14">测试</a>
-                                <a href="/job?city=14">运维</a>
-                                <a href="/job?city=14">其他</a>
+                                <a class="active" href="<?php echo Yii::app()->baseUrl
+                                    .'/site/index?skill=all'?>">全部</a>
+                                <?php
+                                foreach($skills as $skill){
+                                    ?>
+                                    <a href="<?php echo Yii::app()->baseUrl
+                                        .'/site/index?skill='.$skill->name?>">
+                                        <?php echo $skill->name?>
+                                    </a>
+                                <?php }?>
                             </dd>
                         </dl>
                     </div>
@@ -69,11 +58,11 @@
                                     </td>
                                     <td>
                                         <p>
-                                            <a href="<?php echo Yii::app()->baseUrl.'/mscompany/view/'.$job['jid'] ?>"><?php echo $job['title'];?></a>
+                                            <a target="_blank" href="<?php echo Yii::app()->baseUrl.'/msjobs/view/'.$job['jid'] ?>"><?php echo $job['title'];?></a>
                                         </p>
                                     </td>
                                     <td>
-                                        <a href="<?php echo Yii::app()->baseUrl.'/mscompany/view/'.$job['cid'] ?>"><?php echo $job['name'];?></a>
+                                        <a target="_blank"href="<?php echo Yii::app()->baseUrl.'/mscompany/view/'.$job['cid'] ?>"><?php echo $job['name'];?></a>
                                     </td>
                                     <td>
                                         <p><?php  echo $job['tags'] ?></p>
