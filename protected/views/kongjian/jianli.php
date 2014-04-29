@@ -231,7 +231,7 @@
             success:function(data) {
                 if(data == '1'){ //修改成功，刷新页面
 //                    window.location.reload();
-                    window.location.href();//避免重复提交表单
+                    window.location.href = window.location.href;//避免重复提交表单
                 }else if(data=='0'){
                     alert('抱歉，修改失败');
                 }

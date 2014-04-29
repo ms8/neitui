@@ -147,17 +147,40 @@ class MsJobsController extends Controller
 
         $model = MsJobs::model()->findByPk($id);
         if($model != null){
-            $finish = '0';
+            $finished = '0';
             if(!Yii::app()->user->isGuest){ //查看该职位是否投过简历
                 $app = MsApplication::model()->findByAttributes(array('member_id'=>Yii::app()->user->id,
                     'job_id'=>$id,'company_id'=>$model->company_id));
                 if($app != null){
-                    $finish = '1';
+                    $finished = '1';
                 }
             }
+            /*取公司发布的职位信息*/
+            $jobs = MsJobs::model()->findAllByAttributes(array('company_id'=>$model->company_id),array('order'=>'createtime desc'));
+            $temAll = array();
+            $finish = '0';
+            foreach($jobs as $job){
+                if(!Yii::app()->user->isGuest){ //查看该职位是否投过简历
+                    $app = MsApplication::model()->findByAttributes(array('member_id'=>Yii::app()->user->id,
+                        'job_id'=>$job->id));
+                    if($app != null){
+                        $finish = '1';
+                    }else{
+                        $finish = '0';
+                    }
+                }
+                array_push($temAll,array("job"=>$job,"status"=>$finish));
+            }
             $company = MsCompany::model()->findByPk($model->company_id);
+            //**********************
+            $criteria = new CDbCriteria; // 创建CDbCriteria对象
+            $criteria->order = 'createtime DESC'; // 设置排序条件
+            $criteria->limit = 20; // 限定记录的条数
+            $criteria->select = 'id,title,createtime'; // 设置结果所包含的字段
+
+            $others = MsJobs::model()->findAll($criteria);
             $this->render('view',array(
-                'model'=>$model,'company'=>$company,'finish'=>$finish,
+                'model'=>$model,'company'=>$company,'finish'=>$finished, 'jobs'=>$temAll,'others'=>$others
             ));
         }
 

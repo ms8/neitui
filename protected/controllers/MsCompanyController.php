@@ -195,6 +195,8 @@ class MsCompanyController extends Controller
                     'job_id'=>$job->id,'company_id'=>$id));
                 if($app != null){
                     $finish = '1';
+                }else{
+                    $finish = '0';
                 }
             }
             array_push($temAll,array("job"=>$job,"status"=>$finish));
