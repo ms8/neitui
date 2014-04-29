@@ -15,11 +15,11 @@
                         <dl class="dl-horizontal">
                             <dt>城市</dt>
                             <dd>
-                                <a class="active" href="/job?city=0">全部</a>
-                                <a href="/job?city=11">北京</a>
-                                <a href="/job?city=12">上海</a>
-                                <a href="/job?city=13">广州</a>
-                                <a href="/job?city=14">深圳</a>
+                                <a class="active" href="<?php echo Yii::app()->baseUrl."/"?>">全部</a>
+                                <a href="<?php echo Yii::app()->baseUrl."/"?>">北京</a>
+                                <a class="disabled" href="javascript:;" data-toggle="tooltip" title="久等了，此城市还没开通服务！">上海</a>
+                                <a class="disabled" href="javascript:;" data-toggle="tooltip" title="久等了，此城市还没开通服务！">广州</a>
+                                <a class="disabled" href="javascript:;" data-toggle="tooltip" title="久等了，此城市还没开通服务！">深圳</a>
                             </dd>
                         </dl>
                         <dl class="dl-horizontal">
@@ -39,53 +39,47 @@
                         </dl>
                     </div>
                     <div>
-                        <table class="table jobs">
-                            <thead>
-                            <tr>
-                                <th style="width: 10%"></th>
-                                <th style="width: 20%"></th>
-                                <th style="width: 20%"></th>
-                                <th style="width: 20%"></th>
-                                <th style="width: 20%"></th>
-                            </tr>
-                            </thead>
-
-                            <tbody>
-                            <?php foreach($jobs as $job) {?>
+                        <?php if ($jobs->count() != 0) {  ?>
+                            <table class="table jobs">
+                                <thead>
                                 <tr>
-                                    <td>
-                                        <img  src="<?php echo Yii::app()->baseUrl."/".$job['logo']?>" alt="<?php echo $job['title'];?>">
-                                    </td>
-                                    <td>
-                                        <p>
-                                            <a target="_blank" href="<?php echo Yii::app()->baseUrl.'/msjobs/view/'.$job['jid'] ?>"><?php echo $job['title'];?></a>
-                                        </p>
-                                    </td>
-                                    <td>
-                                        <a target="_blank"href="<?php echo Yii::app()->baseUrl.'/mscompany/view/'.$job['cid'] ?>"><?php echo $job['name'];?></a>
-                                    </td>
-                                    <td>
-                                        <p><?php  echo $job['tags'] ?></p>
-                                    </td>
-                                    <td>
-                                        <?php  echo $job['createtime'] ?>
-                                    </td>
+                                    <th style="width: 10%"></th>
+                                    <th style="width: 20%"></th>
+                                    <th style="width: 20%"></th>
+                                    <th style="width: 20%"></th>
+                                    <th style="width: 20%"></th>
                                 </tr>
-                            <?php } ?>
-                            </tbody>
-                        </table>
+                                </thead>
+
+                                <tbody>
+                                <?php  foreach($jobs as $job) { ?>
+                                    <tr>
+                                        <td>
+                                            <img  src="<?php echo Yii::app()->baseUrl."/".$job['logo']?>" alt="<?php echo $job['title'];?>">
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <a href="<?php echo Yii::app()->baseUrl.'/mscompany/view/'.$job['jid'] ?>"><?php echo $job['title'];?></a>
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <a href="<?php echo Yii::app()->baseUrl.'/mscompany/view/'.$job['cid'] ?>"><?php echo $job['name'];?></a>
+                                        </td>
+                                        <td>
+                                            <p><?php  echo $job['tags'] ?></p>
+                                        </td>
+                                        <td>
+                                            <?php  echo $job['createtime'] ?>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                                </tbody>
+                            </table>
+                        <?php }else {
+                            echo "<div class='text-center empty-content'>抱歉，暂时没有此岗位信息！</div>";}
+                        ?>
                     </div>
                     <div class="text-center" >
-<!--                        --><?php //foreach($jobs as $row):?>
-<!--                            --><?php //echo $row["logo"]?><!--&nbsp;&nbsp;-->
-<!--                            --><?php //echo $row["cid"]?><!--&nbsp;&nbsp;-->
-<!--                            --><?php //echo $row["name"]?><!--&nbsp;&nbsp;-->
-<!--                            --><?php //echo $row["jid"]?><!--&nbsp;&nbsp;-->
-<!--                            --><?php //echo $row["title"]?><!--&nbsp;&nbsp;-->
-<!--                            --><?php //echo $row["createtime"]?><!--&nbsp;&nbsp;-->
-<!--                            --><?php //echo $row["description"]?>
-<!--                            <br>-->
-<!--                        --><?php //endforeach;?>
                         <?php
                         //分页widget代码:
                         $this->widget('CLinkPager',array('pages'=>$pages,'selectedPageCssClass'=>'active','hiddenPageCssClass'=>'disabled', 'htmlOptions'=>array('class'=>'pagination')));
@@ -160,31 +154,10 @@
 
 
 <script type="text/javascript">
-    $("#login-close").live('click',function(){
-        $("#loginDiv").hide();
-    });
-    $('#loginbt').live('click',function(){
-        $("#loginForm").submit();
-    });
-    $("#upload-close").live('click',function(){
-        $("#uploadDiv").hide();
-    });
-    $("#choose-close").live('click',function(){
-        //清除里面动态生成的内容
-        $("#jianlis").empty();
-        $("#chooseDiv").hide();
-    });
-    $("#choose_td").live('click',function(){
-        var jianli_id = $('input[name="chosen"]:checked').val();
-        $("#jianliid").val(jianli_id);
-        $("#chooseForm").submit();
-    });
-
     function submitjl(){
         $.ajax({
             type:'POST',
             dataType:'json',
-//            data:{'jobid':id},
             url:'<?php echo Yii::app()->createUrl('msjobs/jlUpload')?>',
             success:function(data) {
                 if(data == '0'){//未登录，弹出登录框
@@ -196,8 +169,32 @@
         });
     };
     $(document).ready(function() {
+        $("#login-close").live('click',function(){
+            $("#loginDiv").hide();
+        });
+        $('#loginbt').live('click',function(){
+            $("#loginForm").submit();
+        });
+        $("#upload-close").live('click',function(){
+            $("#uploadDiv").hide();
+        });
+        $("#choose-close").live('click',function(){
+            //清除里面动态生成的内容
+            $("#jianlis").empty();
+            $("#chooseDiv").hide();
+        });
+        $("#choose_td").live('click',function(){
+            var jianli_id = $('input[name="chosen"]:checked').val();
+            $("#jianliid").val(jianli_id);
+            $("#chooseForm").submit();
+        });
         $('.register_radio li input').click(function(e){
             $(this).parent('li').addClass('current').append('<em></em>').siblings().removeClass('current').find('em').remove();
+        });
+        //没开通城市
+        $('.job_search .disabled').tooltip({
+            animation:true,
+            trigger:'hover' //触发tooltip的事件
         });
     });
 </script>
