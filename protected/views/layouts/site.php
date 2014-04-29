@@ -115,85 +115,14 @@
 <?php echo $content ?>
 </div>
 <div class="footer" id="footer-1">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-                <div class="widget about-us">
-                    <div class="footer-brand"><span>快</span>入职</div>
-                    <p><a href="http://www.kuairuzhi.com/" target="_blank"><strong>快入职</strong></a>是专注IT类应届生的招聘网站，以众多优质IT资源为依托，发布圈内招聘信息，为IT应届生和优秀企业搭建快捷通道，以帮助应届生就业为己任。</p>
-                </div>
-                <!-- /.about-us -->
-
-            </div>
-            <!-- /.col-md-3 -->
-            <div class="col-md-3">
-                <div class="widget popular-posts">
-                    <div class="subpage-title">
-                        <h5>联系我们</h5>
-                    </div>
-                    <ul class="recent-posts">
-                        <li>
-                            <span>邮箱</span>
-                            <h5>
-                                admin@kuairuzhi.com
-                            </h5>
-                        </li>
-                        <li>
-                            <span>电话</span>
-                            <h5>
-                                15811205600
-                            </h5>
-                        </li>
-                        <li>
-                            <span>QQ</span>
-                            <h5>
-                                394604262
-                            </h5>
-                        </li>
-                    </ul>
-                </div>
-                <!-- /.popular-posts -->
-            </div>
-            <!-- /.col-md-3 -->
-            <div class="col-md-3">
-                <div class="widget stay-connedted">
-                    <div class="subpage-title">
-                        <h5>关注我们</h5>
-                    </div>
-                    <ul class="social-links">
-                        <li><a href="http://weibo.com/kuairuzhi" class="facebook" target="_blank"><i class="icon-weibo"></i></a></li>
-                         <li><a href="javascript:;" class="weixin google-plus"><img alt="快入职微信号" src="<?php echo Yii::app()->baseUrl.CSS_PATH.'/images/weixin.png'?>" width="20px"/></a></li>
-                        <img alt="快入职微信号" src="<?php echo Yii::app()->baseUrl.CSS_PATH.'/images/erweima.jpg'?>" width="0"/><!-- 预加载图片 -->
-                    </ul>
-                </div>
-                <!-- /.tagcloud -->
-            </div>
-            <!-- /.col-md-3 -->
-            <div class="col-md-3">
-                <div class="widget flickr-photos">
-                    <div class="subpage-title">
-                        <h5>合作伙伴</h5>
-                    </div>
-                    <ul class="flickr-photos-list">
-                        <li>
-                            <a href="http://www.bcc.ac.cn/" target="_blank" title="北京市计算中心">
-                                <img alt="北京市计算中心" src="<?php echo Yii::app()->baseUrl.CSS_PATH.'/images/bcc.jpg'?>"/>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://www.xinwaihui.com" target="_blank" title="新外汇">
-                                <img alt="新外汇" src="<?php echo Yii::app()->baseUrl.CSS_PATH.'/images/xinwaihui.jpg'?>"/>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- /.flickr-photos -->
-            </div>
-            <!-- /.col-md-3 -->
-        </div>
-        <!-- /.row -->
-    </div>
-    <!-- /.container -->
+    <ul>
+        <li>
+            <a href="<?php echo Yii::app()->baseUrl."/"?>">首页</a> |
+            <a href="<?php echo Yii::app()->createUrl('/mscompany/index')?>">招聘公司</a> |
+            <a href="#">关于我们</a> |
+            <a href="#">联系方式</a>
+        </li>
+    </ul>
 </div>
 
 <!-- Modal advice-->
@@ -503,8 +432,6 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'valida
             }
         });
     }
-
-
 
     function register(){
         var username = $("#email").val();
