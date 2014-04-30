@@ -98,7 +98,7 @@
             <section class="pad-top-25">
                 <div class="widget" style="min-height:280px;">
                     <div class="subpage-title noline">
-                        <h5>其他职位</h5>
+                        <h5>热门职位</h5>
                     </div>
                     <div style="padding: 10px;">
                         <?php foreach($others as $other){?>

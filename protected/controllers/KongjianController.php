@@ -205,7 +205,9 @@ class KongjianController extends Controller
             }
             $jobs = MsApplication::model()->findAll('member_id=:userId',array(':userId'=>Yii::app()->user->id));
             $jianlis = MsJianli::model()->findAll('userId=:userId',array(':userId'=>Yii::app()->user->id));
-            $this->render('jianli', array('jianlis'=>$jianlis,'message'=>$message,'jobs'=>$jobs));
+            $jobUtil = new JobUtil();
+            $others = $jobUtil->getHotJobs();
+            $this->render('jianli', array('jianlis'=>$jianlis,'message'=>$message,'jobs'=>$jobs,'others'=>$others));
         }
     }
 

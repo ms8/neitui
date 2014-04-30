@@ -143,7 +143,7 @@ class SiteController extends Controller
                 if(isset($_POST['loginflag']) && Yii::app()->request->urlReferrer != null){
                     $returnUrl = Yii::app()->request->urlReferrer;
                 }else{
-                    $returnUrl = '/kongjian/application';
+                    $returnUrl = '/site/index';
                 }
             }else if($member->type == '2'){
 //                $company = MsCompany::model()->findByAttributes(array('account'=>$member->username));

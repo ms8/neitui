@@ -59,11 +59,11 @@
                                         </td>
                                         <td>
                                             <p>
-                                                <a href="<?php echo Yii::app()->baseUrl.'/mscompany/view/'.$job['jid'] ?>"><?php echo $job['title'];?></a>
+                                                <a target="_blank" href="<?php echo Yii::app()->baseUrl.'/msjobs/view/'.$job['jid'] ?>"><?php echo $job['title'];?></a>
                                             </p>
                                         </td>
                                         <td>
-                                            <a href="<?php echo Yii::app()->baseUrl.'/mscompany/view/'.$job['cid'] ?>"><?php echo $job['name'];?></a>
+                                            <a target="_blank" href="<?php echo Yii::app()->baseUrl.'/mscompany/view/'.$job['cid'] ?>"><?php echo $job['name'];?></a>
                                         </td>
                                         <td>
                                             <p><?php  echo $job['tags'] ?></p>

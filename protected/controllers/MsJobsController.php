@@ -173,12 +173,8 @@ class MsJobsController extends Controller
             }
             $company = MsCompany::model()->findByPk($model->company_id);
             //**********************
-            $criteria = new CDbCriteria; // 创建CDbCriteria对象
-            $criteria->order = 'createtime DESC'; // 设置排序条件
-            $criteria->limit = 20; // 限定记录的条数
-            $criteria->select = 'id,title,createtime'; // 设置结果所包含的字段
-
-            $others = MsJobs::model()->findAll($criteria);
+            $jobUtil = new JobUtil();
+            $others = $jobUtil->getHotJobs();
             $this->render('view',array(
                 'model'=>$model,'company'=>$company,'finish'=>$finished, 'jobs'=>$temAll,'others'=>$others
             ));
