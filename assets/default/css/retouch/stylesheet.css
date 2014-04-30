@@ -1695,8 +1695,8 @@ address {
 }
 .absolute-right-20{
     position: absolute;
-    top:20px;
-    right:20px;
+    top:10px;
+    right:10px;
 }
 /*职位列表*/
 .job-list{
@@ -1863,7 +1863,8 @@ address {
 }
 /*个人信息项目经历描述*/
 .peixun-show,.project-show{
-    padding-right: 10px;
+    /*padding-right: 10px;*/
+    padding: 20px;
 }
 .filters .disabled{
     color: #cccccc;
