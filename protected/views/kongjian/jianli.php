@@ -6,6 +6,24 @@
                     <div class="subpage-title noline">
                         <h5>简历管理</h5>
                     </div>
+                    <form id="uploadForm" class="login" method="post" enctype="multipart/form-data"
+                          action="<?php echo Yii::app()->baseUrl.'/kongjian/jianli'?>">
+                        <input id="lefile" type="file"  name="jianlifile" style="display:none">
+                        <table class="table table-bordered">
+                            <tr>
+                                <td style="width: 82%">
+                                    <input id="photoCover" class="form-control" type="text" >
+                                    <span id="apply"class="input-group-addon" onclick="$('input[id=lefile]').click();">
+                                        选择简历
+                                    </span>
+                                </td>
+                                <td style="width: 18%">
+                                    <button id="jianliSubmit" class="btn btn-flat flat-color"  type="submit">上传简历</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+
                     <?php if($jianlis != null && count($jianlis)>0){ ?>
                     <table class="table table-bordered">
                         <thead>
@@ -43,27 +61,12 @@
                     </table>
                 </div>
 
-                <div class="widget">
-                    <div class="subpage-title noline">
-                        <h5>上传简历</h5>
-                    </div>
-                    <div style="padding: 20px;">
-                        <form id="uploadForm" class="login" method="post" enctype="multipart/form-data"
-                              action="<?php echo Yii::app()->baseUrl.'/kongjian/jianli'?>">
-                            <input id="lefile" type="file"  name="jianlifile" style="display:none">
-                            <div class="input-group">
-                                <input id="photoCover" class="form-control" type="text" >
-                                <span id="apply"class="input-group-addon" onclick="$('input[id=lefile]').click();">
-                                    选择简历
-                                </span>
-                            </div>
-                            <div  class="text-center status" style="margin-top:20px">
-                                <button id="jianliSubmit" class="btn btn-flat flat-color"  type="submit">上传简历</button>
-                            </div>
-                            <div style="clear: both;"></div>
-                        </form>
-                    </div>
-                </div>
+<!--                <div class="widget">-->
+<!--                    <div class="subpage-title noline">-->
+<!--                        <h5>上传简历</h5>-->
+<!--                    </div>-->
+<!---->
+<!--                </div>-->
 
                 <div class="widget">
                     <div class="subpage-title noline">
@@ -83,16 +86,16 @@
                             <?php foreach ($jobs as $key => $value) {?>
                                 <tr>
                                     <td>
-                                        <a href="<?php echo Yii::app()->createUrl('mscompany/view',array('id'=>$value->company_id)); ?>">
+                                        <a target="_blank" href="<?php echo Yii::app()->createUrl('mscompany/view/',array('id'=>$value->company_id)); ?>">
                                             <i class="icon-eye-open"></i>&nbsp&nbsp<?php  $company = MsCompany::model()->findByPk($value->company_id);
                                             echo $company->name ?>
                                         </a>
                                     </td>
                                     <td>
-                                        <!--                        <a href="--><?php //echo Yii::app()->createUrl('msjobs/view',array('id'=>$value->job_id)); ?><!--">-->
-                                        <?php  $job = MsJobs::model()->findByPk($value->job_id);
-                                        echo $job->title ?>
-                                        <!--                        </a>-->
+                                        <a target="_blank"href="<?php echo Yii::app()->createUrl('msjobs/view/',array('id'=>$value->job_id)); ?>">
+                                            <?php  $job = MsJobs::model()->findByPk($value->job_id);
+                                            echo $job->title ?>
+                                        </a>
                                     </td>
                                     <td>
                                         <?php  echo $value->createtime ?>
@@ -113,11 +116,11 @@
                     </div>
                     <div style="padding: 10px;">
                         <?php foreach($others as $other){?>
-                            <div style="margin-top: 5px;">
-                                <a target="_blank" href="<?php echo Yii::app()->baseUrl.'/msjobs/view/'.$other->id?>">
-                                    <?php echo $other->title?>
+                            <div style="margin-top: 10px;">
+                                <a style="font-size:13px"target="_blank" href="<?php echo Yii::app()->baseUrl.'/msjobs/view/'.$other->id?>">
+                                    <?php echo CHtml::encode(Helper::truncate_utf8_string($other->title,8));?>
                                 </a>
-                                <em style="float: right"><?php echo substr($other->createtime,0,10)?></em>
+                                <em style="float: right;font-size:13px"><?php echo substr($other->createtime,0,10)?></em>
                             </div>
                         <?php }?>
                     </div>
