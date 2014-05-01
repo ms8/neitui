@@ -4,26 +4,12 @@
             <div class="col-md-9">
                 <div class="widget">
                     <div class="subpage-title noline">
-                        <h5>简历管理</h5>
+                        <h5 style="float: left">简历管理</h5>
+                        <form name="uploadForm" enctype="multipart/form-data" method="post">
+                            <input id="uploadTest" onchange="submitform()" type="file" name="jianlifile" style="display:none">
+                            <button id="uploadJianli" class="btn btn-flat flat-color" style="margin-right: 38px;float: right;padding:2px 10px" onclick="$('input[id=uploadTest]').click()" type="button">上传简历</button>
+                        </form>
                     </div>
-                    <form id="uploadForm" class="login" method="post" enctype="multipart/form-data"
-                          action="<?php echo Yii::app()->baseUrl.'/kongjian/jianli'?>">
-                        <input id="lefile" type="file"  name="jianlifile" style="display:none">
-                        <table class="table table-bordered">
-                            <tr>
-                                <td style="width: 82%">
-                                    <input id="photoCover" class="form-control" type="text" >
-                                    <span id="apply"class="input-group-addon" onclick="$('input[id=lefile]').click();">
-                                        选择简历
-                                    </span>
-                                </td>
-                                <td style="width: 18%">
-                                    <button id="jianliSubmit" class="btn btn-flat flat-color"  type="submit">上传简历</button>
-                                </td>
-                            </tr>
-                        </table>
-                    </form>
-
                     <?php if($jianlis != null && count($jianlis)>0){ ?>
                     <table class="table table-bordered">
                         <thead>
@@ -54,7 +40,7 @@
                         <?php } ?>
                         <?php }else{ ?>
                             <div class="top3" style="padding:15px">
-                                你还没上传简历哦~速度上传简历吧~，众多名企在等你~
+                                你还没上传简历哦~速度上传简历吧~，众多名企在等着你~
                             </div>
                         <?php }?>
                         </tbody>
@@ -135,54 +121,13 @@
     </div>
 </section>
 
-<?php if(Yii::app()->user->isGuest){?>
-<script>
-    $('.addGroup').click(function(){
-        var r=confirm("您尚未登陆，是否登陆？");
-        if(r){
-            location.href = "<?php echo Yii::app()->createUrl('public/login'); ?>"; 
-        }else{
-            return false;
-        }
-        return false;
-    });
-</script>
-
-<?php }else{?>
-<script>
-    $('.addGroup').click(function(){
-       var gid  = $.trim($(this).attr('id'));
-       var mid  = <?php echo Yii::app()->user->id; ?>;
-       var node =$(this);
-           if(gid!='' && mid!=''){
-                $.ajax({
-                type: "POST",
-                url: "<?php echo Yii::app()->createUrl('/group/add'); ?>",
-                dataType:'json',
-                data: "gid="+gid+"&mid="+mid,
-                success: function(data){
-                  if(data.status==1){
-                    node.parent().html(' √已加入');
-                    return false;
-                  }else{
-                    alert(data.info);
-                    return false;
-                  }
-                }
-              });
-           }else{
-                return false;
-           }
-
-
-    });
-
-
-</script>
-
-<?php } ?>
 
 <script>
+    function submitform(){
+        document.uploadForm.action="<?php echo Yii::app()->baseUrl.'/kongjian/jianli'?>";
+        document.uploadForm.submit();
+    }
+
     $(function(){
         //菜单选中个人中心
         $("#header .nav li.active").removeClass("active");
@@ -234,9 +179,9 @@
         });
     }
 
-    $('input[id=lefile]').change(function() {
-        $('#photoCover').val($(this).val());
-    });
+//    $('input[id=lefile]').change(function() {
+//        $('#photoCover').val($(this).val());
+//    });
 
 //    $(function(){
 //        $('.portfolio-filter a').click(function () {
