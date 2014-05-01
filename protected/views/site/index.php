@@ -25,13 +25,13 @@
                         <dl class="dl-horizontal">
                             <dt>技能</dt>
                             <dd>
-                                <a class="active" href="<?php echo Yii::app()->baseUrl
-                                    .'/site/index?skill=all'?>">全部</a>
+                                <a id="all"  href="<?php echo Yii::app()->baseUrl
+                                    .'/site/index?skill=all&code=all'?>">全部</a>
                                 <?php
                                 foreach($skills as $skill){
                                     ?>
-                                    <a href="<?php echo Yii::app()->baseUrl
-                                        .'/site/index?skill='.$skill->name?>">
+                                    <a id="<?php echo $skill->code?>" href="<?php echo Yii::app()->baseUrl
+                                        .'/site/index?skill='.$skill->name.'&code='.$skill->code?>">
                                         <?php echo $skill->name?>
                                     </a>
                                 <?php }?>
@@ -76,7 +76,7 @@
                                 </tbody>
                             </table>
                         <?php }else {
-                            echo "<div class='text-center empty-content'>抱歉，暂时没有此岗位信息！</div>";}
+                            echo "<div class='text-center empty-content'>抱歉，暂时没有此类岗位信息！</div>";}
                         ?>
                     </div>
                     <div class="text-center" >
@@ -169,6 +169,15 @@
         });
     };
     $(document).ready(function() {
+        var code = "<?php
+        if(isset($_GET['code'])){
+            echo $_GET['code'];
+        }else {
+            echo 'all';
+        }
+        ?>";
+        $("#"+code).addClass("active");
+
         $("#login-close").live('click',function(){
             $("#loginDiv").hide();
         });
