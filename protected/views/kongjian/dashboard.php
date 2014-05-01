@@ -256,15 +256,21 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umedit
                                  </span>
                             </div>
                             <div style="margin-top:5px">
+                                <label  >学历：</label>
+                                <span class="college-degree">
+                                    <?php echo $model->degreename?>
+                                 </span>
+                            </div>
+                            <div style="margin-top:5px">
                                 <label  >名称：</label>
                                 <span class="college-name">
                                     <?php echo $model->universityname?>
                                  </span>
                             </div>
                             <div style="margin-top:5px">
-                                <label  >学历：</label>
-                                <span class="college-degree">
-                                    <?php echo $model->degreename?>
+                                <label  >专业：</label>
+                                <span class="college-major">
+                                    <?php echo $model->major?>
                                  </span>
                             </div>
                         </div>
@@ -294,6 +300,15 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umedit
                                         </div>
 
                                         <div class="form-group">
+                                            <?php echo $form->labelEx($model,'degree',array('class'=>'col-sm-2 control-label')); ?>
+                                            <div class="col-sm-10 radioTag">
+                                                <?php echo $form->radioButtonList($model,'degree',$degreearr,
+                                                    array('separator'=>'&nbsp;',
+                                                        'labelOptions'=>array('class'=>'btn btn-flat flat-success btn-bordered myLabel')) )?>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
                                             <?php echo $form->labelEx($model,'universityname',array('class'=>'col-sm-2 control-label')); ?>
                                             <div class="col-sm-6">
                                                 <?php echo $form->textField($model,'universityname',array('size'=>50,'maxlength'=>50,
@@ -303,11 +318,11 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umedit
                                         </div>
 
                                         <div class="form-group">
-                                            <?php echo $form->labelEx($model,'degree',array('class'=>'col-sm-2 control-label')); ?>
-                                            <div class="col-sm-10 radioTag">
-                                                <?php echo $form->radioButtonList($model,'degree',$degreearr,
-                                                    array('separator'=>'&nbsp;',
-                                                        'labelOptions'=>array('class'=>'btn btn-flat flat-success btn-bordered myLabel')) )?>
+                                            <?php echo $form->labelEx($model,'major',array('class'=>'col-sm-2 control-label')); ?>
+                                            <div class="col-sm-6">
+                                                <?php echo $form->textField($model,'major',array('size'=>100,'maxlength'=>100,
+                                                    'class'=>'form-control')); ?>
+                                                <?php echo $form->error($model,'major'); ?>
                                             </div>
                                         </div>
                                     <?php $this->endWidget(); ?>
@@ -403,7 +418,8 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umedit
                     $("#college-show .college-type").html(data.model.universitytypename);
                     $("#college-show .college-name").html(data.model.universityname);
                     $("#college-show .college-degree").html(data.model.degreename);
-                    $("#college-show .college-jiangli").html(data.model.jiangliname);
+                    $("#college-show .college-major").html(data.model.major);
+//                    $("#college-show .college-jiangli").html(data.model.jiangliname); college-major
                     $("#college-edit").modal("hide");
                 }
             });
