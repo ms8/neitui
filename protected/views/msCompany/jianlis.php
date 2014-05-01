@@ -1,45 +1,52 @@
 <section class="pad-25" id="action-box">
     <div class="container">
-        <div class="subpage-title noline">
-            <h5>收到的简历</h5>
-        </div>
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th style="width: 20%">职位</th>
-                <th style="width: 20%">应聘者</th>
-                <th style="width: 40%">简历</th>
-                <th style="width: 20%">投递时间</th>
-                <!--                            <th>备注</th>-->
-            </tr>
-            </thead>
+        <div class="row">
+            <div class="col-md-9">
+                <div class="widget">
+                    <div class="subpage-title noline">
+                        <h5>收到的简历</h5>
+                    </div>
+                    <div>
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th style="width: 25%">职位</th>
+                                <th style="width: 25%">应聘者</th>
+                                <th style="width: 35%">简历</th>
+                                <th style="width: 10%">投递时间</th>
+                            </tr>
+                            </thead>
 
-            <tbody>
-            <?php foreach ($jobinfos as $jobinfo) {?>
-                <tr>
-                    <td>
-                        <a id="<?php  echo $jobinfo['jobid'] ?>" data-toggle="modal" data-target="#job"
-                           onclick="setJob(this)" href="#">
-                            <i class="icon-eye-open"></i>&nbsp<?php  echo $jobinfo['title'] ?>
-                        </a>
-                    </td>
-                    <td>
-                        <a   target="_blank" href="<?php echo Yii::app()->createUrl('/kongjian/information')."/".$jobinfo['userid']?>">
-                            <i class="icon-eye-open"></i>&nbsp<?php  echo $jobinfo['username'] ?>
-                        </a>
-                    </td>
-                    <td>
-                        <a id="<?php  echo $jobinfo['path'] ?>" data-toggle="modal" data-target="#jianli" href="#" onclick="setPath(this)">
-                            <i class="icon-file-text"></i>&nbsp<?php  echo $jobinfo['jianliname'] ?>
-                        </a>
-                    </td>
-                    <td>
-                        <?php  echo $jobinfo['createtime'] ?>
-                    </td>
-                </tr>
-            <?php } ?>
-            </tbody>
-        </table>
+                            <tbody>
+                            <?php foreach ($jobinfos as $jobinfo) {?>
+                                <tr>
+                                    <td>
+                                        <a id="<?php  echo $jobinfo['jobid'] ?>" data-toggle="modal" data-target="#job"
+                                           onclick="setJob(this)" href="#">
+                                            <i class="icon-eye-open"></i>&nbsp<?php  echo $jobinfo['title'] ?>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a   target="_blank" href="<?php echo Yii::app()->createUrl('/kongjian/information')."/".$jobinfo['userid']?>">
+                                            <i class="icon-eye-open"></i>&nbsp<?php  echo $jobinfo['username'] ?>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a id="<?php  echo $jobinfo['path'] ?>" data-toggle="modal" data-target="#jianli" href="#" onclick="setPath(this)">
+                                            <i class="icon-file-text"></i>&nbsp<?php  echo $jobinfo['jianliname'] ?>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <?php  echo substr($jobinfo['createtime'],0,10); ?>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
