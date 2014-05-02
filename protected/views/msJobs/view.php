@@ -247,8 +247,11 @@
                 if(data == '0'){//未登录，弹出登录框
                     $('#myModal').modal('show');
                 }else if(data == '1'){//没有简历，弹出对话框上传简历
-                    $("#uploadDiv input[name='jobid']").val(id);
-                    $("#uploadDiv").modal('show');
+//                    $("#uploadDiv input[name='jobid']").val(id);
+//                    $("#uploadDiv").modal('show');
+                    //转到简历管理页面，提示上传简历
+                    alert('你还没有简历哦，请上传简历吧~');
+                    window.open("<?php echo Yii::app()->baseUrl.'/kongjian/jianli'?>");
                 }else if(data == '2'){ //投递成功，刷新页面
                     $("#collapse"+id+" .panel-body .status").html('<button class="btn btn-default" type="button" disabled="disabled">该职位已投</button>');
                     //window.location.href = window.location.href;

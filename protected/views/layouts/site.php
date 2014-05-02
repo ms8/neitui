@@ -188,13 +188,13 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-8">
-                            <div class="checkbox">
+                            <div class="">
                                 <label>
                                     <input type="checkbox" name="autoLogin"  id="remember"/> 记住我
                                 </label>
-                                <a target="_blank"  href="<?php echo Yii::app()->request->hostInfo.Yii::app()->homeUrl.'/site/forgetpassword'?>">忘记密码？</a>
-                                &nbsp;|&nbsp;&nbsp;还没有账号？
-                                <a onclick="$('#myModal').modal('hide')" href="#"data-toggle="modal" data-target="#registerModal">马上注册</a>
+                                <a target="_blank"  href="<?php echo Yii::app()->request->hostInfo.Yii::app()->homeUrl.'/site/forgetpassword'?>">忘记密码?</a>
+                                |
+                                <a onclick="$('#myModal').modal('hide')" href="#"data-toggle="modal" data-target="#registerModal">没有账号? 马上注册</a>
                             </div>
                         </div>
 
@@ -247,7 +247,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">确认密码:</label>
+                        <label class="col-sm-2 control-label"  style="padding:12px 5px">确认密码:</label>
                         <div class="col-sm-9">
                             <input name="register_password_confirm" class="form-control" type="password" placeholder="确认密码">
                         </div>
@@ -255,8 +255,8 @@
 <!--                        </label>-->
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-6">
-                            <div class="checkbox">
+                        <div class="col-sm-offset-2 col-sm-7">
+                            <div class="">
                                 <label>
                                     <input type="checkbox" class="checkbox valid" checked="checked" name="checkbox" id="checkbox"/>
                                     我已阅读并同意

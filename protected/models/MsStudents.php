@@ -14,6 +14,7 @@
  * @property string $sex
  * @property string $degree
  * @property string $degreename
+ * @property string $major
  * @property string $universitytype
  * @property string $universitytypename
  * @property string $universityname
@@ -64,13 +65,13 @@ class MsStudents extends CActiveRecord
 			array('realname, universitytypename, universityname, jiangliname', 'length', 'max'=>50),
 			array('hasoffer, sex', 'length', 'max'=>1),
 			array('degree, universitytype, jianglitype', 'length', 'max'=>10),
+			array('major, image', 'length', 'max'=>100),
 			array('projects', 'length', 'max'=>2000),
 			array('peixun, skill, description', 'length', 'max'=>1000),
-			array('image', 'length', 'max'=>100),
 			array('graduatetime, createtime, updatetime', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, mid, username, realname, phone, graduatetime, hasoffer, sex, degree, degreename, universitytype, universitytypename, universityname, jianglitype, jiangliname, projects, peixun, skill, createtime, updatetime, image, description', 'safe', 'on'=>'search'),
+			array('id, mid, username, realname, phone, graduatetime, hasoffer, sex, degree, degreename, major, universitytype, universitytypename, universityname, jianglitype, jiangliname, projects, peixun, skill, createtime, updatetime, image, description', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -99,13 +100,14 @@ class MsStudents extends CActiveRecord
 			'graduatetime' => 'Graduatetime',
 			'hasoffer' => 'Hasoffer',
 			'sex' => '性别：',
-			'degree' => '学历',
-			'degreename' => '学历',
-			'universitytype' => '学校类型',
-			'universitytypename' => '学校类型',
-			'universityname' => '学校名称',
-			'jianglitype' => '获得奖励',
-			'jiangliname' => '获得奖励',
+			'degree' => '学历：',
+			'degreename' => '学历：',
+			'major' => '专业：',
+			'universitytype' => '学校类型：',
+			'universitytypename' => '学校类型：',
+			'universityname' => '学校名称：',
+			'jianglitype' => '获得奖励：',
+			'jiangliname' => '获得奖励：',
 			'projects' => 'Projects',
 			'peixun' => 'Peixun',
 			'skill' => 'Skill',
@@ -137,6 +139,7 @@ class MsStudents extends CActiveRecord
 		$criteria->compare('sex',$this->sex,true);
 		$criteria->compare('degree',$this->degree,true);
 		$criteria->compare('degreename',$this->degreename,true);
+		$criteria->compare('major',$this->major,true);
 		$criteria->compare('universitytype',$this->universitytype,true);
 		$criteria->compare('universitytypename',$this->universitytypename,true);
 		$criteria->compare('universityname',$this->universityname,true);

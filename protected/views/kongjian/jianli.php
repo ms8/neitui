@@ -4,7 +4,11 @@
             <div class="col-md-9">
                 <div class="widget">
                     <div class="subpage-title noline">
-                        <h5>简历管理</h5>
+                        <h5 style="float: left">简历管理</h5>
+                        <form name="uploadForm" enctype="multipart/form-data" method="post">
+                            <input id="uploadTest" onchange="submitform()" type="file" name="jianlifile" style="display:none">
+                            <button id="uploadJianli" class="btn btn-flat flat-color" style="margin-right: 38px;float: right;padding:2px 10px" onclick="$('input[id=uploadTest]').click()" type="button">上传简历</button>
+                        </form>
                     </div>
                     <?php if($jianlis != null && count($jianlis)>0){ ?>
                     <table class="table table-bordered">
@@ -36,34 +40,19 @@
                         <?php } ?>
                         <?php }else{ ?>
                             <div class="top3" style="padding:15px">
-                                你还没上传简历哦~速度上传简历吧~，众多名企在等你~
+                                你还没上传简历哦~速度上传简历吧~，众多名企在等着你~
                             </div>
                         <?php }?>
                         </tbody>
                     </table>
                 </div>
 
-                <div class="widget">
-                    <div class="subpage-title noline">
-                        <h5>上传简历</h5>
-                    </div>
-                    <div style="padding: 20px;">
-                        <form id="uploadForm" class="login" method="post" enctype="multipart/form-data"
-                              action="<?php echo Yii::app()->baseUrl.'/kongjian/jianli'?>">
-                            <input id="lefile" type="file"  name="jianlifile" style="display:none">
-                            <div class="input-group">
-                                <input id="photoCover" class="form-control" type="text" >
-                                <span id="apply"class="input-group-addon" onclick="$('input[id=lefile]').click();">
-                                    选择简历
-                                </span>
-                            </div>
-                            <div  class="text-center status" style="margin-top:20px">
-                                <button id="jianliSubmit" class="btn btn-flat flat-color"  type="submit">上传简历</button>
-                            </div>
-                            <div style="clear: both;"></div>
-                        </form>
-                    </div>
-                </div>
+<!--                <div class="widget">-->
+<!--                    <div class="subpage-title noline">-->
+<!--                        <h5>上传简历</h5>-->
+<!--                    </div>-->
+<!---->
+<!--                </div>-->
 
                 <div class="widget">
                     <div class="subpage-title noline">
@@ -83,16 +72,16 @@
                             <?php foreach ($jobs as $key => $value) {?>
                                 <tr>
                                     <td>
-                                        <a href="<?php echo Yii::app()->createUrl('mscompany/view',array('id'=>$value->company_id)); ?>">
+                                        <a target="_blank" href="<?php echo Yii::app()->createUrl('mscompany/view/',array('id'=>$value->company_id)); ?>">
                                             <i class="icon-eye-open"></i>&nbsp&nbsp<?php  $company = MsCompany::model()->findByPk($value->company_id);
                                             echo $company->name ?>
                                         </a>
                                     </td>
                                     <td>
-                                        <!--                        <a href="--><?php //echo Yii::app()->createUrl('msjobs/view',array('id'=>$value->job_id)); ?><!--">-->
-                                        <?php  $job = MsJobs::model()->findByPk($value->job_id);
-                                        echo $job->title ?>
-                                        <!--                        </a>-->
+                                        <a target="_blank"href="<?php echo Yii::app()->createUrl('msjobs/view/',array('id'=>$value->job_id)); ?>">
+                                            <?php  $job = MsJobs::model()->findByPk($value->job_id);
+                                            echo $job->title ?>
+                                        </a>
                                     </td>
                                     <td>
                                         <?php  echo $value->createtime ?>
@@ -113,11 +102,11 @@
                     </div>
                     <div style="padding: 10px;">
                         <?php foreach($others as $other){?>
-                            <div style="margin-top: 5px;">
-                                <a target="_blank" href="<?php echo Yii::app()->baseUrl.'/msjobs/view/'.$other->id?>">
-                                    <?php echo $other->title?>
+                            <div style="margin-top: 10px;">
+                                <a style="font-size:13px"target="_blank" href="<?php echo Yii::app()->baseUrl.'/msjobs/view/'.$other->id?>">
+                                    <?php echo CHtml::encode(Helper::truncate_utf8_string($other->title,8));?>
                                 </a>
-                                <em style="float: right"><?php echo substr($other->createtime,0,10)?></em>
+                                <em style="float: right;font-size:13px"><?php echo substr($other->createtime,0,10)?></em>
                             </div>
                         <?php }?>
                     </div>
@@ -132,54 +121,13 @@
     </div>
 </section>
 
-<?php if(Yii::app()->user->isGuest){?>
-<script>
-    $('.addGroup').click(function(){
-        var r=confirm("您尚未登陆，是否登陆？");
-        if(r){
-            location.href = "<?php echo Yii::app()->createUrl('public/login'); ?>"; 
-        }else{
-            return false;
-        }
-        return false;
-    });
-</script>
-
-<?php }else{?>
-<script>
-    $('.addGroup').click(function(){
-       var gid  = $.trim($(this).attr('id'));
-       var mid  = <?php echo Yii::app()->user->id; ?>;
-       var node =$(this);
-           if(gid!='' && mid!=''){
-                $.ajax({
-                type: "POST",
-                url: "<?php echo Yii::app()->createUrl('/group/add'); ?>",
-                dataType:'json',
-                data: "gid="+gid+"&mid="+mid,
-                success: function(data){
-                  if(data.status==1){
-                    node.parent().html(' √已加入');
-                    return false;
-                  }else{
-                    alert(data.info);
-                    return false;
-                  }
-                }
-              });
-           }else{
-                return false;
-           }
-
-
-    });
-
-
-</script>
-
-<?php } ?>
 
 <script>
+    function submitform(){
+        document.uploadForm.action="<?php echo Yii::app()->baseUrl.'/kongjian/jianli'?>";
+        document.uploadForm.submit();
+    }
+
     $(function(){
         //菜单选中个人中心
         $("#header .nav li.active").removeClass("active");
@@ -231,9 +179,9 @@
         });
     }
 
-    $('input[id=lefile]').change(function() {
-        $('#photoCover').val($(this).val());
-    });
+//    $('input[id=lefile]').change(function() {
+//        $('#photoCover').val($(this).val());
+//    });
 
 //    $(function(){
 //        $('.portfolio-filter a').click(function () {

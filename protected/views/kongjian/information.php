@@ -44,38 +44,32 @@
                         <h5>基本信息</h5>
                     </div>
                     <div id="info-show" class="c_detail">
-                        <form class="form-horizontal"  role="form">
-                            <div class="form-group">
-                                <label  class="col-sm-5">姓名：</label>
-                                <div class="col-sm-7">
-                                    <span class="info-realname"><?php echo $model->realname?></span>
-                                </div>
+                        <div class="form-horizontal" style="padding:10px">
+                            <div style="margin-top:5px">
+                                <label  >性别：</label>
+                                <span class="info-sex">
+                                    <?php  if($model->sex != null){echo $model->sex == 1 ? '男':'女';} ?>
+                                 </span>
                             </div>
-                            <div class="form-group">
-                                <label  class="col-sm-5">手机号：</label>
-                                <div class="col-sm-7">
-                                    <span class="info-phone">
-                                        <?php echo $model->phone?>
-                                    </span>
-                                </div>
+                            <div style="margin-top:5px">
+                                <label >手机号：</label>
+                                <span class="info-phone">
+                                    <?php echo $model->phone?>
+                                </span>
                             </div>
-                            <div class="form-group">
-                                <label  class="col-sm-5">性别：</label>
-                                <div class="col-sm-7">
-                                    <span class="info-sex">
-                                        <?php  if($model->sex != null){echo $model->sex == 1 ? '男':'女';} ?>
-                                     </span>
-                                </div>
+                            <div style="margin-top:5px">
+                                <label >邮箱：</label>
+                                <span>
+                                    <?php echo $model->username?>
+                                </span>
                             </div>
-                            <div class="form-group">
-                                <label  class="col-sm-5">技能特长：</label>
-                                <div class="col-sm-7">
-                                    <span class="info-skill">
-                                          <?php echo $model->skill?>
-                                     </span>
-                                </div>
+                            <div style="margin-top:5px">
+                                <label >技能：</label>
+                                <span class="info-skill">
+                                    <?php echo $model->skill?>
+                                </span>
                             </div>
-                        </form>
+                        </div>
                     </div>
 
                 </div>
@@ -84,40 +78,32 @@
                         <h5>学校信息</h5>
                     </div>
                     <div class="c_detail">
-                        <form class="form-horizontal" id="college-show" role="form">
-                            <div class="form-group">
-                                <label  class="col-sm-5">学校类型：</label>
-                                <div class="col-sm-7">
-                                    <span class="college-type">
-                                        <?php echo $model->universitytypename;?>
-                                    </span>
-                                </div>
+                        <div class="form-horizontal" id="college-show" style="padding:10px">
+                            <div style="margin-top:5px">
+                                <label  >类型：</label>
+                                <span class="college-type">
+                                    <?php echo $model->universitytypename;?>
+                                 </span>
                             </div>
-                            <div class="form-group">
-                                <label  class="col-sm-5">学校名称：</label>
-                                <div class="col-sm-7">
-                                    <span class="college-name">
-                                        <?php echo $model->universityname?>
-                                    </span>
-                                </div>
+                            <div style="margin-top:5px">
+                                <label  >学历：</label>
+                                <span class="college-degree">
+                                    <?php echo $model->degreename?>
+                                 </span>
                             </div>
-                            <div class="form-group">
-                                <label  class="col-sm-5">学历：</label>
-                                <div class="col-sm-7">
-                                    <span class="college-degree">
-                                        <?php  echo $model->degreename; ?>
-                                     </span>
-                                </div>
+                            <div style="margin-top:5px">
+                                <label  >名称：</label>
+                                <span class="college-name">
+                                    <?php echo $model->universityname?>
+                                 </span>
                             </div>
-                            <div class="form-group">
-                                <label  class="col-sm-5">获得奖励：</label>
-                                <div class="col-sm-7">
-                                    <span class="college-jiangli">
-                                          <?php echo $model->jiangliname?>
-                                     </span>
-                                </div>
+                            <div style="margin-top:5px">
+                                <label  >专业：</label>
+                                <span class="college-major">
+                                    <?php echo $model->major?>
+                                 </span>
                             </div>
-                        </form>
+                        </div>
                     </div>
             </div>
         </div>
