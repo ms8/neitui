@@ -12,11 +12,13 @@
             <?php $this->widget('zii.widgets.CListView', array(
                 'dataProvider'=>$dataProvider,
                 'itemView'=>'_index',
-                "itemsCssClass"=>"row items",
-                 'template'=>'<div class="list">{items}</div>{pager}',
+                "itemsCssClass"=>"companys",
+//                "id"=>'companys',
+                 'template'=>'{items}{pager}',
+//                 'template'=>'<div class="list">{items}</div>{pager}',
                 'pager'=>array(
                     'class'=>'CLinkPager',
-            //        'cssFile'=>"pagination",
+//                    'cssFile'=>"pagination",
                     'htmlOptions'=>array('class'=>'pagination'),
                     'selectedPageCssClass'=>'active',
                     'hiddenPageCssClass'=>'disabled',
@@ -26,19 +28,41 @@
         </div>
     </div>
 </section>
+
+<?php
+Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'GridLoadingEffects/modernizr.custom.js');
+Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'GridLoadingEffects/masonry.pkgd.min.js');
+Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'GridLoadingEffects/imagesloaded.js');
+//Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'GridLoadingEffects/classie.js');
+//Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'GridLoadingEffects/AnimOnScroll.js');
+?>
 <script type="text/javascript">
+    var container = $('.companys .team-member-wrap');
+    var masonryContainer = $( '.companys');
+    container.imagesLoaded(function(){
+            container.fadeIn();
+            masonryContainer.masonry({
+                    itemSelector : '.team-member-wrap',
+                    isAnimated: true
+                });
+   });
+
+//    $( '#companys .items').masonry({
+//        columnWidth: 0,
+//        transitionDuration : 0,
+//        itemSelector: '.team-member-wrap'
+//    });
     $(function(){
         //菜单选中公司
         $(".nav li.active").removeClass("active");
         $(".nav li:eq(1)").addClass("active");
+//        new AnimOnScroll( document.getElementById( 'companys'), {
+//            minDuration : 0.4,
+//            maxDuration : 0.7,
+//            viewportFactor : 0.2  items
+//        } );
 
-        $('#filters .disabled').popover({
-            placement:"bottom",
-            html:true,
-            trigger:'hover',
-            container:"body",
-            title:"",
-            content:'抱歉，上海、广州、深圳的同学们还得等等'
-        });
+
     })
+
 </script>

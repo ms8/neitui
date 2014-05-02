@@ -4,7 +4,7 @@ body {
     background-color: #ECF0F1;
     color: #8b9a9b;
     font-family: '宋体',sans-serif;
-    font-size: 14px/1.42857;
+    font-size: 14px;
 }
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     color: #2C3E50;
@@ -988,17 +988,19 @@ blockquote small {
     padding-bottom: 20px;
 }
 .tagcloud-list {
+    display: inline-block;
     list-style: none outside none;
-    margin: 0;
+    margin:0;
     padding-left: 0;
+    font-size: 13px;
 }
 .tagcloud-list li {
     /*border: 1px solid #ECF0F1;*/
     border: 1px solid #e7ebec;
-    float: left;
+    display:inline-block;
     margin-bottom: 5px;
     margin-right: 5px;
-    padding: 5px 14px;
+    padding: 2px 5px 2px 5px;
 }
 .tagcloud-list li a,.tagcloud-list li span {
     font-weight: 700;
@@ -1327,6 +1329,13 @@ blockquote small {
 .widget p:last-child {
     margin-bottom: 0;
 }
+.widget-content{
+    padding: 10px;
+    word-break:break-all;
+}
+.widget-content.media{
+    margin-top: 0;
+}
 .project-details-list {
     border: 1px solid #ECF0F1;
     font-family:  '宋体',sans-serif;
@@ -1408,7 +1417,8 @@ blockquote small {
     vertical-align: -5px;
 }
 .team-member-wrap {
-    /*padding-bottom: 25px;*/
+    padding-bottom: 25px;
+    /*display: none;*/
 }
 .team-member {
     border-radius: 3px;
@@ -1726,10 +1736,10 @@ address {
     display: inline-block;
 }
 .job-title{
-    width:300px;
+    width:35%;
 }
 .job-city{
-    width:150px;
+    width:15%;
 }
 /*公司编辑*/
 .job-add{
@@ -1748,7 +1758,7 @@ address {
 }
 .tag-remove{
     display: inline-block;
-    position:absolute;
+    /*position:absolute;*/
     padding: 2px;
     font-weight: normal;
     color: #2ECC71;
@@ -1769,7 +1779,6 @@ address {
 }
 .c_detail{
     position: relative;
-    min-height: 145px;
 }
 .c_detail .form-group{
     margin-bottom: 5px;
@@ -1840,9 +1849,9 @@ address {
     margin-right: 10px;
 }
 /*基本信息列表*/
-.info-name,.info-home,.info-address{
+.info-name,.info-home,.info-address,.info-tags{
     display: inline-block;
-    margin-left: -25px;
+    margin-left: -45px;
 }
 
 #upload #uploadForm div span:hover{
@@ -1997,7 +2006,7 @@ address {
 }
 /*公司列表*/
 .list-view{
-   padding: 0 10px;
+   /*padding: 0 10px;*/
 }
 .follow-weibo{
     display: inline-block;
@@ -2005,4 +2014,13 @@ address {
 }
 .WB_follow_ex .follow_btn_inner .follow_text{
     width: auto;
+}
+
+.tag-edit ul{
+    padding: 5px 0;
+}
+.companys:before, .companys:after {
+    content: " ";
+    display: table;
+    clear: both;
 }
