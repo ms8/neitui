@@ -359,13 +359,26 @@ class MsCompanyController extends Controller
 		$dataProvider=new CActiveDataProvider('MsCompany',array(
                 'criteria'=>$criteria,
                 'pagination' => array(
-                    'pageSize' => 6,
+                    'pageSize' => 12,
+                    'currentPage' => isset($_GET['MsCompany_page']) ? $_GET['MsCompany_page'] : 0
                 ),
             )
         );
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
+
+        if (isset($_GET['ajax'])){
+            $allData = array();
+            foreach($dataProvider->getData() as $company){
+                $criteriaJob = new CDbCriteria;
+                $criteriaJob->order = 'createtime desc';
+                $jobs = MsJobs::model()->findAllByAttributes(array('company_id'=>$company->id),$criteriaJob);
+                array_push( $allData , array('company'=>$company,'jobs'=>$jobs));
+            }
+            die(CJSON::encode($allData));
+        }else{
+            $this->render('index',array(
+                'dataProvider'=>$dataProvider,
+            ));
+        }
 	}
 
 	/**

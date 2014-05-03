@@ -39,7 +39,8 @@
 						delete params[settings.ajaxVar];
 						window.History.pushState(null, document.title, decodeURIComponent($.param.querystring(url[0], params)));
 					} else {
-						$.fn.yiiListView.update(id, {url: $(this).attr('href')});
+                        //添加ajaxOptions属性
+						$.fn.yiiListView.update(id, $.extend({url: $(this).attr('href')},options.ajaxOptions || {}));
 					}
 					return false;
 				});

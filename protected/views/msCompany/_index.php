@@ -36,20 +36,15 @@
                             $time = $job->createtime;
                             echo "<ul class='job-list'>";
                         };
-                        if($i == 3){
-                            echo  "</ul><div class='text-left' style='padding:0 0 2px 5px;'><i class='icon-hand-right'></i>&nbsp共".count($jobs)."个招聘职位</div>";
-                            break;
-                        }else{
 
-                            echo "<li><a target='_blank' href='". Yii::app()->baseUrl.'/msjobs/view/'.$job->id ."'>".$job->title."</a></li>";
-                            if(count($jobs) == ($i+1)) echo"</ul>";
-                        }
+                        echo "<li><a target='_blank' href='". Yii::app()->baseUrl.'/msjobs/view/'.$job->id ."'>".$job->title."</a></li>";
+                        if(count($jobs) == ($i+1)) echo"</ul>";
                         $i++;
                     }
                     echo "<div class='text-left' style='padding:5px 0 0 4px;'><i class='icon-time'></i>&nbsp".$time."</div>";
                 ?>
             </div>
-            <p class="text-center"><a class="btn btn-flat flat-color" href="<?php echo Yii::app()->baseUrl.'/mscompany/view/'.$data->id?>">查看详情</a></p>
+            <p class="text-center"><a class="btn btn-flat flat-primary"" href="<?php echo Yii::app()->baseUrl.'/mscompany/view/'.$data->id?>">查看详情</a></p>
         </div>
     </div>
 

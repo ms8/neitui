@@ -150,6 +150,11 @@ class CListView extends CBaseListView
 	 * by this widget. Defaults to 'ajax'. This is effective only when {@link ajaxUpdate} is not false.
 	 */
 	public $ajaxVar='ajax';
+    /**
+     * 'ajaxOptions'=>"{dataType:'json',success:do}"
+     * 可用于分页按钮自定义处理函数
+     */
+    public  $ajaxOptions;
 	/**
 	 * @var mixed the URL for the AJAX requests should be sent to. {@link CHtml::normalizeUrl()} will be
 	 * called on this property. If not set, the current page URL will be used for AJAX requests.
@@ -233,13 +238,14 @@ class CListView extends CBaseListView
 			'pagerClass'=>$this->pagerCssClass,
 			'loadingClass'=>$this->loadingCssClass,
 			'sorterClass'=>$this->sorterCssClass,
-			'enableHistory'=>$this->enableHistory
+			'enableHistory'=>$this->enableHistory,
 		);
 		if($this->ajaxUrl!==null)
 			$options['url']=CHtml::normalizeUrl($this->ajaxUrl);
 		if($this->updateSelector!==null)
 			$options['updateSelector']=$this->updateSelector;
-		foreach(array('beforeAjaxUpdate', 'afterAjaxUpdate', 'ajaxUpdateError') as $event)
+        //添加ajaxOptions属性 by jdh
+		foreach(array('beforeAjaxUpdate', 'afterAjaxUpdate', 'ajaxUpdateError','ajaxOptions') as $event)
 		{
 			if($this->$event!==null)
 			{

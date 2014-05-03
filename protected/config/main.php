@@ -110,10 +110,10 @@ return array(
 		 //  		array(
 		 //  			'class'=>'CWebLogRoute',
 		 // 		),
-				
+
 		 // 	),
 		 // ),
-		
+
 		'mailer' => array(
           'class' => 'application.extensions.mailer.EMailer',
           'pathViews' => 'application.views.email',

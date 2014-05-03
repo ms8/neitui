@@ -1418,7 +1418,7 @@ blockquote small {
 }
 .team-member-wrap {
     padding-bottom: 25px;
-    /*display: none;*/
+    width:247px;
 }
 .team-member {
     border-radius: 3px;
