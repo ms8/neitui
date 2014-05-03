@@ -98,7 +98,7 @@
                         <li class="weixin"><img  src="<?php echo Yii::app()->baseUrl.CSS_PATH.'images/erweima.jpg'?>" alt="快入职微信号"/></li>
                         <li class="weibo">
                             <img  src="<?php echo Yii::app()->baseUrl.CSS_PATH.'images/weibo.png'?>" alt="快入职微博号"/>
-                            <wb:follow-button uid="5099334861" type="red_2" width="130" height="24" ></wb:follow-button>
+                            <div class="follow-weibo"><wb:follow-button uid="5099334861" type="red_2" width="136" height="24" ></wb:follow-button></div>
                         </li>
                     </ul>
                 </div>

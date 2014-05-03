@@ -4,7 +4,7 @@ body {
     background-color: #ECF0F1;
     color: #8b9a9b;
     font-family: '宋体',sans-serif;
-    font-size: 14px/1.42857;
+    font-size: 14px;
 }
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     color: #2C3E50;
@@ -266,15 +266,15 @@ a:focus {
     float: left;
     margin-right: 10px;
 }
-.social-links > li a {
-    border: 1px solid #BDC3C7;
-    color: #7F8C8D;
-    display: block;
-    height: 30px;
-    line-height: 30px;
-    text-align: center;
-    width: 30px;
-}
+/*.social-links > li a {*/
+    /*border: 1px solid #BDC3C7;*/
+    /*color: #7F8C8D;*/
+    /*display: block;*/
+    /*height: 30px;*/
+    /*line-height: 30px;*/
+    /*text-align: center;*/
+    /*width: 30px;*/
+/*}*/
 .social-links > li i{
     line-height: 30px;
 }
@@ -988,17 +988,19 @@ blockquote small {
     padding-bottom: 20px;
 }
 .tagcloud-list {
+    display: inline-block;
     list-style: none outside none;
-    margin: 0;
+    margin:0;
     padding-left: 0;
+    font-size: 13px;
 }
 .tagcloud-list li {
     /*border: 1px solid #ECF0F1;*/
     border: 1px solid #e7ebec;
-    float: left;
+    display:inline-block;
     margin-bottom: 5px;
     margin-right: 5px;
-    padding: 5px 14px;
+    padding: 2px 5px 2px 5px;
 }
 .tagcloud-list li a,.tagcloud-list li span {
     font-weight: 700;
@@ -1327,6 +1329,13 @@ blockquote small {
 .widget p:last-child {
     margin-bottom: 0;
 }
+.widget-content{
+    padding: 10px;
+    word-break:break-all;
+}
+.widget-content.media{
+    margin-top: 0;
+}
 .project-details-list {
     border: 1px solid #ECF0F1;
     font-family:  '宋体',sans-serif;
@@ -1408,26 +1417,27 @@ blockquote small {
     vertical-align: -5px;
 }
 .team-member-wrap {
-    padding-bottom: 50px;
+    padding-bottom: 25px;
+    /*display: none;*/
 }
 .team-member {
     border-radius: 3px;
     overflow: hidden;
-    border: 1px solid #ECF0F1;
+    border: 1px solid #DBE4E7;
 }
 .member-details {
     -moz-border-bottom-colors: none;
     -moz-border-left-colors: none;
     -moz-border-right-colors: none;
     -moz-border-top-colors: none;
-    border-color: #f4f8f9;
+    border-color: #E5F0F3;;
     border-image: none;
     /*border-right: 1px solid #ECF0F1;*/
     border-style:solid none none ;
     /*border-width: 0 1px 1px;*/
     border-width:1px ;
     padding: 10px 20px;
-    font-size: 13px;
+    font-size: 13.5px;
 }
 .member-details .member-name {
     margin-top: 0;
@@ -1458,7 +1468,7 @@ blockquote small {
 }
 .member-content{
     display: inline-block;
-    height:150px;
+    /*height:150px;*/
     overflow: hidden;
     margin-bottom: 15px;
 }
@@ -1699,6 +1709,9 @@ address {
     right:10px;
 }
 /*职位列表*/
+.job-list{
+    line-height: 25px;
+}
 .job-details-list{
     list-style: none;
     margin: 0 auto;
@@ -1723,10 +1736,10 @@ address {
     display: inline-block;
 }
 .job-title{
-    width:300px;
+    width:35%;
 }
 .job-city{
-    width:150px;
+    width:15%;
 }
 /*公司编辑*/
 .job-add{
@@ -1745,7 +1758,7 @@ address {
 }
 .tag-remove{
     display: inline-block;
-    position:absolute;
+    /*position:absolute;*/
     padding: 2px;
     font-weight: normal;
     color: #2ECC71;
@@ -1766,7 +1779,6 @@ address {
 }
 .c_detail{
     position: relative;
-    min-height: 145px;
 }
 .c_detail .form-group{
     margin-bottom: 5px;
@@ -1837,9 +1849,9 @@ address {
     margin-right: 10px;
 }
 /*基本信息列表*/
-.info-name,.info-home,.info-address{
+.info-name,.info-home,.info-address,.info-tags{
     display: inline-block;
-    margin-left: -25px;
+    margin-left: -45px;
 }
 
 #upload #uploadForm div span:hover{
@@ -1936,7 +1948,7 @@ address {
     border-top:1px solid #ececec;
 }
 .social-links .weibo > img{
-    width:70px;
+    width:68px;
 }
 .company-show{
     padding:10px 0;
@@ -1991,4 +2003,24 @@ address {
 .empty-content{
     border-top: 1px solid #ECECEC;
     padding: 25px;
+}
+/*公司列表*/
+.list-view{
+   /*padding: 0 10px;*/
+}
+.follow-weibo{
+    display: inline-block;
+    margin-top: 5px;
+}
+.WB_follow_ex .follow_btn_inner .follow_text{
+    width: auto;
+}
+
+.tag-edit ul{
+    padding: 5px 0;
+}
+.companys:before, .companys:after {
+    content: " ";
+    display: table;
+    clear: both;
 }

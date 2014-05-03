@@ -17,13 +17,16 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
         <div class="row">
             <div class="col-md-9">
                 <div class="widget">
-                    <div class="media">
+                    <div class="subpage-title noline">
+                        <h5><?php echo $model->name?></h5>
+                    </div>
+                    <div class="media widget-content">
                         <a class="pull-left intro-logo" href="#">
-                            <img  alt="<?php echo $model->name?>"
+                            <img  alt="<?php echo $model->name?>" class="img-thumbnail"
                                  src="<?php echo Yii::app()->baseUrl.'/'.$model->logo?>" />
                         </a>
                         <div class="media-body">
-                            <h4 class="media-heading"><?php echo $model->name?></h4>
+<!--                            <h4 class="media-heading">--><?php //echo $model->name?><!--</h4>-->
                             <div id="intro-info" class="c_intro">
                                 <div class="intro-des"><?php echo $model->description?></div>
                             </div>
@@ -84,26 +87,28 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
                     <div class="absolute-right-20">
                         <a href="javascript:;" class="icon-operate"  id="job-add" ><i class="icon-plus-sign-alt"></i></a>
                     </div>
-                    <div id="accordion" class="panel-group">
-                        <?php foreach($jobs as $job){?>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a href="#collapse<?php echo $job->id?>" job-id="<?php echo $job->id?>" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle collapsed">
-                                            <span class="job-title"><?php echo $job->title?></span>
-                                            <span class="job-city"><?php echo $job->cityname?></span>
-                                            <span class="job-citycode" style="display: none"><?php echo $job->citycode?></span>
-                                            <span class="job-time"><?php echo $job->createtime?></span>
-                                        </a>
-                                        <a href="javascript:;" class="job-operate"><i class="icon-edit"></i></a>
-                                        <a href="javascript:;" class="job-operate"><i class="icon-trash"></i></a>
-                                    </h4>
+                    <div class="widget-content">
+                        <div id="accordion" class="panel-group">
+                            <?php foreach($jobs as $job){?>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a href="#collapse<?php echo $job->id?>" job-id="<?php echo $job->id?>" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle collapsed">
+                                                <span class="job-title"><?php echo $job->title?></span>
+                                                <span class="job-city"><?php echo $job->cityname?></span>
+                                                <span class="job-citycode" style="display: none"><?php echo $job->citycode?></span>
+                                                <span class="job-time"><?php echo $job->createtime?></span>
+                                            </a>
+                                            <a href="javascript:;" class="job-operate"><i class="icon-edit"></i></a>
+                                            <a href="javascript:;" class="job-operate"><i class="icon-trash"></i></a>
+                                        </h4>
+                                    </div>
+                                    <div class="panel-collapse collapse" id="collapse<?php echo $job->id?>" style="height: 0px;">
+                                        <div class="panel-body"></div>
+                                    </div>
                                 </div>
-                                <div class="panel-collapse collapse" id="collapse<?php echo $job->id?>" style="height: 0px;">
-                                    <div class="panel-body"></div>
-                                </div>
-                            </div>
-                        <?php }?>
+                            <?php }?>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -115,26 +120,45 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
                     <div class="text-right absolute-right-20">
                         <a href="javascript:;" class="icon-operate"  id="info-update" ><i class="icon-edit"></i></a>
                     </div>
-                    <div id="info-show" class="c_detail">
+                    <div id="info-show" class="c_detail widget-content">
                         <form class="form-horizontal" role="form">
                             <div class="form-group">
-                                <label for="inputEmail3" class="col-sm-4">名称：</label>
-                                <div class="col-sm-8">
+                                <label for="inputEmail3" class="col-sm-5">名称：</label>
+                                <div class="col-sm-7">
                                     <span class="info-name"><?php echo $model->name?></span>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="inputEmail3" class="col-sm-4">主页：</label>
-                                <div class="col-sm-8">
+                                <label for="inputEmail3" class="col-sm-5">主页：</label>
+                                <div class="col-sm-7">
                                     <span class="info-home">
                                         <a href="<?php echo $model->website?>" target="_blank"><?php echo $model->website?> </a>
                                     </span>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="inputEmail3" class="col-sm-4">地址：</label>
-                                <div class="col-sm-8">
+                                <label for="inputEmail3" class="col-sm-5">地址：</label>
+                                <div class="col-sm-7">
                                     <span class="info-address"><?php echo $model->address?></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-5">标签：</label>
+                                <div class="col-sm-7">
+                                    <div class="info-tags">
+                                        <ul  class="tagcloud-list">
+                                            <?php
+                                            $tags = empty($model->tags) ? array() : explode(' ',$model->tags);
+                                            foreach($tags as $tag){
+                                                ?>
+                                                <li>
+                                                    <span><?php echo $tag?></span>
+                                                </li>
+                                            <?php
+                                            }
+                                            ?>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </form>
@@ -181,6 +205,32 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
                                                 <script type="text/plain" id="myEditor"><?php echo $model->description?></script>
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                            <label for="inputEmail3" class="col-sm-2 control-label">标签：</label>
+                                            <div class="col-sm-8">
+                                                <div class="tag-edit">
+                                                    <ul id="hasLabels" class="tagcloud-list">
+                                                        <?php
+                                                        $tags = empty($model->tags) ? array() : explode(' ',$model->tags);
+                                                        foreach($tags as $tag){
+                                                            ?>
+                                                            <li>
+                                                                <span><?php echo $tag?></span>
+                                                                <a  class="tag-remove" href="javascript:;" title="删除"><i class="icon-remove"></i></a>
+                                                            </li>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                    </ul>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-8">
+                                                        <input  id="MsCompany_tags" name="MsCompany[tags]" type="hidden" value="<?php echo $model->tags?>" />
+                                                        <input  id="tags-new" type="text" size="60" maxlength="500" data-toggle="tooltip" title="新增多个标签空格分隔，例如：高富帅 白富美" class="form-control pad-bottom-5"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </form>
 
                                 </div>
@@ -193,30 +243,6 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
 
                     </div>
 
-                </div>
-                <div class="widget text" style="position: relative">
-                    <div class="subpage-title noline">
-                        <h5>公司印象</h5>
-                    </div>
-                    <div class="absolute-right-20">
-                        <a  id="tag-add" class="icon-operate" href="javascript:;"><i class="icon-plus-sign-alt"></i></a>
-                    </div>
-                    <div id="tag-info" class="r_box">
-                        <input  id="MsCompany_tags" type="hidden" value="<?php echo $model->tags?>" />
-                        <ul id="hasLabels" class="tagcloud-list">
-                            <?php
-                            $tags = empty($model->tags) ? array() : explode(' ',$model->tags);
-                            foreach($tags as $tag){
-                                ?>
-                                <li>
-                                    <span><?php echo $tag?></span>
-                                    <a  class="tag-remove" href="javascript:;" title="删除"><i class="icon-remove"></i></a>
-                                </li>
-                            <?php
-                            }
-                            ?>
-                        </ul>
-                    </div>
                 </div>
             </div>
         </div>
@@ -275,6 +301,11 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
     });
     $("#info-save").click(function(){
         var tempHtml = $("#myEditor").html();
+        var tags = $.trim($("#MsCompany_tags").val()),
+            newTags =$.trim($("#tags-new").val());
+        if(typeof tags == "string" && !!tags) {tags = tags + " ";}
+        tags += newTags;
+        $("#MsCompany_tags").val(tags);
         $("#info-form").ajaxSubmit({
             url:"<?php echo Yii::app()->baseUrl.'/mscompany/update' ?>",
             dataType:"html",
@@ -293,87 +324,46 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
         });
     })
 
-    //编辑公司印象
-    var popoverObj = $('#tag-add').popover({
-        placement:"left",
-        html:true,
-        container:"body",
-        title:"",
-        content:'<ul class="recent-posts" style="width:300px">' +
-               '<li> <input type="text" id="tags-new" class="form-control pad-bottom-5"' +
-            'name="MsCompany[tags]" maxlength="500" size="60" /></li>'+
-            '<li><i class="icon-quote-left icon-x pull-left icon-muted"></i>多个印象标签通过空格分开，例如：高富帅 白富美<i class="icon-quote-right icon-x pull-right icon-muted"></i></li>'+
-        '<li class="text-right">'+
-       ' <button type="button" class="btn btn-flat flat-success btn-bordered btn-rounded" id="tag-cancel" >取消</button>'+
-        '<button  type="button" class="btn btn-flat flat-success btn-bordered btn-rounded tag-save" id="tag-save">保存</button>'+
-        '</li>'+
-        '</ul>"'
-    });
-
     //编辑标签
     $("#hasLabels .tag-remove").live("click",function(){
         var $that = $(this),
             tags = $("#MsCompany_tags").val(),
             removeTag = $that.prev("span").html();
         $("#MsCompany_tags").val($.trim(tags.replace(removeTag+" ", "").replace(removeTag, "")));
-        $.ajax({
-            type:'POST',
-            dataType:'json',
-            data:{MsCompany:{tags: $.trim(tags.replace(removeTag+" ", "").replace(removeTag, ""))}},
-            url:"<?php echo Yii::app()->baseUrl.'/mscompany/update'?>",
-            success:function(data) {
-                $that.parent().remove();
-            }
-        });
+        $that.parent().remove();
     });
-    $("#tag-save").live("click",function(){
-        var $that = $(this),
-            tags = $("#MsCompany_tags").val(),
-            newTags =$.trim($("#tags-new").val());
-        //如果新标签为空，隐藏弹窗口并返回
-        if($.trim(newTags) == ""){
-            $("#tag-add").popover("hide");
-            return;
-        }
-        //新标签有内容继续处理
-        if(typeof tags == "string" && !!tags) {tags = tags + " ";}
-        tags += newTags;
-        $("#MsCompany_tags").val(tags);
-        $.ajax({
-            type:'POST',
-            dataType:'json',
-            data:{MsCompany:{tags: tags}},
-            url:"<?php echo Yii::app()->baseUrl.'/mscompany/update'?>",
-            success:function(data) {
+    $("#tags-new").keydown(function(event){
+        switch(event.keyCode) {
+            case 32:
+                var tags = $("#MsCompany_tags").val(),
+                    newTags =$.trim($("#tags-new").val());
+                if(typeof tags == "string" && !!tags) {tags = tags + " ";}
+                tags += newTags;
                 var tagsArr = newTags.split(" ");
                 for(var j = 0 ;j <  tagsArr.length ; j++ ){
-                       var liHtml = '<li><span>' + tagsArr[j] +'</span><a  class="tag-remove" href="javascript:;" title="删除"><i class="icon-remove"></i></a></li>'
-                    $("#hasLabels").append(liHtml);
-                }
-                //隐藏popover，使用hide会出现z-index值大遮住标签删除操作情况
-                var self = $("#tag-add").popover().data("bs.popover");
-                self.leave(self);
-            }
-        });
-    });
-    $("#tag-cancel").live("click",function(){
-        //隐藏popover，使用hide会出现z-index值大遮住标签删除操作情况
-        var self = $("#tag-add").popover().data("bs.popover");
-        self.leave(self);
-    });
-    $("body").click(function(e){
-        if($(".popover").length == 0 || $(".popover:hidden").length > 0){
-            return;
-        }
-        var target = (e.srcElement)?e.srcElement:e.target;
-        if($(target).parents('.popover-content').length == 0 && !$(target).hasClass("popover-content")
-            && !$(target).hasClass("icon-plus-sign-alt")){
-            //隐藏popover，使用hide会出现z-index值大遮住标签删除操作情况
-            var self = $("#tag-add").popover().data("bs.popover");
-            self.leave(self);
-        }
+                    var tagsAll = $.map( $("#hasLabels span").toArray(), function(n){
+                        return $(n).text();
+                    });//$("#MsCompany_tags").val().split(" ");
 
-    })
+                    if (jQuery.inArray(tagsArr[j], tagsAll) == -1 ){
+                        var liHtml = '<li><span>' + tagsArr[j] +'</span><a  class="tag-remove" href="javascript:;" title="删除"><i class="icon-remove"></i></a></li>'
+                        $("#hasLabels").append(liHtml);
+                    }
+                }
+
+                break;
+            // ...
+            // 不同的按键可以做不同的事情
+            // 不同的浏览器的keycode不同
+        }
+    });
+    //标签输入框
+    $('#tags-new').tooltip({
+        animation:true,
+        placement:'right',
+        container:$(".tag-edit").parent().parent(),
+        trigger:'hover' //触发tooltip的事件
+    });
 
     //新增职位
     $("#job-add").click(function(){

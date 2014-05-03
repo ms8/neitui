@@ -1,56 +1,68 @@
 <?php
 /* @var $this MsCompanyController */
 /* @var $dataProvider CActiveDataProvider */
-//
-//$this->breadcrumbs=array(
-//	'Ms Companies',
-//);
-//
-//$this->menu=array(
-//	array('label'=>'Create MsCompany', 'url'=>array('create')),
-//	array('label'=>'Manage MsCompany', 'url'=>array('admin')),
-//);
 ?>
 <section>
-    <div class="container">
-    <div  class="filters pad-top-25" id="filters" data-option-key="filter">
-        <span id="filter-up">公司所在城市：</span>
-        <a href="<?php echo Yii::app()->baseUrl."/"?>" data-option-value="*" class="active_sort">北京</a>
-        <span class="text-sep">/</span>
-        <a class="disabled">
-            上海<span class="text-sep">&nbsp/&nbsp</span>广州<span class="text-sep">&nbsp/&nbsp</span>深圳
-        </a>
+    <div class="container  pad-top-25">
+        <div class="widget">
+<!--            <div class="subpage-title noline">-->
+<!--                <h5>招聘公司</h5>-->
+<!--            </div>-->
+            <section class="pad-25">
+            <?php $this->widget('zii.widgets.CListView', array(
+                'dataProvider'=>$dataProvider,
+                'itemView'=>'_index',
+                "itemsCssClass"=>"companys",
+//                "id"=>'companys',
+                 'template'=>'{items}{pager}',
+//                 'template'=>'<div class="list">{items}</div>{pager}',
+                'pager'=>array(
+                    'class'=>'CLinkPager',
+//                    'cssFile'=>"pagination",
+                    'htmlOptions'=>array('class'=>'pagination'),
+                    'selectedPageCssClass'=>'active',
+                    'hiddenPageCssClass'=>'disabled',
+                ),
+            )); ?>
+             </section>
+        </div>
     </div>
-    <section class="pad-top-25">
-<?php $this->widget('zii.widgets.CListView', array(
-	'dataProvider'=>$dataProvider,
-	'itemView'=>'_index',
-    "itemsCssClass"=>"row items",
-     'template'=>'<div class="list">{items}</div>{pager}',
-    'pager'=>array(
-        'class'=>'CLinkPager',
-//        'cssFile'=>"pagination",
-        'htmlOptions'=>array('class'=>'pagination'),
-        'selectedPageCssClass'=>'active',
-        'hiddenPageCssClass'=>'disabled',
-    ),
-)); ?>
-     </section>
-     </div>
 </section>
+
+<?php
+Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'GridLoadingEffects/modernizr.custom.js');
+Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'GridLoadingEffects/masonry.pkgd.min.js');
+Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'GridLoadingEffects/imagesloaded.js');
+//Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'GridLoadingEffects/classie.js');
+//Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'GridLoadingEffects/AnimOnScroll.js');
+?>
 <script type="text/javascript">
+    var container = $('.companys .team-member-wrap');
+    var masonryContainer = $( '.companys');
+    container.imagesLoaded(function(){
+            container.fadeIn();
+            masonryContainer.masonry({
+                    itemSelector : '.team-member-wrap',
+                    isAnimated: true
+                });
+   });
+
+//    $( '#companys .items').masonry({
+//        columnWidth: 0,
+//        transitionDuration : 0,
+//        itemSelector: '.team-member-wrap'
+//    });
     $(function(){
         //菜单选中公司
         $(".nav li.active").removeClass("active");
         $(".nav li:eq(1)").addClass("active");
+//        new AnimOnScroll( document.getElementById( 'companys'), {
+//            minDuration : 0.4,
+//            maxDuration : 0.7,
+//            viewportFactor : 0.2  items
+//        } );
 
-        $('#filters .disabled').popover({
-            placement:"bottom",
-            html:true,
-            trigger:'hover',
-            container:"body",
-            title:"",
-            content:'抱歉，上海、广州、深圳的同学们还得等等'
-        });
+
     })
+
 </script>
