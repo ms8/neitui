@@ -46,41 +46,65 @@ class MsCompanyController extends Controller
 	}
 
     public function actionSearch(){
-        $id=Yii::app()->user->id;
-        $member = Member::model()->findByPk($id);
-        if($member->type == '2'){ //只有企业用户才有权限查找人
-            $model=new MsStudents;
-            $persons = array();
-            $unitypes = MsDictionary::model()->findAllByAttributes(array('type'=>'unitype'));
-            $jianglis = MsDictionary::model()->findAllByAttributes(array('type'=>'jiangli'));
-            $degrees = MsDictionary::model()->findAllByAttributes(array('type'=>'degree'));
-            foreach($unitypes as $unitype){ //对应的学校类型名称
-                $uniarr[$unitype->code]=$unitype->name;
-            }
-            foreach($jianglis as $jiangli){ //对应的奖励类型名称
-                $jiangliarr[$jiangli->code]=$jiangli->name;
-            }
-            foreach($degrees as $degree){ //对应的学历类型名称
-                $degreearr[$degree->code]=$degree->name;
-            }
-            if(isset($_POST['MsStudents'])){
-                $model->attributes=$_POST['MsStudents'];
+        if(!Yii::app()->user->isGuest){ //只有企业用户才有权限查找人
+            $id=Yii::app()->user->id;
+            $member = Member::model()->findByPk($id);
+            if($member->type == '2'){
                 $params = array();
-                $params['hasoffer']='0';
-                if($model->sex != null){
-                    $params['sex']=$model->sex;
-                }
-                if($model->sex != null){
-                    $params['degree']=$model->degree;
-                }
-                if($model->sex != null){
-                    $params['universitytype']=$model->universitytype;
-                }
-                $persons = $model->findAllByAttributes($params);
+                $unitypes = MsDictionary::model()->findAllByAttributes(array('type'=>'unitype'));
+                $degrees = MsDictionary::model()->findAllByAttributes(array('type'=>'degree'));
+                $skills = MsDictionary::model()->findAllByAttributes(array('type'=>'skill'));
 
+                $condition = "";
+                if(isset($_POST['skillValue'])){
+                    $params[] = $_POST['skillValue'];
+                    if( $_POST['skillValue']!="skill_all"){
+                        $skillName = "";
+                        foreach($skills as $skill){
+                            if($skill->code == $_POST['skillValue']){
+                                $skillName = $skill->name;
+                                break;
+                            }
+                        }
+                        $condition = " and skill like '%".$skillName."%'";
+                    }
+                }else{
+                    $params[] = "skill_all";
+                }
+                if(isset($_POST['universityValue'])){
+                    $params[] = $_POST['universityValue'];
+                    if( $_POST['universityValue']!="university_all"){
+                        $condition = " and universitytype= '".$_POST['universityValue']."'";
+                    }
+                }else{
+                    $params[] = "university_all";
+                }
+                if(isset($_POST['degreeValue'])){
+                    $params[] = $_POST['degreeValue'];
+                    if( $_POST['degreeValue']!="degree_all"){
+                        $condition = " and degree = '".$_POST['degreeValue']."'";
+                    }
+                }else{
+                    $params[] = "degree_all";
+                }
+                //职位信息
+                $sql = "select * from ms_students where  realname!='' "
+                    .$condition." order by createtime desc";
+                $criteria=new CDbCriteria();
+                $result = Yii::app()->db->createCommand($sql)->query();
+                $pages=new CPagination($result->rowCount);
+                $pages->pageSize=8;
+                $pages->applyLimit($criteria);
+                $result=Yii::app()->db->createCommand($sql." LIMIT :offset,:limit");
+                $result->bindValue(':offset', $pages->currentPage*$pages->pageSize);
+                $result->bindValue(':limit', $pages->pageSize);
+                $students=$result->query();
+
+                $this->render('search',array('unitypes'=>$unitypes,'degrees'=>$degrees,
+                    'skills'=>$skills,'students'=>$students,'pages'=>$pages,'params'=>$params));
+            }else{
+                $this->redirect(array('/site/index'));
             }
-            $this->render('search',array('uniarr'=>$uniarr,'jiangliarr'=>$jiangliarr,
-                'degreearr'=>$degreearr,'model'=>$model,'persons'=>$persons));
         }else{
             $this->redirect(array('/site/index'));
         }
