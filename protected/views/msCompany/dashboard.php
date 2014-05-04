@@ -18,11 +18,14 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
             <div class="col-md-9">
                 <div class="widget">
                     <div class="subpage-title noline">
-                        <h5><?php echo $model->name?></h5>
+                        <h5 id="company-name"><?php echo $model->name?></h5>
+                    </div>
+                    <div class="text-right absolute-right-20">
+                        <a href="javascript:;" class="icon-operate"  id="des-update" ><i class="icon-edit"></i></a>
                     </div>
                     <div class="media widget-content">
                         <a class="pull-left intro-logo" href="#">
-                            <img  alt="<?php echo $model->name?>" class="img-thumbnail"
+                            <img  alt="<?php echo $model->name?>" class=""
                                  src="<?php echo Yii::app()->baseUrl.'/'.$model->logo?>" />
                         </a>
                         <div class="media-body">
@@ -32,6 +35,47 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
                             </div>
                         </div>
                     </div>
+                    <div class="modal fade" id="des-edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog"  style="width:750px">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title" id="myModalLabel">编辑公司描述</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="form-horizontal" id="des-form" role="form" enctype="multipart/form-data">
+                                        <div class="form-group">
+                                            <label for="inputEmail3" class="col-sm-2 control-label">名称：</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" id="MsCompany_name" value="<?php echo $model->name?>" class="form-control"
+                                                       name="MsCompany[name]" maxlength="100" size="60"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputEmail3" class="col-sm-2 control-label">logo：</label>
+                                            <div class="col-sm-6">
+                                                <input type="file" size="60" maxlength="100" name="logo" name="logo" value=""/>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="inputEmail3" class="col-sm-2 control-label">公司描述：</label>
+                                            <div class="col-sm-8">
+                                                <script type="text/plain" id="myEditor"><?php echo $model->description?></script>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" id="des-cancel" class="btn btn-flat flat-success" data-dismiss="modal">取消</button>
+                                    <button type="button"  id="des-save" class="btn btn-flat flat-success">保存</button>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+
+                    </div>
+
                 </div>
                 <div class="post-wrapper widget pad-bottom-25">
                     <div>
@@ -87,7 +131,40 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
                     <div class="absolute-right-20">
                         <a href="javascript:;" class="icon-operate"  id="job-add" ><i class="icon-plus-sign-alt"></i></a>
                     </div>
-                    <div class="widget-content">
+                    <div>
+                        <table id="jobs" class="table jobs">
+                            <thead>
+                            <tr>
+                                <th style="width: 25%">职位</th>
+                                <th style="width: 25%">城市</th>
+                                <th style="width: 35%">发布时间</th>
+                                <th style="width: 20%">操作</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <?php foreach ($jobs as $job) {?>
+                                <tr>
+                                    <td>
+                                        <a href="<?php echo Yii::app()->baseUrl.'/msjobs/view/'.$job->id?>">
+                                            <span class="job-title"><?php echo $job->title?></span>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <span class="job-city"><?php echo $job->cityname?></span>
+                                    </td>
+                                    <td>
+                                        <span class="job-time"><?php echo $job->createtime?></span>
+                                    </td>
+                                    <td>
+                                        <a href="<?php echo Yii::app()->baseUrl.'/msjobs/view/'.$job->id?>"><i class="icon-eye-open"></i></a>
+                                        <a href="javascript:;"><i class="icon-edit"></i></a>
+                                        <a href="javascript:;"><i class="icon-trash"></i></a>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                            </tbody>
+                        </table>
                         <div id="accordion" class="panel-group">
                             <?php foreach($jobs as $job){?>
                                 <div class="panel panel-default">
@@ -122,12 +199,6 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
                     </div>
                     <div id="info-show" class="c_detail widget-content">
                         <form class="form-horizontal" role="form">
-                            <div class="form-group">
-                                <label for="inputEmail3" class="col-sm-5">名称：</label>
-                                <div class="col-sm-7">
-                                    <span class="info-name"><?php echo $model->name?></span>
-                                </div>
-                            </div>
                             <div class="form-group">
                                 <label for="inputEmail3" class="col-sm-5">主页：</label>
                                 <div class="col-sm-7">
@@ -173,19 +244,6 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
                                 <div class="modal-body">
                                     <form class="form-horizontal" id="info-form" role="form" enctype="multipart/form-data">
                                         <div class="form-group">
-                                            <label for="inputEmail3" class="col-sm-2 control-label">logo：</label>
-                                            <div class="col-sm-6">
-                                                <input type="file" size="60" maxlength="100" name="logo" name="logo" value=""/>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="inputEmail3" class="col-sm-2 control-label">名称：</label>
-                                            <div class="col-sm-6">
-                                                <input type="text" id="MsCompany_name" value="<?php echo $model->name?>" class="form-control"
-                                                       name="MsCompany[name]" maxlength="100" size="60"/>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
                                             <label for="inputEmail3" class="col-sm-2 control-label">主页：</label>
                                             <div class="col-sm-6">
                                                 <input type="text" id="MsCompany_website" value="<?php echo $model->website?>" class="form-control"
@@ -197,12 +255,6 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
                                             <div class="col-sm-6">
                                                 <input type="text" id="MsCompany_address" value="<?php echo $model->address?>"  class="form-control"
                                                        name="MsCompany[address]" maxlength="100" size="60" />
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="inputEmail3" class="col-sm-2 control-label">公司描述：</label>
-                                            <div class="col-sm-8">
-                                                <script type="text/plain" id="myEditor"><?php echo $model->description?></script>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -281,8 +333,10 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
             }
         }
     });
-
-    //编辑基本信息
+    //编辑公司描述
+    $("#des-update").click(function(){
+        $("#des-edit").modal("show");
+    })
     var um = UM.getEditor('myEditor',{
         toolbar:[
             'source | undo redo | bold italic underline strikethrough | superscript subscript | forecolor backcolor | removeformat |',
@@ -292,6 +346,24 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
         ,initialFrameWidth:500 //初始化编辑器宽度,默认500
         ,initialFrameHeight:200  //初始化编辑器高度,默认500
     });
+    $("#des-save").click(function(){
+        $("#des-form").ajaxSubmit({
+            url:"<?php echo Yii::app()->baseUrl.'/mscompany/update' ?>",
+            dataType:"html",
+            type:"post",
+            success:function(data){
+                data = JSON.parse(data);
+//                $("#intro-info").prevAll("h4").html(data.name);
+                $("#company-name").html(data.name);
+//                $("#info-show .info-home").html(data.website);
+                $(".intro-logo img").attr("src","<?php echo Yii::app()->baseUrl.'/'?>"+data.logo);
+//                $("#info-show .info-address").html(data.address);
+                $("#intro-info .intro-des").html($("#myEditor").html());
+                $("#des-edit").modal("hide");
+            }
+        });
+    })
+    //编辑基本信息
     $("#info-update").click(function(){
         $("#info-edit").modal("show");
     })
@@ -303,7 +375,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
         var tempHtml = $("#myEditor").html();
         var tags = $.trim($("#MsCompany_tags").val()),
             newTags =$.trim($("#tags-new").val());
-        if(typeof tags == "string" && !!tags) {tags = tags + " ";}
+        if(typeof tags == "string" && !!tags && newTags != "") {tags = tags + " ";}
         tags += newTags;
         $("#MsCompany_tags").val(tags);
         $("#info-form").ajaxSubmit({
@@ -409,7 +481,24 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
                                         '</div>'+
                                     '</div>'+
                                 '</div>';
-                $("#accordion").prepend(jobHtml);
+                jobHtml = '<tr>'+
+                                '<td>'+
+                                    '<a href="<?php echo Yii::app()->baseUrl."/msjobs/view/"?>'+ data.id + '" >'+
+                                        '<i class="icon-eye-open"></i>&nbsp<span class="job-title">'+ data.title+'</span>'+
+                                    '</a>'+
+                                '</td>'+
+                                '<td>'+
+                                    '<span class="job-city">'+ data.cityname + '</span>'+
+                                '</td>'+
+                                '<td>'+
+                                    '<span class="job-time">'+data.createtime +'</span>'+
+                                '</td>'+
+                                '<td>'+
+                                    '<a href="javascript:;"><i class="icon-edit"></i></a>'+
+                                    '<a href="javascript:;"><i class="icon-trash"></i></a>'+
+                                '</td>'+
+                            '</tr>';
+                $("#jobs tbody").prepend(jobHtml);
                 $("#job-new").modal("hide");
 
             }

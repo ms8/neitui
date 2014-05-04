@@ -793,6 +793,7 @@ blockquote small {
     padding: 25px 0;
     margin-top: 25px;
     position: relative;
+    font-size: 13px;
 }
 #footer-1:before {
     border-color: #ECF0F1 rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
@@ -1999,15 +2000,22 @@ address {
 .footer a:hover{
     color:#2ECC71;
 }
+.copyright{
+    color: white;
+}
+.copyright .copy{
+    display: inline-block;
+    font-size: 20px;
+    position: relative;
+    top: 3px;
+}
+
 /*查询数据为空时显示*/
 .empty-content{
     border-top: 1px solid #ECECEC;
     padding: 25px;
 }
-/*公司列表*/
-.list-view{
-   /*padding: 0 10px;*/
-}
+
 .follow-weibo{
     display: inline-block;
     margin-top: 5px;
@@ -2023,4 +2031,7 @@ address {
     content: " ";
     display: table;
     clear: both;
+}
+.jobs a{
+   margin-right: 10px;
 }

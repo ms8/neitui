@@ -92,7 +92,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'GridLo
         //菜单选中公司
         $(".nav li.active").removeClass("active");
         $(".nav li:eq(1)").addClass("active");
-        var pageSize = 2;
+        var pageSize = 1;
         $(window).scroll(function() {
             if($(document).height() - $(window).height() - $(document).scrollTop() < 50) {
                 if(!imagesLoading) {
@@ -101,11 +101,17 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'GridLo
                     $.ajax({
                         type: "POST",
                         dataType:"json",
-                        url: "<?php echo Yii::app()->baseUrl ?>/mscompany/index?MsCompany_page="+pageSize+"&ajax=yw0",
+                        url: "<?php echo Yii::app()->baseUrl ?>/mscompany/index?page="+pageSize+"&ajax=yw0",
                         success: function(msg){
-                            pageSize++;
-                            appendToMasonry(msg);
-                            $("#loading").hide();
+                            if(msg.length != 0){
+                                pageSize++;
+                                appendToMasonry(msg);
+                                $("#loading").hide();
+
+                            }else{
+                                $("#loading strong").text("没有了……");
+                            }
+
                         }
                     });
                 }

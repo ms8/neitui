@@ -309,29 +309,29 @@ class MsCompanyController extends Controller
         $member = Member::model()->findByPk($account_id);
         if($member->type == '2'){ //企业用户才能修改信息
             $company = MsCompany::model()->findByAttributes(array('account'=>$member->username));
-            if(isset($_POST['MsCompany'])){
+            if(isset($_POST['MsCompany'])) {
                 $company->attributes=$_POST['MsCompany'];
-                if(isset($_POST['editorValue']) && $_POST['editorValue']!=null){
-                    $company->description = $_POST['editorValue'];
-                }
-                if(isset($_FILES['logo']) && $_FILES['logo']!=null){ //更新logo
-                    $old_path = $company->logo;
-                    //上传图片
-                    $picCreate = new PicCreate();
-                    $picPath = $picCreate->createPic('logo','upload/companylogo/'
-                        ,1024*1024,array('.jpg','.jpeg','.png','gif'));
-                    if($picPath != ""){
-                        $company->logo = $picPath;
-                    }
-                    try{
-                        //删除之前的图片
-                        if($old_path != null && $old_path!='') $picCreate->deletePic($old_path);
-                    }catch(Exception $e){
-
-                    }
-                }
-                $company->save(false);
             }
+            if(isset($_POST['editorValue']) && $_POST['editorValue']!=null){
+                $company->description = $_POST['editorValue'];
+            }
+            if(isset($_FILES['logo']) && $_FILES['logo']!=null){ //更新logo
+                $old_path = $company->logo;
+                //上传图片
+                $picCreate = new PicCreate();
+                $picPath = $picCreate->createPic('logo','upload/companylogo/'
+                    ,1024*1024,array('.jpg','.jpeg','.png','gif'));
+                if($picPath != ""){
+                    $company->logo = $picPath;
+                }
+                try{
+                    //删除之前的图片
+                    if($old_path != null && $old_path!='') $picCreate->deletePic($old_path);
+                }catch(Exception $e){
+
+                }
+            }
+             $company->save(false);
             $company->description  = "";
             die(CJSON::encode($company));
 //            $this->redirect(array('dashboard'));
@@ -374,31 +374,60 @@ class MsCompanyController extends Controller
 	 */
 	public function actionIndex()
 	{
-        $criteria = new CDbCriteria;
-        $criteria->select = 't.*';
+//        $criteria = new CDbCriteria;
+//        $criteria->select = 't.*';
+//
+//        $criteria->join = 'inner JOIN ms_jobs ON ms_jobs.company_id=t.id';
+//        $criteria->order = 'updatetime desc';
+//        $criteria->distinct = true;
+//		$dataProvider=new CActiveDataProvider('MsCompany',array(
+//                'criteria'=>$criteria,
+//                'pagination' => array(
+//                    'pageSize' => 8,
+//                    'currentPage' => isset($_GET['page']) ? $_GET['page'] : 0
+//                ),
+//            )
+//        );
 
-        $criteria->join = 'inner JOIN ms_jobs ON ms_jobs.company_id=t.id';
-        $criteria->order = 'updatetime desc';
-        $criteria->distinct = true;
-		$dataProvider=new CActiveDataProvider('MsCompany',array(
-                'criteria'=>$criteria,
-                'pagination' => array(
-                    'pageSize' => 12,
-                    'currentPage' => isset($_GET['MsCompany_page']) ? $_GET['MsCompany_page'] : 0
-                ),
-            )
-        );
 
         if (isset($_GET['ajax'])){
+            $criteria = new CDbCriteria;
+            $sql = "SELECT  ms_company.*  ,count(distinct  ms_company.id ) FROM ms_company  inner JOIN ms_jobs ON ms_jobs.company_id=ms_company.id  group by ms_company.id  Order by updatetime desc";
+            $model= Yii::app()->db->createCommand($sql)->queryAll();
+            $pages = new CPagination(count($model));
+            $pages->pageSize = 12;
+            $pages->applylimit($criteria);
+            $pages->setCurrentPage($_GET['page']);
+            /*注意此处必须设置getCurrentPage 参数为false，否则取出当前页不对*/
+            if ( count($model) == $pages->getCurrentPage(false)*$pages->pageSize ) {
+                die(CJSON::encode(array()));
+            }
+            $model=Yii::app()->db->createCommand($sql." LIMIT :offset,:limit");
+            $model->bindValue(':offset', $pages->getCurrentPage(false)*$pages->pageSize);
+            $model->bindValue(':limit', $pages->pageSize);
+            $model=$model->queryAll();
+
             $allData = array();
-            foreach($dataProvider->getData() as $company){
+            foreach($model as $company){
                 $criteriaJob = new CDbCriteria;
                 $criteriaJob->order = 'createtime desc';
-                $jobs = MsJobs::model()->findAllByAttributes(array('company_id'=>$company->id),$criteriaJob);
+                $jobs = MsJobs::model()->findAllByAttributes(array('company_id'=>$company['id']),$criteriaJob);
                 array_push( $allData , array('company'=>$company,'jobs'=>$jobs));
             }
             die(CJSON::encode($allData));
         }else{
+            $criteria = new CDbCriteria;
+            $criteria->select = 't.*';
+            $criteria->join = 'inner JOIN ms_jobs ON ms_jobs.company_id=t.id';
+            $criteria->order = 'updatetime desc';
+            $criteria->distinct = true;
+            $dataProvider=new CActiveDataProvider('MsCompany',array(
+                    'criteria'=>$criteria,
+                    'pagination' => array(
+                        'pageSize' => 12,
+                    ),
+                )
+            );
             $this->render('index',array(
                 'dataProvider'=>$dataProvider,
             ));
