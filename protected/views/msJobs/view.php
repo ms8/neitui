@@ -13,13 +13,13 @@
                     </div>
                     <div style="padding:20px">
                         <?php echo $model->description?>
-                        <div class="text-center status" id="jodBt">
-                            <?php if($finish == '0'){?>
-                                <button class="btn btn-flat flat-color"   id="submitbt" onclick="submitjl(<?php echo $model->id?>)">投简历</button>
-                            <?php }else{ ?>
-                                <span>该职位已投过简历</span>
-                            <?php }?>
-                        </div>
+                    </div>
+                    <div class="text-center" id="jodBt">
+                        <?php if($finish == '0'){?>
+                            <button class="btn btn-flat flat-color"   id="submitbt" onclick="submitjl(<?php echo $model->id?>)">投简历</button>
+                        <?php }else{ ?>
+                            <span>该职位已投过简历</span>
+                        <?php }?>
                     </div>
                 </div>
             </section>
@@ -45,10 +45,18 @@
                         </div>
                         <div style="clear: both"></div>
                         <div class="media" style="margin-top:5px;">
+                            <h5>【公司印象】
+                                </h5>
+                            <em style="font-size:14px;color: #aaaaaa;">
+                                <?php echo $company->tags?>
+                            </em>
+                        </div>
+                        <div class="media" style="margin-top:5px;">
                             <h5>【公司地址】
-                                <em style="font-size:14px;color: #aaaaaa;">
-                                    <?php echo $company->address?>
-                                </em></h5>
+                                </h5>
+                            <em style="font-size:14px;color: #aaaaaa;">
+                                <?php echo $company->address?>
+                            </em>
                         </div>
                         <div style="clear: both"></div>
                         <div class="media" style="margin-top:0px;" >
@@ -106,7 +114,7 @@
                                 <a target="_blank" href="<?php echo Yii::app()->baseUrl.'/msjobs/view/'.$other->id?>">
                                     <?php echo $other->title?>
                                 </a>
-                                <em style="float: right"><?php echo substr($other->createtime,0,10)?></em>
+                                <em style="float: right"><?php echo date("m/d",strtotime($other->createtime));?></em>
                                 </div>
                         <?php }?>
                     </div>

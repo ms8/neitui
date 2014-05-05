@@ -44,17 +44,17 @@
                                 <thead>
                                 <tr>
                                     <th style="width: 10%"></th>
-                                    <th style="width: 20%"></th>
-                                    <th style="width: 20%"></th>
-                                    <th style="width: 20%"></th>
-                                    <th style="width: 20%"></th>
+                                    <th style="width: 25%"></th>
+                                    <th style="width: 28%"></th>
+                                    <th style="width: 27%"></th>
+                                    <th style="width: 10%"></th>
                                 </tr>
                                 </thead>
 
                                 <tbody>
                                 <?php  foreach($jobs as $job) { ?>
                                     <tr>
-                                        <td>
+                                        <td rowspan="2" style="padding: 5px;">
                                             <img  src="<?php echo Yii::app()->baseUrl."/".$job['logo']?>" alt="<?php echo $job['title'];?>">
                                         </td>
                                         <td>
@@ -63,13 +63,20 @@
                                             </p>
                                         </td>
                                         <td>
-                                            <a target="_blank" href="<?php echo Yii::app()->baseUrl.'/mscompany/view/'.$job['cid'] ?>"><?php echo $job['name'];?></a>
+                                            <a target="_blank" href="<?php echo Yii::app()->baseUrl.'/mscompany/view/'.$job['cid'] ?>">
+                                                <?php echo CHtml::encode(Helper::truncate_utf8_string($job['name'],15));?>
+                                            </a>
                                         </td>
                                         <td>
-                                            <p><?php  echo $job['tags'] ?></p>
+                                            <p><?php  echo CHtml::encode(Helper::truncate_utf8_string($job['tags'],21)); ?></p>
                                         </td>
                                         <td>
-                                            <?php  echo $job['createtime'] ?>
+                                            <?php  echo date("m/d",strtotime($job['createtime'])); ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4">
+                                            <p>[要求]<?php echo CHtml::encode(Helper::truncate_utf8_string($job['description'],130));?></p>
                                         </td>
                                     </tr>
                                 <?php } ?>
