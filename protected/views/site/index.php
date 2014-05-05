@@ -46,8 +46,8 @@
                                     <th style="width: 10%"></th>
                                     <th style="width: 25%"></th>
                                     <th style="width: 28%"></th>
-                                    <th style="width: 27%"></th>
-                                    <th style="width: 10%"></th>
+                                    <th style="width: 30%"></th>
+                                    <th style="width: 7%"></th>
                                 </tr>
                                 </thead>
 
@@ -68,7 +68,7 @@
                                             </a>
                                         </td>
                                         <td>
-                                            <p><?php  echo CHtml::encode(Helper::truncate_utf8_string($job['tags'],21)); ?></p>
+                                            <p><?php  echo CHtml::encode(Helper::truncate_utf8_string($job['tags'],25)); ?></p>
                                         </td>
                                         <td>
                                             <?php  echo date("m/d",strtotime($job['createtime'])); ?>
