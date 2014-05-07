@@ -136,7 +136,19 @@ class MsCompanyController extends Controller
                 $jobinfo['createtime']=$jianli->createtime;
                 $jobinfos[]=$jobinfo;
             }
-            $this->render('jianlis',array('jobinfos'=>$jobinfos));
+            /*获取12家公司信息*/
+            $criteria = new CDbCriteria;
+            $sql = "SELECT  ms_company.*  ,count(distinct  ms_company.id ) FROM ms_company  inner JOIN ms_jobs ON ms_jobs.company_id=ms_company.id  group by ms_company.id  Order by updatetime desc";
+            $companys= Yii::app()->db->createCommand($sql)->queryAll();
+            $pages = new CPagination(count($companys));
+            $pages->pageSize = 12;
+            $pages->applylimit($criteria);
+            $pages->setCurrentPage(0);
+            $companys=Yii::app()->db->createCommand($sql." LIMIT :offset,:limit");
+            $companys->bindValue(':offset', $pages->getCurrentPage(false)*$pages->pageSize);
+            $companys->bindValue(':limit', $pages->pageSize);
+            $companys=$companys->queryAll();
+            $this->render('jianlis',array('jobinfos'=>$jobinfos,'companys'=>$companys));
         }
     }
 
@@ -170,6 +182,7 @@ class MsCompanyController extends Controller
     public function actionChangepwd()
     {
         $model=Member::model()->find('id = '.Yii::app()->user->id);
+
         if(!empty($_POST['Member'])){
             //获取验证错误,需要制定验证字段
             $ajaxRes = CActiveForm::validate($model, array('oldpass','newpass','queren'),true,true);
@@ -190,12 +203,24 @@ class MsCompanyController extends Controller
                 die($ajaxRes);
             }
         }
+        /*获取12家公司信息*/
+        $criteria = new CDbCriteria;
+        $sql = "SELECT  ms_company.*  ,count(distinct  ms_company.id ) FROM ms_company  inner JOIN ms_jobs ON ms_jobs.company_id=ms_company.id  group by ms_company.id  Order by updatetime desc";
+        $company= Yii::app()->db->createCommand($sql)->queryAll();
+        $pages = new CPagination(count($company));
+        $pages->pageSize = 12;
+        $pages->applylimit($criteria);
+        $pages->setCurrentPage(0);
+        $company=Yii::app()->db->createCommand($sql." LIMIT :offset,:limit");
+        $company->bindValue(':offset', $pages->getCurrentPage(false)*$pages->pageSize);
+        $company->bindValue(':limit', $pages->pageSize);
+        $company=$company->queryAll();
         $this->pageKeyword=array(
             'title'=>'修改密码-'.Helper::siteConfig()->site_name,
             'keywords'=>'修改密码-'.Helper::siteConfig()->site_name,
             'description'=>'修改密码-'.Helper::siteConfig()->site_name,
         );
-        $this->render('changepwd',array('model'=>$model));
+        $this->render('changepwd',array('model'=>$model,'companys'=>$company));
     }
 
 	/**

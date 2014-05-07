@@ -120,8 +120,8 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
 
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" id="job-cancel" class="btn btn-flat flat-success btn-bordered btn-rounded" data-dismiss="modal">取消</button>
-                                        <button type="button"  id="job-save" class="btn btn-flat flat-success btn-bordered btn-rounded">保存</button>
+                                        <button type="button" id="job-cancel" class="btn btn-flat flat-success" data-dismiss="modal">取消</button>
+                                        <button type="button"  id="job-save" class="btn btn-flat flat-success">保存</button>
                                     </div>
                                 </div><!-- /.modal-content -->
                             </div><!-- /.modal-dialog -->
@@ -275,8 +275,8 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
 
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" id="info-cancel" class="btn btn-flat flat-success btn-bordered btn-rounded" data-dismiss="modal">取消</button>
-                                    <button type="button"  id="info-save" class="btn btn-flat flat-success btn-bordered btn-rounded">保存</button>
+                                    <button type="button" id="info-cancel" class="btn btn-flat flat-success" data-dismiss="modal">取消</button>
+                                    <button type="button"  id="info-save" class="btn btn-flat flat-success">保存</button>
                                 </div>
                             </div><!-- /.modal-content -->
                         </div><!-- /.modal-dialog -->

@@ -46,6 +46,28 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-3">
+                <section class="pad-top-5">
+                    <div class="widget">
+                        <div class="subpage-title noline">
+                            <h5>热门企业</h5>
+                        </div>
+                        <div class="company-show">
+                            <ul class="flickr-photos-list">
+                                <?php foreach($companys as $company){?>
+                                    <li>
+                                        <a href="<?php echo Yii::app()->baseUrl.'/mscompany/view/'.$company['id']?>">
+                                            <img  alt="<?php echo $company['name']?>" src="<?php echo Yii::app()->baseUrl.'/'.$company['logo']?>" />
+                                            <div class="des"><strong><?php echo $company['name']?></strong></div>
+                                        </a>
+
+                                    </li>
+                                <?php }?>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
         </div>
     </div>
 </section>

@@ -25,12 +25,12 @@
                         <dl class="dl-horizontal">
                             <dt>技能</dt>
                             <dd>
-                                <a id="all"  href="<?php echo Yii::app()->baseUrl
+                                <a id="all" <?php if(!isset($_GET['code']) || ($_GET['code'] == 'all')) echo " class='active' ";?> href="<?php echo Yii::app()->baseUrl
                                     .'/site/index?skill=all&code=all'?>">全部</a>
                                 <?php
                                 foreach($skills as $skill){
                                     ?>
-                                    <a id="<?php echo $skill->code?>" href="<?php echo Yii::app()->baseUrl
+                                    <a id="<?php echo $skill->code?>" <?php if(isset($_GET['code']) &&  $_GET['code'] == $skill->code) echo " class='active' ";?> href="<?php echo Yii::app()->baseUrl
                                         .'/site/index?skill='.$skill->name.'&code='.$skill->code?>">
                                         <?php echo $skill->name?>
                                     </a>
@@ -176,14 +176,14 @@
         });
     };
     $(document).ready(function() {
-        var code = "<?php
-        if(isset($_GET['code'])){
-            echo $_GET['code'];
-        }else {
-            echo 'all';
-        }
-        ?>";
-        $("#"+code).addClass("active");
+<!--        var code = "--><?php
+//        if(isset($_GET['code'])){
+//            echo $_GET['code'];
+//        }else {
+//            echo 'all';
+//        }
+//        ?><!--";-->
+<!--        $("#"+code).addClass("active");-->
 
         $("#login-close").live('click',function(){
             $("#loginDiv").hide();
