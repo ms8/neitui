@@ -137,7 +137,7 @@
             <div class="modal-body">
                 <form role="form" method="post" id="adviceForm" action="" class="form-horizontal" >
                     <div class="form-group">
-                        <label for="username" class="col-sm-2 control-label">您的邮箱:</label>
+                        <label for="username" class="col-sm-2 control-label">邮箱:</label>
                         <div class="col-sm-7">
                             <input type="text" required="" placeholder="请填写您的邮箱地址，方便我们联系您"  id="emailAdvice" name="emailAdvice" class="form-control"/>
                         </div>
