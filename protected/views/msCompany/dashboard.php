@@ -95,6 +95,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
                                             <div class="form-group">
                                                 <label for="inputEmail3" class="col-sm-2 control-label">职位信息：</label>
                                                 <div class="col-sm-6">
+                                                    <input type="hidden" name=MsJobs[id] />
                                                     <input type="text" class="form-control" name=MsJobs[title] placeholder="职位信息">
                                                 </div>
                                             </div>
@@ -135,6 +136,8 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
                         <table id="jobs" class="table jobs">
                             <thead>
                             <tr>
+                                <th style="display: none"></th>
+                                <th style="display: none"></th>
                                 <th style="width: 25%">职位</th>
                                 <th style="width: 25%">城市</th>
                                 <th style="width: 35%">发布时间</th>
@@ -144,7 +147,13 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
 
                             <tbody>
                             <?php foreach ($jobs as $job) {?>
-                                <tr>
+                                <tr id="<?php echo $job->id?>">
+                                    <td style="display: none">
+                                          <span class="job-id"><?php echo $job->id?></span>
+                                    </td>
+                                    <td style="display: none">
+                                        <span class="job-des"><?php echo $job->description?></span>
+                                    </td>
                                     <td>
                                         <a href="<?php echo Yii::app()->baseUrl.'/msjobs/view/'.$job->id?>">
                                             <span class="job-title"><?php echo $job->title?></span>
@@ -158,34 +167,13 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
                                     </td>
                                     <td>
                                         <a href="<?php echo Yii::app()->baseUrl.'/msjobs/view/'.$job->id?>"><i class="icon-eye-open"></i></a>
-                                        <a href="javascript:;"><i class="icon-edit"></i></a>
-                                        <a href="javascript:;"><i class="icon-trash"></i></a>
+                                        <a href="javascript:;" class="job-operate"><i class="icon-edit"></i></a>
+                                        <a href="javascript:;" class="job-operate"><i class="icon-trash"></i></a>
                                     </td>
                                 </tr>
                             <?php } ?>
                             </tbody>
                         </table>
-                        <div id="accordion" class="panel-group">
-                            <?php foreach($jobs as $job){?>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                            <a href="#collapse<?php echo $job->id?>" job-id="<?php echo $job->id?>" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle collapsed">
-                                                <span class="job-title"><?php echo $job->title?></span>
-                                                <span class="job-city"><?php echo $job->cityname?></span>
-                                                <span class="job-citycode" style="display: none"><?php echo $job->citycode?></span>
-                                                <span class="job-time"><?php echo $job->createtime?></span>
-                                            </a>
-                                            <a href="javascript:;" class="job-operate"><i class="icon-edit"></i></a>
-                                            <a href="javascript:;" class="job-operate"><i class="icon-trash"></i></a>
-                                        </h4>
-                                    </div>
-                                    <div class="panel-collapse collapse" id="collapse<?php echo $job->id?>" style="height: 0px;">
-                                        <div class="panel-body"></div>
-                                    </div>
-                                </div>
-                            <?php }?>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -439,6 +427,11 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
 
     //新增职位
     $("#job-add").click(function(){
+        $("#job-new h4").text("新增职位");
+        $("#job-new input[name='MsJobs[id]']").val("");
+        $("#job-new input[name='MsJobs[title]']").val("");
+        $("#beijing")[0].checked = true;
+        $("#MsJobs_description").html("");
         $('#job-new').modal('show')
     })
     UM.getEditor('MsJobs_description',{
@@ -451,54 +444,56 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
         ,initialFrameHeight:150  //初始化编辑器高度,默认500
     });
     $("#job-save").click(function(){
-        var title = $("#job-new input[name='MsJobs[title]']").val();
-        var citycode = $("#job-new input[name='city']:checked").val();
-        var jobDesHtml = $("#MsJobs_description").html();
+        var URL ,
+            title = $("#job-new input[name='MsJobs[title]']").val(),
+            citycode = $("#job-new input[name='city']:checked").val(),
+            jobDesHtml = $("#MsJobs_description").html(),
+            jobId = $("#job-new input[name='MsJobs[id]']").val();
+        if( jobId == "" ){
+            URL = "<?php echo Yii::app()->baseUrl.'/msjobs/create'?>";
+        }else{
+            URL = "<?php echo Yii::app()->baseUrl.'/msjobs/update/'?>"+jobId;
+        }
         $.ajax({
             type:'POST',
             dataType:'json',
             data:{MsJobs:{title:title,citycode:citycode,description:jobDesHtml}},
-            url:"<?php echo Yii::app()->baseUrl.'/msjobs/create'?>",
+            url:URL,
             success:function(data) {
-                var nowTime = new Date();
-                var jobHtml = '<div class="panel panel-default">' +
-                                    '<div class="panel-heading">'+
-                                        '<h4 class="panel-title">'+
-                                            '<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" job-id="'+ data.id +'" href="#collapse'+ data.id +'">'+
-                                            '&nbsp<span class="job-title">'+ data.title +'</span>'+
-                                            '&nbsp<span class="job-city">'+ data.cityname +'</span>'+
-                                            '&nbsp<span class="job-terms">'+ data.createtime +'</span>'+
-                                            '</a>'+
-                                             '<a class="job-operate" href="javascript:;"><i class="icon-edit"></i></a>'+
-                                             '<a class="job-operate" href="javascript:;"><i class="icon-trash"></i></a>'+
-                                        '</h4>'+
-                                    '</div>'+
-                                    '<div style="height: 0px;" id="collapse'+ data.id + '" class="panel-collapse collapse">'+
-                                        '<div class="panel-body"><div class="description">'+ data.description  + '</div>'+
-                                            '<div class="text-center status">' +
-                                                '<button onclick="submitjl('+ data.id +')"  disabled="disabled" class="btn btn-flat flat-color btn-rounded">投简历</button>' +
-                                            '</div>' +
-                                        '</div>'+
-                                    '</div>'+
-                                '</div>';
-                jobHtml = '<tr>'+
-                                '<td>'+
-                                    '<a href="<?php echo Yii::app()->baseUrl."/msjobs/view/"?>'+ data.id + '" >'+
-                                        '<i class="icon-eye-open"></i>&nbsp<span class="job-title">'+ data.title+'</span>'+
-                                    '</a>'+
-                                '</td>'+
-                                '<td>'+
-                                    '<span class="job-city">'+ data.cityname + '</span>'+
-                                '</td>'+
-                                '<td>'+
-                                    '<span class="job-time">'+data.createtime +'</span>'+
-                                '</td>'+
-                                '<td>'+
-                                    '<a href="javascript:;"><i class="icon-edit"></i></a>'+
-                                    '<a href="javascript:;"><i class="icon-trash"></i></a>'+
-                                '</td>'+
-                            '</tr>';
-                $("#jobs tbody").prepend(jobHtml);
+                if(jobId == ""){
+                    var nowTime = new Date();
+                    jobHtml = '<tr>'+
+                        '<td style="display: none">'+
+                        '<span class="job-id">'+ data.id + '</span>'+
+                        '</td>'+
+                        '<td style="display: none">'+
+                        '<span class="job-des">'+ data.description + '</span>'+
+                        '</td>'+
+                        '<td>'+
+                        '<a href="<?php echo Yii::app()->baseUrl."/msjobs/view/"?>'+ data.id + '" >'+
+                        '<span class="job-title">'+ data.title+'</span>'+
+                        '</a>'+
+                        '</td>'+
+                        '<td>'+
+                        '<span class="job-city">'+ data.cityname + '</span>'+
+                        '</td>'+
+                        '<td>'+
+                        '<span class="job-time">'+data.createtime +'</span>'+
+                        '</td>'+
+                        '<td>'+
+                        '<a href="<?php echo Yii::app()->baseUrl.'/msjobs/view/'?>' + data.id + '"style="margin-right:17px"><i class="icon-eye-open"></i></a>'+
+                        '<a class="job-operate" href="javascript:;" style="margin-right:17px"><i class="icon-edit"></i></a>'+
+                        '<a class="job-operate" href="javascript:;"><i class="icon-trash"></i></a>'+
+                        '</td>'+
+                        '</tr>';
+                    $("#jobs tbody").prepend(jobHtml);
+                }else{
+                    var $editRow = $("#"+jobId);
+                    $(".job-title",$editRow).text(data.title);
+                    $(".job-des",$editRow).text(data.description);
+                    $(".job-city",$editRow).text(data.cityname);
+                    $(".job-time",$editRow).text(data.createtime);
+                }
                 $("#job-new").modal("hide");
 
             }
@@ -510,116 +505,36 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
     })
     //编辑职位
     $(".job-operate .icon-edit").live("click",function(){
-        var $jobInfo = $(this).parent().prev();
-        $("#accordion .panel-title .accordion-toggle").not(".collapsed").each(function(){
-            var collapseId = $(this).attr("href");
-            $(collapseId).collapse('hide');
-            $(this).addClass("collapsed");
+        $('#job-new').modal('show');
+        var $jobRow = $(this).parents("tr"),
+            jobId = $(".job-id" , $jobRow).text(),
+            jobTitle = $(".job-title" , $jobRow).text(),
+            jobCity = $(".job-city" , $jobRow).text(),
+            jobDes = $(".job-des" , $jobRow).text();
 
-        })
-        var jobId = $jobInfo.removeClass("collapsed").attr("href");
-        if($(jobId+" form").length == 0){
-            var desOperate = $(".panel-body .status",jobId).clone().hide();
-            var editForm = '<div id="job-edit" class="pad-bottom-25">'+
-                                '<form class="form-horizontal" role="form">'+
-                                    '<div class="form-group">'+
-                                        '<label for="inputEmail3" class="col-sm-3 control-label">职位信息：</label>'+
-                                        '<div class="col-sm-8">'+
-                                            '<input type="text" class="form-control" name=MsJobs[title] placeholder="职位信息">'+
-                                        '</div>'+
-                                    '</div>'+
-                                    '<div class="form-group">'+
-                                        '<label for="inputEmail3" class="col-sm-3 control-label">城市：</label>'+
-                                        '<div class="col-sm-8">'+
-                                            cityHtml +
-                                        '</div>'+
-                                    '</div>'+
-                                    '<div class="form-group">'+
-                                        '<label for="inputEmail3" class="col-sm-3 control-label">职位描述：</label>'+
-                                        '<div class="col-sm-8">'+
-                                            "<script type='text/plain' id='job-edit-description"+ $jobInfo.attr("job-id")+ "'>"+ $(".panel-body .description",jobId).html()+"<\/script>"+
-                                        '</div>'+
-                                    '</div>'+
-                                '</form>'+
+        $("#job-new h4").text("编辑职位");
+        $("#job-new input[name='MsJobs[id]']").val(jobId);
+        $("#job-new input[name='MsJobs[title]']").val(jobTitle);
+        var cityId = $("#job-new .radioTag label:contains('"+ jobCity + "')").attr("for");
+        $("#"+cityId)[0].checked = true;
+        $("#MsJobs_description").html(jobDes);
+    })
 
-                                '<div class="text-center operate">'+
-                                    '<button type="button" class="btn btn-flat flat-success btn-bordered btn-rounded" onclick="editCancel('+$jobInfo.attr("job-id")+')">取消</button>'+
-                                    '<button type="button" class="btn btn-flat flat-success btn-bordered btn-rounded" onclick="editSave('+$jobInfo.attr("job-id")+')">保存</button>'+
-                                '</div>'+
-                    '</div>';
-
-            $(".panel-body",jobId).html(editForm).append(desOperate);
-            //给编辑框赋值
-            $("input[name='MsJobs[title]']",jobId).val($(".job-title",$jobInfo).html());
-            $("input[name='city']",jobId).each(function(){
-                if($(this).val() == $(".job-citycode",$jobInfo).text() ){
-                    $(this).attr("checked",true);
+    $(".job-operate .icon-trash").live("click",function(){
+        if (confirm("确认删除？"))  {
+            var $that = $(this);
+            var jobId = $(".job-id",$that.parents('tr')).text();
+            $.ajax({
+                type:'POST',
+                dataType:'json',
+                data:{ajax:true},
+                url:"<?php echo Yii::app()->baseUrl.'/msjobs/delete/'?>"+jobId,
+                success:function(data) {
+                    $that.parents("tr").remove();
                 }
             });
-            UM.getEditor('job-edit-description'+ $jobInfo.attr("job-id"),{
-                toolbar:[
-                    'source | undo redo | bold italic underline strikethrough | superscript subscript | forecolor backcolor | removeformat |',
-                    'insertorderedlist insertunorderedlist | selectall cleardoc paragraph | fontfamily fontsize' ,
-                    '| justifyleft justifycenter justifyright justifyjustify |'
-                ]
-                ,initialFrameWidth:500 //初始化编辑器宽度,默认500
-                ,initialFrameHeight:200  //初始化编辑器高度,默认500
-            });
-        }else{
-            $(jobId+" form").show();
-            $(jobId+" .operate").show();
-            $(jobId+" .description").hide();
-            $(jobId+" .status").hide();
-        }
-        $(jobId).collapse('show');
-    })
-    function editSave(jobId){
-        var $panelBody = $("#collapse"+jobId + " .panel-body");
-        var title = $("input[name='MsJobs[title]']",$panelBody).val();
-        var citycode = $("input[name='city']:checked",$panelBody).val();
-        var jobDesHtml = $("#job-edit-description"+jobId).html();
+        };
 
-        $.ajax({
-            type:'POST',
-            dataType:'json',
-            data:{MsJobs:{title:title,citycode:citycode,description:jobDesHtml}},
-            url:"<?php echo Yii::app()->baseUrl.'/msjobs/update/'?>"+jobId,
-            success:function(data) {
-                console.log(data);
-                var $panel = $("#collapse"+jobId).parent();
-                $(".job-title",$panel).text(data.title);
-                $(".job-city",$panel).text(data.cityname);
-                $(".job-citycode",$panel).text(data.citycode);
-                $(".job-time",$panel).text(data.createtime);
-                $(".panel-body form",$panel).hide();
-                $(".panel-body .operate",$panel).hide();
-                $(".panel-body",$panel).prepend("<div class='description'>"+  data.description +"</div>");
-                $(".panel-body .status",$panel).show();
-            }
-        });
-    }
-    function editCancel(jobId){
-        var $panelBody = $("#collapse"+jobId + " .panel-body");
-        var jobDesHtml = $("#job-edit-description"+jobId).html();
-        var $panel = $("#collapse"+jobId).parent();
-        $(".panel-body form",$panel).hide();
-        $(".panel-body .operate",$panel).hide();
-        $(".panel-body",$panel).prepend("<div class='description'>"+ jobDesHtml +"</div>");
-        $(".panel-body .status",$panel).show();
-    }
-    $(".job-operate .icon-trash").live("click",function(){
-        var $that = $(this);
-        var jobId = $(this).parent().prevAll('a[job-id]').attr("job-id");
-        $.ajax({
-            type:'POST',
-            dataType:'json',
-            data:{ajax:true},
-            url:"<?php echo Yii::app()->baseUrl.'/msjobs/delete/'?>"+jobId,
-            success:function(data) {
-                $that.parents(".panel").remove();
-//                console.log(data);
-            }
-        });
     })
 
 </script>

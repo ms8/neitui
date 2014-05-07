@@ -789,8 +789,8 @@ blockquote small {
     margin-top: 20px;
 }
 #footer-1 {
-    background-color: #35434D;
-    padding: 25px 0;
+    background-color: #65727A;
+    padding: 15px 0;
     margin-top: 25px;
     position: relative;
     font-size: 13px;
@@ -1747,12 +1747,12 @@ address {
     margin-bottom: 20px;
     padding-right: 15px;
 }
-.job-operate i{
-    float: right;
-    font-size: 16px;
-    color: #2ECC71;
-    margin-left: 10px;
-}
+/*.job-operate i{*/
+    /*float: right;*/
+    /*font-size: 16px;*/
+    /*color: #2ECC71;*/
+    /*margin-left: 10px;*/
+/*}*/
 /*标签编辑*/
 .tagcloud-list li{
     position: relative;
