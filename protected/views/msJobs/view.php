@@ -16,7 +16,15 @@
                     </div>
                     <div class="text-center" id="jodBt">
                         <?php if($finish == '0'){?>
-                            <button class="btn btn-flat flat-color"   id="submitbt" onclick="submitjl(<?php echo $model->id?>)">投简历</button>
+
+                            <button class='btn btn-flat flat-color'
+                                <?php if(!Yii::app()->user->isGuest){
+                                    $user = Member::model()->findByPk(Yii::app()->user->id);
+                                    if($user!=null && $user->type=='2'){ //企业用户不能投简历
+                                        ?>
+                                        disabled='disabled'
+                                    <?php }}?>
+                                    id='submitbt' onclick='submitjl(<?php echo $model->id?>)'>投简历</button>
                         <?php }else{ ?>
                             <span>该职位已投过简历</span>
                         <?php }?>
