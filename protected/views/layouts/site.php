@@ -117,10 +117,7 @@
 <div class="footer" id="footer-1">
     <ul>
         <li>
-<!--            <a href="--><?php //echo Yii::app()->baseUrl."/"?><!--">首页</a> |-->
-<!--            <a href="--><?php //echo Yii::app()->createUrl('/mscompany/index')?><!--">热门公司</a> |-->
-            <a href="#">关于我们</a> |
-            <a href="#">联系方式</a> |
+            <a href="<?php echo Yii::app()->baseUrl."/about/index"?>">关于我们</a> |
             <span class="copyright"><span class="copy">&copy; </span>2014 kuairuzhi.com 京ICP备14017078号-1</span>
         </li>
     </ul>

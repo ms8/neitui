@@ -1344,15 +1344,16 @@ blockquote small {
     margin: 0;
     overflow: hidden;
     padding: 20px;
+    word-break: break-all;
 }
-.project-details-list li {
+.project-details-list > li {
     border-bottom: 1px solid #ECF0F1;
     padding: 10px 0;
 }
-.project-details-list li:first-child {
+.project-details-list > li:first-child {
     padding-top: 0;
 }
-.project-details-list li:last-child {
+.project-details-list > li:last-child {
     border-bottom: 0 none;
     padding-bottom: 0;
 }
@@ -1362,12 +1363,20 @@ blockquote small {
     font-weight: normal;
     line-height: 1.42857;
     margin: 0;
-    width: 100px;
+    width: 50px;
+}
+.project-details-list h5 {
+    color: #BDC3C7;
+    float: left;
+    font-weight: normal;
+    line-height: 1.42857;
+    margin: 0;
+    width: 50px;
 }
 .project-details-list .project-terms {
     color: #2C3E50;
     font-weight: 400;
-    margin-left: 100px;
+    margin-left: 50px;
 }
 .portfolio-navigation {
     text-align: right;
@@ -1850,10 +1859,10 @@ address {
     margin-right: 10px;
 }
 /*基本信息列表*/
-.info-name,.info-home,.info-address,.info-tags{
-    display: inline-block;
-    margin-left: -45px;
-}
+/*.info-name,.info-home,.info-address,.info-tags{*/
+    /*display: inline-block;*/
+    /*margin-left: -45px;*/
+/*}*/
 
 #upload #uploadForm div span:hover{
     cursor: pointer;

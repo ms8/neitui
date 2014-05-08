@@ -185,25 +185,27 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
                     <div class="text-right absolute-right-20">
                         <a href="javascript:;" class="icon-operate"  id="info-update" ><i class="icon-edit"></i></a>
                     </div>
-                    <div id="info-show" class="c_detail widget-content">
-                        <form class="form-horizontal" role="form">
-                            <div class="form-group">
-                                <label for="inputEmail3" class="col-sm-5">主页：</label>
-                                <div class="col-sm-7">
+                    <div id="info-show" class="c_detail">
+                        <ul class="project-details-list">
+                            <li>
+                                <h5>网址：</h5>
+                                <div class="project-terms">
                                     <span class="info-home">
-                                        <a href="<?php echo $model->website?>" target="_blank"><?php echo $model->website?> </a>
+                                        <a href="<?php echo $model->website?>" target="_blank">
+                                            <?php echo $model->website?>
+                                        </a>
                                     </span>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputEmail3" class="col-sm-5">地址：</label>
-                                <div class="col-sm-7">
+                            </li>
+                            <li>
+                                <h5>地址：</h5>
+                                <div class="project-terms">
                                     <span class="info-address"><?php echo $model->address?></span>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputEmail3" class="col-sm-5">标签：</label>
-                                <div class="col-sm-7">
+                            </li>
+                            <li>
+                                <h5>标签：</h5>
+                                <div class="project-terms">
                                     <div class="info-tags">
                                         <ul  class="tagcloud-list">
                                             <?php
@@ -219,8 +221,8 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
                                         </ul>
                                     </div>
                                 </div>
-                            </div>
-                        </form>
+                            </li>
+                        </ul>
                     </div>
                     <div class="modal fade" id="info-edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                         <div class="modal-dialog"  style="width:750px">
@@ -341,11 +343,8 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
             type:"post",
             success:function(data){
                 data = JSON.parse(data);
-//                $("#intro-info").prevAll("h4").html(data.name);
                 $("#company-name").html(data.name);
-//                $("#info-show .info-home").html(data.website);
                 $(".intro-logo img").attr("src","<?php echo Yii::app()->baseUrl.'/'?>"+data.logo);
-//                $("#info-show .info-address").html(data.address);
                 $("#intro-info .intro-des").html($("#myEditor").html());
                 $("#des-edit").modal("hide");
             }
@@ -370,15 +369,16 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
             url:"<?php echo Yii::app()->baseUrl.'/mscompany/update' ?>",
             dataType:"html",
             type:"post",
-//            data:[{name:"MsCompany[description]",value:tempHtml}],
             success:function(data){
                 data = JSON.parse(data);
-                $("#intro-info").prevAll("h4").html(data.name);
-                $("#info-show .info-name").html(data.name);
                 $("#info-show .info-home").html(data.website);
-                $(".intro-logo img").attr("src","<?php echo Yii::app()->baseUrl.'/'?>"+data.logo);
                 $("#info-show .info-address").html(data.address);
-                $("#intro-info .intro-des").html(tempHtml);
+                var liHtml = "";
+                var tagsArr = $.trim(data.tags).split(" ");
+                for(var j = 0 ;j <  tagsArr.length ; j++ ){
+                    liHtml += '<li><span>' + tagsArr[j] +'</span></li>'
+                }
+                $("#info-show .info-tags .tagcloud-list").html(liHtml);
                 $("#info-edit").modal("hide");
             }
         });

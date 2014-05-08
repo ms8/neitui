@@ -62,51 +62,43 @@
                     <div class="subpage-title noline">
                         <h5>基本信息</h5>
                     </div>
-                    <div class="c_detail widget-content">
-                        <form class="form-horizontal" role="form">
-                            <?php if($model->website != null && $model->website != ''){ ?>
-                            <div class="form-group">
-                                <label for="inputEmail3" class="col-sm-5">网址：</label>
-                                <div class="col-sm-7">
-                                    <span class="info-name">
-                                        <a href="<?php echo $model->website?>" target="_blank">
-                                            <?php echo $model->website?>
-                                        </a>
-                                    </span>
-                                </div>
+                    <ul class="project-details-list">
+                        <?php if($model->website != null && $model->website != ''){ ?>
+                        <li>
+                            <h5>网址：</h5>
+                            <div class="project-terms">
+                                <a href="<?php echo $model->website?>" target="_blank">
+                                    <?php echo $model->website?>
+                                </a>
                             </div>
-                            <?php } if($model->address != null && $model->address != ''){?>
-                            <div class="form-group">
-                                <label for="inputEmail3" class="col-sm-5">地址：</label>
-                                <div class="col-sm-7">
-                                    <span class="info-name">
-                                       <?php echo $model->address?>
-                                    </span>
-                                </div>
+                        </li>
+                        <?php } if($model->address != null && $model->address != ''){?>
+                        <li>
+                            <h5>地址：</h5>
+                            <div class="project-terms">
+                                <?php echo $model->address?>
                             </div>
-                            <?php } if($model->tags != null && $model->tags != ''){?>
-                            <div class="form-group">
-                                <label for="inputEmail3" class="col-sm-5">标签：</label>
-                                <div class="col-sm-7">
-                                    <div class="info-tags">
-                                        <ul  class="tagcloud-list">
-                                            <?php
-                                            $tags = empty($model->tags) ? array() : explode(' ',$model->tags);
-                                            foreach($tags as $tag){
-                                                ?>
-                                                <li>
-                                                    <span><?php echo $tag?></span>
-                                                </li>
-                                            <?php
-                                            }
-                                            ?>
-                                        </ul>
-                                    </div>
-                                </div>
+                        </li>
+                        <?php } if($model->tags != null && $model->tags != ''){?>
+                        <li>
+                            <h5>标签：</h5>
+                            <div class="project-terms">
+                                <ul  class="tagcloud-list">
+                                    <?php
+                                    $tags = empty($model->tags) ? array() : explode(' ',$model->tags);
+                                    foreach($tags as $tag){
+                                        ?>
+                                        <li>
+                                            <span><?php echo $tag?></span>
+                                        </li>
+                                    <?php
+                                    }
+                                    ?>
+                                </ul>
                             </div>
-                            <?php } ?>
-                        </form>
-                    </div>
+                        </li>
+                        <?php } ?>
+                    </ul>
                 </div>
             </div>
         </div>

@@ -2,28 +2,28 @@
 
 class AboutController extends Controller
 {
-	public $layout='common';
+	public $layout='site';
 	public function init(){
-		Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_PATH.'common.css');
-		Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_PATH.'article.css');
+//		Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_PATH.'common.css');
+//		Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.CSS_PATH.'article.css');
 	}
 
 	public function actionIndex()
 	{
 	
 
-		$id = Yii::app()->request->getParam('id');
+//		$id = Yii::app()->request->getParam('id');
+//
+//		$data = Cate::model()->find(array('condition'=>'id = :id','params'=>array(':id'=>$id)));
+//
+//		$danye = Cate::model()->findAll(array('condition'=>'type = 2 and status = 1'));
+//		$this->pageKeyword=array(
+//			'title'=>$data->name.'-'.Helper::siteConfig()->site_name,
+//			'keywords'=>$data->name,
+//			'description'=>$data->name,
+//		);
 
-		$data = Cate::model()->find(array('condition'=>'id = :id','params'=>array(':id'=>$id)));
-
-		$danye = Cate::model()->findAll(array('condition'=>'type = 2 and status = 1'));
-		$this->pageKeyword=array(
-			'title'=>$data->name.'-'.Helper::siteConfig()->site_name,
-			'keywords'=>$data->name,
-			'description'=>$data->name,
-		);		
-
-		$this->render('index',array('data'=>$data,'danye'=>$danye));
+		$this->render('index');
 	}
 
 	// Uncomment the following methods and override them if needed
