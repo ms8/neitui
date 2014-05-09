@@ -18,7 +18,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
             <div class="col-md-9">
                 <div class="widget">
                     <div class="subpage-title noline">
-                        <h5 id="company-name"><?php echo $model->name?></h5>
+                        <h5 id="company-name"><?php echo (isset($model->name) || $model->name == "") ? "企业名称" : $model->name ;?></h5>
                     </div>
                     <div class="text-right absolute-right-20">
                         <a href="javascript:;" class="icon-operate"  id="des-update" ><i class="icon-edit"></i></a>
@@ -353,6 +353,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
     //编辑基本信息
     $("#info-update").click(function(){
         $("#info-edit").modal("show");
+        $("#tags-new").val("");
     })
     $("#info-cancel").live('click',function(){
         $("#info-show").show();
