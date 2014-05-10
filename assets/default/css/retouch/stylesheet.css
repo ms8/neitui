@@ -1349,6 +1349,7 @@ blockquote small {
 .project-details-list > li {
     border-bottom: 1px solid #ECF0F1;
     padding: 10px 0;
+    min-height: 35px;
 }
 .project-details-list > li:first-child {
     padding-top: 0;

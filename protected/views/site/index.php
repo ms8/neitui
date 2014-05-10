@@ -54,7 +54,12 @@
                                 <?php  foreach($jobs as $job) { ?>
                                     <tr>
                                         <td rowspan="2" style="padding: 5px;">
-                                            <img  src="<?php echo Yii::app()->baseUrl."/".$job['logo']?>" alt="<?php echo $job['title'];?>">
+                                            <img  src="<?php
+                                            if($job['logo'] == null || $job['logo'] == ''){
+                                                $job['logo'] = 'upload/companylogo/default.png';
+                                            }
+                                            echo Yii::app()->baseUrl."/".$job['logo']
+                                            ?>" alt="<?php echo $job['title'];?>">
                                         </td>
                                         <td>
                                             <p>
