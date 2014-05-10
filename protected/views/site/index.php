@@ -44,10 +44,9 @@
                                 <thead>
                                 <tr>
                                     <th style="width: 10%"></th>
-                                    <th style="width: 25%"></th>
-                                    <th style="width: 28%"></th>
-                                    <th style="width: 30%"></th>
-                                    <th style="width: 7%"></th>
+                                    <th style="width: 35%"></th>
+                                    <th style="width: 45%"></th>
+                                    <th style="width: 10%"></th>
                                 </tr>
                                 </thead>
 
@@ -67,16 +66,16 @@
                                                 <?php echo CHtml::encode(Helper::truncate_utf8_string($job['name'],15));?>
                                             </a>
                                         </td>
-                                        <td>
-                                            <p><?php  echo CHtml::encode(Helper::truncate_utf8_string($job['tags'],25)); ?></p>
-                                        </td>
+<!--                                        <td>-->
+<!--                                            <p>--><?php // echo CHtml::encode(Helper::truncate_utf8_string($job['tags'],25)); ?><!--</p>-->
+<!--                                        </td>-->
                                         <td>
                                             <?php  echo date("m/d",strtotime($job['createtime'])); ?>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td colspan="4">
-                                            <p>[要求]<?php echo CHtml::encode(Helper::truncate_utf8_string($job['description'],130));?></p>
+                                        <td colspan="3">
+                                            <p>[要求]<?php echo CHtml::encode(Helper::truncate_utf8_string($job['description'],83));?></p>
                                         </td>
                                     </tr>
                                 <?php } ?>
