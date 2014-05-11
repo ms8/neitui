@@ -18,4 +18,4 @@ $this->menu=array(
 
 <h1>更新字典<?php echo $model->id; ?></h1>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model,'dctypes'=>$dctypes)); ?>

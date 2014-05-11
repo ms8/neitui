@@ -112,8 +112,10 @@ class MsDictionaryController extends Controller
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
+        $dctypes = MsDictionaryType::model()->findAll();
 		$this->render('update',array(
 			'model'=>$model,
+            'dctypes'=>$dctypes
 		));
 	}
 
