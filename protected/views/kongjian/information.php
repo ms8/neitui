@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-9">
                 <div class="widget">
-                    <div class="media">
+                    <div class="media widget-content">
                         <a class="pull-left intro-image" href="#">
                             <img  alt="<?php echo $model->realname?>"
                                  src="<?php echo Yii::app()->baseUrl.'/'.$model->image?>" />
@@ -43,67 +43,92 @@
                     <div class="subpage-title noline">
                         <h5>基本信息</h5>
                     </div>
-                    <div id="info-show" class="c_detail">
-                        <div class="form-horizontal" style="padding:10px">
-                            <div style="margin-top:5px">
-                                <label  >性别：</label>
-                                <span class="info-sex">
-                                    <?php  if($model->sex != null){echo $model->sex == 1 ? '男':'女';} ?>
-                                 </span>
-                            </div>
-                            <div style="margin-top:5px">
-                                <label >手机号：</label>
-                                <span class="info-phone">
-                                    <?php echo $model->phone?>
-                                </span>
-                            </div>
-                            <div style="margin-top:5px">
-                                <label >邮箱：</label>
-                                <span>
-                                    <?php echo $model->username?>
-                                </span>
-                            </div>
-                            <div style="margin-top:5px">
-                                <label >技能：</label>
-                                <span class="info-skill">
-                                    <?php echo $model->skill?>
-                                </span>
-                            </div>
-                        </div>
+                    <div class="c_detail">
+                        <ul class="project-details-list">
+                            <?php if($model->sex != null && $model->sex != ''){ ?>
+                            <li>
+                                <h5>性别：</h5>
+                                <div class="project-terms">
+                                    <span class="info-sex">
+                                        <?php  if($model->sex != null){echo $model->sex == 1 ? '男':'女';} ?>
+                                     </span>
+                                </div>
+                            </li>
+                            <?php } if($model->phone != null && $model->phone != ''){?>
+                            <li>
+                                <h5>手机：</h5>
+                                <div class="project-terms">
+                                    <span class="info-phone">
+                                        <?php echo $model->phone?>
+                                    </span>
+                                </div>
+                            </li>
+                            <?php } if($model->username != null && $model->username != ''){?>
+                            <li>
+                                <h5>邮箱：</h5>
+                                <div class="project-terms">
+                                    <span>
+                                        <?php echo $model->username?>
+                                    </span>
+                                </div>
+                            </li>
+                            <?php } if($model->skill != null && $model->skill != ''){?>
+                            <li>
+                                <h5>技能：</h5>
+                                <div class="project-terms">
+                                    <span class="info-skill">
+                                        <?php echo $model->skill?>
+                                    </span>
+                                </div>
+                            </li>
+                            <?php } ?>
+                        </ul>
                     </div>
-
                 </div>
                 <div class="widget">
                     <div class="subpage-title noline">
                         <h5>学校信息</h5>
                     </div>
-                    <div class="c_detail">
-                        <div class="form-horizontal" id="college-show" style="padding:10px">
-                            <div style="margin-top:5px">
-                                <label  >类型：</label>
-                                <span class="college-type">
-                                    <?php echo $model->universitytypename;?>
-                                 </span>
-                            </div>
-                            <div style="margin-top:5px">
-                                <label  >学历：</label>
-                                <span class="college-degree">
-                                    <?php echo $model->degreename?>
-                                 </span>
-                            </div>
-                            <div style="margin-top:5px">
-                                <label  >名称：</label>
-                                <span class="college-name">
-                                    <?php echo $model->universityname?>
-                                 </span>
-                            </div>
-                            <div style="margin-top:5px">
-                                <label  >专业：</label>
-                                <span class="college-major">
-                                    <?php echo $model->major?>
-                                 </span>
-                            </div>
-                        </div>
+                    <div  class="c_detail">
+                        <ul class="project-details-list">
+                            <?php if($model->universitytypename != null && $model->universitytypename != ''){ ?>
+                            <li>
+                                <h5>类型：</h5>
+                                <div class="project-terms">
+                                    <span class="college-type">
+                                        <?php echo $model->universitytypename;?>
+                                     </span>
+                                </div>
+                            </li>
+                            <?php } if($model->degreename != null && $model->degreename != ''){?>
+                            <li>
+                                <h5>学历：</h5>
+                                <div class="project-terms">
+                                    <span class="college-degree">
+                                        <?php echo $model->degreename?>
+                                     </span>
+                                </div>
+                            </li>
+                            <?php } if($model->universityname != null && $model->universityname != ''){?>
+                            <li>
+                                <h5>名称：</h5>
+                                <div class="project-terms">
+                                    <span class="college-name">
+                                        <?php echo $model->universityname?>
+                                     </span>
+                                </div>
+                            </li>
+                            <?php } if($model->major != null && $model->major != ''){?>
+                            <li>
+                                <h5>专业：</h5>
+                                <div class="project-terms">
+                                    <span class="college-major">
+                                        <?php echo $model->major?>
+                                     </span>
+                                </div>
+                            </li>
+                            <?php } ?>
+                        </ul>
                     </div>
             </div>
         </div>

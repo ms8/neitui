@@ -45,6 +45,11 @@
                     </div>
                     <div class="media"  style="padding: 10px;margin-top:0px">
                         <a class="pull-left intro-logo" target="_blank" href="<?php echo $company->website?>">
+                            <?php
+                               if($company->logo == null || $company->logo == ''){
+                                   $company->logo = 'upload/companylogo/default.png';
+                               }
+                            ?>
                             <img src="<?php echo Yii::app()->baseUrl."/".$company->logo?>"
                                  class="media-object" alt="快入职 | 应届生招聘 |<?php echo $company->name?>">
                         </a>

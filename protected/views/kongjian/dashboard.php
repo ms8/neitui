@@ -9,7 +9,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umedit
         <div class="row">
             <div class="col-md-9">
                 <div class="widget">
-                    <div class="media">
+                    <div class="media widget-content">
                         <a class="pull-left intro-image" href="#">
                             <img  alt="<?php echo $model->realname?>"
                                  src="<?php echo Yii::app()->baseUrl.'/'.$model->image?>" />
@@ -74,8 +74,8 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umedit
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" id="desc-cancel" class="btn btn-flat flat-success btn-bordered btn-rounded" data-dismiss="modal">取消</button>
-                                <button type="button"  id="desc-save" class="btn btn-flat flat-success btn-bordered btn-rounded">保存</button>
+                                <button type="button" id="desc-cancel" class="btn btn-flat flat-success" data-dismiss="modal">取消</button>
+                                <button type="button"  id="desc-save" class="btn btn-flat flat-success">保存</button>
                             </div>
                         </div>
                     </div>
@@ -110,8 +110,8 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umedit
 
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" id="project-cancel" class="btn btn-flat flat-success btn-bordered btn-rounded" data-dismiss="modal">取消</button>
-                                    <button type="button"  id="project-save" class="btn btn-flat flat-success btn-bordered btn-rounded">保存</button>
+                                    <button type="button" id="project-cancel" class="btn btn-flat flat-success" data-dismiss="modal">取消</button>
+                                    <button type="button"  id="project-save" class="btn btn-flat flat-success">保存</button>
                                 </div>
                             </div><!-- /.modal-content -->
                         </div><!-- /.modal-dialog -->
@@ -146,8 +146,8 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umedit
 
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" id="peixun-cancel" class="btn btn-flat flat-success btn-bordered btn-rounded" data-dismiss="modal">取消</button>
-                                    <button type="button"  id="peixun-save" class="btn btn-flat flat-success btn-bordered btn-rounded">保存</button>
+                                    <button type="button" id="peixun-cancel" class="btn btn-flat flat-success" data-dismiss="modal">取消</button>
+                                    <button type="button"  id="peixun-save" class="btn btn-flat flat-success">保存</button>
                                 </div>
                             </div><!-- /.modal-content -->
                         </div><!-- /.modal-dialog -->
@@ -155,7 +155,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umedit
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="widget" style="min-height:260px;">
+                <div class="widget">
                     <div class="subpage-title noline">
                         <h5>基本信息</h5>
                     </div>
@@ -163,32 +163,40 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umedit
                         <a href="javascript:;" class="icon-operate"  id="info-update" ><i class="icon-edit"></i></a>
                     </div>
                     <div id="info-show" class="c_detail">
-                        <div class="form-horizontal" style="padding:10px">
-                            <div style="margin-top:5px">
-                                <label  >性别：</label>
-                                <span class="info-sex">
-                                    <?php  if($model->sex != null){echo $model->sex == 1 ? '男':'女';} ?>
-                                 </span>
-                            </div>
-                            <div style="margin-top:5px">
-                                <label >手机号：</label>
-                                <span class="info-phone">
-                                    <?php echo $model->phone?>
-                                </span>
-                            </div>
-                            <div style="margin-top:5px">
-                                <label >邮箱：</label>
-                                <span>
-                                    <?php echo $model->username?>
-                                </span>
-                            </div>
-                            <div style="margin-top:5px">
-                                <label >技能：</label>
-                                <span class="info-skill">
-                                    <?php echo $model->skill?>
-                                </span>
-                            </div>
-                        </div>
+                        <ul class="project-details-list">
+                            <li>
+                                <h5>性别：</h5>
+                                <div class="project-terms">
+                                    <span class="info-sex">
+                                        <?php  if($model->sex != null){echo $model->sex == 1 ? '男':'女';} ?>
+                                     </span>
+                                </div>
+                            </li>
+                            <li>
+                                <h5>手机：</h5>
+                                <div class="project-terms">
+                                    <span class="info-phone">
+                                        <?php echo $model->phone?>
+                                    </span>
+                                </div>
+                            </li>
+                            <li>
+                                <h5>邮箱：</h5>
+                                <div class="project-terms">
+                                    <span>
+                                        <?php echo $model->username?>
+                                    </span>
+                                </div>
+                            </li>
+                            <li>
+                                <h5>技能：</h5>
+                                <div class="project-terms">
+                                    <span class="info-skill">
+                                        <?php echo $model->skill?>
+                                    </span>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                     <div class="modal fade" id="info-edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                         <div class="modal-dialog"  style="width:750px">
@@ -232,8 +240,8 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umedit
                                 </div>
 
                                 <div class="modal-footer">
-                                    <button type="button" id="info-cancel" class="btn btn-flat flat-success btn-bordered btn-rounded" data-dismiss="modal">取消</button>
-                                    <button type="button"  id="info-save" class="btn btn-flat flat-success btn-bordered btn-rounded">保存</button>
+                                    <button type="button" id="info-cancel" class="btn btn-flat flat-success" data-dismiss="modal">取消</button>
+                                    <button type="button"  id="info-save" class="btn btn-flat flat-success">保存</button>
                                 </div>
                             </div><!-- /.modal-content -->
                         </div><!-- /.modal-dialog -->
@@ -247,33 +255,41 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umedit
                     <div class="text-right absolute-right-20">
                         <a href="javascript:;" class="icon-operate"  id="college-update" ><i class="icon-edit"></i></a>
                     </div>
-                    <div class="c_detail">
-                        <div class="form-horizontal" id="college-show" style="padding:10px">
-                            <div style="margin-top:5px">
-                                <label  >类型：</label>
-                                <span class="college-type">
-                                    <?php echo $model->universitytypename;?>
-                                 </span>
-                            </div>
-                            <div style="margin-top:5px">
-                                <label  >学历：</label>
-                                <span class="college-degree">
-                                    <?php echo $model->degreename?>
-                                 </span>
-                            </div>
-                            <div style="margin-top:5px">
-                                <label  >名称：</label>
-                                <span class="college-name">
-                                    <?php echo $model->universityname?>
-                                 </span>
-                            </div>
-                            <div style="margin-top:5px">
-                                <label  >专业：</label>
-                                <span class="college-major">
-                                    <?php echo $model->major?>
-                                 </span>
-                            </div>
-                        </div>
+                    <div id="college-show" class="c_detail">
+                        <ul class="project-details-list">
+                            <li>
+                                <h5>类型：</h5>
+                                <div class="project-terms">
+                                    <span class="college-type">
+                                        <?php echo $model->universitytypename;?>
+                                     </span>
+                                </div>
+                            </li>
+                            <li>
+                                <h5>学历：</h5>
+                                <div class="project-terms">
+                                    <span class="college-degree">
+                                        <?php echo $model->degreename?>
+                                     </span>
+                                </div>
+                            </li>
+                            <li>
+                                <h5>名称：</h5>
+                                <div class="project-terms">
+                                    <span class="college-name">
+                                        <?php echo $model->universityname?>
+                                     </span>
+                                </div>
+                            </li>
+                            <li>
+                                <h5>专业：</h5>
+                                <div class="project-terms">
+                                    <span class="college-major">
+                                        <?php echo $model->major?>
+                                     </span>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                     <div class="modal fade" id="college-edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                         <div class="modal-dialog"  style="width:750px">
@@ -329,8 +345,8 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umedit
 
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" id="college-cancel" class="btn btn-flat flat-success btn-bordered btn-rounded" data-dismiss="modal">取消</button>
-                                    <button type="button"  id="college-save" class="btn btn-flat flat-success btn-bordered btn-rounded">保存</button>
+                                    <button type="button" id="college-cancel" class="btn btn-flat flat-success" data-dismiss="modal">取消</button>
+                                    <button type="button"  id="college-save" class="btn btn-flat flat-success">保存</button>
                                 </div>
                             </div><!-- /.modal-content -->
                         </div><!-- /.modal-dialog -->

@@ -17,21 +17,22 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'json2.
         <div class="row">
             <div class="col-md-9">
                 <div class="widget">
-                    <div class="subpage-title noline">
-                        <h5 id="company-name"><?php echo (isset($model->name) || $model->name == "") ? "企业名称" : $model->name ;?></h5>
-                    </div>
-                    <div class="text-right absolute-right-20">
-                        <a href="javascript:;" class="icon-operate"  id="des-update" ><i class="icon-edit"></i></a>
-                    </div>
                     <div class="media widget-content">
                         <a class="pull-left intro-logo" href="#">
                             <img  alt="<?php echo $model->name?>" class=""
                                  src="<?php echo Yii::app()->baseUrl.'/'.$model->logo?>" />
                         </a>
                         <div class="media-body">
-<!--                            <h4 class="media-heading">--><?php //echo $model->name?><!--</h4>-->
+                            <h4 class="media-heading"><?php echo $model->name?></h4>
+                            <div class="text-right absolute-right-20">
+                                <a href="javascript:;" class="icon-operate"  id="des-update" ><i class="icon-edit"></i></a>
+                            </div>
                             <div id="intro-info" class="c_intro">
-                                <div class="intro-des"><?php echo $model->description?></div>
+                                <div class="intro-des">
+                                    <?php if($model->description==null || $model->description==""){?>
+                                        请填写公司描述，例如公司发展历程、规模、研究方向和成果等信息，便于求职者更全面的了解公司。
+                                    <?php }else{echo $model->description;}?>
+                                </div>
                             </div>
                         </div>
                     </div>

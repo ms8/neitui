@@ -3,14 +3,15 @@
         <div class="row pad-25">
             <div class="clearfix col-md-9 main">
                 <div class="widget">
-                    <div class="subpage-title noline">
-                        <h5 id="company-name"><?php echo $model->name?></h5>
-                    </div>
+<!--                    <div class="subpage-title noline">-->
+<!--                        <h5 id="company-name">--><?php //echo $model->name?><!--</h5>-->
+<!--                    </div>-->
                     <div class="media widget-content">
                         <a href="<?php echo $model->website?>" target="_blank" class="pull-left intro-logo">
                             <img alt="快入职 | 应届生招聘 |<?php echo $model->name?>"  class="media-object" src="<?php echo Yii::app()->baseUrl.'/'.$model->logo?>">
                         </a>
                         <div class="media-body">
+                            <h4 class="media-heading"><?php echo $model->name?></h4>
                             <?php if($model->status == '1'){ ?>
                                 <div style="color: red">公司信息未验证，暂时不能发布招聘信息和阅读简历</div>
                             <?php }?>

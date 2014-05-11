@@ -13,7 +13,7 @@
                                 <th style="width: 25%">职位</th>
                                 <th style="width: 25%">应聘者</th>
                                 <th style="width: 35%">简历</th>
-                                <th style="width: 10%">投递时间</th>
+                                <th style="width: 15%">投递时间</th>
                             </tr>
                             </thead>
 
