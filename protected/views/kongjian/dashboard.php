@@ -41,7 +41,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'umedit
                     'id'=>'desc-form',
                     'enableAjaxValidation'=>false,
                     //'action'=>Yii::app()->createUrl("/kongjian/information"),
-                    'htmlOptions'=>array('class'=>'form-horizontal')
+                    'htmlOptions'=>array('class'=>'form-horizontal','enctype'=>'multipart/form-data')
                 ));
                 ?>
                 <div class="modal fade" id="desc-edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

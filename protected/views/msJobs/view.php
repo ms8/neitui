@@ -123,9 +123,9 @@
                     </div>
                     <div style="padding: 10px;">
                         <?php foreach($others as $other){?>
-                            <div style="margin-top: 5px;">
+                            <div style="margin-top: 10px;">
                                 <a target="_blank" href="<?php echo Yii::app()->baseUrl.'/msjobs/view/'.$other->id?>">
-                                    <?php echo $other->title?>
+                                    <?php echo CHtml::encode(Helper::truncate_utf8_string($other->title,10));?>
                                 </a>
                                 <em style="float: right"><?php echo date("m/d",strtotime($other->createtime));?></em>
                                 </div>

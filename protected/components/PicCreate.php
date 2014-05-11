@@ -22,17 +22,22 @@ class PicCreate {
         if(Yii::app()->user->isGuest){
             return '';
         }
-        $id = Yii::app()->user->id;
-        $member = Member::model()->findByPk($id);
-        $pic_path = $dir. $member->username.'_'.$_FILES[$fileInput]["name"];
+//        $id = Yii::app()->user->id;
+//        $member = Member::model()->findByPk($id);
+        //随机码作为文件名
+        list($s1, $s2) = explode(' ', microtime());
+        $fileName_store = (float)sprintf('%.0f', (floatval($s1) + floatval($s2)) * 1000);
+        $fileName_store.=rand(0,9999);
         $picname = $_FILES[$fileInput]['name'];
         $picsize = $_FILES[$fileInput]['size'];
         if ($picname != "") {
+            $type = strstr($picname, '.');
+            $type = strtolower($type);
+            $pic_path = $dir. $fileName_store.$type;
             if ($picsize > $size) {
                 exit;
             }
-            $type = strstr($picname, '.');
-            $type = strtolower($type);
+
             $flag = 0;
             foreach($typeArr as $fileType){
                 if ($type == $fileType ) {

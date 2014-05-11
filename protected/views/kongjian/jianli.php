@@ -103,10 +103,10 @@
                     <div style="padding: 10px;">
                         <?php foreach($others as $other){?>
                             <div style="margin-top: 10px;">
-                                <a style="font-size:13px"target="_blank" href="<?php echo Yii::app()->baseUrl.'/msjobs/view/'.$other->id?>">
-                                    <?php echo CHtml::encode(Helper::truncate_utf8_string($other->title,8));?>
+                                <a target="_blank" href="<?php echo Yii::app()->baseUrl.'/msjobs/view/'.$other->id?>">
+                                    <?php echo CHtml::encode(Helper::truncate_utf8_string($other->title,10));?>
                                 </a>
-                                <em style="float: right;font-size:13px"><?php echo substr($other->createtime,0,10)?></em>
+                                <em style="float: right;"><?php echo date("m/d",strtotime($other->createtime));?></em>
                             </div>
                         <?php }?>
                     </div>

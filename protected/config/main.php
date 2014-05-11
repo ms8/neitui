@@ -49,7 +49,20 @@ return array(
 	    ),
 	),
 
-	'components'=>array(
+    'components'=>array(
+
+//        'log'=>array(
+//            'class'=>'CLogRouter',
+//            'routes'=>array(
+//                array(
+//                    'class'=>'CFileLogRoute',
+//                    'levels'=>'trace, info, debug, warn, error, fatal, profile',
+//                    'categories'=>'test.*',
+//                    'maxFileSize'=>1048576,//单文件最大1G
+//                    'logFile'=>'test.log',
+//                ),
+//            ),
+//        ),
 		
 		'image'=>array(
 	      'class'=>'application.extensions.image.CImageComponent',
@@ -100,21 +113,7 @@ return array(
 			'errorAction'=>'site/error',
 		),
 
-		 //  'log'=>array(
-		 //  	'class'=>'CLogRouter',
-		 //  	'routes'=>array(
-		 //  		// array(
-		 //  		// 	'class'=>'CFileLogRoute',
-		 //  		// 	'levels'=>'error, warning',
-		 //  		// ),
-		 //  		array(
-		 //  			'class'=>'CWebLogRoute',
-		 // 		),
-
-		 // 	),
-		 // ),
-
-		'mailer' => array(
+        'mailer' => array(
           'class' => 'application.extensions.mailer.EMailer',
           'pathViews' => 'application.views.email',
           'pathLayouts' => 'application.views.email.layouts'
