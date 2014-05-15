@@ -119,6 +119,10 @@
         <li>
             <a href="<?php echo Yii::app()->baseUrl."/about/index"?>">关于我们</a> |
             <span class="copyright"><span class="copy">&copy; </span>2014 kuairuzhi.com 京ICP备14017078号-1</span>
+            <script type="text/javascript">
+                var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+                document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F17d1512f82fa5b2881194c4dd495f550' type='text/javascript'%3E%3C/script%3E"));
+            </script>
         </li>
     </ul>
 </div>

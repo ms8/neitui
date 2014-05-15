@@ -11,23 +11,23 @@
                             </em>
                         </h5>
                     </div>
-                    <div style="padding:20px">
+                    <div class="widget-content">
                         <?php echo $model->description?>
-                    </div>
-                    <div class="text-center" id="jodBt">
-                        <?php if($finish == '0'){?>
+                        <div class="text-center" id="jodBt">
+                            <?php if($finish == '0'){?>
 
-                            <button class='btn btn-flat flat-color'
-                                <?php if(!Yii::app()->user->isGuest){
+                                <button class='btn btn-flat flat-color'
+                                    <?php if(!Yii::app()->user->isGuest){
                                     $user = Member::model()->findByPk(Yii::app()->user->id);
                                     if($user!=null && $user->type=='2'){ //企业用户不能投简历
                                         ?>
                                         disabled='disabled'
                                     <?php }}?>
-                                    id='submitbt' onclick='submitjl(<?php echo $model->id?>)'>投简历</button>
-                        <?php }else{ ?>
-                            <span>该职位已投过简历</span>
-                        <?php }?>
+                                        id='submitbt' onclick='submitjl(<?php echo $model->id?>)'>投简历</button>
+                            <?php }else{ ?>
+                                <span>该职位已投过简历</span>
+                            <?php }?>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -43,7 +43,7 @@
                             </em>
                         </h5>
                     </div>
-                    <div class="media"  style="padding: 10px;margin-top:0px">
+                    <div class="media widget-content">
                         <a class="pull-left intro-logo" target="_blank" href="<?php echo $company->website?>">
                             <?php
                                if($company->logo == null || $company->logo == ''){
