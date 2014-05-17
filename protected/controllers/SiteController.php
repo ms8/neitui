@@ -46,13 +46,18 @@ class SiteController extends Controller
         //$companys = MsCompany::model()->findAllByAttributes(array('status'=>'2'));
         $wm = new WeightManage();
         $companys = $wm->getCompanys();
+        $i=0;
         foreach($companys as $company){
             $jobs = MsJobs::model()->findAllByAttributes(array('company_id'=>$company->id));
             if($jobs == null)
                 continue;  //只取发布了招聘岗位的公司信息
+            $i++;
+            if($i >12)
+                break;
             if($company->logo == null || $company->logo == ''){
                 $company->logo = 'upload/companylogo/default.png';
             }
+
             array_push($allData,array('company'=>$company,'jobs'=>$jobs));
         }
         $condition = "";
