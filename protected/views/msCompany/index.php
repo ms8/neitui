@@ -62,19 +62,21 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'GridLo
                 '</div>'+
                 '</div>'+
                 '<div class="member-details">'+
-                '<div class="member-content">'+
-                '<ul class="job-list">' ;
-
-                for(var j = 0,length = data[i].jobs.length; j < length ; j++){
-                    elem +=  '<li><a href="<?php echo Yii::app()->baseUrl."/msjobs/view/"?>'+ data[i].jobs[j].id+ '" target="_blank">'+ data[i].jobs[j].title+ '</a></li>';
-                }
-                elem +='</ul>' +
-                '<div style="padding:5px 0 0 4px;" class="text-left"><i class="icon-time"></i>&nbsp;'+ data[i].jobs[0].createtime + '</div>  ' +
-                '</div>'+
-                '<p class="text-center"><a href="<?php echo Yii::app()->baseUrl."mscompany/view/" ?>'+ data[i].id +'" class="btn btn-flat flat-primary"">查看详情</a></p>'+
-                '</div>'+
-                '</div>'+
-                '</div>';
+                '<div class="member-content">';
+            if(!!data[i].company.tags){
+                elem += '<span class="position">' +  '<strong>【公司印象】</strong>' + data[i].company.tags + '</span>' ;
+            }
+            elem +='<ul class="job-list">' ;
+            for(var j = 0,length = data[i].jobs.length; j < length ; j++){
+                elem +=  '<li><a href="<?php echo Yii::app()->baseUrl."/msjobs/view/"?>'+ data[i].jobs[j].id+ '" target="_blank">'+ data[i].jobs[j].title+ '</a></li>';
+            }
+            elem +='</ul>' +
+            '<div style="padding:5px 0 0 4px;" class="text-left"><i class="icon-time"></i>&nbsp;'+ data[i].jobs[0].createtime + '</div>  ' +
+            '</div>'+
+            '<p class="text-center"><a href="<?php echo Yii::app()->baseUrl."/mscompany/view/" ?>'+ data[i].company.id +'" class="btn btn-flat flat-primary"">查看详情</a></p>'+
+            '</div>'+
+            '</div>'+
+            '</div>';
             newItemContainer.append(elem);
         }
         var items = newItemContainer.find('.team-member-wrap').css('opacity', 0);

@@ -1665,6 +1665,9 @@ address {
    text-align: left;
    padding: 20px;
 }
+.member-name{
+    margin-top:0;
+}
 
 /*公司基本信息*/
 .dl-horizontal.companyInfo{
