@@ -121,6 +121,7 @@ class MsCompanyController extends Controller
                 $job = MsJobs::model()->findByPk($jianli->job_id);
                 $jianliinfo = MsJianli::model()->findByPk($jianli->jianli_id);
                 $jobinfo=array();
+                $jobinfo['jianliid']=$jianli->jianli_id;
                 $jobinfo['jobid']=$jianli->job_id;
                 $jobinfo['title']=$job->title;
                 $jobinfo['jianliid']=$jianli->jianli_id;

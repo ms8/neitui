@@ -32,7 +32,10 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <a id="<?php  echo $jobinfo['path'] ?>" data-toggle="modal" data-target="#jianli" href="#" onclick="setPath(this)">
+<!--                                        <a id="--><?php // echo $jobinfo['path'] ?><!--" data-toggle="modal" data-target="#jianli" href="#" onclick="setPath(this)">-->
+<!--                                            <i class="icon-file-text"></i>&nbsp--><?php // echo $jobinfo['jianliname'] ?>
+<!--                                        </a>-->
+                                        <a href="<?php echo Yii::app()->createUrl('kongjian/jianlidownload',array('id'=>$jobinfo['jianliid'])); ?>">
                                             <i class="icon-file-text"></i>&nbsp<?php  echo $jobinfo['jianliname'] ?>
                                         </a>
                                     </td>
