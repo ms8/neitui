@@ -174,23 +174,39 @@
             </div>
             <div class="modal-body">
                 <form role="form" method="post" id="loginForm" action="<?php echo Yii::app()->createUrl('site/login')?>" class="form-horizontal" >
-                    <div class="form-group">
-                        <label for="username" class="col-sm-2 control-label">账号:</label>
-                        <div class="col-sm-7">
-                            <input type="text" required="" placeholder="账号"  id="username" name="username" class="form-control"/>
+                    <div class="col-sm-8">
+                        <div class="separator-right">
+                            <div class="form-group">
+                                <label for="username" class="col-sm-3 control-label">账号:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" required="" placeholder="账号"  id="username" name="username" class="form-control"/>
+                                </div>
+                                <div class="col-sm-3 errorMessage"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="col-sm-3 control-label">密码:</label>
+                                <div class="col-sm-8">
+                                    <input type="password" required=""  placeholder="密码" id="password" name="password" class="form-control"/>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-sm-3 errorMessage"></div>
+                    </div>
+                    <div class="col-sm-4">
+                        <ul class="social-links">
+                            <li>
+                                使用其它账号登陆：
+                            </li>
+<!--                            <li class="login-qq">-->
+<!--                                <span id="login-qq"></span>-->
+<!--                            </li>-->
+                            <li class="login-qq">
+                                <a href="<?php echo Yii::app()->request->hostInfo.Yii::app()->homeUrl.'site/loginQQ' ?>"><img alt="快入职微信号" src="http://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_3.png"></a>
+                            </li>
+                        </ul>
                     </div>
                     <div class="form-group">
-                        <label for="password" class="col-sm-2 control-label">密码:</label>
-                        <div class="col-sm-7">
-                            <input type="password" required=""  placeholder="密码" id="password" name="password" class="form-control"/>
-                        </div>
-                        <div id="loginErr" class="col-sm-3 errorMessage" ></div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-8">
-                            <div class="">
+                        <div class="col-sm-offset-1 col-sm-8">
+                            <div>
                                 <label>
                                     <input type="checkbox" name="autoLogin"  id="remember"/> 记住我
                                 </label>
@@ -202,8 +218,11 @@
 
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-3">
+                        <div class="col-sm-offset-1 col-sm-3">
                             <button class="btn btn-flat flat-color col-sm-12" type="button" onclick="login()">登录</button>
+                        </div>
+                        <div class="col-sm-6">
+                            <span id="loginErr" class="errorMessage" ></span>
                         </div>
                     </div>
                 </form>
@@ -266,11 +285,14 @@
                                 <a target="_blank" href="<?php echo Yii::app()->createUrl('/site/privacy')?>">《快入职用户协议》</a>
                             </div>
                         </div>
-                        <div id="errRegMsg" style="display: none" class="col-sm-3 errorMessage">用户名已经被注册</div>
+
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button id="registerSubmit" class="btn btn-flat flat-color col-sm-3" type="button" >注册</button>
+                        <div class="col-sm-offset-2 col-sm-3">
+                            <button id="registerSubmit" class="btn btn-flat flat-color col-sm-12" type="button" >注册</button>
+                        </div>
+                        <div class="col-sm-6">
+                            <span id="errRegMsg" style="display: none" class="errorMessage">用户名已经被注册</span>
                         </div>
                     </div>
                 </form>
@@ -281,12 +303,20 @@
 <!-- /.modal -->
 </body>
 <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+<!--<script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101101369" data-redirecturi="http://www.kuairuzhi.com" charset="utf-8"></script>-->
 <?php
 Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'jquery.form.js');
 Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_GLOBAL.'bootstrap.min.js');
 Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'validate.min.js');
 ?>
 <script type="text/javascript">
+
+//    function toLogin(){
+//        //以下为按钮点击事件的逻辑。注意这里要重新打开窗口
+//        //否则后面跳转到QQ登录，授权页面时会直接缩小当前浏览器的窗口，而不是打开新窗口
+//        var A=window.open("oauth/index.php","TencentLogin",
+//            "width=450,height=320,menubar=0,scrollbars=1,resizable=1,status=1,titlebar=0,toolbar=0,location=1");
+//    }
     $(function(){
         $(document).keydown(function(e){
             var curKey = e.which;
@@ -331,12 +361,8 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'valida
             rules: 'required|matches[register_password]'}
         ], function(errors, event) {
             if (errors.length > 0) {
-//                $("#errRegMsg").text(errors[0].name);
-//                $("#errRegMsg").show();
                 if (errors.length > 0) {
-                    for(var i = 0; i < errors.length ; i++){
-                        $("#errRegMsg").text(errors[i].message);
-                    }
+                    $("#errRegMsg").text(errors[0].message);
                     $("#errRegMsg").show();
                 }
             }
@@ -385,10 +411,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'valida
         rules: 'required'}
     ], function(errors) {
         if (errors.length > 0) {
-            for(var i = 0; i < errors.length ; i++){
-                $("#"+errors[i].id).parent().next().empty().append(errors[i].message);
-//                $("label[error-message='"+errors[i].name +"']").empty().append(errors[i].message);
-            }
+            $("#loginErr").text(errors[0].message);
         }
     });
     function login(){

@@ -305,7 +305,7 @@ class MsCompanyController extends Controller
         if(!Yii::app()->user->isGuest){
             $id = Yii::app()->user->id;
             $member = Member::model()->findByPk($id);
-            $model = MsCompany::model()->findByAttributes(array('account'=>$member->username));
+            $model = MsCompany::model()->findByAttributes(array('account'=>$member->email));
             if($model->logo == null || $model->logo == ''){
                 $model->logo = 'upload/companylogo/default.png';
             }

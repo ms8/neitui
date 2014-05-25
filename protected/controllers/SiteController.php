@@ -164,6 +164,105 @@ class SiteController extends Controller
             die(CJSON::encode('fail'));
         }
     }
+    public function actionLoginQQ(){
+        //应用的APPID
+        $app_id = "101101369";
+        //应用的APPKEY
+        $app_secret = "1cad84d2fde04ae13425341e49706ff2";
+        //成功授权后的回调地址
+        $my_url = "http://www.kuairuzhi.com/site/loginQQ";
+
+        //Step1：获取Authorization Code
+        session_start();
+        $code = isset($_REQUEST["code"]) ? $_REQUEST["code"] : null ;
+        if(empty($code)){
+            //state参数用于防止CSRF攻击，成功授权后回调时会原样带回
+            $_SESSION['state'] = md5(uniqid(rand(), TRUE));
+            //拼接URL
+            $dialog_url = "https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id="
+                . $app_id . "&redirect_uri=" . urlencode($my_url) . "&state="
+                . $_SESSION['state'];
+            echo("<script> location.href='" . $dialog_url . "'</script>");
+            die();
+        }
+
+        //Step2：通过Authorization Code获取Access Token
+        if(isset($_REQUEST['state']) && $_REQUEST['state'] == $_SESSION['state']){
+            //拼接URL
+            $token_url = "https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&"
+                . "client_id=" . $app_id . "&redirect_uri=" . urlencode($my_url)
+                . "&client_secret=" . $app_secret . "&code=" . $code;
+            $response = file_get_contents($token_url);
+            if (strpos($response, "callback") !== false)
+            {
+                $lpos = strpos($response, "(");
+                $rpos = strrpos($response, ")");
+                $response  = substr($response, $lpos + 1, $rpos - $lpos -1);
+                $msg = json_decode($response);
+                if (isset($msg->error))
+                {
+                    echo "<h3>error:</h3>" . $msg->error;
+                    echo "<h3>msg  :</h3>" . $msg->error_description;
+                    exit;
+                }
+            }
+
+            //Step3：使用Access Token来获取用户的OpenID
+            $params = array();
+            parse_str($response, $params);
+            $graph_url = "https://graph.qq.com/oauth2.0/me?access_token=". $params['access_token'];
+            $str  = file_get_contents($graph_url);
+            if (strpos($str, "callback") !== false){
+                $lpos = strpos($str, "(");
+                $rpos = strrpos($str, ")");
+                $str  = substr($str, $lpos + 1, $rpos - $lpos -1);
+            }
+            $user = json_decode($str);
+            if (isset($user->error)){
+                echo "<h3>error:</h3>" . $user->error;
+                echo "<h3>msg  :</h3>" . $user->error_description;
+                exit;
+            }
+            $member = Member::model()->findByAttributes(array('username'=>$user->openid));
+            if(  $member == null){
+                $this->render('login',array(
+                    'user'=>$user,
+                ));
+            }else{
+                $model=new LoginForm;
+                $model->username = $user->openid;
+                $model->password = $user->openid;
+                if($model->login()){
+                    if($member->type == '1'){ //应聘者
+                        //从其他页面中的弹出框直接登录，不是从登录界面登录的，登录后要返回当前页面
+                        if(isset($_POST['loginflag']) && Yii::app()->request->urlReferrer != null){
+                            $returnUrl = Yii::app()->request->urlReferrer;
+                        }else{
+                            $returnUrl = '/site/index';
+                        }
+                    }else if($member->type == '2'){
+                        $returnUrl = '/mscompany/dashboard/'; //暂时这么处理
+                    }
+                    $this->redirect(array($returnUrl));
+//                    die(CJSON::encode($returnUrl));
+                }else{
+                    die(CJSON::encode('fail'));
+                }
+            }
+
+//            echo("Hello " . $user->openid);
+        } else{
+            $this->render('error', "The state does not match. You may be a victim of CSRF.");
+//            echo("The state does not match. You may be a victim of CSRF.");
+        }
+    }
+
+    public  function actionLoginTest(){
+        $this->render('login',array(
+//            'user'=>$user,
+        ));
+    }
+
 
     public function actionCheckUser(){
         $user = Member::model()->findByAttributes(array('username' => $_POST['username']));
@@ -329,12 +428,13 @@ class SiteController extends Controller
         $memberModel=new Member();
         $username = $_POST['username'];
         $password = $_POST['password'];
+        $email = isset($_POST['email']) ? $_POST['email'] : null ;
         $type=$_POST['type'];
         $memberModel->username = $username;
         $memberModel->password = $password;
         $memberModel->type=$type;
         $memberModel->nickname = $memberModel->username;
-        $memberModel->email = $memberModel->username;
+        $memberModel->email = ($email == null) ? $memberModel->username : $email;
 
         $score=Score::model()->find('id=1');
 
@@ -366,12 +466,12 @@ class SiteController extends Controller
                 $company->website='';
                 $company->name='';
                 $company->address='';
-                $company->email='';
+                $company->email=$memberModel->email;
                 $company->telephone='';
                 $company->tags='';
                 $company->description='';
                 $company->status='2';//目前创建公司时默认已验证
-                $company->account = $memberModel->username;//当前登录用户
+                $company->account = $memberModel->email;//当前登录用户
                 $company->createtime = date("Y-m-d H:i:s");
                 $company->updatetime = date("Y-m-d H:i:s");
                 //$company->logo = 'upload/companylogo/default.png';
@@ -386,7 +486,7 @@ class SiteController extends Controller
                 //注册后默认创建一个students表的信息
                 $student = new MsStudents();
                 $student->mid=$memberModel->id;
-                $student->username=$memberModel->username;
+                $student->username=$memberModel->email;
                 $student->createtime = date("Y-m-d H:i:s");
                 $student->updatetime = date("Y-m-d H:i:s");
                 if($student->save()){

@@ -1883,6 +1883,7 @@ address {
 .errorMessage{
     padding-top: 11px;
     color: #E74C3C;
+    line-height: 30px;
 }
 /*个人信息项目经历描述*/
 .peixun-show,.project-show{
@@ -1964,8 +1965,14 @@ address {
 .social-links .weibo > img{
     width:68px;
 }
+.social-links .login-qq,.social-links .login-weibo{
+    width:120px;
+}
 .company-show{
     padding:10px 0;
+}
+.separator-right{
+    border-right: 1px solid #E5E5E5;
 }
 /*招聘企业*/
 .flickr-photos-list > li:hover{

@@ -96,7 +96,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.JS_PATH.'GridLo
         $(".nav li:eq(1)").addClass("active");
         var pageSize = 1;
         $(window).scroll(function() {
-            if($(document).height() - $(window).height() - $(document).scrollTop() < 50) {
+            if($(document).height() - $(window).height() - $(document).scrollTop() < 100) {
                 if(!imagesLoading) {
                     imagesLoading = true;
                     $("#loading").show();

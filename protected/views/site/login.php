@@ -1,61 +1,71 @@
-<div class="login_wrapper">
-    <div class="login_box">
-        <div>
-            <?php $form=$this->beginWidget('CActiveForm', array(
-                'id'=>'loginForm',
-                'enableAjaxValidation'=>false,
-                'action'=>Yii::app()->request->hostInfo.Yii::app()->homeUrl.'/site/login',
-                'htmlOptions'=>array('class'=>'login form-horizontal','role'=>'form'),
-            )); ?>
-    <!--            <input type="text" placeholder="请输入登录邮箱地址" tabindex="1" name="email" id="email">-->
-    <!--            <input type="password" placeholder="请输入密码" tabindex="2" name="password" id="password">-->
-            <div class="row">
-                <div class="col-md-8" style="margin-top: 40px;">
-                    <?php echo $form->textField($model,'username',array('class'=>'inp1','value'=>'','placeholder'=>'用户名')); ?>
-                    <?php echo $form->passwordField($model,'password',array('class'=>'inp1','placeholder'=>'密码')); ?>
-                    <span id="beError" style="display:none;" class="error"></span>
-                    <div>
-                    <label for="remember"><input type="checkbox" name="autoLogin" checked="checked" value="" id="remember"> 记住我</label>
-                    <a target="_blank"  href="<?php echo Yii::app()->request->hostInfo.Yii::app()->homeUrl.'/site/forgetpassword'?>">忘记密码？</a>
-                    </div>
+<div class="container">
+    <section class="pad-top-25">
+        <div class="row">
+            <div class="col-sm-offset-1 col-sm-10">
+                <div class="widget" STYLE="min-height: 400px;padding-top: 50px;">
+                    <form  id="connectLogin" role="form" method="post"  class="form-horizontal" >
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" for="username">请选择账户类型：</label>
+                            <div class="col-sm-3">
+                                <div data-toggle="buttons" class="btn-group">
+                                    <label class="btn btn-flat flat-success btn-bordered">
+                                        <input type="radio"  name="type"  value="1"> 应聘者
+                                    </label>
+                                    <label class="btn btn-flat flat-success btn-bordered">
+                                        <input type="radio"  name="type" value="2"> 企业
+                                    </label>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" for="username">邮箱地址：</label>
+                            <div class="col-sm-3">
+                                <input type="input" class="form-control" name="email" value="" />
+                                <input type="hidden" name="password" value="<?php echo $user->openid?>" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-4 col-sm-2">
+                                <button onclick="registerQQ()" class="btn btn-flat flat-color  col-sm-12" type="button" >下一步</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <div class="col-md-4">
-                    <input type="submit" value="登 &nbsp; &nbsp; 录" id="submitLogin" />
-                </div>
-            </div>
-            <?php $this->endWidget(); ?>
+             </div>
         </div>
-        <div class="login_right">
-                <div class="col-md-3" style="height: 50px;line-height: 50px;">还没有帐号？</div>
-                <div class="col-md-9"> <a class="registor_now" href="http://www.lagou.com/register.html">立即注册</a>
-                    <a title="使用新浪微博帐号登录" class="icon_wb" target="_blank" href="http://www.lagou.com/ologin/auth/sina.html"></a>
-                    <a title="使用腾讯QQ帐号登录" target="_blank" class="icon_qq" href="http://www.lagou.com/ologin/auth/qq.html"></a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="login_box_btm"></div>
+    </section>
+
 </div>
-
-<input type="hidden" value="<?php echo $msg?>" id="msg">
-
 <script type="text/javascript">
-    //动态给背景上深绿色
-    var style = $("body").attr("style");
-    style = style+'background-color:#0D956F';
-    $("body").attr("style",style);
+    function registerQQ(){
+        var username = $("#connectLogin input[name='password']").val();
+        var password = $("#connectLogin input[name='password']").val();
+        var type = $('#connectLogin input[name="type"]:checked').val();
+        var email = $("#connectLogin input[name='email']").val();
+        if(type == undefined){
+            alert('您是应聘者还是企业用户呢？请选择对应的角色。')
+            return;
+        }
+        var search_str = /^[\w\-\.]+@[\w\-\.]+(\.\w+)+$/;
+        if(!search_str.test(email)){
+            alert('请填写正确的邮箱地址');
+            return false;
+        }
 
-    $("#submitLogin").click(
-        function(){
-//            $("input").parent().next().html('');
-            $('#login-form').submit();
-        }
-    );
-    $(document).ready(function(){
-        var msg = $("#msg").val();
-        if(msg != ""){
-            $("#beError").text(msg);
-            $("#beError").show();
-        }
-    });
+        $.ajax({
+            type:'POST',
+            dataType:'json',
+            data:{'username':username,'password':password,'type':type,'email':email},
+            url:'<?php echo Yii::app()->createUrl('site/register')?>',
+            success:function(data) {
+                if(data == 'fail'){
+                    $("#errRegMsg").text('注册失败');
+                    $("#errRegMsg").show();
+                }else {
+                    window.location.href="<?php echo Yii::app()->baseUrl?>"+data;
+                }
+            }
+        });
+    }
 </script>
