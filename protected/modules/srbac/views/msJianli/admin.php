@@ -8,8 +8,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'简历列表', 'url'=>array('index')),
-	array('label'=>'创建简历', 'url'=>array('create')),
+	array('label'=>'提取昨天的简历', 'url'=>array('group')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -40,7 +39,7 @@ $('.search-form form').submit(function(){
 	'model'=>$model,
 )); ?>
 </div><!-- search-form -->
-
+<input type="hidden" id="path" value="<?php echo $path?>">
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'ms-jianli-grid',
 	'dataProvider'=>$model->search(),
@@ -60,14 +59,17 @@ $('.search-form form').submit(function(){
 		/*
 		'updatetime',
 		*/
-		array(
-			'class'=>'CButtonColumn',
-		),
+//		array(
+//			'class'=>'CButtonColumn',
+//		),
 	),
 )); ?>
 
 <script>
-    function downloadAll(){
-        alert('11');
-    }
+    $(function(){
+        var path = $("#path").val();
+        if(path != ""){
+            alert('生成文件在工程的相对路径是：'+path);
+        }
+    });
 </script>

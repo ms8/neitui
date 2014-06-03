@@ -134,18 +134,34 @@ class MsCompanyController extends Controller
 	 */
 	public function actionAdmin()
 	{
-        $criteria = new CDbCriteria;
-        $criteria->order = "createtime desc";
-        $dataProvider=new CActiveDataProvider('MsCompany',array(
-                'criteria'=>$criteria,
-                'pagination' => array(
-                    'pageSize' => 10,
-                ),
-            )
-        );
+        $sql = "select c.id,c.name,c.account,c.website,c.createtime,m.score "
+            ." from ms_member m, ms_company c where m.email = c.account order by c.createtime desc";
+        $criteria=new CDbCriteria();
+        $result = Yii::app()->db->createCommand($sql)->query();
+        $pages=new CPagination($result->rowCount);
+        $pages->pageSize=10;
+        $pages->applyLimit($criteria);
+        $result=Yii::app()->db->createCommand($sql." LIMIT :offset,:limit");
+        $result->bindValue(':offset', $pages->currentPage*$pages->pageSize);
+        $result->bindValue(':limit', $pages->pageSize);
+        $companys=$result->query();
+
         $this->render('admin',array(
-            'dataProvider'=>$dataProvider,
+            'companys'=>$companys,
+            'pages'=>$pages,
         ));
+//        $criteria = new CDbCriteria;
+//        $criteria->order = "createtime desc";
+//        $dataProvider=new CActiveDataProvider('MsCompany',array(
+//                'criteria'=>$criteria,
+//                'pagination' => array(
+//                    'pageSize' => 10,
+//                ),
+//            )
+//        );
+//        $this->render('admin',array(
+//            'dataProvider'=>$dataProvider,
+//        ));
 //        $companys = MsCompany::model()->findAll(array('order'=>'createtime desc'));
 //		$this->render('admin',array(
 //			'companys'=>$companys,

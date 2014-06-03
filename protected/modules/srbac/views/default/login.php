@@ -3,50 +3,40 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>客户信息管理系统</title>
-<link rel="stylesheet" type="text/css" href="<?php echo $this->module->assetUrl; ?>/css/common.css" />
+<!--<link rel="stylesheet" type="text/css" href="--><?php //echo $this->module->assetUrl; ?><!--/css/common.css" />-->
+    <link rel="stylesheet" type="text/css" href="<?php echo $this->module->assetUrl;?>/css/styles.css" />
 <script src="/js/jquery.js"></script>
+
 </head>
 
-<body class="loginbody">
-	<div class="login">
-			<?php $form=$this->beginWidget('CActiveForm', array(
-				'id'=>'login-form',
-				'enableClientValidation'=>true,
-				'clientOptions'=>array(
-				  'validateOnSubmit'=>true,
-				),
-				'htmlOptions'=>array('class'=>'login1'),
-				
-            )); ?>
-            <div>用户名</div>
-            <div>
-            	<?php echo $form->textField($model,'username',array('class','in1')); ?>
-            </div>
-            <div>密&nbsp;&nbsp码</div>
-            <div>
-                <?php echo $form->passwordField($model,'password',array('class','in1')); ?>
-            </div>
-            <div>
-                <span class="fl">
-					<?php echo $form->error($model,'username'); ?>
-                    <?php echo $form->error($model,'password'); ?>
-                </span>
-                <span class="fl"></span>
-            </div>
-<input type="submit" value="提交">	
-        <?php $this->endWidget(); ?>
-        <a class="fl dlan" href="javascript:void(0)">
-            <img src="<?php echo $this->module->assetUrl; ?>/images/login/dlan.png" />
-        </a>
-	
+<body id="login">
+
+<div id="wrapper">
+    <div id="content">
+        <div id="header">
+            <h1><a href=""><img alt="平台管理系统" src="<?php echo $this->module->assetUrl;?>/images/logo.png"></a></h1>
+        </div>
+        <div class="banner320" id="darkbanner">
+            <h2>Login</h2>
+        </div>
+        <div id="darkbannerwrap">
+        </div>
+        <form method="post" >
+            <fieldset class="form">
+                <p>
+                    <label for="user_name">账号:</label>
+                    <input id="LoginForm_username" type="text" name="LoginForm[username]" class="form-control">
+                </p>
+                <p>
+                    <label for="user_password">密码:</label>
+                    <input id="LoginForm_password" type="password" name="LoginForm[password]" class="form-control">
+                </p>
+                <button name="Submit" class="positive" type="submit">
+                    <img alt="Announcement" src="<?php echo $this->module->assetUrl;?>/images/key.png">登录
+                </button>
+            </fieldset>
+        </form>
     </div>
+</div>
 </body>
 </html>
-<script>
-	$(".dlan").click(
-		function(){
-alert('aaa');
-			$(".login1").submit();
-		}
-	);
-</script>

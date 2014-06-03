@@ -1,6 +1,6 @@
 <?php
 
-include("zip.php");
+//include("zip.php");
 
 class MsJianliController extends Controller
 {
@@ -130,6 +130,87 @@ class MsJianliController extends Controller
 		));
 	}
 
+    public function actionGroup(){
+        /**
+         * 取昨天所有已经投递了简历的情况
+         */
+        $sql="select app.createtime applyTime,jobs.title,jianli.filepath,com.account companyEmail,
+  com.name companyName,student.realname realname ,app.company_id cid,student.username studentEmail "
+        ." from ms_application app,ms_company com,ms_jianli jianli,ms_jobs jobs,ms_students student
+ where app.company_id = com.id and app.member_id = student.mid and app.jianli_id=jianli.id "
+        ." and jobs.id=app.job_id and app.createtime>='".date("Y-m-d",strtotime("-1 day"))." 00:00:00'"
+            ." and app.createtime<'".date("Y-m-d H:i:s")."' order by app.company_id";
+        $command = Yii::app()->db->createCommand($sql);
+        $rows = $command->queryAll();
+        $companyArr = array();
+        foreach($rows as $row){
+            $cur_company = $row['companyEmail'];
+            if(isset($companyArr[$cur_company])){
+                $companyArr[$cur_company][]=$row;
+            }else{
+                $applications = array();
+                $applications[] = $row;
+                $companyArr[$cur_company]=$applications;
+            }
+        }
+        $time = date("Y-m-d",strtotime("-1 day"));
+        $dir = 'upload/jianli/toudi/'.$time.'/';
+        foreach($companyArr as $company){
+            foreach($company as $application){
+                //目录的命名方式:公司邮箱_公司名称
+                $dist=$dir.$application['companyEmail'].'_'.$application['companyName'];
+                //$dist = iconv("UTF-8", "GBK", $dist);
+                if(!is_dir(iconv("UTF-8", "GBK", $dist))){
+                    mkdir(iconv("UTF-8", "GBK", $dist), 0777,true);
+                }
+                //$dist=$dir.$application['companyEmail'].'_'.$application['companyName'];
+                if(file_exists(iconv("UTF-8", "GBK", $dist))){
+                    if($application['realname'] == ""){
+                        $dist=$dist.'/'
+                            .$application['studentEmail'].'应聘'.$application['title'].'.doc';
+                    }else{
+                        $dist=$dist.'/'
+                            .$application['realname'].'应聘'.$application['title'].'.doc';
+                    }
+                    $dist = iconv("UTF-8", "GBK", $dist);
+                    copy($application['filepath'],$dist );
+                }
+            }
+        }
+
+        $filename = 'upload/jianli/toudi/'.$time.'.zip';
+        $zip=new ZipArchive();
+        if($zip->open('upload/jianli/toudi/'.$time.'.zip', ZipArchive::OVERWRITE)=== TRUE){
+            $this->addFileToZip($dir, "",$zip); //调用方法，对要打包的根目录进行操作，并将ZipArchive的对象传递给方法
+            $zip->close(); //关闭处理的zip文件
+        }
+        if(!file_exists($filename)){
+            exit("无法找到文件"); //即使创建，仍有可能失败。。。。
+        }
+        header("Cache-Control: public");
+        header("Content-Description: File Transfer");
+        header('Content-disposition: attachment; filename='.basename($filename)); //文件名
+        header("Content-Type: application/zip"); //zip格式的
+        header("Content-Transfer-Encoding: binary"); //告诉浏览器，这是二进制文件
+        header('Content-Length: '. filesize($filename)); //告诉浏览器，文件大小
+        @readfile($filename);
+    }
+
+    private function addFileToZip($path,$dirName,$zip){
+        $handler=opendir($path); //打开当前文件夹由$path指定。 $path."/".$filename
+        while(($filename=readdir($handler))!==false){
+            if($filename != "." && $filename != ".."){//文件夹文件名字为'.'和‘..’，不要对他们进行操作
+                if(is_dir($path."/".$filename)){// 如果读取的某个对象是文件夹，则递归
+                    $this->addFileToZip($path."/".$filename, $dirName."/".$filename,$zip);
+                }else{ //将文件加入zip对象
+                    $zip->addFile($path."/".$filename,$dirName."/".$filename);
+                }
+            }
+        }
+        @closedir($path);
+    }
+
+
 	/**
 	 * Manages all models.
 	 */
@@ -139,11 +220,11 @@ class MsJianliController extends Controller
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['MsJianli']))
 			$model->attributes=$_GET['MsJianli'];
-
-		$this->render('admin',array(
-			'model'=>$model,
-		));
-	}
+        $this->render('admin',array(
+            'model'=>$model,
+            'path'=>''
+        ));
+    }
 
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
